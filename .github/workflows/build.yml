@@ -24,5 +24,4 @@ jobs:
     steps:
     - uses: actions/cache@v2s
       with:
-        path: |
-          ~/.cargo
+        path: ~/.cargo
