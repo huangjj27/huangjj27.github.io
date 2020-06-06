@@ -24,7 +24,8 @@ jobs:
       run: mdbook build
 
   deploy:
-    needs: [ build ]
+    needs: build
+    runs-on: ubuntu-latest
     steps:
     - name: Deploy
       if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true }}
