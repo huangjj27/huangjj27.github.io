@@ -23,7 +23,7 @@ jobs:
 
 jobs:
   deploy:
-    needs: build
+    needs: [build]
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
