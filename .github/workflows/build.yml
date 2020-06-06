@@ -21,7 +21,8 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/cache@v2s
-        with:
-          path: |
-            ~/.cargo
+    - name: cache mdbook
+      uses: actions/cache@v2s
+      with:
+        path: |
+          ~/.cargo
