@@ -13,16 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install mdbook
-      run: cargo install mdbook
+      uses: actions-rs/install@v0.1
+      with:
+        crate: mdbook
+        version: latest
+        use-tool-cache: true
     - name: Build
       run: mdbook build
-
-  cache:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-    - name: cache mdbook
-      uses: actions/cache@v2
-      with:
-        path: |
-          ~/.cargo
