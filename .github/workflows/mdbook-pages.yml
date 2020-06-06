@@ -23,10 +23,11 @@ jobs:
 
   deploy:
     needs: [ build ]
+    steps:
     - name: Deploy
+      if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true }}
       uses: peaceiris/actions-gh-pages@v3
       with:
-        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./book
         publish_branch: master
