@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: caches mdbook
-    uses: actions/cache@v2s
-      with:
-        path: |
-          ~/.cargo
+      uses: actions/cache@v2s
+        with:
+          path: |
+            ~/.cargo
