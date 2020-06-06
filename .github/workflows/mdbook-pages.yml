@@ -21,10 +21,12 @@ jobs:
         version: latest
         use-tool-cache: true
     - name: Build
-      run: mdbook build
+      run:
+        - mdbook build
+        - pwd
 
   deploy:
-    if: github.event_name == 'push'
+    # if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     steps:
