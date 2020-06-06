@@ -1,4 +1,4 @@
-name: Rust
+name: Check if it can be published
 
 on:
   push:
@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cargo
     - name: Install mdbook
       run: cargo install mdbook
     - name: Build
