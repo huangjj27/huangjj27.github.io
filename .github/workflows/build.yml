@@ -24,4 +24,5 @@ jobs:
     - name: caches mdbook
     uses: actions/cache@v2s
       with:
-        path: ~/.cargo
+        path: |
+          ~/.cargo
