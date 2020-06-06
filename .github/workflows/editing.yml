@@ -16,8 +16,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install mdbook
       run: cargo install mdbook
-    - uses: actions/cache@v2
-      with:
-        path: ~/.cargo
+    # - uses: actions/cache@v2
+    #   with:
+    #     path: ~/.cargo
     - name: Build
       run: mdbook build
+
+  # pages:
+  #   needs: [build]
