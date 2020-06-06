@@ -21,9 +21,7 @@ jobs:
         version: latest
         use-tool-cache: true
     - name: Build
-      run:
-        - mdbook build
-        - pwd
+      run: mdbook build && pwd
 
   deploy:
     # if: github.event_name == 'push'
