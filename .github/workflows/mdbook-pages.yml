@@ -20,14 +20,23 @@ jobs:
         crate: mdbook
         version: latest
         use-tool-cache: true
-    - name: Build
-      run: mdbook build
+    - name: Build mdbook
+      run: mdbook build && pwd
+    - name: Cache artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: book
+        path: ./book
 
   deploy:
     if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - name: Get artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: book
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
