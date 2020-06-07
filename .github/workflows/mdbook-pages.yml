@@ -29,7 +29,7 @@ jobs:
         path: ./book
 
   deploy:
-    # if: github.event_name == 'push'
+    if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -44,3 +44,6 @@ jobs:
         publish_dir: ./book
         publish_branch: master
         allow_empty_commit: true
+        username: "huangjj27"
+        useremail: "huangjj.27@qq.com"
+
