@@ -1,0 +1,13 @@
+# Cargo.toml
+[package]
+name = "guessing_game"
+version = "0.1.0"
+authors = ["Your Name <you@example.com>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.3.14"
+
+[[bin]]
+name = "guess"
+path = "./main.rs"
