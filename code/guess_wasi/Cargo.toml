@@ -1,0 +1,26 @@
+# ANCHOR: all
+# ANCHOR: rand
+[package]
+name = "guess_wasi"
+version = "0.1.0"
+authors = ["huangjj27 <huangjj.27@qq.com>"]
+edition = "2018"
+
+# ANCHOR: log
+# ANCHOR: structopt
+[dependencies]
+rand = "0.7"
+# ANCHOR_END: rand
+
+# 总是使用最新的log与env_log
+log = "*"
+env_logger = "*"
+# ANCHOR_END: log
+
+structopt = "*"
+# ANCHOR_END: structopt
+# ANCHOR_END: all
+
+[[bin]]
+name = "guess"
+path = "./main.rs"
