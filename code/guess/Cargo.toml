@@ -1,3 +1,4 @@
+# ANCHOR: show
 # Cargo.toml
 [package]
 name = "guessing_game"
@@ -7,6 +8,7 @@ edition = "2018"
 
 [dependencies]
 rand = "0.3.14"
+# ANCHOR_END: show
 
 [[bin]]
 name = "guess"
