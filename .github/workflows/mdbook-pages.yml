@@ -44,5 +44,5 @@ jobs:
         publish_dir: ./book
         publish_branch: master
         allow_empty_commit: true
-        username: "huangjj27"
-        useremail: "huangjj.27@qq.com"
+        user_name: "huangjj27"
+        user_email: "huangjj.27@qq.com"
