@@ -46,3 +46,4 @@ jobs:
         allow_empty_commit: true
         user_name: "huangjj27"
         user_email: "huangjj.27@qq.com"
+        force_orphan: true
