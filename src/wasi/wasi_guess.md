@@ -235,8 +235,10 @@ $ cargo build --target=wasm32-wasi --release
     Finished release [optimized] target(s) in 4m 58s
 ```
 
-现在，我们来运行一下程序[^1]吧：
+现在，我们来运行一下程序吧：
 ```
+$ wasmer --version
+wasmer 0.13.1
 $ wasmer run .\target\wasm32-wasi\release\guess.wasm --env RUST_LOG=trace -- --levels 10 100 1000
 given number range 0~10
 [2020-06-09T14:55:58Z TRACE guess] secret number: 10
@@ -298,9 +300,6 @@ $
 ```
 
 调试后，确认我们的程序可以正常执行了， 去掉`--env RUST_LOG=trace`参数，享受自己制作的这个小游戏吧！
-
-[^1]: 如果运行时出现了报错，那因为有些bugfix在已经发布的wasmer 0.4.2版本中尚未更新，请采用最新源码编译并替换到
-已经安装好的`wasmer.exe`程序
 
 <!-- TODO：待更新 -->
 ## Wasmer与Wapm
