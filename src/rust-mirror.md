@@ -10,7 +10,7 @@
 - [如何在各平台安装 Rustup](https://www.rust-lang.org/zh-CN/tools/install) （尽管下文会涉及到 Rustup 加速镜像有哪些可用）
 
 ## 使用国内镜像加速更新 Rustup 工具链
-我们需要指定 `RUSTUP_DIST_SERVER`（默认指向 <https://static.rust-lang.org>）和 `RUSTUP_UPDATE_ROOT` （默认指向<https://static.rust-lang.org/rustup>），这两个网站均在中国大陆境外，因此在中国大陆访问会很慢，需要配置成境内的镜像。[^1]
+我们需要指定 `RUSTUP_DIST_SERVER`（默认指向 <https://static.rust-lang.org>）和 `RUSTUP_UPDATE_ROOT` （默认指向<https://static.rust-lang.org/rustup>），这两个网站均在中国大陆境外，因此在中国大陆访问会很慢，需要配置成境内的镜像。
 
 以下 `RUSTUP_DIST_SERVER` 和 `RUSTUP_UPDATE_ROOT` 可以组合使用。
 
@@ -27,7 +27,7 @@ RUSTUP_DIST_SERVER=https://mirrors.sjtug.sjtu.edu.cn/rust-static/
 ```
 ​
 ## 使用国内镜像加速更新 crate 拉取
-将如下配置写入 `$HOME/.cargo/config` 文件：
+将如下配置写入 `$HOME/.cargo/config` 文件[^1] [^2]：
 
 ```toml
 {{#include ../code/cargo.config}}
@@ -41,3 +41,7 @@ RUSTUP_DIST_SERVER=https://mirrors.sjtug.sjtu.edu.cn/rust-static/
 [国内Rust库文件镜像 - rustcc](https://rustcc.cn/article?id=0d125ec2-08fe-427a-9328-69cba6c4795c)
 
 [在中国大陆cargo命令速度很慢怎么办?](https://github.com/rustcc/RustFAQ#%E5%9C%A8%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86cargo%E5%91%BD%E4%BB%A4%E9%80%9F%E5%BA%A6%E5%BE%88%E6%85%A2%E6%80%8E%E4%B9%88%E5%8A%9E)
+
+[^1]: 如遇到 `invalid UTF-8`的问题请去掉文中中文注释
+
+[^2]: 建议不要用Windows默认的记事本编辑
