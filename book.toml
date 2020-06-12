@@ -8,8 +8,7 @@ title = "huangjj27's Tech blog"
 [output.html]
 mathjax-support = true
 no-section-label = true
-# git-repository-url = "https://github.com/huangjj27/huangjj27.github.io"
-git-repository-url = "https://localhost:3000"
+git-repository-url = "https://github.com/huangjj27/huangjj27.github.io"
 git-repository-icon = "fa-github"
 
 [output.html.fold]
