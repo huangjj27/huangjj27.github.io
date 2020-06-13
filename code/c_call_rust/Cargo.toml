@@ -1,0 +1,15 @@
+[package]
+name = "c_call_rust"
+version = "0.1.0"
+authors = ["huangjj27 <huangjj.27@qq.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+# ANCHOR: lib
+[lib]
+name = "callrust"   # 链接库名字
+crate-type = ["staticlib", "cdylib"]
+# ANCHOR_END: lib
+
+[dependencies]

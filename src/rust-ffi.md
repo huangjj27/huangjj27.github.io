@@ -139,9 +139,7 @@ makefile
 # Cargo.toml
 # ...
 
-[lib]
-name = "callrust"   # 链接库名字
-crate-type = ["staticlib", "cdylib"]
+{{#include ../code/c_call_rust/Cargo.toml:lib}}
 ```
 
 然后添加我们的 Rust 函数：
@@ -149,62 +147,26 @@ crate-type = ["staticlib", "cdylib"]
 ```rs
 // lib.rs
 
-// `#[no_mangle]` 关闭混淆功能以让 C 程序找到调用的函数
-// `extern` 默认导出为 C ABI
-#[no_mangle]
-pub extern fn print_hello_from_rust() {
-    println!("Hello from rust");
-}
+{{#include ../code/c_call_rust/src/lib.rs}}
 ```
 
 当然，为了给 C 调用我们还需要编写一个头文件：
 ```c
 // callrust.h
-void print_hello_from_rust();
+{{#include ../code/c_call_rust/src/callrust.h}}
 ```
 
 在我们的 `main.c` 中库并调用：
 
 ```c
 // main.c
-#include "callrust.h"
-#include <stdio.h>
-#include <stdint.h>
-#include <inttypes.h>
-
-int main(void) {
-    print_hello_from_rust();
-}
+{{#include ../code/c_call_rust/c_src/main.c}}
 ```
 
 <!-- 坑2：执行时需要指定LD_LIBRARY_PATH -->
 编写 makefile，先调度cargo 编译出我们需要的 Rust 库（动态或链接），然后再运行：
 ```makefile
-GCC_BIN ?= $(shell which gcc)
-CARGO_BIN ?= $(shell which cargo)
-
-# 动态链接 libcallrust.so
-share: clean cargo
-	mkdir cbin
-	$(GCC_BIN) -o ./cbin/main ./c_src/main.c -I./src -L./target/debug -lcallrust
-
-	# 注意动态链接再运行时也需要再次指定 `.so` 文件所在目录，否则会报错找不到！
-	LD_LIBRARY_PATH=./target/debug ./cbin/main
-
-# 静态链接 libcallrust.a
-static: clean cargo
-	mkdir cbin
-
-	# libcallrust.a 缺少了一些pthread, dl类函数，需要链接进来
-	$(GCC_BIN) -o ./cbin/main ./c_src/main.c -I./src ./target/debug/libcallrust.a -lpthread -ldl
-	./cbin/main
-
-clean:
-	$(CARGO_BIN) clean
-	rm -rf ./cbin
-
-cargo:
-	$(CARGO_BIN) build
+{{#include ../code/c_call_rust/makefile}}
 ```
 
 ## 小结
