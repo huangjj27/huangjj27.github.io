@@ -85,6 +85,9 @@
     ASPOPsolver 1.0
     ```
 
+## 小结
+当我看到 `rust-overlaps` 已经超过三年没有更新之后，我就觉得很可能不能够成功编译——但是 Rust 从来没有让我失望 —— 在本文中，我们使用的是最新稳定版的 `Rust 1.44`， 然而编译一个三年的旧库一次就可以编译成功了。同样，得益于 Rust 以 crate 为单位的并行与增量编译，让编译命令中断后可以继续执行而不需从头编译。这个故事告诉我们，充分吸收现代学术成果的工具比起偏旧的工具对于效率提高有重要影响！
+
 [`rust-overlaps`]: https://github.com/sirkibsirkib/rust-overlaps
 
 [如何申请天河二号计算资源]: http://www.nscc-gz.cn/Service/Igotto.html
