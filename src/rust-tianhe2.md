@@ -16,7 +16,7 @@
     ```shell
     [you@tainhe2-H ~]$ uname -r
     ```
-2. 了解平台架构后，获取对应平台的[Rust 独立安装包], 并上传至超算。此处以`x8_64`架构为例：
+2. 了解平台架构后，获取对应平台的[Rust 独立安装包], 并上传至超算。此处以`x86_64`架构为例：
     ```shell
     $ scp -i${YOUR_CERTIFICATE_ID} -P${SSH_PORT} rust-1.44.0-x86_64-unknown-linux-gnu.tar.gz you@server.ip.in.vpn:~
     ```
