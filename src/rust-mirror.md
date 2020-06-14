@@ -14,7 +14,7 @@
 
 以下 `RUSTUP_DIST_SERVER` 和 `RUSTUP_UPDATE_ROOT` 可以组合使用。
 
-```
+```shell
 # 清华大学
 RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
@@ -42,6 +42,6 @@ RUSTUP_DIST_SERVER=https://mirrors.sjtug.sjtu.edu.cn/rust-static/
 
 [在中国大陆cargo命令速度很慢怎么办?](https://github.com/rustcc/RustFAQ#%E5%9C%A8%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86cargo%E5%91%BD%E4%BB%A4%E9%80%9F%E5%BA%A6%E5%BE%88%E6%85%A2%E6%80%8E%E4%B9%88%E5%8A%9E)
 
-[^1]: 如遇到 `invalid UTF-8`的问题请去掉文中中文注释
+[^1]: 如遇到 `invalid UTF-8` 的问题请去掉文中中文注释
 
 [^2]: 建议不要用Windows默认的记事本编辑

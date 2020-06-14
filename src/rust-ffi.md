@@ -19,7 +19,7 @@
 ## WSL Rust 环境搭建
 由于 WSL 是新装的，没有 Rust 和 gcc/g++ 环境，因此需要安装：
 
-```sh
+```shell
 sudo apt install gcc -y
 
 # 官方脚本
@@ -144,7 +144,7 @@ makefile
 
 然后添加我们的 Rust 函数：
 
-```rs
+```rust
 // lib.rs
 
 {{#include ../code/c_call_rust/src/lib.rs}}
