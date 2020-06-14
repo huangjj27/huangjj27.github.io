@@ -1,0 +1,10 @@
+[package]
+name = "rust_call_cpp"
+version = "0.1.0"
+authors = ["huangjj27 <huangjj.27@qq.com>"]
+edition = "2018"
+
+# ANCHOR: cc
+[build-dependencies]
+cc = "1"
+# ANCHOR_END: cc
