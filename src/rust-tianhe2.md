@@ -98,6 +98,6 @@
 
 [^1]: ssh登陆前还需登录VPN环境，账号密码为管理员提供的账号密码。
 
-[^2]: Rust仓库的版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)，因此必须为`x.y.z`的形式。
+[^2]: Rust仓库的版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)，因此必须为`x.y.z`的形式。更多参见[sirkibsirkib/rust-overlaps#2](https://github.com/sirkibsirkib/rust-overlaps/issues/2)
 
 [^3]: `cargo`编译中断，可以重新运行命令继续安装，直到安装完成。
