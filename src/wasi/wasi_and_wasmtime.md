@@ -42,3 +42,23 @@ GitHub上面已经有了比较简单的[试验](https://github.com/kubkon/rust-w
 [^2]: [rust crates 镜像使用帮助 - 中国科学技术大学](https://lug.ustc.edu.cn/wiki/mirrors/help/rust-crates#rust_crates_镜像使用帮助)
 
 [^3]: 截至2020年1月19日，WASI目标已经稳定并重命名为`wasm32-wasi`
+
+
+---
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+
+<script>
+const gitalk = new Gitalk({
+  clientID: '5af6fa1218b8ad6d12e9',
+  clientSecret: '0c226cbc5544c3252c1c0fba0b01ca9b7bf61691',
+  repo: 'blog-gitment',      // The repository of store comments,
+  owner: 'huangjj27',
+  admin: ['huangjj27'],
+  id: '/posts/fisrt-wasi/',      // Ensure uniqueness and length less than 50
+  distractionFreeMode: false  // Facebook-like distraction free mode
+})
+
+gitalk.render('gitalk-container')
+</script>
