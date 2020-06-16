@@ -1,6 +1,6 @@
 # Summary
 
-- [在天河二号上配置 Rust 运行环境](./rust-tianhe2.md)
+- [在天河二号上配置 Rust 运行环境](./rust-tianhe-ii.md)
 - [Rust 镜像](./rust-mirror.md)
 - [在 WSL 中学习 Rust FFI](./rust-ffi.md)
 - [WASI探索](./wasi/intro.md)
