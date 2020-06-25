@@ -4,7 +4,7 @@
 
 ## 阅读须知
 学习外部资料更有助于读者了解相关生态，因此本文将不赘述：
-- [WASI是什么？](/posts/first-wasi)
+- [WASI是什么？](/wasi/wasi_and_wasmtime.html#什么是wasi)
 - [Wasmer与wapm如何安装？](https://wapm.io/help/install)
 - [rust是什么？](https://www.rust-lang.org/zh-CN/) [如何安装Rust？](https://www.rust-lang.org/zh-CN/tools/install) [如何学习rust？](https://www.rust-lang.org/zh-CN/learn)
 - [cargo是什么？要怎样使用？](https://doc.rust-lang.org/cargo/index.html)
