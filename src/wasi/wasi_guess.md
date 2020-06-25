@@ -312,3 +312,23 @@ WASI标准的wasm栈机码。并且方便为wasm代码分发，该组织开发�
 作为边缘人士（稍微知道WASM生态但没很深入了解），博主看到这项目背后的布局很像上世纪Sun公司的Java和JVM（尽管WASM并不是Wasmer的发明，但这样反而不必为WASM这样可以作为主流编程语言编译目标工具投入过多精力宣传，可以集中精力去优化wasmer与wapm；同时因为wasmer是使用MIT协议授权，不会产生类似OracleJDK专利权所属的问题，相信随着生态的进一步发展，在虚拟机运行时领域会逐步替代JVM成为主流，届时将解放程序员更多生产力 -- 不必要求掌握Java而是通过自己熟悉的编程语言（c/c++/rust/python/...)通过统一的标准相互调用（进一步微型化的微服务）。
 
 而这个在服务器/PC桌面应用占主导地位的标准，就是WASI。
+
+
+---
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+
+<script>
+const gitalk = new Gitalk({
+  clientID: '5af6fa1218b8ad6d12e9',
+  clientSecret: '0c226cbc5544c3252c1c0fba0b01ca9b7bf61691',
+  repo: 'blog-gitment',      // The repository of store comments,
+  owner: 'huangjj27',
+  admin: ['huangjj27'],
+  id: '/posts/wasmer-guess-game/',      // Ensure uniqueness and length less than 50
+  distractionFreeMode: false  // Facebook-like distraction free mode
+})
+
+gitalk.render('gitalk-container')
+</script>
