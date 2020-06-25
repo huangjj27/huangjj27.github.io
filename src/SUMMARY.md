@@ -11,3 +11,4 @@
 - [WASI探索](./wasi/intro.md)
     - [WASI简介与Wasmtime配置](./wasi/wasi_and_wasmtime.md)
     - [WASI版猜数字](./wasi/wasi_guess.md)
+- [用初等数论探索哥德巴赫猜想](./goldbachs-conjecture.md)
