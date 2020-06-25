@@ -47,23 +47,23 @@
 
     \\( \therefore \exists m \ge 1, m \in Z,  mx=a. \\)
 
-    \\( 假设 x|a-b,  即 \exists k \in Z,  kx=a-b \Leftrightarrow b = a-kx = (m-k)x. \\)
+    假设 \\( x|a-b \\),  即 \\( \exists k \in Z,  kx=a-b \Leftrightarrow b = a-kx = (m-k)x. \\)
 
-    \\( 若 m = k, 则b=0, 与b > 1矛盾; \\)
+    若 \\( m = k \\), 则 \\( b = 0 \\), 与 \\( b > 1 \\) 矛盾;
 
-    \\( 若 m \neq k, 则\exists (m-k) \in Z,  b = (m-k)x \Leftrightarrow x|b,  与假设x \nmid b 矛盾! \\)
+    若 \\( m \neq k \\), 则 \\( \exists (m-k) \in Z,  b = (m-k)x \Leftrightarrow x|b \\),  与假设 \\( x \nmid b \\) 矛盾!
 
-    \\( 故假设不成立, x \nmid a-b. \\)
+    故假设 \\( x|a-b \\) 不成立, \\( x \nmid a-b. \\)
 
 - \\(x \nmid a, \, x|b\\). 同理可得:
-    若\\( x|a-b\\) ,  则 \\( a = b + kx = (m+k)x \Leftrightarrow x|a \\), 与\\(x \nmid a\\)矛盾! 故\\(x \nmid a-b\\).
+    若\\( x|a-b\\) ,  则 \\( a = b + kx = (m+k)x \Leftrightarrow x|a \\), 与 \\(x \nmid a\\) 矛盾! 故 \\(x \nmid a-b \\).
 
 ## 探索哥德巴赫猜想
 分类讨论:
-- 若n为素数, 显然\\(2n-n = n\\)亦为素数, 哥德巴赫猜想成立.
-- 若n为合数, 则\\(n \ge 4\\). 由[引理(一)](#一-p中存在不整除n的元素), 将集合P以能否整除n划分为以下子集: \\(S = \lbrace s \mid s|n \rbrace,  T = \lbrace t \mid t \nmid n \rbrace\\)
+- 若n为素数, 显然 \\( 2n-n = n \\) 亦为素数, 哥德巴赫猜想成立.
+- 若n为合数, 则 \\( n \ge 4 \\). 由[引理(一)](#一-p中存在不整除n的元素), 将集合P以能否整除n划分为以下子集: \\( S = \lbrace s \mid s|n \rbrace,  T = \lbrace t \mid t \nmid n \rbrace\\)
 
-    容易发现以下结论: \\(\forall s \in S,  \because s|n, s|s,  \therefore s|2n-s\\), 即若一个素数是n的素因子, 那么对应的整数\\(2n-s\\)为合数. 故**符合哥德巴赫猜想的数对\\(p\\)与\\(2n-p\\)必然满足\\(p \nmid n\\)(封面结论)**
+    容易发现以下结论: \\( \forall s \in S,  \because s|n, s|s,  \therefore s|2n-s \\), 即若一个素数是n的素因子, 那么对应的整数 \\( 2n-s \\) 为合数. 故**符合哥德巴赫猜想的数对 \\( p \\)与 \\( 2n-p \\)必然满足 \\( p \nmid n \\)(封面结论)**
 
     到这里, 我们可以得到一个哥德巴赫猜想的等价命题:
     > 哥德巴赫猜想 等价于 对给定合数\\(n\\), 及小于\\(n\\)且不整除\\(n\\)的素数集合\\(T\\), 在集合\\(T\\)对应的整数集\\(2n-T\\)中是否存在素数
