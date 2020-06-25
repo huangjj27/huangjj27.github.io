@@ -11,32 +11,36 @@
 
 ## 引理
 ### (一) P中存在不整除n的元素
-命题1:
-\\[ \label{1} \tag{1}
+引理1:
+\\[ \label{1.1} \tag{1.1}
     \exists p \in P, p \nmid n
 \\]
 
 证明(反证法):
 
-假设命题\\( \ref{1} \\) 的反命题:
-\\[\label{2} \tag{2}
+假设命题\\( \ref{1.1} \\) 的反命题:
+\\[\label{1.2} \tag{1.2}
     \forall p \in P, p \mid n, 即\forall p \in P, \exists m \in Z, mp = n
 \\]
 成立, 由伯特兰-切比雪夫定理([Bertrand's postulate])可知:
-\\[\label{3} \tag{3}
+\\[
     \exists p_0, {n \over 2} \lt p_0 \lt n
 \\]
 
-由假设\\( \ref{2} \\) 可得:
+由假设\\( \ref{1.2} \\) 可得:
 \\[{mp_0 \over 2} \lt p_0 \Rightarrow m \lt 2\\].
 
 又\\(m \in Z\\), \\(p \gt 0, n \gt 0 \Rightarrow m = {n \over 2} \gt 0\\), 所以\\(m = 1\\), 即\\(mp_0 = p_0 = n\\), 这与\\(p_0 \gt n\\) 矛盾!
 
-所以命题\\( \ref{2} \\)不成立. 故命题\\( \ref{1} \\)成立.
+所以命题\\( \ref{1.2} \\)不成立. 故命题\\( \ref{1.1} \\)成立.
 
 [Bertrand's postulate]: https://en.wikipedia.org/wiki/Bertrand%27s_postulate
 
-### (二) 给定正整数\\((a, b) = 1, x \gt 1, a \gt 1, b \gt 1\\), 若\\(x|a\\)或\\(x|b \Rightarrow x \nmid a-b\\)
+### (二) 给定正整数 \\(x\\) 若整除互质数对\\( a, b \\)之一，则 \\(x\\) 不整除 \\(a-b\\)
+\\[ \label{2} \tag{2}
+    (a, b) = 1, x \gt 1, a \gt 1, b \gt 1, x|a \lor x|b \Rightarrow x \nmid a-b
+\\]
+
 证明:
 
 易知\\(x|a\\)与\\(x|b\\)不同时成立, 否则\\((a, b) \ge x\\), 与 \\((a, b) = 1\\) 矛盾.
@@ -66,47 +70,46 @@
     容易发现以下结论: \\( \forall s \in S,  \because s|n, s|s,  \therefore s|2n-s \\), 即若一个素数是n的素因子, 那么对应的整数 \\( 2n-s \\) 为合数. 故**符合哥德巴赫猜想的数对 \\( p \\)与 \\( 2n-p \\)必然满足 \\( p \nmid n \\)(封面结论)**
 
     到这里, 我们可以得到一个哥德巴赫猜想的等价命题:
-    > 哥德巴赫猜想 等价于 对给定合数\\(n\\), 及小于\\(n\\)且不整除\\(n\\)的素数集合\\(T\\), 在集合\\(T\\)对应的整数集\\(2n-T\\)中是否存在素数
+    > 对给定合数\\(n\\), 及小于\\(n\\)且不整除\\(n\\)的素数集合\\( T = \lbrace t \mid Prime(t) \land t \gt n \land t \nmid n \rbrace \\), 在集合\\(T\\)对应的整数集\\(2n-T = \lbrace 2n - t \mid Prime(t) \land t \gt n \land t \nmid n \rbrace \\)中是否存在素数
 
-    而由[引理(二)]可得:
+## 进一步探究
+### 推论一
+\\[ \label{3} \tag{3}
+    \forall s \in S, t \in T,  s \nmid 2n-t
+\\]
+而由[引理(二)]可得:
 
-    \\( \because \forall s, t, 有: \\)
+对于任意前述s, t, 有:
+1. \\( Prime(s), Prime(t) \Rightarrow s \nmid t \\)
+2. \\( s|n \Rightarrow s|2n \\)
 
-    \\( 1.  s, t均为素数 \Rightarrow s \nmid t \\)
+故: \\( \forall s \in S, t \in T,  s \nmid 2n-t \\)
+也就是, 至少集合 \\( 2n-T \\) 的元素不会被 \\( S \\) 中的元素整除， 命题 \\( \ref{3} \\) 证毕。
 
-    \\( 2.  s|n \Rightarrow s|2n \\)
+### 推论二
+对于\\(T\\)的子集 \\( T_{\gt {n \over 2}} = T_1 = \lbrace t| t \in T, t \gt {n \over 2} \rbrace \\), 具有以下性质:
 
-    \\( \therefore \forall s \in S, t \in T,  s \nmid 2n-t \\)
+\\[ \label{4} \tag{4}
+    \forall t_1, t_2 \in T_{\gt {n \over 2}},  t_1 \nmid 2n-t_2
+\\]
 
-    也就是, 至少\\(2n-T\\)的元素不会被\\(S\\)中的元素整除
+证明如下:
 
-    进一步探究发现, 对于\\(T\\)的子集 \\( T_{\gt {n \over 2}} = T_1 = \lbrace t| t \in T, t \gt {n \over 2} \rbrace \\), 具有以下性质:
-    \\[ \forall t_1, t_2 \in T_1,  t_1 \nmid 2n-t_2 \\]
+假设 \\( \exists t_1, t_2,  t_1 \nmid 2n-t_2 \\), 即 \\( \exists m \in Z^+, mt_1 = 2n - t_2 \\).
 
-    证明如下:
+\\( \because t_1, t_2为奇数, 2n为偶数 \\)
+\\( \therefore m为奇数. \\)
 
-    \\( 假设\exists t_1, t_2,  t_1 \nmid 2n-t_2 \\),
+分类讨论:
+1. 当 \\( m = 1 \\) 时, t_1 + t_2 = 2n.
 
-    \\( 即\exists m \in Z^+, mt_1 = 2n - t_2 \\).
+    \\( \because t_1 != t_2, t_1 \le n, t_2 \le n, \therefore t_1 + t_2 \lt 2n \\), 矛盾!
 
-    \\( \because t_1, t_2为奇数, 2n为偶数 \\)
+2. 当 \\( m \ge 3 \\)时:
 
-    \\( \therefore m为奇数. \\)
+    \\( \because t_1 \gt {n \over 2},  t_2 \gt {n \over 2}, \therefore mt_1 + t_2 \gt 2n \\)
+, 矛盾!
 
-    \\( 分类讨论: \\)
-
-    \\( 1. 当m = 1时, t_1 + t_2 = 2n. \\)
-
-    \\( \because t_1 != t_2, t_1 \le n, t_2 \le n, \\)
-
-    \\( \therefore t_1 + t_2 \lt 2n, 矛盾! \\)
-
-    \\( 2. 当m \ge 3时: \\)
-
-    \\( \because t_1 \gt {n \over 2},  t_2 \gt {n \over 2}, \\)
-
-    \\( \therefore mt_1 + t_2 \gt 2n, 矛盾! \\)
-
-    \\( 故假设不成立, 原命题证毕. \\)
+故假设不成立, 命题 \\( \ref{4} \\) 证毕.
 
 [引理(二)]: #二-给定正整数a-b--1-x-gt-1-a-gt-1-b-gt-1-若xa或xb-rightarrow-x-nmid-a-b
