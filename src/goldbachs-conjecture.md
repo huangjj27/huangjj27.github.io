@@ -5,23 +5,34 @@
 关于历史研究历程一类资料, 请参考[wiki].
 
 本文将哥德巴赫猜想简单地描述为:
-> 给定任意整数\\(n(n > 1)\\), 以及不超过n的所有素数的集合\\(P\\). 设\\(p\\)为集合P中的一个元素, 猜想\\(p\\)对应的整数\\(2n-p\\)所组成的集合\\(2n-P\\)中, 必然存在素数元素.
+> 给定任意整数\\(n(n > 1)\\), 以及不超过n的所有素数的集合\\( P = \\{ p \mid Prime(p) \land p \lt n \\} \\). 设\\(p\\)为集合\\( P \\)中的一个元素, 猜想\\(p\\)对应的整数\\(2n-p\\)所组成的集合\\(2n-P\\)中, 必然存在素数元素.
 
 [wiki]: https://en.wikipedia.org/wiki/Goldbach's_conjecture
 
 ## 引理
 ### (一) P中存在不整除n的元素
-命题1: \\(\exists p \in P, p \nmid n\\)
+命题1:
+\\[ \label{1} \tag{1}
+    \exists p \in P, p \nmid n
+\\]
 
 证明(反证法):
 
-假设命题2: \\[\forall p \in P, P \mid n, 即\forall p \in P, \exists m \in Z, mp = n\\] 成立, 由伯特兰-切比雪夫定理([Bertrand's postulate])可知: \\[\exists p_0, {n \over 2} \lt p_0 \lt n\\]
+假设命题\\( \ref{1} \\) 的反命题:
+\\[\label{2} \tag{2}
+    \forall p \in P, p \mid n, 即\forall p \in P, \exists m \in Z, mp = n
+\\]
+成立, 由伯特兰-切比雪夫定理([Bertrand's postulate])可知:
+\\[\label{3} \tag{3}
+    \exists p_0, {n \over 2} \lt p_0 \lt n
+\\]
 
-由假设可得: \\[{mp_0 \over 2} \lt p_0 \Rightarrow m \lt 2\\].
+由假设\\( \ref{2} \\) 可得:
+\\[{mp_0 \over 2} \lt p_0 \Rightarrow m \lt 2\\].
 
 又\\(m \in Z\\), \\(p \gt 0, n \gt 0 \Rightarrow m = {n \over 2} \gt 0\\), 所以\\(m = 1\\), 即\\(mp_0 = p_0 = n\\), 这与\\(p_0 \gt n\\) 矛盾!
 
-所以命题2不成立. 命题2为命题1反命题, 故命题1成立.
+所以命题\\( \ref{2} \\)不成立. 故命题\\( \ref{1} \\)成立.
 
 [Bertrand's postulate]: https://en.wikipedia.org/wiki/Bertrand%27s_postulate
 
