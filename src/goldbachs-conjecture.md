@@ -90,7 +90,7 @@
 对于\\(T\\)的子集 \\( T_{\gt {n \over 2}} = T_1 = \lbrace t| t \in T, t \gt {n \over 2} \rbrace \\), 具有以下性质:
 
 \\[ \label{4} \tag{4}
-    \forall t_1, t_2 \in T_{\gt {n \over 2}},  t_1 \nmid 2n-t_2
+    \forall t_1, t_2 \in T_1,  t_1 \nmid 2n-t_2
 \\]
 
 证明如下:
