@@ -12,5 +12,6 @@
     - [WASI简介与Wasmtime配置](./wasi/wasi_and_wasmtime.md)
     - [WASI版猜数字](./wasi/wasi_guess.md)
 - [初等数论自我探索](./number_theory/intro.md)
-    - [用初等数论探索哥德巴赫猜想](./number_theory/goldbachs-conjecture.md)
+    - [若质数p不能整除偶数2n，则p不整除2n-p](./number_theory/if_2n-p_is_divided_by_p.md)
     - [整数和它两倍间的合数的性质](./number_theory/single-composite-divsion.md)
+    - [用初等数论探索哥德巴赫猜想](./number_theory/goldbachs-conjecture.md)
