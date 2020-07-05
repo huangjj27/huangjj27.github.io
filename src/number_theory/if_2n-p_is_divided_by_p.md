@@ -1,4 +1,8 @@
 # 若质数p不能整除偶数2n，则p不整除2n-p
+## 命题形式化描述
+\\[\label{1} \tag{1}
+    \forall p \in Primes, p \lt 2n(n \in Z^+), p \nmid 2n \Rightarrow p \nmid 2n - p
+\\]
 
 ## 一整数若不同时整除互质两数，则不能整除后两数之差
 ### 形式化描述
@@ -28,7 +32,4 @@
     若\\( x|a-b\\) ,  则 \\( a = b + kx = (m+k)x \Leftrightarrow x|a \\), 与 \\(x \nmid a\\) 矛盾! 故 \\(x \nmid a-b \\).
 
 ## 代入条件
-令 \\( x := p, a := 2n, b := p \\)，显然有\\( p \mid p \\)。故，当 \\(p \nmid 2n \\)时， \\( p \nmid 2n - p \\):
-\\[\label{1} \tag{1}
-    \forall p \in Primes, p \lt 2n(n \in Z^+), p \nmid 2n \Rightarrow p \nmid 2n - p
-\\]
+令 \\( x := p, a := 2n, b := p \\)，显然有\\( p \mid p \\)。故，当 \\(p \nmid 2n \\)时， \\( p \nmid 2n - p \\)，即命题 \\( \ref{1} \\) 得证。
