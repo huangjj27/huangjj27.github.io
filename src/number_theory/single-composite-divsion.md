@@ -1,6 +1,6 @@
-# 整数和它两倍之间的合数，可以整除整数的阶乘
+# 整数和它两倍（一倍半）之间的合数，可以整除整数的阶乘
 ## 形式化描述
-\\[ \label{2} \tag{2}
+\\[ \label{2.1} \tag{2.1}
     \forall m \in Z^+, m \gt 8, n \in Z^+, m \lt n \lt 2m; \quad n \not \in Primes \Rightarrow n \mid m!
 \\]
 
@@ -35,4 +35,10 @@
 
 因此：\\( \exists C \in Z^+, m! = C \cdot (k \cdot 2k) = C \cdot 2k^2 = 2C \cdot n \Rightarrow n \mid m! \\)
 
-** 综上，命题 \\( \ref{2} \\) 得证。**
+**综上，命题 \\( \ref{2.1} \\) 得证。**
+
+## 更强的结论
+显然对 \\( \forall n \in (m, 3/2m) \Rightarrow n \in (m, 2n) \\)，故：
+\\[ \label{2.2} \tag{2.2}
+    \forall m \in Z^+, m \gt 8, n \in Z^+, m \lt n \lt { 3m \over 2 }; \quad n \not \in Primes \Rightarrow n \mid m!
+\\]
