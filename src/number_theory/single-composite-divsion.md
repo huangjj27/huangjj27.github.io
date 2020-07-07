@@ -60,5 +60,5 @@
 ## 更强的结论
 显然对 \\( \forall n \in (m, 3/2m) \Rightarrow n \in (m, 2n) \\)，故：
 \\[ \label{2.2} \tag{2.2}
-    \forall m \in Z^+, m \gt 8, n \in Z^+, m \lt n \lt { 3m \over 2 }; \quad n \not \in Primes \Rightarrow n \mid m!
+    \forall m \in Z^+, m \gt 8, n \in Z^+, m \lt n \lt { 3m \over 2 }; \quad n \not \in Primes \Leftrightarrow n \mid m!
 \\]
