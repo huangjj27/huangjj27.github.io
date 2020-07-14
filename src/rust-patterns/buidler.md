@@ -103,6 +103,64 @@ let counter = builder.build();
 
 [灵活构造]: #灵活构造
 
+## 更好用的工具
+本文在微信公众号发布之后，微信粉丝 @福糙·仁波切 推荐了 [dtolnay/proc-macro-workshop] 中的 [derive_builder]，能够更快地实现自定义的Builder。例如，上文中的示例使用该库可以大大减少代码:
+
+```rs,no_run
+use derive_builder::Builder;
+
+struct Counter {
+    #[builder(default = "5")]
+    counted1: usize,
+
+    #[builder(default)]
+    counted2: usize,
+
+    #[builder(default)]
+    done: bool,
+}
+
+```
+
+甚至可以快速自定义自己的 setter：
+
+```rs,no_run
+use derive_builder::Builder;
+
+struct Counter {
+    #[builder(default = "5")]
+    counted1: usize,
+
+    #[builder(default)]
+    counted2: usize,
+
+    #[builder(default)]
+    done: bool,
+}
+
+impl CounterBuilder {
+    fn set_counted2(&mut self, cnt: usize) -> &mut Self {
+        // 注意生成的构造器的字段为 `Option`
+        self.counted2 = Some(if cnt > 100 { 100 } else { cnt });
+        self
+    }
+}
+
+fn main() {
+    let mut builder = CounterBuilder::default();
+
+    builder.set_counted2(123);
+
+    let counter = builder.build();
+
+    println!("{:?}", counter);
+}
+
+```
+
+[dtolnay/proc-macro-workshop]: https://github.com/dtolnay/proc-macro-workshop
+[derive_builder]: https://docs.rs/derive_builder/0.9.0/derive_builder/
+
 ## 为什么使用构造器模式
 - **构造过程可控**。通常实现构造器模式的时候，我们会将构造器所需要配置的属性设置为私有[^1]，并且只能通过我们提供的属性设置方法进行设置，使得构造过程可控。另外，可以通过属性设置方法提前恐慌（panic）来阻止生成无效对象。
 - **设置方法职责专一**。属性设置方法 [职责专一]，只会负责设置一种属性，只有在该属性的设置规则改变时，相应的属性设置方法才需要进行修改；
@@ -120,4 +178,4 @@ let counter = builder.build();
 
 
 [^1]: Rust 语言中默认语言项(Item)的可见性都是私有的，如需公开语言项给其他模块使用，需要使用 `pub` 关键字放开。
-[^2]: 一个绕开的行为不一致问题的方法是将属性设置规则抽取为静态函数，但仍然无法避免过度封装的问题。
+[^2]: 一个绕开的行为不一致问题的方法是将属性设置规则抽取为静态函数，但仍然无法避免过度封装的问题。不过，可以将过度封装的事情交给过程宏等自动代码生成手段，例如文中举例的 `derive_builder`
