@@ -21,11 +21,11 @@
 
 这与 \\( n \lt 2m \\) 矛盾！
 
-故假设不成立，故 \\(2 \le b \lt a \lt m \\)。
+故假设不成立，故 \\(2 \le b \lt a \lt m \Rightarrow a \mid m!, b \mid m! \\)。
 
 又 \\( (a, b) = 1 \Rightarrow [a, b] = ab = n \\)
 
-因此：\\( \exists C \in Z^+, m! = C \cdot ab = C \cdot n \Rightarrow n \mid m! \\)
+因此：\\( a \mid m!, b \mid m \Rightarrow [a, b] \mid m! \Leftrightarrow n \mid m! \\)。
 
 #### 完全平方数
 不妨设 \\( n = k^2 \\)，则 \\(2 \lt k \lt 2k \lt m \\)，证明如下：
@@ -36,9 +36,9 @@
 
 这与 \\( n \lt 2m \\) 矛盾！
 
-故假设不成立，故 \\(2 \le k \lt 2k \lt m \\)。
+故假设不成立，故 \\( 2 \le k \lt 2k \lt m \Rightarrow 2k^2 \mid m! \\)。
 
-因此：\\( \exists C \in Z^+, m! = C \cdot (k \cdot 2k) = C \cdot 2k^2 = 2C \cdot n \Rightarrow n \mid m! \\)
+因此：\\( 2k^2 \mid m! \Leftrightarrow 2n | m! \Rightarrow n \mid m! \\)。
 
 **综上，命题 \\( \ref{2.1.1} \\) 得证。**
 
