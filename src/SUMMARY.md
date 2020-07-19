@@ -4,6 +4,7 @@
 - [在天河二号上配置 Rust 运行环境](./rust-tianhe-ii.md)
 - [设计模式在 Rust 中的实践](./rust-patterns/intro.md)
     - [构建器（Builder）模式](./rust-patterns/buidler.md)
+    - [抽象工厂（Abstract Factory）模式](./rust-patterns/abstract-factory.md)
 - [Rust 镜像](./rust-mirror.md)
 - [在 WSL 中学习 Rust FFI](./rust-ffi.md)
 - [WASI探索](./wasi/intro.md)
