@@ -32,6 +32,40 @@ bevy = "0.3.0"
 rand = "0.7.3"
 ```
 
+## 创建窗口
+
+> [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/3f7c30b)
+
+我们现在要创建一个2D游戏，需要很多不同的系统；用来创建窗口的，用来做渲染循环的，用来处理输出的，用来处理精灵（sprites)的，等等。幸运的是，Bevy的默认插件给了我们以上所有选项：
+
+```rust
+fn main() {
+    App::build().add_plugins(DefaultPlugins).run();
+}
+```
+
+然而 Bevy 的默认插件不包括摄像机（camera），所以我们来插入一个 2D 摄像机，只要我们创建我们第一个系统就可以设置了：
+
+```rust
+fn setup(mut commands: Commands) {
+    commands.spawn(Camera2dComponents::default());
+}
+```
+
+[`Cammands`](https://docs.rs/bevy_ecs/0.2.1/bevy_ecs/struct.Commands.html) 通常用来排列命令，来更改游戏世界与资源。在这里，我们创建一个带有 2D 摄像机组件的实体。为Bevy的魔法做点准备吧：
+
+```rust
+App::build()
+    .add_startup_system(setup.system()) // <--
+    .add_plugins(DefaultPlugins)
+    .run();
+```
+
+我们需要做的只是在我们的函数是调用 `.system()`，然后 Bevy 会神奇地在启动地时候调用 `commands` 参数。再运行一次 app， 你应该能看到一个像这样的空窗口：
+
+![](https://mbuffett.com/bevy_snake/new_pics/empty_window.png)
+
+
 
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
