@@ -66,6 +66,63 @@ App::build()
 ![](https://mbuffett.com/bevy_snake/new_pics/empty_window.png)
 
 
+## 开始编写一条蛇
+
+> [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/baaefcc)
+
+我们来写个蛇头放在窗口上吧。我们先定义几个结构体：
+
+```rust
+struct SnakeHead;
+struct Materials {
+    head_material: Handle<ColorMaterial>,
+}
+```
+
+`SnakeHead` 仅仅是一个空结构体，我们会把它当作一个组件来使用，它就是像某种标签，我们会放到一个实体上，之后我们能通过查询带有 `SnakeHead` 组件的实体来找到这个实体。像这样的空结构体在 Bevy 中是一种常见的模式，组件经常不需要他们自己的任何状态。 `Materials` 以后会变成一种资源，用来存储我们给蛇头使用的材质，也会用来存储蛇身和食物的材质。
+
+`head_material` 句柄应该在游戏设置的时候就应该创建好，所以我们接下来要做的是，修改我们的 `setup` 函数：
+
+```rust
+fn setup(mut commands: Commands, mut materials: ResMut<Assets<ColorMaterial>>) {
+    commands.spawn(Camera2dComponents::default());
+    commands.insert_resource(Materials {
+        head_material: materials.add(Color::rgb(0.7, 0.7, 0.7).into()),
+    });
+}
+```
+
+> **注意：** Bevy要求在注册系统时按照特定的顺序。命令（Commands） -> 资源（Resources） -> 组件（Components）/查询（Queries）。如果你在弄乱一个系统之后获得一个神秘的编译时错误，请检查你的顺序。
+
+`materials.add` 会返回 `Handle<ColorMaterial>`。我们创建了使用这个新建 handle 的 `Materials` 结构体。之后，我们尝试访问类型为 `Materials` 的资源， Bevy会找到我们这个结构体。现在我们来在新的系统里创建我们的蛇头实体，然后你会看到我们如何使用前述资源的：
+
+```rust
+fn game_setup(mut commands: Commands, materials: Res<Materials>) {
+    commands
+        .spawn(SpriteComponents {
+            material: materials.head_material.clone(),
+            sprite: Sprite::new(Vec2::new(10.0, 10.0)),
+            ..Default::default()
+        })
+        .with(SnakeHead);
+}
+```
+
+现在我们有了新的系统，它会寻找类型为 `Materials` 的资源。它也会创建（spawn）一个新实体，带有 `SpriteComponents` 和 `SnakeHead` 组件。为了创建 `SpriteComponents`, 我们将我们之间创建的颜色的 handle 传入，并且给精灵 10x10 的大小。我们将这个系统添加到我们 app 的构建器：
+
+```rust
+.add_startup_system(setup.system())
+.add_startup_stage("game_setup") // <--
+.add_startup_system_to_stage("game_setup", game_setup.system()) // <--
+```
+
+我们需要一个新的场景而不是再一次调用 `add_startup_system` 的原因是，我们需要使用在 `setup` 函数中插入的资源。这次运行后，你应该在屏幕中央看到蛇头：
+
+![](https://mbuffett.com/bevy_snake/new_pics/snake_pixel.png)
+
+好了，可能我们叫它“蛇头”有点过了，你可以看到一个 10x10 的白色精灵。
+
+
 
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
