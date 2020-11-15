@@ -281,7 +281,33 @@ fn position_translation(windows: Res<Windows>, mut q: Query<(&Position, &mut Tra
 
 > **注意：** 现在最明显的问题是小蛇被压扁了。另外一个问题是我们破环了我们的输入处理。我们先修复输入处理，然后我们得记得回来处理我们被压扁的小蛇，把它恢复原状。
 
-## 使用
+## 使用我们的格子
+
+> [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/0f39c51)
+
+我们现在配置好了格子坐标，现在我们需要更新我们的 `snake_movement` 系统。之前我们使用 `Transform` 的地方，现在替换成 `Position`：
+
+```rs
+fn snake_movement(
+    keyboard_input: Res<Input<KeyCode>>,
+    mut head_positions: Query<With<SnakeHead, &mut Position>>,
+) {
+    for mut pos in head_positions.iter_mut() {
+        if keyboard_input.pressed(KeyCode::Left) {
+            pos.x -= 1;
+        }
+        if keyboard_input.pressed(KeyCode::Right) {
+            pos.x += 1;
+        }
+        if keyboard_input.pressed(KeyCode::Down) {
+            pos.y -= 1;
+        }
+        if keyboard_input.pressed(KeyCode::Up) {
+            pos.y += 1;
+        }
+    }
+}
+```
 
 
 ---
