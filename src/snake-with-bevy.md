@@ -188,7 +188,7 @@ fn snake_movement(
 ## 码格子
 > [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/d1f4225)
 
-到现在我们一直在用窗口的坐标，但这种方法只能在 (0, 0) 坐标在窗口正中央，并且单位是像素的时候有效。贪吃蛇游戏通常用格子，所以如果我们把我们的贪吃蛇设置成 10x10，那我们的窗口会 __真的__ 很小。我们让日子变得轻松些吧，我们选择用我们自己的位置和尺度。然后，我们用系统来处理变换到窗口的坐标。
+到现在我们一直在用窗口的坐标，但这种方法只能在 (0, 0) 坐标在窗口正中央，并且单位是像素的时候有效。贪吃蛇游戏通常用格子，所以如果我们把我们的贪吃蛇设置成 10x10，那我们的窗口会 __真的__ 很小。我们让日子变得轻松些吧，我们选择用我们自己的位置和尺寸。然后，我们用系统来处理变换到窗口的坐标。
 
 我们先定义格子为 10x10。在程序文件开头定义如下变量：
 
@@ -197,7 +197,7 @@ const ARENA_WIDTH: u32 = 10;
 const ARENA_HEIGHT: u32 = 10;
 ```
 
-以及我们用于处理位置/尺度的结构体：
+以及我们用于处理位置/尺寸的结构体：
 
 ```rs
 #[derive(Default, Copy, Clone, Eq, PartialEq, Hash)]
@@ -234,7 +234,7 @@ commands
     .with(Size::square(0.8)); // <--
 ```
 
-这些组件暂时不做任何事情，我们现在就来将我们的尺度映射到精灵的尺度：
+这些组件暂时不做任何事情，我们现在就来将我们的尺寸映射到精灵的尺寸：
 
 ```rs
 fn size_scaling(windows: Res<Windows>, mut q: Query<(&Size, &mut Sprite)>) {
@@ -248,7 +248,7 @@ fn size_scaling(windows: Res<Windows>, mut q: Query<(&Size, &mut Sprite)>) {
 }
 ```
 
-这个尺度变换逻辑是这样的：如果某个对象有一个单位格子宽度，格子宽40，然后窗口现在 400px 宽，那么它应该有10哥宽度。下面我们做位置系统：
+这个尺寸变换逻辑是这样的：如果某个对象有一个单位格子宽度，格子宽40，然后窗口现在 400px 宽，那么它应该有10哥宽度。下面我们做位置系统：
 
 ```rs
 fn position_translation(windows: Res<Windows>, mut q: Query<(&Position, &mut Transform)>) {
@@ -309,6 +309,11 @@ fn snake_movement(
 }
 ```
 
+## 调整窗口大小
+
+> [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/dce7a53)
+
+我们上一步中的小蛇被压扁了，是因为默认的窗口尺寸
 
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
