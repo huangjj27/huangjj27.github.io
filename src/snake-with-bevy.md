@@ -313,7 +313,19 @@ fn snake_movement(
 
 > [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/dce7a53)
 
-我们上一步中的小蛇被压扁了，是因为默认的窗口尺寸
+我们上一步中的小蛇被压扁了，是因为默认的窗口尺寸并不是方形的，然而我们的格子是，所以我们每个格坐标会宽度长于高度。我们修复它最简单的方法，是在构建 app 的时候创建一个 `WindowDescriptor` 资源：
+
+```rs
+    App::build()
+        .add_resource(WindowDescriptor { // <--
+            title: "Snake!".to_string(), // <--
+            width: 200,                 // <--
+            height: 200,                // <--
+            ..Default::default()         // <--
+        })
+        .add_startup_system(setup.system())
+```
+
 
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
