@@ -325,6 +325,19 @@ fn snake_movement(
         })
         .add_startup_system(setup.system())
 ```
+同时，我们改一下背景颜色，插入这个 `use` 语句来引入 `ClearColor` 结构体：
+
+```rs
+use bevy::render::pass::ClearColor;
+```
+
+然后在 app 构建器增加资源：
+
+```rs
+.add_resource(ClearColor(Color::rgb(0.04, 0.04, 0.04)))
+```
+## 生成食物
+
 
 
 ---
