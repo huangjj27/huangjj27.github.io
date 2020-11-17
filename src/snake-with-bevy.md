@@ -337,7 +337,83 @@ use bevy::render::pass::ClearColor;
 .add_resource(ClearColor(Color::rgb(0.04, 0.04, 0.04)))
 ```
 ## 生成食物
+现在我们的小蛇可以到处移动了，该喂点东西给它了。现在我们给 `Materials` 加一个 `food_materials` 字段：
 
+```rs
+struct Materials {
+    head_material: Handle<ColorMaterial>,
+    food_material: Handle<ColorMaterial>, // <--
+}
+```
+
+然后把这个新材质加到我们的 `setup` 函数里：
+
+```rs
+commands.insert_resource(Materials {
+    head_material: materials.add(Color::rgb(0.7, 0.7, 0.7).into()),
+    food_material: materials.add(Color::rgb(1.0, 0.0, 1.0).into()), // <--
+});
+```
+
+然后我们需要 `Duration` 给要创建的定时器使用，而且我们还需要 `random` 来随机分配食物的位置。先在程序里引入这些：
+
+```rs
+use rand::prelude::random;
+use std::time::Duration;
+```
+
+然后我们因素两个新结构体： `Food` 组件让我们知道哪个实体是食物，以及一个定时制造食物的定时器：
+
+```rs
+struct Food;
+
+struct FoodSpawnTimer(Timer);
+impl Default for FoodSpawnTimer {
+    fn default() -> Self {
+        Self(Timer::new(Duration::from_millis(1000), true))
+    }
+}
+```
+
+至于实现 `Default` 的原因，会在我解释下面的系统的时候说明：
+
+```
+fn food_spawner(
+    mut commands: Commands,
+    materials: Res<Materials>,
+    time: Res<Time>,
+    mut timer: Local<FoodSpawnTimer>,
+) {
+    timer.0.tick(time.delta_seconds);
+    if timer.0.finished {
+        commands
+            .spawn(SpriteComponents {
+                material: materials.food_material.clone(),
+                ..Default::default()
+            })
+            .with(Food)
+            .with(Position {
+                x: (random::<f32>() * ARENA_WIDTH as f32) as i32,
+                y: (random::<f32>() * ARENA_HEIGHT as f32) as i32,
+            })
+            .with(Size::square(0.8));
+    }
+}
+```
+
+我们引入了局部资源概念，具体而言是 `timer` 参数。 Bevy 会看到这个参数并且实例化一个 `FoodSpawnTimer` 类型的值，用的是我们的 `Default` 实现。这会在这个系统第一次运行是发生，之后这个系统会一直重用相同的定时器。像这样使用局部资源要比手动注册资源更贴近工程化。这个定时器会一直重复，所以我们只需要调用 `tick` 函数，然后无论这个系统在定时器完成后什么时候跑，我们就随机创建一些食物。
+
+你可能知道下一步是什么了，把这个系统加到应用构建器上：
+
+```rs
+.add_system(food_spawner.system())
+```
+
+现在我们的程序看起来像这样：
+
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="/bevy_snake/new_gifs/food_spawning.mp4" type="video/mp4">
+</video>
 
 
 ---
