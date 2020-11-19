@@ -415,7 +415,79 @@ fn food_spawner(
     <source src="/bevy_snake/new_gifs/food_spawning.mp4" type="video/mp4">
 </video>
 
+## 更像蛇的移动
 
+> [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/f4e6100)
+
+我们现在准备定时触发小蛇移动。具体说来，我们想小蛇一直在移动，无论我们是否按下按键；并且我们想要它每隔 X 秒移动一次，而不是每一帧都移动。我们会改动几个地方，所以如果你不太清楚要改动哪里，查看这一小节的差异吧。
+
+首先，我们需要加一个方向枚举：
+
+```rs
+#[derive(PartialEq, Copy, Clone)]
+enum Direction {
+    Left,
+    Up,
+    Right,
+    Down,
+}
+
+impl Direction {
+    fn opposite(self) -> Self {
+        match self {
+            Self::Left => Self::Right,
+            Self::Right => Self::Left,
+            Self::Up => Self::Down,
+            Self::Down => Self::Up,
+        }
+    }
+}
+```
+
+然后把这个方向枚举加到我们的 `SnakeHead` 结构体，使得它知道应该要往哪里移动：
+
+```rs
+struct SnakeHead {
+    direction: Direction,
+}
+```
+
+我们也得在实例化 `SnakeHead` 组件的时候给定初始方向，例如我们让它一开始往上走：
+
+```rs
+.with(SnakeHead {
+    direction: Direction::Up,
+})
+```
+
+小蛇通常移动不是很流畅，是一种一步步来的行动。就行我们生成食物的时候，我们需要使用定时器来让系统没每隔 X秒/毫秒才跑一次。我们需要创建一个结构体来持有定时器：
+
+```rs
+struct SnakeMoveTimer(Timer);
+```
+
+然后我们把它当成资源加到我们的 app 构建器：
+
+```rs
+.add_resource(SnakeMoveTimer(Timer::new(
+    Duration::from_millis(150. as u64),
+    true,
+)))
+```
+
+我们之所以不把这个定时器像生成食物的时候把定时器看成局部资源，是因为我们将会在几个系统里用上它，所以我帮你节约了一些重构的工作。因为我们需要在几个系统里使用它，我们需要创建一个新系统来触发这个定时器：
+
+```rs
+fn snake_timer(time: Res<Time>, mut snake_timer: ResMut<SnakeMoveTimer>) {
+    snake_timer.0.tick(time.delta_seconds);
+}
+```
+
+我们也可以把这段触发逻辑直接放到 `snake_movement` 系统里，但是我比较喜欢整洁地吧它放到一个单独的系统中，因为这个定时器会用在几个地方。我们把这个系统也加到 app上：
+
+```rs
+.add_system(snake_timer.system())
+```
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
