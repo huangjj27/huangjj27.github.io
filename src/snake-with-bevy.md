@@ -488,6 +488,56 @@ fn snake_timer(time: Res<Time>, mut snake_timer: ResMut<SnakeMoveTimer>) {
 ```rs
 .add_system(snake_timer.system())
 ```
+
+现在我们可以做方向逻辑的核心部分，也就是 `snake_movement` 系统，以下是更新后的版本：
+
+```rs
+fn snake_movement(
+    keyboard_input: Res<Input<KeyCode>>,
+    snake_timer: ResMut<SnakeMoveTimer>,
+    mut heads: Query<(Entity, &mut SnakeHead)>,
+    mut positions: Query<&mut Position>,
+) {
+    if let Some((head_entity, mut head)) = heads.iter_mut().next() {
+        let mut head_pos = positions.get_mut(head_entity).unwrap();
+        let dir: Direction = if keyboard_input.pressed(KeyCode::Left) {
+            Direction::Left
+        } else if keyboard_input.pressed(KeyCode::Down) {
+            Direction::Down
+        } else if keyboard_input.pressed(KeyCode::Up) {
+            Direction::Up
+        } else if keyboard_input.pressed(KeyCode::Right) {
+            Direction::Right
+        } else {
+            head.direction
+        };
+        if dir != head.direction.opposite() {
+            head.direction = dir;
+        }
+        if !snake_timer.0.finished {
+            return;
+        }
+        match &head.direction {
+            Direction::Left => {
+                head_pos.x -= 1;
+            }
+            Direction::Right => {
+                head_pos.x += 1;
+            }
+            Direction::Up => {
+                head_pos.y += 1;
+            }
+            Direction::Down => {
+                head_pos.y -= 1;
+            }
+        };
+    }
+}
+```
+
+这里没有什么新概念，仅仅是游戏逻辑。你可能在想为什么我们需要获取拥有 `SankeHead` 组件的 `Entity`， 然后用另外一个独立的查询来获取位置， 而不是用像 `Query<Entity, &SnakeHead, &mut Position>` 这样的参数。原因在于，我们之后可能需要其他实体的位置，而分开两个查询访问相同的组件是不会允许放在 Bevy app 构建器上的。这样改了之后，你会获得一个蛇头移动的稍微……像蛇一样：
+
+
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
