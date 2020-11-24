@@ -537,6 +537,105 @@ fn snake_movement(
 
 这里没有什么新概念，仅仅是游戏逻辑。你可能在想为什么我们需要获取拥有 `SankeHead` 组件的 `Entity`， 然后用另外一个独立的查询来获取位置， 而不是用像 `Query<Entity, &SnakeHead, &mut Position>` 这样的参数。原因在于，我们之后可能需要其他实体的位置，而分开两个查询访问相同的组件是不会允许放在 Bevy app 构建器上的。这样改了之后，你会获得一个蛇头移动的稍微……像蛇一样：
 
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="/bevy_snake/new_gifs/moving_snake_like.mp4" type="video/mp4">
+</video>
+
+## 加个尾巴
+> [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/7c8e2f7)
+
+小蛇的尾巴有点复杂。对于每蛇尾的分段，我们需要知道它下一步需要到哪里。我们准备这样实现：将这些分段放到 `Vec`，然后存储为资源。这样，当我们更新分段的位置时，我们能够迭代所有的分段并且设置每个分段的位置为前一个分段的位置。
+
+我们加一个 `segment_material` 字段到我们趁手的 `Materials` 结构体：
+```rs
+struct Materials {
+    head_material: Handle<ColorMaterial>,
+    segment_material: Handle<ColorMaterial>, // <--
+    food_material: Handle<ColorMaterial>,
+}
+```
+
+老调重弹，把 `segment_material` 加到 `setup` 中：
+
+```rs
+commands.insert_resource(Materials {
+    head_material: materials.add(Color::rgb(0.7, 0.7, 0.7).into()),
+    segment_material: materials.add(Color::rgb(0.3, 0.3, 0.3).into()), // <--
+    food_material: materials.add(Color::rgb(1.0, 0.0, 1.0).into()),
+});
+```
+
+然后一个给蛇身分段的组件：
+
+```rs
+struct SnakeSegment;
+```
+
+然后我们再加上我们说到的，用来存储分段列表的资源：
+
+```rs
+#[derive(Default)]
+struct SnakeSegments(Vec<Entity>);
+```
+
+再把它作为资源加到我们的 app 上：
+
+```rs
+.add_resource(SnakeSegments::default())
+```
+
+我们我们需要从几个地方生成分段（当你吃食物或者你初始化小蛇的时候），我们需要先创建一个辅助函数：
+
+```rs
+fn spawn_segment(
+    commands: &mut Commands,
+    material: &Handle<ColorMaterial>,
+    position: Position,
+) -> Entity {
+    commands
+        .spawn(SpriteComponents {
+            material: material.clone(),
+            ..SpriteComponents::default()
+        })
+        .with(SnakeSegment)
+        .with(position)
+        .with(Size::square(0.65))
+        .current_entity()
+        .unwrap()
+}
+```
+这看上去非常像我们生成 `SnakeHead` 的函数，但是替换了 `SnakeHead` 组件，我们用的是 `SnakeSegment` 组件。这里要说的新知识点，就是我们最后通过 `current_entity` 函数，获取了生成的 `Entity` （其实只是个 id），然后将它返回给调用者以便使用它。现在，我们需要修改我们的游戏配置函数。并非只是生成一个蛇头，它现在要生成一个蛇身的分段：
+
+```rs
+fn spawn_snake(
+    mut commands: Commands,
+    materials: Res<Materials>,
+    mut segments: ResMut<SnakeSegments>,
+) {
+    segments.0 = vec![
+        commands
+            .spawn(SpriteComponents {
+                material: materials.head_material.clone(),
+                ..Default::default()
+            })
+            .with(SnakeHead {
+                direction: Direction::Up,
+            })
+            .with(SnakeSegment)
+            .with(Position { x: 3, y: 3 })
+            .with(Size::square(0.8))
+            .current_entity()
+            .unwrap(),
+        spawn_segment(
+            &mut commands,
+            &materials.segment_material,
+            Position { x: 3, y: 2 },
+        ),
+    ];
+}
+```
+
+我们第一个分段是头部，现在我们多加了一个 `with(SnakeSegment)`。第二个分段来自我们的 `spawn_segment` 函数。我先现在得到了一条小小的尾巴：
 
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
