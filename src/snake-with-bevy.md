@@ -635,7 +635,54 @@ fn spawn_snake(
 }
 ```
 
-我们第一个分段是头部，现在我们多加了一个 `with(SnakeSegment)`。第二个分段来自我们的 `spawn_segment` 函数。我先现在得到了一条小小的尾巴：
+我们第一个分段是头部，现在我们多加了一个 `with(SnakeSegment)`。第二个分段来自我们的 `spawn_segment` 函数。我们现在得到了一条小小的尾巴：
+
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="/bevy_snake/new_gifs/detached_tail.mp4" type="video/mp4">
+</video>
+
+## 让尾巴跟着小蛇活动
+
+> [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/2f57b9b)
+
+正如我记得那样，蛇尾没有脱离蛇头，是贪吃蛇游戏中重要的一部分。我们来看看，我们可以怎么修改 `snake_movement` 函数，来更接近原汁原味的游戏。首先要做的事把 `SnakeSegments` 资源到 `snake_movement` 函数上：
+
+```rs
+fn snake_movement(
+    keyboard_input: Res<Input<KeyCode>>,
+    snake_timer: ResMut<SnakeMoveTimer>,
+    segments: ResMut<SnakeSegments>, // <--
+    mut heads: Query<(Entity, &mut SnakeHead)>,
+    mut positions: Query<&mut Position>,
+```
+
+现在，直接在最前面的 `if let` 后面，我们加上所有分段的位置（当然，不要忘了蛇头的位置）：
+
+
+```rs
+let segment_positions = segments
+    .0
+    .iter()
+    .map(|e| *positions.get_mut(*e).unwrap())
+    .collect::<Vec<Position>>();
+```
+
+然后我们要做的是在 `if let` 的末尾迭代蛇身分段（跳过蛇头，因为我们已经通过用户输入更新了位置），然后让每个分段的位置都变成前一个分段的。例如，第一个蛇身分段设置为当前蛇头（更新前）的位置，第二段的设置为第一段的。
+
+```rs
+segment_positions
+    .iter()
+    .zip(segments.0.iter().skip(1))
+    .for_each(|(pos, segment)| {
+        *positions.get_mut(*segment).unwrap() = *pos;
+    });
+```
+
+现在我们的游戏看起来应该像这样：
+
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="/bevy_snake/new_gifs/tail_following.mp4" type="video/mp4">
+</video>
 
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
