@@ -1,3 +1,13 @@
+<style>
+.bevy_img {
+    max-height: 400px;
+    max-width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+</style>
+
 # 用 `Bevy` 游戏引擎编写贪吃蛇（译）
 > 原文：<https://mbuffett.com/posts/bevy-snake-tutorial/#0.3>
 
