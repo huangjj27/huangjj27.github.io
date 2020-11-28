@@ -784,6 +784,86 @@ fn snake_growth(
 ```rs
 .add_system(snake_growth.system())
 ```
+
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="/bevy_snake/new_gifs/growing.mp4" type="video/mp4">
+</video>
+
+## 撞墙（或者咬尾巴）
+
+> [点击查看差异]https://github.com/marcusbuffett/bevy_snake/commit/bd2b307)
+
+现在我们来增加撞墙和咬尾巴来触发游戏结束（game over）。我们使用一个新事件，就像我们在“小蛇成长小节”中那样：
+
+```rs
+struct GameOverEvent;
+```
+
+并把它注册到 app 构建器上：
+
+```rs
+.add_event::<GameOverEvent>()
+```
+
+在我们的 `snake_movement` 系统中，我们想要访问 “游戏结束” 事件，使得我们能够发送事件：
+
+```rs
+fn snake_movement(
+    // ...
+    mut game_over_events: ResMut<Events<GameOverEvent>>, // <--
+    // ...
+) {
+```
+
+我们先关注在撞墙事件上面。把这部分代码放到 `match &head.direction {` 后面：
+
+```rs
+if head_pos.x < 0
+    || head_pos.y < 0
+    || head_pos.x as u32 >= ARENA_WIDTH
+    || head_pos.y as u32 >= ARENA_HEIGHT
+{
+    game_over_events.send(GameOverEvent);
+}
+```
+
+好了，现在我们的 `snake_movement` 系统可以发送 “游戏结束” 事件了，我们再来创建一个系统来监听这些事件：
+
+```rs
+fn game_over(
+    mut commands: Commands,
+    mut reader: Local<EventReader<GameOverEvent>>,
+    game_over_events: Res<Events<GameOverEvent>>,
+    materials: Res<Materials>,
+    segments_res: ResMut<SnakeSegments>,
+    food: Query<With<Food, Entity>>,
+    segments: Query<With<SnakeSegment, Entity>>,
+) {
+    if reader.iter(&game_over_events).next().is_some() {
+        for ent in food.iter().chain(segments.iter()) {
+            commands.despawn(ent);
+        }
+        spawn_snake(commands, materials, segments_res);
+    }
+}
+```
+
+这里有个很酷的点: 我们可以直接使用 `spawn_snake` 函数，现在它既是一个系统，也是一个辅助函数了。
+
+最后一个修改点，就是我们得让小蛇咬到尾巴的时候也会触发 “游戏结束” 事件。在 `snake_movement` 系统中，在我们检查完边界的部分后添加：
+
+```rs
+if segment_positions.contains(&head_pos) {
+    game_over_events.send(GameOverEvent);
+}
+```
+
+最后，我们的成果：
+
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="/bevy_snake/new_gifs/game_over.mp4" type="video/mp4">
+</video>
+
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
