@@ -684,6 +684,106 @@ segment_positions
     <source src="/bevy_snake/new_gifs/tail_following.mp4" type="video/mp4">
 </video>
 
+## 小蛇成长
+
+> [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/0533569)
+
+小蛇已经饿坏了。我们现在需要家一个系统来让小蛇猎食：
+
+```rs
+fn snake_eating(
+    mut commands: Commands,
+    snake_timer: ResMut<SnakeMoveTimer>,
+    mut growth_events: ResMut<Events<GrowthEvent>>,
+    food_positions: Query<With<Food, (Entity, &Position)>>,
+    head_positions: Query<With<SnakeHead, &Position>>,
+) {
+    if !snake_timer.0.finished {
+        return;
+    }
+    for head_pos in head_positions.iter() {
+        for (ent, food_pos) in food_positions.iter() {
+            if food_pos == head_pos {
+                commands.despawn(ent);
+                growth_events.send(GrowthEvent);
+            }
+        }
+    }
+}
+```
+
+只是迭代所有的食物位置，来看他们是不是和蛇头共享一个位置，如果是这样，我们就用 `despawn` 者趁手的函数移除食物，然后触发一个 `GrowthEvent`。我们来创建这个结构体：
+
+```rs
+struct GrowthEvent;
+```
+
+使用事件是个新概念。你可以在系统间发送或接受事件，他们可以是任意类型的结构体，使得你可以在事件里包括任何你需要发送的数据。例如，你可能有一个系统发送跳跃事件，然后一个独立的系统来处理他们。在我们的这个案例中，我们需要一个系统来发送成长事件，以及一个成长系统来处理它们。你需要注册事件，就像我们对资源和系统做的那样：
+
+```rs
+.add_event::<GrowthEvent>()
+```
+
+然后在这里我们也加上 `snake_eating` 系统：
+
+```rs
+.add_system(snake_eating.system())
+```
+
+现在小蛇应该能够猎食了。但是小蛇现在就像个黑洞，吃多少也不长大。在思考成长这事时，需要注意我们需要知道最后的分段移动前在哪里，因为那里是新的分段成长的位置。现在我们来创建一个新资源：
+
+```rs
+#[derive(Default)]
+struct LastTailPosition(Option<Position>);
+```
+
+然后在 app 构建器上：
+
+```rs
+.add_resource(LastTailPosition::default())
+```
+
+我们也要对 `snake_movement` 系统做一点小修改，来更新 `LastTailPosition` 资源。首先先把这个资源加到参数中：
+
+```rs
+fn snake_movement(
+    // ...
+    mut last_tail_position: ResMut<LastTailPosition>, // <--
+    // ...
+```
+
+然后就是给这个资源分配最后的一个分段的位置。这段代码放在我们迭代过了 `segment_positions` 之后：
+
+```rs
+last_tail_position.0 = Some(*segment_positions.last().unwrap()); // <--
+```
+
+之后，小蛇成长的函数就很清晰了：
+
+```rs
+fn snake_growth(
+    mut commands: Commands,
+    last_tail_position: Res<LastTailPosition>,
+    growth_events: Res<Events<GrowthEvent>>,
+    mut segments: ResMut<SnakeSegments>,
+    mut growth_reader: Local<EventReader<GrowthEvent>>,
+    materials: Res<Materials>,
+) {
+    if growth_reader.iter(&growth_events).next().is_some() {
+        segments.0.push(spawn_segment(
+            &mut commands,
+            &materials.segment_material,
+            last_tail_position.0.unwrap(),
+        ));
+    }
+}
+```
+
+以及追加系统：
+
+```rs
+.add_system(snake_growth.system())
+```
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
