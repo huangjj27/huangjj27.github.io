@@ -281,6 +281,8 @@ fn position_translation(windows: Res<Windows>, mut q: Query<(&Position, &mut Tra
 
 > **注意：** 现在最明显的问题是小蛇被压扁了。另外一个问题是我们破环了我们的输入处理。我们先修复输入处理，然后我们得记得回来处理我们被压扁的小蛇，把它恢复原状。
 
+![](https://mbuffett.com/bevy_snake/new_pics/squished_snake.png)
+
 ## 使用我们的格子
 
 > [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/0f39c51)
@@ -309,7 +311,11 @@ fn snake_movement(
 }
 ```
 
-## 调整窗口大小
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/moving_grid.mp4" type="video/mp4">
+</video>
+
+## 调整窗口大小[^1]
 
 > [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/dce7a53)
 
@@ -336,6 +342,13 @@ use bevy::render::pass::ClearColor;
 ```rs
 .add_resource(ClearColor(Color::rgb(0.04, 0.04, 0.04)))
 ```
+
+[^1]: 原文中这里的规格是 2000，但是 2000 的规则放 10x10 显然太大了， 这里改成 200
+
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/moving_square_grid.mp4" type="video/mp4">
+</video>
+
 ## 生成食物
 现在我们的小蛇可以到处移动了，该喂点东西给它了。现在我们给 `Materials` 加一个 `food_materials` 字段：
 
@@ -412,7 +425,7 @@ fn food_spawner(
 现在我们的程序看起来像这样：
 
 <video controls="" loop="" muted="" playsinline="" class="bevy_img">
-    <source src="/bevy_snake/new_gifs/food_spawning.mp4" type="video/mp4">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/food_spawning.mp4" type="video/mp4">
 </video>
 
 ## 更像蛇的移动
@@ -538,7 +551,7 @@ fn snake_movement(
 这里没有什么新概念，仅仅是游戏逻辑。你可能在想为什么我们需要获取拥有 `SankeHead` 组件的 `Entity`， 然后用另外一个独立的查询来获取位置， 而不是用像 `Query<Entity, &SnakeHead, &mut Position>` 这样的参数。原因在于，我们之后可能需要其他实体的位置，而分开两个查询访问相同的组件是不会允许放在 Bevy app 构建器上的。这样改了之后，你会获得一个蛇头移动的稍微……像蛇一样：
 
 <video controls="" loop="" muted="" playsinline="" class="bevy_img">
-    <source src="/bevy_snake/new_gifs/moving_snake_like.mp4" type="video/mp4">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/moving_snake_like.mp4" type="video/mp4">
 </video>
 
 ## 加个尾巴
@@ -638,7 +651,7 @@ fn spawn_snake(
 我们第一个分段是头部，现在我们多加了一个 `with(SnakeSegment)`。第二个分段来自我们的 `spawn_segment` 函数。我们现在得到了一条小小的尾巴：
 
 <video controls="" loop="" muted="" playsinline="" class="bevy_img">
-    <source src="/bevy_snake/new_gifs/detached_tail.mp4" type="video/mp4">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/detached_tail.mp4" type="video/mp4">
 </video>
 
 ## 让尾巴跟着小蛇活动
@@ -681,7 +694,7 @@ segment_positions
 现在我们的游戏看起来应该像这样：
 
 <video controls="" loop="" muted="" playsinline="" class="bevy_img">
-    <source src="/bevy_snake/new_gifs/tail_following.mp4" type="video/mp4">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/tail_following.mp4" type="video/mp4">
 </video>
 
 ## 小蛇成长
@@ -786,12 +799,12 @@ fn snake_growth(
 ```
 
 <video controls="" loop="" muted="" playsinline="" class="bevy_img">
-    <source src="/bevy_snake/new_gifs/growing.mp4" type="video/mp4">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/growing.mp4" type="video/mp4">
 </video>
 
 ## 撞墙（或者咬尾巴）
 
-> [点击查看差异]https://github.com/marcusbuffett/bevy_snake/commit/bd2b307)
+> [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/bd2b307)
 
 现在我们来增加撞墙和咬尾巴来触发游戏结束（game over）。我们使用一个新事件，就像我们在“小蛇成长小节”中那样：
 
@@ -861,7 +874,7 @@ if segment_positions.contains(&head_pos) {
 最后，我们的成果：
 
 <video controls="" loop="" muted="" playsinline="" class="bevy_img">
-    <source src="/bevy_snake/new_gifs/game_over.mp4" type="video/mp4">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/game_over.mp4" type="video/mp4">
 </video>
 
 ---
