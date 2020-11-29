@@ -17,7 +17,7 @@
     <source src="https://mbuffett.com/bevy_snake/new_gifs/game_over.mp4" type="video/mp4">
 </video>
 
-这大约是 300 行 Rust 代码；也需要花点时间深入。如果你想快进到成品代码，请点 [这里](https://github.com/marcusbuffett/bevy_snake/tree/tutorial)。每一个小姐开头都有一份代码差异，这应该会在你不是很清晰哪里需要插入代码的时候更加清晰一点。
+这大约是 300 行 Rust 代码；也需要花点时间深入。如果你想快进到成品代码，请点 [这里](https://github.com/marcusbuffett/bevy_snake/tree/tutorial)。每一个小节开头都有一份代码差异，这应该会在你不是很清晰哪里需要插入代码的时候更加清晰一点。
 
 ## 新的空的 Bevy 应用
 > [点击查看差异](https://github.com/marcusbuffett/bevy_snake/commit/174c226)
