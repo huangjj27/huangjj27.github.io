@@ -4,6 +4,36 @@
     \forall p \in Primes, p \lt 2n(n \in Z^+), p \nmid 2n \Rightarrow p \nmid 2n - p
 \\]
 
+## 一般化命题与反证法 [^1]
+我们可以抽出一个更一般的命题：对任意正整数 \\(a, b (a \lt b)\\)，若 \\( a \nmid b\\)，则 \\( a \nmid b - a \\):
+\\[\label{1.0} \tag{1.0}
+    \forall a, b \in Z^+ (a \lt b), a \nmid b \Rightarrow a \mid b - a
+\\]
+
+### 反证法
+假设原结论不成立，即 \\( a \mid b - a \\) 成立，则：
+
+\\( \because a \mid b - a, a \mid a \\)
+
+\\(  \therefore a \mid (b - a) + a \\) （整除的线性性质），即 \\( a \mid b \\),
+
+这与假设 \\( a \nmid b \\) 矛盾！故假设不成立，原结论成立，即 \\( a\mid b - a \\),
+
+故命题 \\( \ref{1.0} \\) 成立。
+
+### 代入条件
+
+令 \\( a := p, b = 2n \\), 则显然：
+
+\\[
+    p \in Primes, p \lt 2n \Rightarrow p \nmid 2n \Rightarrow p \nmid 2n - p
+\\]
+
+即命题 \\( \ref{1} \\) 得证。
+
+---
+
+(以下内容为作者之前思考过的另外一个比较迂回的证明方法，为后续叙述的引理）
 ## 一整数若不同时整除互质两数，则不能整除后两数之差
 ### 形式化描述
 \\[ \label{1.1} \tag{1.1}
@@ -31,5 +61,8 @@
 - \\(x \nmid a, \, x|b\\). 同理可得:
     若\\( x|a-b\\) ,  则 \\( a = b + kx = (m+k)x \Leftrightarrow x|a \\), 与 \\(x \nmid a\\) 矛盾! 故 \\(x \nmid a-b \\).
 
-## 代入条件
+### 代入条件
 令 \\( x := p, a := 2n, b := p \\)，显然有\\( p \mid p \\)。故，当 \\(p \nmid 2n \\)时， \\( p \nmid 2n - p \\)，即命题 \\( \ref{1} \\) 得证。
+
+
+[^1]: 感谢中山大学数学专业的倪秉业师弟指出这个更简洁的证明方式！
