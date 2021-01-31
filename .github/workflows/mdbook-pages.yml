@@ -21,9 +21,7 @@ jobs:
         version: latest
         use-tool-cache: true
     - name: Build mdbook
-      run: mdbook build && pwd
-    - name: add resume pdf
-      run: mkdir -p ./book/resume && mv ./static/resume ./book/resume
+      run: mdbook build
     - name: Cache artifact
       uses: actions/upload-artifact@v1
       with:
