@@ -1,5 +1,6 @@
 # Summary
 
+- [记一次面试](./interview.md)
 - [用 `Bevy` 游戏引擎编写贪吃蛇（译）](./snake-with-bevy.md)
 - [Rust 安全应用开发51条](./rust-safe-apps-51.md)
 - [在天河二号上配置 Rust 运行环境](./rust-tianhe-ii.md)

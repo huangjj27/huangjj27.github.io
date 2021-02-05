@@ -81,6 +81,7 @@
 [SOLID原则]: https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)
 [语义化版本]: http://semver.org/lang/zh-CN/
 
+<!--
 ## <i class="fa fa-heart" aria-hidden="true"></i> 期望
 - 工作地点: 广州
 - 期望岗位:
@@ -93,3 +94,4 @@
         - 根据架构实现系统代码
         - 对实现的代码编写单元测试, 集成测试, 性能测试用例代码
         - 往架构师/设计师方向发展
+-->
