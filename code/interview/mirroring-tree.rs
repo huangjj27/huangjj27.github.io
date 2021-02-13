@@ -8,113 +8,113 @@ struct Node {
 
 type NodeLink = Option<Box<Node>>;
 
-# fn construct_tree() -> Box<node> {
-#     let l3left1 = node {
+# fn construct_tree() -> Box<Node> {
+#     let l3left1 = Node {
 #         val: 4,
-#         left: none,
-#         right: none,
+#         left: None,
+#         right: None,
 #     };
 #
-#     let l3right1 = node {
+#     let l3right1 = Node {
 #         val: 5,
-#         left: none,
-#         right: none,
+#         left: None,
+#         right: None,
 #     };
 #
-#     let l3left2 = node {
+#     let l3left2 = Node {
 #         val: 6,
-#         left: none,
-#         right: none,
+#         left: None,
+#         right: None,
 #     };
 #
-#     let l3right2 = node {
+#     let l3right2 = Node {
 #         val: 7,
-#         left: none,
-#         right: none,
+#         left: None,
+#         right: None,
 #     };
 #
-#     let l2left = node {
+#     let l2left = Node {
 #         val: 2,
-#         left: some(Box::new(l3left1)),
-#         right: some(Box::new(l3right1)),
+#         left: Some(Box::new(l3left1)),
+#         right: Some(Box::new(l3right1)),
 #     };
 #
 #
-#     let l2right = node {
+#     let l2right = Node {
 #         val: 3,
-#         left: some(Box::new(l3left2)),
-#         right: some(Box::new(l3right2)),
+#         left: Some(Box::new(l3left2)),
+#         right: Some(Box::new(l3right2)),
 #     };
 #
-#     Box::new(node {
+#     Box::new(Node {
 #         val: 1,
-#         left: some(Box::new(l2left)),
-#         right: some(Box::new(l2right)),
+#         left: Some(Box::new(l2left)),
+#         right: Some(Box::new(l2right)),
 #     })
 # }
 #
-# fn construct_mirror() -> Box<node> {
-#     let l3left1 = node {
+# fn construct_mirror() -> Box<Node> {
+#     let l3left1 = Node {
 #         val: 7,
-#         left: none,
-#         right: none,
+#         left: None,
+#         right: None,
 #     };
 #
-#     let l3right1 = node {
+#     let l3right1 = Node {
 #         val: 6,
-#         left: none,
-#         right: none,
+#         left: None,
+#         right: None,
 #     };
 #
-#     let l3left2 = node {
+#     let l3left2 = Node {
 #         val: 5,
-#         left: none,
-#         right: none,
+#         left: None,
+#         right: None,
 #     };
 #
-#     let l3right2 = node {
+#     let l3right2 = Node {
 #         val: 4,
-#         left: none,
-#         right: none,
+#         left: None,
+#         right: None,
 #     };
 #
-#     let l2left = node {
+#     let l2left = Node {
 #         val: 3,
-#         left: some(Box::new(l3left1)),
-#         right: some(Box::new(l3right1)),
+#         left: Some(Box::new(l3left1)),
+#         right: Some(Box::new(l3right1)),
 #     };
 #
 #
-#     let l2right = node {
+#     let l2right = Node {
 #         val: 2,
-#         left: some(Box::new(l3left2)),
-#         right: some(Box::new(l3right2)),
+#         left: Some(Box::new(l3left2)),
+#         right: Some(Box::new(l3right2)),
 #     };
 #
-#     Box::new(node {
+#     Box::new(Node {
 #         val: 1,
-#         left: some(Box::new(l2left)),
-#         right: some(Box::new(l2right)),
+#         left: Some(Box::new(l2left)),
+#         right: Some(Box::new(l2right)),
 #     })
 # }
 #
-# impl into<vec<i32>> for Box<node> {
-#     fn into(mut self) -> vec<i32> {
-#         let v_left: vec<i32>;
-#         let v_right: vec<i32>;
-#         v_left = if let some(node) = self.left.take() {
+# impl Into<Vec<i32>> for Box<Node> {
+#     fn into(mut self) -> Vec<i32> {
+#         let v_left: Vec<i32>;
+#         let v_right: Vec<i32>;
+#         v_left = if let Some(node) = self.left.take() {
 #             node.into()
 #         } else {
-#             vec::new()
+#             Vec::new()
 #         };
 #
-#         v_right = if let some(node) = self.right.take() {
+#         v_right = if let Some(node) = self.right.take() {
 #             node.into()
 #         } else {
-#             vec::new()
+#             Vec::new()
 #         };
 #
-#        let mut v = vec::new();
+#        let mut v = Vec::new();
 #        v.push(self.val);
 #        v.extend(v_left.into_iter());
 #        v.extend(v_right.into_iter());

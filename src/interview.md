@@ -4,15 +4,15 @@
 
 参考自：
 - [线程同步 -- 百度百科](https://baike.baidu.com/item/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5)
-- [<MFC笔记> 四种线程同步（或互斥）方式小结 -- CSDN](https://blog.csdn.net/ebowtang/article/details/29905309)
 
 ### 有什么场景是 添加了生命周期标注 还是会出问题的？
 'a: 'static ('staic < 'a )
 
 ### Waker 如何被唤醒？ Reactor要怎么实现？
-  Reactor作为反应器，上面同时挂载了成千上万个待唤醒的事件， 这里使用了mio统一封装了操作系统的多路复用API。在Linux中使用的是Epoll，在Mac中使用的则是Kqueue[^1]
+Reactor 作为反应器，上面同时挂载了成千上万个待唤醒的事件，这里使用了mio统一封装了操作系统的多路复用API。
+在Linux中使用的是Epoll，在Mac中使用的则是Kqueue[^1]
 
-```
+```ignore
 loop {
     // 轮询事件是否超时
     poll.poll(&events, timeout);
@@ -32,7 +32,9 @@ loop {
 ```
 
 [^1]: https://rustcc.cn/article?id=e6d50145-4bc2-4f1e-84da-c39c8217640b
-### poll epoll
+
+#### poll epoll kqueue
+#### io_uring
 
 ## 一面 -- 手写代码
 ### 1. 实现一个二分查找函数
@@ -51,7 +53,7 @@ loop {
 
 ### 2. 镜像二叉树
 请反转二叉树。如给出以下二叉树：
-```
+```markdown
      1
    /   \
   2     3
@@ -59,7 +61,7 @@ loop {
 4   5 6   7
 ```
 反转为：
-```
+```markdown
      1
    /   \
   3     2
@@ -75,3 +77,22 @@ loop {
 - Q: 请优化这个算法？
   - A：如果不用递归（因为递归会加深调用栈），可以使用 **广度优先搜索算法** 来自根向叶
         逐层反转左右子节点的指针，并将子节点的指针放入到队列中待进行处理。
+
+---
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+
+<script>
+const gitalk = new Gitalk({
+  clientID: '5af6fa1218b8ad6d12e9',
+  clientSecret: '0c226cbc5544c3252c1c0fba0b01ca9b7bf61691',
+  repo: 'blog-gitment',      // The repository of store comments,
+  owner: 'huangjj27',
+  admin: ['huangjj27'],
+  id: '/posts/rust-interview-1/',      // Ensure uniqueness and length less than 50
+  distractionFreeMode: false  // Facebook-like distraction free mode
+})
+
+gitalk.render('gitalk-container')
+</script>
