@@ -1,5 +1,6 @@
 # Summary
 
+- [蓄水池算法改进 - 面向抽奖场景保证等概率性](./reservoir.md)
 - [记一次面试](./interview.md)
 - [用 `Bevy` 游戏引擎编写贪吃蛇（译）](./snake-with-bevy.md)
 - [Rust 安全应用开发51条](./rust-safe-apps-51.md)
