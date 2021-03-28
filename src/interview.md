@@ -87,7 +87,7 @@ loop {
 
 ## 一面 -- 手写代码
 ### 1. 实现一个二分查找函数
-{{#playpen ../code/interview/binary-search.rs}}
+{{#playground ../code/interview/binary-search.rs}}
 
 - Q: 请分析该函数的算法复杂度？
   - A: 时间复杂度 \\( O(\log n) \\)a，最坏情况下的事件复杂度是 \\( O(n) \\)
@@ -117,7 +117,7 @@ loop {
 ```
 
 递归解法：
-{{#playpen ../code/interview/mirroring-tree.rs}}
+{{#playground ../code/interview/mirroring-tree.rs}}
 
 - Q: 请优化这个算法？
   - A：如果不用递归（因为递归会加深调用栈），可以使用 **广度优先搜索算法** 来自根向叶

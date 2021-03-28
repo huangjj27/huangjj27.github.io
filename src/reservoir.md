@@ -125,7 +125,7 @@ Rust 中的[特质（trait）](https://kaisery.gitbooks.io/trpl-zh-cn/ch10-02-tr
 ### 建模与实现
 本文使用面向对象（Object-Oriented）编程范式[^2]来进行抽象，如下所示：
 
-```rs
+```rs,playground
 extern crate rand;
 use rand::random;
 use rand::seq::SliceRandom;
@@ -270,6 +270,10 @@ fn main() {
     println!("{:?}", lottery.release().unwrap());
 }
 ```
+
+## 优点
+- 流式处理，可以适应任意规模的参与人群
+- 在保证每一位抽奖者都有相同的概率获得特定奖项的同时，还能保证每一个抽奖者的获得的奖项均不相同
 
 ## 缺点
 - 所有参与抽奖的人都必须**依次**经过服务器处理，因为需要获知准确的总人数来保证等概率性。
