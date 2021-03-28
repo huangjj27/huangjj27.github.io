@@ -288,3 +288,32 @@ fn main() {
 
 [^2]: 作者理解的面向对象 = 对象是交互的最基本单元 + 对象通过相互发送消息进行交互。而特质/接口以及
 对象其他公开的方法定义了对象可以向外发送/从外接收的消息。
+
+## 下一步可能展开的工作
+目前所有抽奖者都按照相等的概率抽奖，而在一些场景下可能按照一些规则给与某些抽奖者优惠
+（例如绩效越高的员工中奖概率越大），因此下一步可能考虑如何按照权重赋予每位抽奖者各自的
+中奖概率。
+
+## 致谢
+感谢茶壶君（@）一语惊醒梦中人，清楚明确地表达了需求；
+感谢张汉东老师 ([@ZhangHanDong](https://github.com/ZhangHanDong))老师提点了之后可以开展研究的方向；
+感谢在这次讨论中提供意见的其他 Rust 社区的朋友，谢谢你们！
+
+---
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+
+<script>
+const gitalk = new Gitalk({
+  clientID: '5af6fa1218b8ad6d12e9',
+  clientSecret: '0c226cbc5544c3252c1c0fba0b01ca9b7bf61691',
+  repo: 'blog-gitment',      // The repository of store comments,
+  owner: 'huangjj27',
+  admin: ['huangjj27'],
+  id: '/posts/reservoir/',      // Ensure uniqueness and length less than 50
+  distractionFreeMode: false  // Facebook-like distraction free mode
+})
+
+gitalk.render('gitalk-container')
+</script>
