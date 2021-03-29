@@ -1,4 +1,8 @@
 # 蓄水池算法改进 - 面向抽奖场景保证等概率性
+
+> 免责声明：禁止任何个人或团体使用本文研究成果用于实施任何违反中华人民共和国法律法规的活动
+> 如有违反，均与本文作者无关
+
 在我们通常遇到的抽奖场景，于年会时将所有人的编号都放到箱子里面抽奖，然后每次抽出中奖者
 决定奖项。而在这过程中，因为先抽中者已经确定了奖项，然后不能够参与后续的奖项的抽奖；而后
 续参与抽奖的人员则其实会以越来越低的概率参与抽奖:
@@ -95,23 +99,29 @@
 > \\( Choosen[k] (1 \le k \le m) \\) 表示第 \\( k \\) 个奖项的当前占有情况，
 > 初始值为 \\( None \\),
 >
+> \\( replaced \\) 为原本已经中奖，但是被人替换的抽奖者
+>
 > \\( Players \\) 为参与参与抽奖的人的序列，每次只能获取一个 \\( player \\)
 >
 > 记 \\( n := 0 \\)为当前参与抽奖的人数
 >
 > 1. 在抽奖结束前，每次遇到一个新的 \\( player \\) 执行以下操作：
->    - \\( n := n + 1 \\)
->    - 产生随机数 \\( r (1 \le r \le n) \\)
->    - 如果 \\( r \lt n \\) 并且 \\( n \le m \\)，\\( Choosen[n] := Choosen[r] \\)
->    - 如果 \\( r \le m \\)，\\( Choosen[r] := player \\)
+>     - \\( placed := None \\)
+>     - \\( n := n + 1 \\)
+>     - 产生随机数 \\( r (1 \le r \le n) \\)
+>     - 如果 \\( r \le m \\)：
+>         - \\( replaced := Choosen[r] \\)
+>         - \\( Choosen[r] := player \\)
+>     - 如果 \\( r \lt n \\) 并且 \\( n \le m \\)：
+>         - \\( Choosen[n] := replaced \\)
 > 2. 在抽奖结束时，如果 \\( n \lt m \\), 执行以下操作：
->    - \\( i := n \\)
->    - 当 \\( i \lt m \\)时，重复执行以下操作：
->        - \\( i := i + 1 \\)
->        - 产生随机数 \\( r_2 (1 \le r_2 \le i) \\)
->        - 如果 \\( r_2 \lt i \\):
->            - \\( Choosen[i] := Choosen[r_2] \\)
->            - \\( Choosen[r_2] := None \\)
+>     - \\( i := n \\)
+>     - 当 \\( i \lt m \\)时，重复执行以下操作：
+>         - \\( i := i + 1 \\)
+>         - 产生随机数 \\( r_2 (1 \le r_2 \le i) \\)
+>         - 如果 \\( r_2 \lt i \\):
+>             - \\( Choosen[i] := Choosen[r_2] \\)
+>             - \\( Choosen[r_2] := None \\)
 
 ## 程序实现
 ### Rust
@@ -125,21 +135,22 @@ Rust 中的[特质（trait）](https://kaisery.gitbooks.io/trpl-zh-cn/ch10-02-tr
 ### 建模与实现
 本文使用面向对象（Object-Oriented）编程范式[^2]来进行抽象，如下所示：
 
-```rs,playground
+```rs
 extern crate rand;
 use rand::random;
 use rand::seq::SliceRandom;
 use rand::thread_rng;
 
-trait StreamSampler {
+trait ReservoirSampler {
     // 每种抽样器只会在一种总体中抽样，而总体中所有个体都属于相同类型
     type Item;
 
-    // 流式采样器无法知道总体数据有多少个样本，因此只逐个处理
-    fn process(&mut self, it: Self::Item);
+    // 流式采样器无法知道总体数据有多少个样本，因此只逐个处理，并返回是否将样本纳入
+    // 样本池的结果，以及可能被替换出来的样本
+    fn sample(&mut self, it: Self::Item) -> (bool, Option<Self::Item>);
 
-    // 任意时候应当知道当前抽取的样本有哪些
-    fn samples(&self) -> &[Self::Item];
+    // 任意时候应当知道当前蓄水池的状态
+    fn samples(&self) -> &[Option<Self::Item>];
 }
 
 struct Lottery<P> {
@@ -153,37 +164,41 @@ struct Lottery<P> {
     lucky: Vec<Option<P>>,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 struct Price {
     name: String,
     cap: usize,
 }
 
-impl<P> StreamSampler for Lottery<P> {
-    type Item = Option<P>;
+impl<P> ReservoirSampler for Lottery<P> {
+    type Item = P;
 
-    fn process(&mut self, it: Self::Item) {
+    fn sample(&mut self, it: Self::Item) -> (bool, Option<Self::Item>) {
         let lucky_cap = self.lucky.capacity();
 
         self.total += 1;
 
         // 概率渐小的随机替换
         let r = random::<usize>() % self.total + 1;
-        if r < self.total && self.total <= lucky_cap {
-            self.lucky[self.total - 1] = self.lucky[r - 1].take();
+        let mut replaced = None;
+        if r <= lucky_cap {
+            replaced = self.lucky[r - 1].take();
+            self.lucky[r - 1] = Some(it);
         }
 
-        if r <= lucky_cap {
-            self.lucky[r - 1] = it;
+        if self.total <= lucky_cap && r < self.total {
+            self.lucky[self.total - 1] = replaced.take();
         }
+
+        (r <= lucky_cap, replaced)
     }
 
-    fn samples(&self) -> &[Self::Item] {
-        &self.lucky[..std::cmp::min(self.total, self.lucky.capacity())]
+    fn samples(&self) -> &[Option<Self::Item>] {
+        &self.lucky[..]
     }
 }
 
-impl<P> Lottery<P> {
+impl<P: Debug> Lottery<P> {
     fn release(self) -> Result<Vec<(String, Vec<P>)>, &'static str> {
         let lucky_cap = self.lucky.capacity();
 
@@ -198,10 +213,11 @@ impl<P> Lottery<P> {
 
             // 概率渐小的随机替换
             let r = random::<usize>() % i + 1;
-            if r < self.total && self.total <= lucky_cap {
+            if r <= lucky_cap {
                 final_lucky[i - 1] = final_lucky[r - 1].take();
             }
         }
+        println!("{:?}", final_lucky);
 
         let mut result = Vec::with_capacity(self.prices.len());
         let mut counted = 0;
@@ -263,8 +279,8 @@ fn main() {
 
 
     for it in v {
-        lottery.process(Some(it));
-      println!("{:?}", lottery.samples());
+        lottery.sample(it);
+        println!("{:?}", lottery.samples());
     }
 
     println!("{:?}", lottery.release().unwrap());
@@ -295,7 +311,7 @@ fn main() {
 中奖概率。
 
 ## 致谢
-感谢茶壶君（@）一语惊醒梦中人，清楚明确地表达了需求；
+感谢茶壶君（[@ksqsf](https://github.com/ksqsf)）一语惊醒梦中人，清楚明确地表达了需求；
 感谢张汉东老师 ([@ZhangHanDong](https://github.com/ZhangHanDong))老师提点了之后可以开展研究的方向；
 感谢在这次讨论中提供意见的其他 Rust 社区的朋友，谢谢你们！
 
