@@ -5,6 +5,9 @@ multilingual = false
 src = "src"
 title = "huangjj27's Tech blog"
 
+[rust]
+edition = "2018"
+
 [output.html]
 mathjax-support = true
 no-section-label = true
