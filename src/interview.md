@@ -96,7 +96,7 @@ loop {
   - A：一个优化方法是 **插值查找法**，利用如下公式自动根据查找到的元素与目标的距离来修正下一次查找
 的区间范围，提高查找速度：
 
-\\[ mid = left + { key - arr[left] \over arr[right] - key] } (right - left) \\]
+\\[ mid = left + { key - arr[left] \over arr[right] - key } (right - left) \\]
 
 ### 2. 镜像二叉树
 请反转二叉树。如给出以下二叉树：
