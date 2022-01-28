@@ -886,22 +886,3 @@ if segment_positions.contains(&head_pos) {
 <video controls="" loop="" muted="" playsinline="" class="bevy_img">
     <source src="https://mbuffett.com/bevy_snake/new_gifs/game_over.mp4" type="video/mp4">
 </video>
-
----
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<div id="gitalk-container"></div>
-
-<script>
-const gitalk = new Gitalk({
-  clientID: '5af6fa1218b8ad6d12e9',
-  clientSecret: '0c226cbc5544c3252c1c0fba0b01ca9b7bf61691',
-  repo: 'blog-gitment',      // The repository of store comments,
-  owner: 'huangjj27',
-  admin: ['huangjj27'],
-  id: '/posts/snake-with-bevy/',      // Ensure uniqueness and length less than 50
-  distractionFreeMode: false  // Facebook-like distraction free mode
-})
-
-gitalk.render('gitalk-container')
-</script>

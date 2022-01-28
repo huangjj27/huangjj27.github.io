@@ -164,22 +164,3 @@ Rust 中的[特质（trait）](https://kaisery.gitbooks.io/trpl-zh-cn/ch10-02-tr
 感谢茶壶君（[@ksqsf](https://github.com/ksqsf)）一语惊醒梦中人，清楚明确地表达了需求；
 感谢张汉东老师 ([@ZhangHanDong](https://github.com/ZhangHanDong))老师提点了之后可以开展研究的方向；
 感谢在这次讨论中提供意见的其他 Rust 社区的朋友，谢谢你们！
-
----
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<div id="gitalk-container"></div>
-
-<script>
-const gitalk = new Gitalk({
-  clientID: '5af6fa1218b8ad6d12e9',
-  clientSecret: '0c226cbc5544c3252c1c0fba0b01ca9b7bf61691',
-  repo: 'blog-gitment',      // The repository of store comments,
-  owner: 'huangjj27',
-  admin: ['huangjj27'],
-  id: '/posts/reservoir/',      // Ensure uniqueness and length less than 50
-  distractionFreeMode: false  // Facebook-like distraction free mode
-})
-
-gitalk.render('gitalk-container')
-</script>
