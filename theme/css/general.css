@@ -92,6 +92,7 @@ h6:target::before {
 .content ol { line-height: 1.45em; }
 .content ul { line-height: 1.45em; }
 .content a { text-decoration: none; }
+.content hr { max-width: var(--content-max-width); }
 .content a:hover { text-decoration: underline; }
 .content img, .content video { max-width: 100%; }
 .content .header:link,
@@ -101,6 +102,9 @@ h6:target::before {
 .content .header:link,
 .content .header:visited:hover {
     text-decoration: none;
+}
+.content .utterances {
+    max-width: var(--content-max-width);
 }
 
 table {
