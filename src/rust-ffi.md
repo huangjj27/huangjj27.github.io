@@ -174,23 +174,3 @@ makefile
 1. WSL的环境变量不生效 -> 使用 `WSLENV` 变量从 Windows 引入使用。
 2. `make share` 的时候提示 `libcallrust.so` 找不到 -> 需要在运行时指定 `LD_LIBRARY_PATH` 变量，引入我们编译的 `libcallrust.so` 路径。
 3. `make static`的时候遇到了`pthread_*` `dy*`系列函数未定义问题 -> 通过动态链接系统库来支持运行。
-
-
----
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<div id="gitalk-container"></div>
-
-<script>
-const gitalk = new Gitalk({
-  clientID: '5af6fa1218b8ad6d12e9',
-  clientSecret: '0c226cbc5544c3252c1c0fba0b01ca9b7bf61691',
-  repo: 'blog-gitment',      // The repository of store comments,
-  owner: 'huangjj27',
-  admin: ['huangjj27'],
-  id: '/posts/rust-ffi/',      // Ensure uniqueness and length less than 50
-  distractionFreeMode: false  // Facebook-like distraction free mode
-})
-
-gitalk.render('gitalk-container')
-</script>

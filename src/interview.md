@@ -128,22 +128,3 @@ loop {
 [^1]: [线程同步 -- 百度百科](https://baike.baidu.com/item/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5)
 
 [^2]: [Rust异步浅谈 -- leaxoy](https://rustcc.cn/article?id=e6d50145-4bc2-4f1e-84da-c39c8217640b)
-
----
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<div id="gitalk-container"></div>
-
-<script>
-const gitalk = new Gitalk({
-  clientID: '5af6fa1218b8ad6d12e9',
-  clientSecret: '0c226cbc5544c3252c1c0fba0b01ca9b7bf61691',
-  repo: 'blog-gitment',      // The repository of store comments,
-  owner: 'huangjj27',
-  admin: ['huangjj27'],
-  id: '/posts/rust-interview-1/',      // Ensure uniqueness and length less than 50
-  distractionFreeMode: false  // Facebook-like distraction free mode
-})
-
-gitalk.render('gitalk-container')
-</script>

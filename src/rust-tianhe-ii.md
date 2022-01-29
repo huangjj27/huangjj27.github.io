@@ -101,23 +101,3 @@
 [^2]: Rust仓库的版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)，因此必须为`x.y.z`的形式。更多参见[sirkibsirkib/rust-overlaps#2](https://github.com/sirkibsirkib/rust-overlaps/issues/2)
 
 [^3]: `cargo`编译中断，可以重新运行命令继续安装，直到安装完成。
-
-
----
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<div id="gitalk-container"></div>
-
-<script>
-const gitalk = new Gitalk({
-  clientID: '5af6fa1218b8ad6d12e9',
-  clientSecret: '0c226cbc5544c3252c1c0fba0b01ca9b7bf61691',
-  repo: 'blog-gitment',      // The repository of store comments,
-  owner: 'huangjj27',
-  admin: ['huangjj27'],
-  id: '/posts/rust-on-tianhe-ii/',      // Ensure uniqueness and length less than 50
-  distractionFreeMode: false  // Facebook-like distraction free mode
-})
-
-gitalk.render('gitalk-container')
-</script>
