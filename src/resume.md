@@ -25,7 +25,7 @@
 
 Bonus:
 - 编写接口自动化测试用例（Postman），并设定生产环境的每日自动巡检（企业微信 bot）
-- 使用 [goose](https://book.goose.rs/)、[locus](https://locust.io/)框架编写性能测试用例
+- 使用 [goose](https://book.goose.rs/)、[locust](https://locust.io/)框架编写性能测试用例
 - 制定性能测试需求评估、性能测试报告规范
 - review 项目代码，并通过项目代码补充对 DES、AES、HTTP设计规范的了解
 
