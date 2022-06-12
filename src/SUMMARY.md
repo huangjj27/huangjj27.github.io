@@ -1,5 +1,6 @@
 # Summary
 
+- [尝试在单 HTML 文件中嵌入 WASM 模块的错误操作](./load-wasm-mistake.md)
 - [蓄水池算法改进 - 面向抽奖场景保证等概率性](./reservoir.md)
 - [记一次面试](./interview.md)
 - [用 `Bevy` 游戏引擎编写贪吃蛇（译）](./snake-with-bevy.md)
