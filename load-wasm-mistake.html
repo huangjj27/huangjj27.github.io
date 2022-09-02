@@ -1,0 +1,516 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>尝试在单 HTML 文件中嵌入 WASM 模块的错误操作 - huangjj27&#x27;s Tech blog</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="tauri-single-instance-bug-dangling.html">由 tauri 单例模式 bug “意外修复” 发现的 dangling</a></li><li class="chapter-item expanded "><a href="load-wasm-mistake.html" class="active">尝试在单 HTML 文件中嵌入 WASM 模块的错误操作</a></li><li class="chapter-item expanded "><a href="reservoir.html">蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item expanded "><a href="interview.html">记一次面试</a></li><li class="chapter-item expanded "><a href="snake-with-bevy.html">用 Bevy 游戏引擎编写贪吃蛇（译）</a></li><li class="chapter-item expanded "><a href="rust-safe-apps-51.html">Rust 安全应用开发51条</a></li><li class="chapter-item expanded "><a href="rust-tianhe-ii.html">在天河二号上配置 Rust 运行环境</a></li><li class="chapter-item expanded "><a href="rust-patterns/intro.html">设计模式在 Rust 中的实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust-patterns/builder.html">构建器（Builder）模式</a></li><li class="chapter-item expanded "><a href="rust-patterns/abstract-factory.html">抽象工厂（Abstract Factory）模式</a></li></ol></li><li class="chapter-item expanded "><a href="rust-mirror.html">Rust 镜像</a></li><li class="chapter-item expanded "><a href="rust-ffi.html">在 WSL 中学习 Rust FFI</a></li><li class="chapter-item expanded "><a href="wasi/intro.html">WASI探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="wasi/wasi_and_wasmtime.html">WASI简介与Wasmtime配置</a></li><li class="chapter-item expanded "><a href="wasi/wasi_guess.html">WASI版猜数字</a></li></ol></li><li class="chapter-item expanded "><a href="number_theory/intro.html">初等数论自我探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="number_theory/if_2n-p_is_divided_by_p.html">若质数p不能整除偶数2n，则p不整除2n-p</a></li><li class="chapter-item expanded "><a href="number_theory/single-composite-divsion.html">整数和它两倍间的合数的性质</a></li><li class="chapter-item expanded "><a href="number_theory/goldbachs-conjecture.html">用初等数论探索哥德巴赫猜想</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="resume.html">关于我</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">huangjj27&#x27;s Tech blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/huangjj27/huangjj27.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="尝试在单-html-文件中嵌入-wasm-模块的错误操作"><a class="header" href="#尝试在单-html-文件中嵌入-wasm-模块的错误操作">尝试在单 HTML 文件中嵌入 WASM 模块的错误操作</a></h1>
+<h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
+<ol>
+<li>当项目是需要 WASM 与 JavaScript 相互交互的时候，请尽可能在统一的 JavaScript 入口中定义所有的功能；</li>
+<li>wasm-pack 生成的胶水 JavaScript 与 WASM 可以稍作修改即可嵌入到 HTML 文件中。</li>
+</ol>
+<h2 id="项目背景"><a class="header" href="#项目背景">项目背景</a></h2>
+<p>当博主兴高采烈地使用 HTML 与 JavaScript 迅速开发好 UI 界面与交互功能的时候，发现核心的功能的 JavaScript 库只支持 npm 环境而无法应用到前述 UI 界面上，博主迫于无奈只能抓起以前做过的 Rust 版本库，尝试改造成 WASM 模块以复用界面代码。因为博主的这个项目是属于不对外开放的项目，因此本文中使用的项目是简化后的 demo，但不影响博主记录以及提醒上述遇到的两个问题（这两个坑每一个都坑掉了我几个小时，但愿会有读者看到我这篇文章抢救一下自己的时间）。</p>
+<h2 id="demo-项目架构"><a class="header" href="#demo-项目架构">demo 项目架构</a></h2>
+<pre><code>demo
+  |-- Cargo.toml
+  |-- src
+        |-- lib.rs
+  |-- assets
+        |-- demo.html
+</code></pre>
+<pre><code class="language-toml"># Cargo.toml
+[package]
+name = &quot;demo&quot;
+authors = [&quot;huangjj27 &lt;huangjj.27@qq.com&gt;&quot;]
+version = &quot;0.1.0&quot;
+edition = &quot;2021&quot;
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = [&quot;cdylib&quot;, &quot;rlib&quot;]
+
+[dependencies]
+wasm-bindgen = &quot;0.2.63&quot;
+</code></pre>
+<pre><code class="language-rs">// lib.rs
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn add(a: i32, b: i32) -&gt; i32 {
+    a + b
+}
+</code></pre>
+<pre><code class="language-html">&lt;!-- demo.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;just a demo&lt;/title&gt;
+    &lt;script id=&quot;indexscript&quot; type=&quot;module&quot;&gt;
+        import init, { add } from &quot;../pkg/demo.js&quot;;
+        async function run() {
+            await init();
+        }
+
+        run();
+    &lt;/script&gt;
+    &lt;script&gt;
+        function js_add() {
+            let a = document.getElementById(&quot;a&quot;);
+            let b = document.getElementById(&quot;b&quot;);
+            let sum = document.getElementById(&quot;sum&quot;);
+            sum.value = add(a.value, b.value);
+        }
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;textarea id=&quot;a&quot; autofocus oninput=&quot;js_add()&quot;&gt;40&lt;/textarea&gt;
+    &lt;textarea id=&quot;b&quot; oninput=&quot;js_add()&quot;&gt;2&lt;/textarea&gt;
+    &lt;textarea id=&quot;sum&quot; readonly&gt;&lt;/textarea&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>项目在编译的时候还需要 <a href="https://rustwasm.github.io/wasm-pack/installer/">wasm-pack</a>，用来生成胶水 JavaScript <code>demo/pkg/demo.js</code> 和 wasm 文件 <code>demo/pkg/demo_bg.wasm</code>：</p>
+<pre><code class="language-sh">wasm-pack build --target=web
+</code></pre>
+<h2 id="薛定谔的-javascript-函数"><a class="header" href="#薛定谔的-javascript-函数">薛定谔的 JavaScript 函数</a></h2>
+<p>当我们打开 <code>demo.html</code> 并且尝试修改 <code>a</code> 和 <code>b</code> 的值时，我们会从控制台遇到了如下报错：</p>
+<pre><code class="language-log">13:33:19.672 Uncaught ReferenceError: add is not defined
+    js_add file:///demo/assets/demo.html:23
+    oninput file:///demo/assets/demo.html:1
+2 demo.html:22:13
+</code></pre>
+<p>这里的 <code>add</code> 函数就是我们从 WASM 模块中加载的，来自 rust 实现的 <code>add</code> 函数。此时，如果我们在 <code>run</code> 下属下方，直接调用 <code>add</code> 则是可以执行成功的：</p>
+<pre><code class="language-html">    &lt;script id=&quot;indexscript&quot; type=&quot;module&quot;&gt;
+        import init, { add } from &quot;../pkg/demo.js&quot;;
+        async function run() {
+            await init();
+            console.log(`add函数已加载，add(1, 2) = ${add(1, 2)}`);
+        }
+
+        run();
+    &lt;/script&gt;
+</code></pre>
+<p>执行结果:</p>
+<pre><code class="language-log">14:02:58.360 add函数已加载，add(1, 2) = 3 demo.html:13:21
+14:03:11.895 Uncaught ReferenceError: add is not defined
+    js_add file:///demo/assets/demo.html:23
+    oninput file:///demo/assets/demo.html:1
+2 demo.html:23:13
+</code></pre>
+<p>出现以上现象的原因是，<code>type=&quot;module&quot;</code> 限制了 <code>indexscript</code> 内部项目的作用域只能在该 <code>&lt;script&gt;</code> 代码块中有效。解决方法有两种：</p>
+<ol>
+<li>将需要导出的给其他 <code>&lt;script&gt;</code> 块使用的功能，挂载在页面全局的 <code>window</code> 对象上，模拟 <code>export</code> 的效果，缺点是很可能无意中覆盖了挂载对象。</li>
+<li>将所有js 功能都集中在 <code>indexscript</code> 代码块中，将所有的功能统一管理。此时，要注意将DOM 元素的事件通过监听事件的方式来管理：</li>
+</ol>
+<pre><code class="language-html">&lt;!-- demo.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;just a demo&lt;/title&gt;
+    &lt;script id=&quot;indexscript&quot; type=&quot;module&quot;&gt;
+        import init, { add } from &quot;../pkg/demo.js&quot;;
+        function js_add() {
+            let a = document.getElementById(&quot;a&quot;);
+            let b = document.getElementById(&quot;b&quot;);
+            let sum = document.getElementById(&quot;sum&quot;);
+            sum.value = add(a.value, b.value);
+        }
+
+        async function run() {
+            await init();
+
+            document.getElementById(&quot;a&quot;).addEventListener(&quot;input&quot;, js_add);
+            document.getElementById(&quot;b&quot;).addEventListener(&quot;input&quot;, js_add);
+        }
+
+        run();
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;textarea id=&quot;a&quot; autofocus&gt;40&lt;/textarea&gt;
+    &lt;textarea id=&quot;b&quot;&gt;2&lt;/textarea&gt;
+    &lt;textarea id=&quot;sum&quot; readonly&gt;&lt;/textarea&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="然而我还是想包容你的我的-wasm"><a class="header" href="#然而我还是想包容你的我的-wasm">然而我还是想包容你的，我的 WASM</a></h2>
+<p>我们来分析一下 <code>wasm-pack</code> 生成的 <code>demo.js</code>：</p>
+<pre><code class="language-js">// demo.js
+
+let wasm;
+
+/**
+* @param {number} a
+* @param {number} b
+* @returns {number}
+*/
+export function add(a, b) {
+    const ret = wasm.add(a, b);
+    return ret;
+}
+
+async function load(module, imports) {
+    if (typeof Response === 'function' &amp;&amp; module instanceof Response) {
+        if (typeof WebAssembly.instantiateStreaming === 'function') {
+            try {
+                return await WebAssembly.instantiateStreaming(module, imports);
+
+            } catch (e) {
+                if (module.headers.get('Content-Type') != 'application/wasm') {
+                    console.warn(&quot;`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n&quot;, e);
+
+                } else {
+                    throw e;
+                }
+            }
+        }
+
+        const bytes = await module.arrayBuffer();
+        return await WebAssembly.instantiate(bytes, imports);
+
+    } else {
+        const instance = await WebAssembly.instantiate(module, imports);
+
+        if (instance instanceof WebAssembly.Instance) {
+            return { instance, module };
+
+        } else {
+            return instance;
+        }
+    }
+}
+
+async function init(input) {
+    if (typeof input === 'undefined') {
+        input = new URL('demo_bg.wasm', import.meta.url);
+    }
+    const imports = {};
+
+
+    if (typeof input === 'string' || (typeof Request === 'function' &amp;&amp; input instanceof Request) || (typeof URL === 'function' &amp;&amp; input instanceof URL)) {
+        input = fetch(input);
+    }
+
+
+
+    const { instance, module } = await load(await input, imports);
+
+    wasm = instance.exports;
+    init.__wbindgen_wasm_module = module;
+
+    return wasm;
+}
+
+export default init;
+</code></pre>
+<p>我们看到，<code>demo.js:175</code> 对来待加载的 <code>module</code> 做了判断：如果不是从响应获取的数据，则直接视作 wasm bytes 来进行加载。于是我们可以对生成的 <code>demo_bg.wasm</code> 文件通过 base64 转码，嵌入到 HTML 文件中，然后转换成 <code>Uint8Array</code> 传递给 <code>demo.js:init</code> 函数进行加载:</p>
+<pre><code class="language-html">    &lt;script id=&quot;indexscript&quot; type=&quot;module&quot;&gt;
+// demo.js 完全嵌入到 html 文件中，并且不需要 export 语句
+let wasm;
+
+/**
+* @param {number} a
+* @param {number} b
+* @returns {number}
+*/
+function add(a, b) {
+    const ret = wasm.add(a, b);
+    return ret;
+}
+
+async function load(module, imports) {
+    if (typeof Response === 'function' &amp;&amp; module instanceof Response) {
+        if (typeof WebAssembly.instantiateStreaming === 'function') {
+            try {
+                return await WebAssembly.instantiateStreaming(module, imports);
+
+            } catch (e) {
+                if (module.headers.get('Content-Type') != 'application/wasm') {
+                    console.warn(&quot;`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n&quot;, e);
+
+                } else {
+                    throw e;
+                }
+            }
+        }
+
+        const bytes = await module.arrayBuffer();
+        return await WebAssembly.instantiate(bytes, imports);
+
+    } else {
+        const instance = await WebAssembly.instantiate(module, imports);
+
+        if (instance instanceof WebAssembly.Instance) {
+            return { instance, module };
+
+        } else {
+            return instance;
+        }
+    }
+}
+
+async function init(input) {
+    if (typeof input === 'undefined') {
+        input = new URL('demo_bg.wasm', import.meta.url);
+    }
+    const imports = {};
+
+
+    if (typeof input === 'string' || (typeof Request === 'function' &amp;&amp; input instanceof Request) || (typeof URL === 'function' &amp;&amp; input instanceof URL)) {
+        input = fetch(input);
+    }
+
+
+
+    const { instance, module } = await load(await input, imports);
+
+    wasm = instance.exports;
+    init.__wbindgen_wasm_module = module;
+
+    return wasm;
+}
+
+// demo.js 嵌入结束
+
+        // wasm 二进制，base64编码：
+        const WASM_B64 = &quot;AGFzbQEAAAABBwFgAn9/AX8DAgEABQMBABEHEAIGbWVtb3J5AgADYWRkAAAKCQEHACAAIAFqCwB7CXByb2R1Y2VycwIIbGFuZ3VhZ2UBBFJ1c3QADHByb2Nlc3NlZC1ieQMFcnVzdGMdMS42MS4wIChmZTViMTNkNjggMjAyMi0wNS0xOCkGd2FscnVzBjAuMTkuMAx3YXNtLWJpbmRnZW4SMC4yLjgwICg0Y2FhOTgxNjUp&quot;;
+
+        function b64toBytes(b64) {
+            let binary = atob(b64);
+            let bytes = new Uint8Array(binary.length);
+            for (let i = 0; i &lt; bytes.length; i++) {
+                bytes[i] = binary.charCodeAt(i);
+            }
+            return bytes;
+        }
+
+        function js_add() {
+            let a = document.getElementById(&quot;a&quot;);
+            let b = document.getElementById(&quot;b&quot;);
+            let sum = document.getElementById(&quot;sum&quot;);
+            sum.value = add(a.value, b.value);
+        }
+
+        async function run() {
+            await init(b64toBytes(WASM_B64));  // 直接通过页面加载编码
+
+            document.getElementById(&quot;a&quot;).addEventListener(&quot;input&quot;, js_add);
+            document.getElementById(&quot;b&quot;).addEventListener(&quot;input&quot;, js_add);
+        }
+
+        run();
+    &lt;/script&gt;
+</code></pre>
+<p>完成以上步骤，我们就得到了一个带有 WASM 功能的 standalone html 文件啦~。</p>
+
+                    </main>
+
+                    <hr>
+                    <script src="https://utteranc.es/client.js"
+                            repo="huangjj27/blog-gitment"
+                            issue-term="title"
+                            label="utterances"
+                            theme="github-light"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="tauri-single-instance-bug-dangling.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="reservoir.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="tauri-single-instance-bug-dangling.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="reservoir.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+    </body>
+</html>

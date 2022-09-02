@@ -1,0 +1,3702 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>huangjj27&#x27;s Tech blog</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="tauri-single-instance-bug-dangling.html">由 tauri 单例模式 bug “意外修复” 发现的 dangling</a></li><li class="chapter-item expanded "><a href="load-wasm-mistake.html">尝试在单 HTML 文件中嵌入 WASM 模块的错误操作</a></li><li class="chapter-item expanded "><a href="reservoir.html">蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item expanded "><a href="interview.html">记一次面试</a></li><li class="chapter-item expanded "><a href="snake-with-bevy.html">用 Bevy 游戏引擎编写贪吃蛇（译）</a></li><li class="chapter-item expanded "><a href="rust-safe-apps-51.html">Rust 安全应用开发51条</a></li><li class="chapter-item expanded "><a href="rust-tianhe-ii.html">在天河二号上配置 Rust 运行环境</a></li><li class="chapter-item expanded "><a href="rust-patterns/intro.html">设计模式在 Rust 中的实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust-patterns/builder.html">构建器（Builder）模式</a></li><li class="chapter-item expanded "><a href="rust-patterns/abstract-factory.html">抽象工厂（Abstract Factory）模式</a></li></ol></li><li class="chapter-item expanded "><a href="rust-mirror.html">Rust 镜像</a></li><li class="chapter-item expanded "><a href="rust-ffi.html">在 WSL 中学习 Rust FFI</a></li><li class="chapter-item expanded "><a href="wasi/intro.html">WASI探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="wasi/wasi_and_wasmtime.html">WASI简介与Wasmtime配置</a></li><li class="chapter-item expanded "><a href="wasi/wasi_guess.html">WASI版猜数字</a></li></ol></li><li class="chapter-item expanded "><a href="number_theory/intro.html">初等数论自我探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="number_theory/if_2n-p_is_divided_by_p.html">若质数p不能整除偶数2n，则p不整除2n-p</a></li><li class="chapter-item expanded "><a href="number_theory/single-composite-divsion.html">整数和它两倍间的合数的性质</a></li><li class="chapter-item expanded "><a href="number_theory/goldbachs-conjecture.html">用初等数论探索哥德巴赫猜想</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="resume.html">关于我</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">huangjj27&#x27;s Tech blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/huangjj27/huangjj27.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="由-tauri-单例模式-bug-意外修复-发现的-dangling"><a class="header" href="#由-tauri-单例模式-bug-意外修复-发现的-dangling">由 tauri 单例模式 bug “意外修复” 发现的 dangling</a></h1>
+<h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
+<p><a href="https://github.com/tauri-apps/tauri-plugin-single-instance">tauri 单例插件</a> 用于区分单例实例的 <code>productName</code>的过长会导致<a href="https://github.com/amrbashir/tauri-plugin-single-instance/issues/5">单例功能失效</a>，博主最初确信 <code>encode_wide</code> 实现有问题，并提交了<a href="https://github.com/huangjj27/tauri-plugin-single-instance/commit/6fd3c8c2c518eb5eaa1101eb14a65603ca5e621e">修复</a>。然而在和社区深入研究问题原因后，发现根本原因是使用 <code>encode_wide</code> 转码传参时造成了 <a href="https://github.com/tauri-apps/tauri-plugin-single-instance/pull/6">dangling</a> 。</p>
+<p>PS: 为方便读者理解，博主花费一天时间重新梳理分析步骤，按照演绎法展示定位 bug 地过程，实现发生的分析过程要比博文的过程更加曲折，对分析理解问题无意义因此略过。</p>
+<h2 id="所以这个-bug-的现象是怎么样的"><a class="header" href="#所以这个-bug-的现象是怎么样的">所以这个 bug 的现象是怎么样的？</a></h2>
+<p>正如博主所说，在 <a href="https://github.com/tauri-apps/tauri-plugin-single-instance/blob/16e5e9eb59da9ceca3dcf09c81120b37fe108a03/src/platform_impl/windows.rs">有问题版本的插件代码</a> 中，博主最初发现，<code>tauri.conf.json</code> 中的 <code>package.productName</code> 在分别使用五个汉字与六个汉字时，单例模式功能表现出不一致的行为：五个汉字的 <code>productName</code> 单例功能运行正常，而六个汉字的 <code>productName</code> 单例功能失效，于是针对该问题初步进行了测试：</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">测试的 <code>productName</code></th><th style="text-align: center">单例插件功能是否生效</th></tr></thead><tbody>
+<tr><td style="text-align: left">六个汉字试试</td><td style="text-align: center">x</td></tr>
+<tr><td style="text-align: left">随便五个字</td><td style="text-align: center">√</td></tr>
+<tr><td style="text-align: left">又来了六个字</td><td style="text-align: center">x</td></tr>
+</tbody></table>
+</div>
+<p>因为这些汉字测试用例使用 <code>UTF-8</code> 编码，又因为是常用字，因此每个汉字对应 3 bytes，因此假设 <code>productName</code> 在超过 15 bytes、不超过 18 bytes 时会导致功能失效，进一步补充测试用例：</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">测试的 <code>productName</code></th><th style="text-align: center">单例插件功能是否生效</th></tr></thead><tbody>
+<tr><td style="text-align: left">z12345678901234</td><td style="text-align: center">√</td></tr>
+<tr><td style="text-align: left">z123456789012345</td><td style="text-align: center">x</td></tr>
+</tbody></table>
+</div>
+<p>看来博主运气不错，刚好踩到了边界的测试用例。那么基本可以确定，<code>productName</code> 超过 15 bytes 就会导致单例功能失效。</p>
+<h2 id="potatotoolarge-传递给-win32-api-的字符串要用-c-string-风格的-0-结束"><a class="header" href="#potatotoolarge-传递给-win32-api-的字符串要用-c-string-风格的-0-结束">PotatoTooLarge: 传递给 Win32 API 的字符串要用 C string 风格的 <code>\0</code> 结束</a></h2>
+<p>在最初的讨论过程中，因为我们没有仔细留意插件仓库使用的 <code>encode_wide</code> 是自行做过封装的，因此我们一开始根据 <a href="https://github.com/tauri-apps/tauri-plugin-single-instance/blob/16e5e9eb59da9ceca3dcf09c81120b37fe108a03/src/platform_impl/windows.rs">以下代码</a> 进行分析：</p>
+<pre><code class="language-rs">pub fn init&lt;R: Runtime&gt;(f: Box&lt;SingleInstanceCallback&lt;R&gt;&gt;) -&gt; TauriPlugin&lt;R&gt; {
+    plugin::Builder::new(&quot;single-instance&quot;)
+        .setup(|app| {
+            let app_name = &amp;app.package_info().name;
+            let class_name = format!(&quot;{}-single-instance-class&quot;, app_name);
+            let window_name = format!(&quot;{}-single-instance-window&quot;, app_name);
+
+            let hmutex = unsafe {
+                CreateMutexW(
+                    std::ptr::null(),
+                    true.into(),
+                    encode_wide(&quot;tauri-plugin-single-instance-mutex&quot;).as_ptr(),
+                )
+            };
+
+            if unsafe { GetLastError() } == ERROR_ALREADY_EXISTS {
+                unsafe {
+                    let hwnd = FindWindowW(
+                        encode_wide(&amp;class_name).as_ptr(),
+                        encode_wide(&amp;window_name).as_ptr(),
+                    );
+
+                    // omitted
+                }
+
+                // omitted
+            }
+
+            // omitted
+        })
+        .on_event(|app, event| {
+            // omitted
+        })
+        .build()
+}
+</code></pre>
+<p>有 Windows 编程经验的 @PotatoTooLarge 指出，<code>encode_wide</code>（来自 <a href="https://doc.rust-lang.org/std/os/windows/ffi/trait.OsStrExt.html#tymethod.encode_wide">std 的 Window扩展</a>）并不会补充 <code>\0</code> 结束符：</p>
+<blockquote>
+<p>Re-encodes an OsStr as a wide character sequence, i.e., potentially ill-formed UTF-16.</p>
+<p>This is lossless: calling OsStringExt::from_wide and then encode_wide on the result will yield the original code units. <strong>Note that the encoding does not add a final null terminator.</strong></p>
+</blockquote>
+<p>于是博主听取建议，把所有会传递到 <code>encode_wide</code> 函数的字符串都添加了 <code>\0</code>，形成了 <a href="https://github.com/huangjj27/tauri-plugin-single-instance/commit/6fd3c8c2c518eb5eaa1101eb14a65603ca5e621e">一版修复</a>:</p>
+<pre><code class="language-rs">pub fn init&lt;R: Runtime&gt;(f: Box&lt;SingleInstanceCallback&lt;R&gt;&gt;) -&gt; TauriPlugin&lt;R&gt; {
+    plugin::Builder::new(&quot;single-instance&quot;)
+        .setup(|app| {
+            let app_name = &amp;app.package_info().name;
+            // let class_name = format!(&quot;{}-single-instance-class&quot;, app_name);
+            let class_name = format!(&quot;{}-single-instance-class\0&quot;, app_name);
+            // let window_name = format!(&quot;{}-single-instance-window&quot;, app_name);
+            let window_name = format!(&quot;{}-single-instance-window\0&quot;, app_name);
+
+            let hmutex = unsafe {
+                CreateMutexW(
+                    std::ptr::null(),
+                    true.into(),
+                    // encode_wide(&quot;tauri-plugin-single-instance-mutex&quot;).as_ptr(),
+                    encode_wide(&quot;tauri-plugin-single-instance-mutex\0&quot;).as_ptr(),
+                )
+            };
+
+            if unsafe { GetLastError() } == ERROR_ALREADY_EXISTS {
+                unsafe {
+                    let hwnd = FindWindowW(
+                        encode_wide(&amp;class_name).as_ptr(),
+                        encode_wide(&amp;window_name).as_ptr(),
+                    );
+
+                    // omitted
+                }
+
+                // omitted
+            }
+
+            // omitted
+        })
+        .on_event(|app, event| {
+            // omitted
+        })
+        .build()
+}
+</code></pre>
+<p>然后使用修复前会引起单例功能失效的 <code>z123456789012345</code> 作为测试用例，验证单例功能可用了，证明该修改可以修复单例功能失效的问题。</p>
+<h2 id="但它并不是真的修复"><a class="header" href="#但它并不是真的修复">但它并不是真的修复</a></h2>
+<p>在博主提交了修复后，插件仓库作者提醒，前文所述的代码使用的 <code>encode_wide</code> 是<a href="https://github.com/tauri-apps/tauri-plugin-single-instance/blob/16e5e9eb59da9ceca3dcf09c81120b37fe108a03/src/platform_impl/windows.rs#L189">封装拼接了 <code>\0</code></a> 后再传递参数的:</p>
+<pre><code class="language-rs">pub fn encode_wide(string: impl AsRef&lt;std::ffi::OsStr&gt;) -&gt; Vec&lt;u16&gt; {
+    std::os::windows::prelude::OsStrExt::encode_wide(string.as_ref())
+        .chain(std::iter::once(0))
+        .collect()
+}
+</code></pre>
+<p>这意味着，并不是 <code>\0</code> 导致问题的失效，因为该函数在 windows 环境下执行是能够补足 <code>\0</code> 的：</p>
+<pre><code class="language-rs">fn encode_wide(string: impl AsRef&lt;std::ffi::OsStr&gt;) -&gt; Vec&lt;u16&gt; {
+    std::os::windows::prelude::OsStrExt::encode_wide(string.as_ref())
+        .chain(std::iter::once(0))
+        .collect()
+}
+
+fn main() {
+    let product_name = &quot;z123456789012345&quot;;
+
+    // output: [122, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 49, 50, 51, 52, 53, 0]
+    //                                                                           ^
+    //                              null concated here so it's null-terminated --|
+    println!(&quot;{:?}&quot;, encode_wide(product_name));
+}
+</code></pre>
+<h2 id="那么失效的过程发生了什么"><a class="header" href="#那么失效的过程发生了什么">那么失效的过程发生了什么？</a></h2>
+<p>为了分析问题详细过程，我将插件仓库代码切换到了 <a href="https://github.com/tauri-apps/tauri-plugin-single-instance/blob/16e5e9eb59da9ceca3dcf09c81120b37fe108a03/src/platform_impl/windows.rs">问题代码版本</a>：</p>
+<pre><code class="language-sh">git checkout 16e5e9eb59da9ceca3dcf09c81120b37fe108a03
+</code></pre>
+<p>然后添加了一些 <code>dbg</code> 宏：</p>
+<pre><code class="language-rs">pub fn init&lt;R: Runtime&gt;(f: Box&lt;SingleInstanceCallback&lt;R&gt;&gt;) -&gt; TauriPlugin&lt;R&gt; {
+    plugin::Builder::new(&quot;single-instance&quot;)
+        .setup(|app| {
+            let app_name = &amp;app.package_info().name;
+            let class_name = format!(&quot;{}-single-instance-class&quot;, app_name);
+            let window_name = format!(&quot;{}-single-instance-window&quot;, app_name);
+
+            let hmutex = unsafe {
+                CreateMutexW(
+                    std::ptr::null(),
+                    true.into(),
+                    encode_wide(&quot;tauri-plugin-single-instance-mutex&quot;).as_ptr(),
+                )
+            };
+            dbg!(hmutex);  // windows.rs:43 debug here!
+
+            if unsafe { GetLastError() } == ERROR_ALREADY_EXISTS {
+                unsafe {
+                    let hwnd = FindWindowW(
+                        encode_wide(&amp;class_name).as_ptr(),
+                        encode_wide(&amp;window_name).as_ptr(),
+                    );
+                    dbg!(hwnd);  // windows.rs:51 debug here!
+
+                    // omitted
+                }
+            } else {
+                app.manage(MutexHandle(hmutex));
+
+                let hwnd = create_event_target_window::&lt;R&gt;(&amp;class_name, &amp;window_name);
+                dbg!(hwnd);  // windows.rs:76 debug here!
+
+                // omitted
+            }
+
+            Ok(())
+        })
+        .on_event(|app, event| {
+            // omitted
+        })
+        .build()
+}
+</code></pre>
+<p>然后，将代码仓库  <code>examples\emit-event\src-tauri\tauri.conf.json</code> 分别改成 <code>z12345678901234</code> 与 <code>z123456789012345</code>，然后执行：</p>
+<pre><code># process1
+&gt; cd examples\emit-event
+examples\emit-event&gt; cargo tauri build --debug
+examples\emit-event&gt; src-tauri\target\debug\z12345678901234.exe
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:43] hmutex = 548
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:76] hwnd = 40113446
+
+# process2
+&gt; examples\emit-event\src-tauri\target\debug\z12345678901234.exe
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:43] hmutex = 548
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:51] hwnd = 40113446
+</code></pre>
+<pre><code># process1
+&gt; cd examples\emit-event
+examples\emit-event&gt; cargo tauri build --debug
+examples\emit-event&gt; src-tauri\target\debug\z123456789012345.exe
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:43] hmutex = 552
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:76] hwnd = 0
+
+# process2
+&gt; examples\emit-event\src-tauri\target\debug\z123456789012345.exe
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:43] hmutex = 548
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:51] hwnd = 0
+
+# process3
+&gt; examples\emit-event\src-tauri\target\debug\z123456789012345.exe
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:43] hmutex = 548
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:51] hwnd = 0
+</code></pre>
+<p>由上面的结果我们可以知道：在用例 <code>z12345678901234</code>，我们在创建实实例时返回了有效的 <code>hwnd</code> 值，并且在检查 <code>hwnd</code> 时确认已经创建窗口；而在用例 <code>z123456789012345</code>，我们创建窗口的函数 <code>create_event_target_window</code> 返回的 <code>hwnd</code> 是无效的！所以导致问题的代码，应该在 <code>create_event_target_window</code> 的逻辑中！再次添加 <code>dbg</code> ，重新编译后继续 debug：</p>
+<pre><code class="language-rs">fn create_event_target_window&lt;R: Runtime&gt;(class_name: &amp;str, window_name: &amp;str) -&gt; HWND {
+    unsafe {
+        let class = WNDCLASSEXW {
+            cbSize: std::mem::size_of::&lt;WNDCLASSEXW&gt;() as u32,
+            style: 0,
+            lpfnWndProc: Some(single_instance_window_proc::&lt;R&gt;),
+            cbClsExtra: 0,
+            cbWndExtra: 0,
+            hInstance: GetModuleHandleW(std::ptr::null()),
+            hIcon: 0,
+            hCursor: 0,
+            hbrBackground: 0,
+            lpszMenuName: std::ptr::null(),
+            lpszClassName: encode_wide(&amp;class_name).as_ptr(),
+            hIconSm: 0,
+        };
+        dbg!(class.lpszClassName);  // windows.rs:153 debug here
+        dbg!(*class.lpszClassName);  // windows.rs:154 debug here
+
+        RegisterClassExW(&amp;class);
+
+        let hwnd = CreateWindowExW(
+            WS_EX_NOACTIVATE
+            | WS_EX_TRANSPARENT
+            | WS_EX_LAYERED
+            // WS_EX_TOOLWINDOW prevents this window from ever showing up in the taskbar, which
+            // we want to avoid. If you remove this style, this window won't show up in the
+            // taskbar *initially*, but it can show up at some later point. This can sometimes
+            // happen on its own after several hours have passed, although this has proven
+            // difficult to reproduce. Alternatively, it can be manually triggered by killing
+            // `explorer.exe` and then starting the process back up.
+            // It is unclear why the bug is triggered by waiting for several hours.
+            | WS_EX_TOOLWINDOW,
+            dbg!(encode_wide(&amp;class_name).as_ptr()),  // windows.rs:170 debug here
+            dbg!(encode_wide(&amp;window_name).as_ptr()),  // windows.rs:171 debug here
+            WS_OVERLAPPED,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            GetModuleHandleW(std::ptr::null()),
+            std::ptr::null(),
+        );
+        SetWindowLongPtrW(
+            hwnd,
+            GWL_STYLE,
+            // The window technically has to be visible to receive WM_PAINT messages (which are used
+            // for delivering events during resizes), but it isn't displayed to the user because of
+            // the LAYERED style.
+            (WS_VISIBLE | WS_POPUP) as isize,
+        );
+        hwnd
+    }
+}
+</code></pre>
+<p><code>z12345678901234</code>:</p>
+<pre><code>examples\emit-event&gt; src-tauri\target\debug\z12345678901234.exe
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:43] hmutex = 556
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:153] class.lpszClassName = 0x0000021d099eddc0
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:154] *class.lpszClassName = 122
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:170] encode_wide(&amp;class_name).as_ptr() = 0x0000021d099ee180
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:171] encode_wide(&amp;window_name).as_ptr() = 0x0000021d099dfe20
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:76] hwnd = 28841288
+</code></pre>
+<p><code>z123456789012345</code>:</p>
+<pre><code>examples\emit-event&gt; src-tauri\target\debug\z123456789012345.exe
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:43] hmutex = 548
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:153] class.lpszClassName = 0x0000017259ca6be0
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:154] *class.lpszClassName = 43920
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:170] encode_wide(&amp;class_name).as_ptr() = 0x0000017259cc6b30
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:171] encode_wide(&amp;window_name).as_ptr() = 0x0000017259cc6970
+[tauri-plugin-single-instance\src\platform_impl\windows.rs:76] hwnd = 0
+</code></pre>
+<p>对比我们之前 <code>encode_wide</code> 函数<a href="tauri-single-instance-bug-dangling.html#%E4%BD%86%E5%AE%83%E5%B9%B6%E4%B8%8D%E6%98%AF%E7%9C%9F%E7%9A%84%E4%BF%AE%E5%A4%8D">返回的结果</a>，<code>class_name</code> 开头的字符应该是 ASCII 字符 <code>z</code>（ASCII 码 122），因此通过 <code>encode_wide(&amp;class_name).as_ptr()</code> 传参的 <code>class.lpszClassName</code>，应当指向值为 &quot;z123456789012345-single-instance-class&quot; 的字符串，这在用例 <code>z12345678901234</code> 中行为符合预期；但在 <code>z123456789012345</code> 的用例中，<code>class.lpszClassName</code> 指向的却发生了变化（<code>*class.lpszClassName = 43920</code>），反推可以得知， <code>encode_wide(&amp;class_name).as_ptr()</code> 并没有成功地把指针传递给 <code>class.lpszClassName</code>。</p>
+<h2 id="一语惊醒梦中人悬垂指针dangling"><a class="header" href="#一语惊醒梦中人悬垂指针dangling">一语惊醒梦中人：悬垂指针（dangling）！</a></h2>
+<p><a href="https://github.com/Berrysoft">@Berrysoft</a> 指出， <code>encode_wide(&amp;class_name).as_ptr()</code> 这种写法由于直接对临时变量直接取指针，而临时变量 <code>encode_wide(&amp;class_name)</code> 会在执行完之后被马上释放结束生命周期，因此指向该临时变量的指针也会变成悬垂指针！临时变量的这一行为在 <a href="https://doc.rust-lang.org/stable/reference/expressions.html#temporaries">reference</a> 中有说明：</p>
+<blockquote>
+<p>When using a value expression in most place expression contexts, a temporary unnamed memory location is created and initialized to that value. The expression evaluates to that location instead, except if promoted to a static. <strong>The drop scope of the temporary is usually the end of the enclosing statement.</strong></p>
+</blockquote>
+<p>而解决该问题，只需要把提升变量的 lifetime，把要用到的变量提取出来，使其 lifetime 可以覆盖要用到的函数而不至于在语句执行完之后马上被回收。于是有了解决问题的 <a href="https://github.com/tauri-apps/tauri-plugin-single-instance/pull/6">PR</a>。</p>
+<h2 id="那为什么在-format-的时候手动添加-0-后问题修复了呢"><a class="header" href="#那为什么在-format-的时候手动添加-0-后问题修复了呢">那为什么在 <code>format</code> 的时候手动添加 <code>\0</code> 后，问题“修复”了呢？</a></h2>
+<p>这个问题依然悬而未决。有 TG 群友提出，可能是由于堆栈被破坏 “碰巧” 又指向了正确的字符串位置，而 <code>format</code> 后的变量又是 <code>'static</code> 的，因此能达到“修复”的效果，然而这依然是基于 bug/undefined behavior 的修复方案，因此仍然不可靠。后续原因排查出来后会更新博客~</p>
+<h2 id="教训与经验"><a class="header" href="#教训与经验">教训与经验</a></h2>
+<ol>
+<li>实际上的排查过程，是分析过一次 <code>create_event_target_window</code> 的，然而当时由于需求紧急而找到了临时绕开的实现方案（把 <code>productName</code> 砍短），因此搁置了，也没有留下相关的排查记录文档，以致于后续在需求变更而变得必须排查清楚该问题时，走向了排查 <code>encode_wide</code> 的错误方向，虽然有了“修复”方案，但该方案仍然不可靠，因此可以视作浪费了实践。 <strong>形成记录首先方便的是以后的自己。</strong></li>
+<li>凡是 <code>unsafe</code> 多查几遍。像本文涉及到的悬垂指针问题，在 safe rust 中因为 lifetime 不够长而会阻止编译，而 <code>unsafe</code> 块中使用裸指针是不会被编译器检查的，因此相关操作都要相当慎重。</li>
+<li>多借助社区的力量。比起一个人钻牛角尖，多与社区讨论才容易跳出原本的死胡同，从而理解意识到原来思路的局限性。</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="尝试在单-html-文件中嵌入-wasm-模块的错误操作"><a class="header" href="#尝试在单-html-文件中嵌入-wasm-模块的错误操作">尝试在单 HTML 文件中嵌入 WASM 模块的错误操作</a></h1>
+<h2 id="tldr-1"><a class="header" href="#tldr-1">TL;DR</a></h2>
+<ol>
+<li>当项目是需要 WASM 与 JavaScript 相互交互的时候，请尽可能在统一的 JavaScript 入口中定义所有的功能；</li>
+<li>wasm-pack 生成的胶水 JavaScript 与 WASM 可以稍作修改即可嵌入到 HTML 文件中。</li>
+</ol>
+<h2 id="项目背景"><a class="header" href="#项目背景">项目背景</a></h2>
+<p>当博主兴高采烈地使用 HTML 与 JavaScript 迅速开发好 UI 界面与交互功能的时候，发现核心的功能的 JavaScript 库只支持 npm 环境而无法应用到前述 UI 界面上，博主迫于无奈只能抓起以前做过的 Rust 版本库，尝试改造成 WASM 模块以复用界面代码。因为博主的这个项目是属于不对外开放的项目，因此本文中使用的项目是简化后的 demo，但不影响博主记录以及提醒上述遇到的两个问题（这两个坑每一个都坑掉了我几个小时，但愿会有读者看到我这篇文章抢救一下自己的时间）。</p>
+<h2 id="demo-项目架构"><a class="header" href="#demo-项目架构">demo 项目架构</a></h2>
+<pre><code>demo
+  |-- Cargo.toml
+  |-- src
+        |-- lib.rs
+  |-- assets
+        |-- demo.html
+</code></pre>
+<pre><code class="language-toml"># Cargo.toml
+[package]
+name = &quot;demo&quot;
+authors = [&quot;huangjj27 &lt;huangjj.27@qq.com&gt;&quot;]
+version = &quot;0.1.0&quot;
+edition = &quot;2021&quot;
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = [&quot;cdylib&quot;, &quot;rlib&quot;]
+
+[dependencies]
+wasm-bindgen = &quot;0.2.63&quot;
+</code></pre>
+<pre><code class="language-rs">// lib.rs
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn add(a: i32, b: i32) -&gt; i32 {
+    a + b
+}
+</code></pre>
+<pre><code class="language-html">&lt;!-- demo.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;just a demo&lt;/title&gt;
+    &lt;script id=&quot;indexscript&quot; type=&quot;module&quot;&gt;
+        import init, { add } from &quot;../pkg/demo.js&quot;;
+        async function run() {
+            await init();
+        }
+
+        run();
+    &lt;/script&gt;
+    &lt;script&gt;
+        function js_add() {
+            let a = document.getElementById(&quot;a&quot;);
+            let b = document.getElementById(&quot;b&quot;);
+            let sum = document.getElementById(&quot;sum&quot;);
+            sum.value = add(a.value, b.value);
+        }
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;textarea id=&quot;a&quot; autofocus oninput=&quot;js_add()&quot;&gt;40&lt;/textarea&gt;
+    &lt;textarea id=&quot;b&quot; oninput=&quot;js_add()&quot;&gt;2&lt;/textarea&gt;
+    &lt;textarea id=&quot;sum&quot; readonly&gt;&lt;/textarea&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>项目在编译的时候还需要 <a href="https://rustwasm.github.io/wasm-pack/installer/">wasm-pack</a>，用来生成胶水 JavaScript <code>demo/pkg/demo.js</code> 和 wasm 文件 <code>demo/pkg/demo_bg.wasm</code>：</p>
+<pre><code class="language-sh">wasm-pack build --target=web
+</code></pre>
+<h2 id="薛定谔的-javascript-函数"><a class="header" href="#薛定谔的-javascript-函数">薛定谔的 JavaScript 函数</a></h2>
+<p>当我们打开 <code>demo.html</code> 并且尝试修改 <code>a</code> 和 <code>b</code> 的值时，我们会从控制台遇到了如下报错：</p>
+<pre><code class="language-log">13:33:19.672 Uncaught ReferenceError: add is not defined
+    js_add file:///demo/assets/demo.html:23
+    oninput file:///demo/assets/demo.html:1
+2 demo.html:22:13
+</code></pre>
+<p>这里的 <code>add</code> 函数就是我们从 WASM 模块中加载的，来自 rust 实现的 <code>add</code> 函数。此时，如果我们在 <code>run</code> 下属下方，直接调用 <code>add</code> 则是可以执行成功的：</p>
+<pre><code class="language-html">    &lt;script id=&quot;indexscript&quot; type=&quot;module&quot;&gt;
+        import init, { add } from &quot;../pkg/demo.js&quot;;
+        async function run() {
+            await init();
+            console.log(`add函数已加载，add(1, 2) = ${add(1, 2)}`);
+        }
+
+        run();
+    &lt;/script&gt;
+</code></pre>
+<p>执行结果:</p>
+<pre><code class="language-log">14:02:58.360 add函数已加载，add(1, 2) = 3 demo.html:13:21
+14:03:11.895 Uncaught ReferenceError: add is not defined
+    js_add file:///demo/assets/demo.html:23
+    oninput file:///demo/assets/demo.html:1
+2 demo.html:23:13
+</code></pre>
+<p>出现以上现象的原因是，<code>type=&quot;module&quot;</code> 限制了 <code>indexscript</code> 内部项目的作用域只能在该 <code>&lt;script&gt;</code> 代码块中有效。解决方法有两种：</p>
+<ol>
+<li>将需要导出的给其他 <code>&lt;script&gt;</code> 块使用的功能，挂载在页面全局的 <code>window</code> 对象上，模拟 <code>export</code> 的效果，缺点是很可能无意中覆盖了挂载对象。</li>
+<li>将所有js 功能都集中在 <code>indexscript</code> 代码块中，将所有的功能统一管理。此时，要注意将DOM 元素的事件通过监听事件的方式来管理：</li>
+</ol>
+<pre><code class="language-html">&lt;!-- demo.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;just a demo&lt;/title&gt;
+    &lt;script id=&quot;indexscript&quot; type=&quot;module&quot;&gt;
+        import init, { add } from &quot;../pkg/demo.js&quot;;
+        function js_add() {
+            let a = document.getElementById(&quot;a&quot;);
+            let b = document.getElementById(&quot;b&quot;);
+            let sum = document.getElementById(&quot;sum&quot;);
+            sum.value = add(a.value, b.value);
+        }
+
+        async function run() {
+            await init();
+
+            document.getElementById(&quot;a&quot;).addEventListener(&quot;input&quot;, js_add);
+            document.getElementById(&quot;b&quot;).addEventListener(&quot;input&quot;, js_add);
+        }
+
+        run();
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;textarea id=&quot;a&quot; autofocus&gt;40&lt;/textarea&gt;
+    &lt;textarea id=&quot;b&quot;&gt;2&lt;/textarea&gt;
+    &lt;textarea id=&quot;sum&quot; readonly&gt;&lt;/textarea&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="然而我还是想包容你的我的-wasm"><a class="header" href="#然而我还是想包容你的我的-wasm">然而我还是想包容你的，我的 WASM</a></h2>
+<p>我们来分析一下 <code>wasm-pack</code> 生成的 <code>demo.js</code>：</p>
+<pre><code class="language-js">// demo.js
+
+let wasm;
+
+/**
+* @param {number} a
+* @param {number} b
+* @returns {number}
+*/
+export function add(a, b) {
+    const ret = wasm.add(a, b);
+    return ret;
+}
+
+async function load(module, imports) {
+    if (typeof Response === 'function' &amp;&amp; module instanceof Response) {
+        if (typeof WebAssembly.instantiateStreaming === 'function') {
+            try {
+                return await WebAssembly.instantiateStreaming(module, imports);
+
+            } catch (e) {
+                if (module.headers.get('Content-Type') != 'application/wasm') {
+                    console.warn(&quot;`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n&quot;, e);
+
+                } else {
+                    throw e;
+                }
+            }
+        }
+
+        const bytes = await module.arrayBuffer();
+        return await WebAssembly.instantiate(bytes, imports);
+
+    } else {
+        const instance = await WebAssembly.instantiate(module, imports);
+
+        if (instance instanceof WebAssembly.Instance) {
+            return { instance, module };
+
+        } else {
+            return instance;
+        }
+    }
+}
+
+async function init(input) {
+    if (typeof input === 'undefined') {
+        input = new URL('demo_bg.wasm', import.meta.url);
+    }
+    const imports = {};
+
+
+    if (typeof input === 'string' || (typeof Request === 'function' &amp;&amp; input instanceof Request) || (typeof URL === 'function' &amp;&amp; input instanceof URL)) {
+        input = fetch(input);
+    }
+
+
+
+    const { instance, module } = await load(await input, imports);
+
+    wasm = instance.exports;
+    init.__wbindgen_wasm_module = module;
+
+    return wasm;
+}
+
+export default init;
+</code></pre>
+<p>我们看到，<code>demo.js:175</code> 对来待加载的 <code>module</code> 做了判断：如果不是从响应获取的数据，则直接视作 wasm bytes 来进行加载。于是我们可以对生成的 <code>demo_bg.wasm</code> 文件通过 base64 转码，嵌入到 HTML 文件中，然后转换成 <code>Uint8Array</code> 传递给 <code>demo.js:init</code> 函数进行加载:</p>
+<pre><code class="language-html">    &lt;script id=&quot;indexscript&quot; type=&quot;module&quot;&gt;
+// demo.js 完全嵌入到 html 文件中，并且不需要 export 语句
+let wasm;
+
+/**
+* @param {number} a
+* @param {number} b
+* @returns {number}
+*/
+function add(a, b) {
+    const ret = wasm.add(a, b);
+    return ret;
+}
+
+async function load(module, imports) {
+    if (typeof Response === 'function' &amp;&amp; module instanceof Response) {
+        if (typeof WebAssembly.instantiateStreaming === 'function') {
+            try {
+                return await WebAssembly.instantiateStreaming(module, imports);
+
+            } catch (e) {
+                if (module.headers.get('Content-Type') != 'application/wasm') {
+                    console.warn(&quot;`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n&quot;, e);
+
+                } else {
+                    throw e;
+                }
+            }
+        }
+
+        const bytes = await module.arrayBuffer();
+        return await WebAssembly.instantiate(bytes, imports);
+
+    } else {
+        const instance = await WebAssembly.instantiate(module, imports);
+
+        if (instance instanceof WebAssembly.Instance) {
+            return { instance, module };
+
+        } else {
+            return instance;
+        }
+    }
+}
+
+async function init(input) {
+    if (typeof input === 'undefined') {
+        input = new URL('demo_bg.wasm', import.meta.url);
+    }
+    const imports = {};
+
+
+    if (typeof input === 'string' || (typeof Request === 'function' &amp;&amp; input instanceof Request) || (typeof URL === 'function' &amp;&amp; input instanceof URL)) {
+        input = fetch(input);
+    }
+
+
+
+    const { instance, module } = await load(await input, imports);
+
+    wasm = instance.exports;
+    init.__wbindgen_wasm_module = module;
+
+    return wasm;
+}
+
+// demo.js 嵌入结束
+
+        // wasm 二进制，base64编码：
+        const WASM_B64 = &quot;AGFzbQEAAAABBwFgAn9/AX8DAgEABQMBABEHEAIGbWVtb3J5AgADYWRkAAAKCQEHACAAIAFqCwB7CXByb2R1Y2VycwIIbGFuZ3VhZ2UBBFJ1c3QADHByb2Nlc3NlZC1ieQMFcnVzdGMdMS42MS4wIChmZTViMTNkNjggMjAyMi0wNS0xOCkGd2FscnVzBjAuMTkuMAx3YXNtLWJpbmRnZW4SMC4yLjgwICg0Y2FhOTgxNjUp&quot;;
+
+        function b64toBytes(b64) {
+            let binary = atob(b64);
+            let bytes = new Uint8Array(binary.length);
+            for (let i = 0; i &lt; bytes.length; i++) {
+                bytes[i] = binary.charCodeAt(i);
+            }
+            return bytes;
+        }
+
+        function js_add() {
+            let a = document.getElementById(&quot;a&quot;);
+            let b = document.getElementById(&quot;b&quot;);
+            let sum = document.getElementById(&quot;sum&quot;);
+            sum.value = add(a.value, b.value);
+        }
+
+        async function run() {
+            await init(b64toBytes(WASM_B64));  // 直接通过页面加载编码
+
+            document.getElementById(&quot;a&quot;).addEventListener(&quot;input&quot;, js_add);
+            document.getElementById(&quot;b&quot;).addEventListener(&quot;input&quot;, js_add);
+        }
+
+        run();
+    &lt;/script&gt;
+</code></pre>
+<p>完成以上步骤，我们就得到了一个带有 WASM 功能的 standalone html 文件啦~。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="蓄水池算法改进---面向抽奖场景保证等概率性"><a class="header" href="#蓄水池算法改进---面向抽奖场景保证等概率性">蓄水池算法改进 - 面向抽奖场景保证等概率性</a></h1>
+<blockquote>
+<p>免责声明：禁止任何个人或团体使用本文研究成果用于实施任何违反中华人民共和国法律法规的活动
+如有违反，均与本文作者无关</p>
+</blockquote>
+<p>在我们通常遇到的抽奖场景，于年会时将所有人的编号都放到箱子里面抽奖，然后每次抽出中奖者
+决定奖项。而在这过程中，因为先抽中者已经确定了奖项，然后不能够参与后续的奖项的抽奖；而后
+续参与抽奖的人员则其实会以越来越低的概率参与抽奖:</p>
+<blockquote>
+<p>例：在上述场景中共有 \( n \) 人参与抽取 \( m ( \lt n) \) 个奖项，</p>
+<p>抽取第一个奖项概率为： \( { m \over n } \)</p>
+<p>那么如果第一个奖项被抽走并 <em>揭露了</em>，剩下 \( n - 1 \) 人参与 \( m - 1 \) 个奖项，抽中的概率
+为 \( m - 1 \over n - 1 \)。
+那么 \( m \lt n \Rightarrow -m \gt -n \Rightarrow mn - m \gt nm - n \Rightarrow m(n-1) \gt n(m - 1) \Rightarrow { m \over n } \gt { m - 1 \over n - 1 }\)，
+即如果是后续参与抽奖 <em>并且前面的奖项被拿走了</em>，后面抽到奖项的概率会更低，<strong>同时也会失去参与部分奖项的机会</strong>。</p>
+</blockquote>
+<p>因此，在人数 \( n \) 大于奖项数 \( m \) 的时候，我们通过以越来越低的概率干涉前面
+已经“取得”奖项的结果，来保证先参与抽奖的人中奖的概率随着人数的增多中奖的概率也变低，
+最后保证每个人中奖的概率为 \( m \over n \)。但是在实际场景中，\( m \) 个奖项可能
+不仅相同（如划分了一二三等奖），因此对于蓄水池算法的改进提出了新的要求：</p>
+<ul>
+<li>将所有的奖项视为各不相同的位置，不论人数多少（当还是要保证有人来参与抽奖 \( n \gt 1\) )所有人占有特定位置的概率相同</li>
+<li><del>每当新来一人参与抽奖时，如果他没有中奖，可以即场告知未中</del><sup class="footnote-reference"><a href="#3">1</a></sup></li>
+</ul>
+<h2 id="算法描述与等概率性证明"><a class="header" href="#算法描述与等概率性证明">算法描述与等概率性证明</a></h2>
+<p>我们分两种情况讨论：</p>
+<ul>
+<li>一种是当人数不足以覆盖所有的奖项的场景（ \(n \lt m \) )，</li>
+<li>另外一种是当抽奖人数远大于所有奖项加起来的数目。（ \( n \gt m \)）。</li>
+</ul>
+<p>然后我们再回来看看能不能找到一种很方便的方法桥接两种情况。</p>
+<p>同时，我们假设 \( m \) 个奖项两两互不相同。</p>
+<h3 id="抽奖人数不足时-n-lt-m--"><a class="header" href="#抽奖人数不足时-n-lt-m--">抽奖人数不足时（ \(n \lt m \) )</a></h3>
+<p>因为当人数不足时，所有参与者都能抽奖，因此我们要保证每个人获得特定奖项的概率为 \( 1 \over m \)。
+算法描述：</p>
+<blockquote>
+<p>记 \( Choosen \) 为容量为 \( m \) 的数组，
+\( Choosen[k] (1 \le k \le m) \) 表示第 k 个奖项的当前占有情况，
+初始值为 \( None \),</p>
+<p>\( Players \) 为参与参与抽奖的人的序列</p>
+<ol>
+<li>令 \( i := 1 \)，当 \( i \le n \) 时，做如下操作：
+<ul>
+<li>产生随机数 \( r_1 (1 \le r_1 \le i) \)</li>
+<li>如果 \( r_1 \lt i \)，\( Choosen[i] := Choosen[r_1] \)</li>
+<li>\( Choosen[r_1] := Players[i] \)</li>
+<li>\( i := i + 1 \)</li>
+</ul>
+</li>
+<li>当 \( i \le m \) 时，做如下操作：
+<ul>
+<li>产生随机数 \( r_2 (1 \le r_2 \le i) \)</li>
+<li>如果 \( r_2 \lt i \):
+<ul>
+<li>\( Choosen[i] := Choosen[r_2] \)</li>
+<li>\( Choosen[r_2] := None \)</li>
+</ul>
+</li>
+<li>\( i := i + 1 \)</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h4 id="等概率性证明"><a class="header" href="#等概率性证明">等概率性证明</a></h4>
+<p>我们先证明，在填入中奖者的第 \( k (1 \le k \le m) \) 轮过程中，能够保证对于前 \( k \)
+个奖项中的每一个奖项，每一位中奖者抽中其中第 \( i (1 \le i \le k) \) 个奖项的概率为
+\(1 \over k \)，证明如下：</p>
+<p>我们采用数学归纳法来证明：</p>
+<ol>
+<li><strong>奠基</strong>：当 \( k = 1 \) 时，易知该中奖者一定会抽中第一个奖项，前一个奖项中只有第一个
+选项，所以此时每一位中奖者抽中第 \( k = 1 \) 的概率为 \( 1 = { 1 \over 1 } = { 1 \over k } \);</li>
+<li><strong>归纳</strong>:
+<ul>
+<li>假设当 \(k = j (1 \le j \lt m) \)时，每一位抽奖者抽中第 \( i (1 \le i \le j) \)的概率为
+\( 1 \over j \)</li>
+<li>当 \( k = j + 1 \), 有：
+<ul>
+<li>第 \( j + 1 \) 位抽奖着抽中任意第 \( i' (1 \le i' \le j + 1) \) 个奖项的概率为 \( 1 \over { j + 1 } \)
+（假设产生的随机数 \( r_1、r_2 \) 足够的均匀）;</li>
+<li>对于前 \( j \) 位抽奖者，每一位都有 \( 1 \over { j + 1 } \)，的概率将自己的奖项更换位第 \( j + 1 \)个奖项；</li>
+<li>对于前 \( j \) 位抽奖者，每一位依然占有原有第 \( i' \) 个奖项的概率为：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>\[ \begin{equation}
+\begin{aligned}
+P\{前 j 位抽奖者 j + 1 轮中仍然持有 i' \} &amp; = P\{前 j 位抽奖者j轮已经持有 i' \} \cdot P\{第 j + 1 位抽奖者没有抽中 i' \} \\
+&amp; = P\{前 j 位抽奖者j轮已经持有 i' \} \cdot (1 - P\{第 j + 1 位抽奖者抽中 i' \}) \\
+&amp; = \frac{1}{j} \cdot (1 - \frac{1}{j+1}) \\
+&amp; = \frac{1}{j} \cdot \frac{j}{j+1} \\
+&amp; = \frac{1}{j + 1} \\
+&amp; = \frac{1}{k} \\
+\end{aligned}
+\label{1.1} \tag{1.1}
+\end{equation}
+\]</p>
+<p>由上，可知每一轮迭代之后，前 \( k \) 个奖项对于已经参与的 \( k \)中奖者来说抽中的概率均等，为 \( 1 \over k \)，
+故到了第 \( n \) 轮操作后，我们可以通过不断填充 \( None \)值来稀释概率，最后达到 \( 1 \over m \) 的等概率性。</p>
+<p>特殊地，当 \( n == m \) 时，每个抽奖者抽到特定奖项的概率也为 \(1 \over n \)。</p>
+<h3 id="抽奖人数足够多时-n-gt-m--"><a class="header" href="#抽奖人数足够多时-n-gt-m--">抽奖人数足够多时（ \(n \gt m \) )</a></h3>
+<p>类似地，当 \(n \gt m \)时，对于每一个抽奖序号 \( k \gt m \) 的抽奖者，我们生成随机数 \( r_3(1 \le r_3 \le n) \)，并且在
+\( r_3 \le m \) 的时候，替换对应原本占有奖项的抽奖者；可以证明在这种情况下，能保证每个人抽到特定奖项的概率为 \(1 \over n \)<sup class="footnote-reference"><a href="#1">2</a></sup>。</p>
+<h3 id="整合后的算法"><a class="header" href="#整合后的算法">整合后的算法</a></h3>
+<blockquote>
+<p>记 \( Choosen \) 为容量为 \( m \) 的数组，
+\( Choosen[k] (1 \le k \le m) \) 表示第 \( k \) 个奖项的当前占有情况，
+初始值为 \( None \),</p>
+<p>\( replaced \) 为原本已经中奖，但是被人替换的抽奖者</p>
+<p>\( Players \) 为参与参与抽奖的人的序列，每次只能获取一个 \( player \)</p>
+<p>记 \( n := 0 \)为当前参与抽奖的人数</p>
+<ol>
+<li>在抽奖结束前，每次遇到一个新的 \( player \) 执行以下操作：
+<ul>
+<li>\( replaced := None \)</li>
+<li>\( n := n + 1 \)</li>
+<li>产生随机数 \( r (1 \le r \le n) \)</li>
+<li>如果 \( r \le m \)：
+<ul>
+<li>\( replaced := Choosen[r] \)</li>
+<li>\( Choosen[r] := player \)</li>
+</ul>
+</li>
+<li>如果 \( r \lt n \) 并且 \( n \le m \)：
+<ul>
+<li>\( Choosen[n] := replaced \)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在抽奖结束时，如果 \( n \lt m \), 执行以下操作：
+<ul>
+<li>\( i := n \)</li>
+<li>当 \( i \lt m \)时，重复执行以下操作：
+<ul>
+<li>\( i := i + 1 \)</li>
+<li>产生随机数 \( r_2 (1 \le r_2 \le i) \)</li>
+<li>如果 \( r_2 \lt i \):
+<ul>
+<li>\( Choosen[i] := Choosen[r_2] \)</li>
+<li>\( Choosen[r_2] := None \)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h2 id="程序实现"><a class="header" href="#程序实现">程序实现</a></h2>
+<h3 id="rust"><a class="header" href="#rust">Rust</a></h3>
+<p>作者偏好 <a href="https://kaisery.gitbooks.io/trpl-zh-cn/">Rust 编程语言</a>，故使用 Rust 实现。</p>
+<h4 id="特质trait"><a class="header" href="#特质trait">特质（trait）</a></h4>
+<p>Rust 中的<a href="https://kaisery.gitbooks.io/trpl-zh-cn/ch10-02-traits.html">特质（trait）</a>
+是其用于复用行为抽象的特性，尽管比起 Java 或 C# 的接口 （Interface）更加强大，但在此文中，
+熟悉 Java/C# 的读者把特质视作接口就可以了。</p>
+<h3 id="建模与实现"><a class="header" href="#建模与实现">建模与实现</a></h3>
+<p>本文使用面向对象（Object-Oriented）编程范式<sup class="footnote-reference"><a href="#2">3</a></sup>来进行抽象，如下所示：</p>
+<pre><pre class="playground"><code class="language-rust edition2018">use rand::random;
+
+use std::fmt::Debug;
+
+trait ReservoirSampler {
+    // 每种抽样器只会在一种总体中抽样，而总体中所有个体都属于相同类型
+    type Item;
+
+    // 流式采样器无法知道总体数据有多少个样本，因此只逐个处理，并返回是否将样本纳入
+    // 样本池的结果，以及可能被替换出来的样本
+    fn sample(&amp;mut self, it: Self::Item) -&gt; (bool, Option&lt;Self::Item&gt;);
+
+    // 任意时候应当知道当前蓄水池的状态
+    fn samples(&amp;self) -&gt; &amp;[Option&lt;Self::Item&gt;];
+}
+
+struct Lottery&lt;P&gt; {
+    // 记录当前参与的总人数
+    total: usize,
+
+    // 奖品的名称与人数
+    prices: Vec&lt;Price&gt;,
+
+    // 当前的幸运儿
+    lucky: Vec&lt;Option&lt;P&gt;&gt;,
+}
+
+#[derive(Clone, Debug)]
+struct Price {
+    name: String,
+    cap: usize,
+}
+
+impl&lt;P&gt; ReservoirSampler for Lottery&lt;P&gt; {
+    type Item = P;
+
+    fn sample(&amp;mut self, it: Self::Item) -&gt; (bool, Option&lt;Self::Item&gt;) {
+        let lucky_cap = self.lucky.capacity();
+
+        self.total += 1;
+
+        // 概率渐小的随机替换
+        let r = random::&lt;usize&gt;() % self.total + 1;
+        let mut replaced = None;
+        if r &lt;= lucky_cap {
+            replaced = self.lucky[r - 1].take();
+            self.lucky[r - 1] = Some(it);
+        }
+
+        if self.total &lt;= lucky_cap &amp;&amp; r &lt; self.total {
+            self.lucky[self.total - 1] = replaced.take();
+        }
+
+        (r &lt;= lucky_cap, replaced)
+    }
+
+    fn samples(&amp;self) -&gt; &amp;[Option&lt;Self::Item&gt;] {
+        &amp;self.lucky[..]
+    }
+}
+
+impl&lt;P: Debug&gt; Lottery&lt;P&gt; {
+    fn release(self) -&gt; Result&lt;Vec&lt;(String, Vec&lt;P&gt;)&gt;, &amp;'static str&gt; {
+        let lucky_cap = self.lucky.capacity();
+
+        if self.lucky.len() == 0 {
+            return Err(&quot;No one attended to the lottery!&quot;);
+        }
+
+        let mut final_lucky = self.lucky.into_iter().collect::&lt;Vec&lt;Option&lt;P&gt;&gt;&gt;();
+        let mut i = self.total;
+        while i &lt; lucky_cap {
+            i += 1;
+
+            // 概率渐小的随机替换
+            let r = random::&lt;usize&gt;() % i + 1;
+            if r &lt;= lucky_cap {
+                final_lucky[i - 1] = final_lucky[r - 1].take();
+            }
+        }
+        println!(&quot;{:?}&quot;, final_lucky);
+
+        let mut result = Vec::with_capacity(self.prices.len());
+        let mut counted = 0;
+        for p in self.prices {
+            let mut luck = Vec::with_capacity(p.cap);
+
+            for i in 0 .. p.cap {
+                if let Some(it) = final_lucky[counted + i].take() {
+                    luck.push(it);
+                }
+            }
+
+            result.push((p.name, luck));
+            counted += p.cap;
+        }
+
+        Ok(result)
+    }
+}
+
+// 构建者模式（Builder Pattern），将所有可能的初始化行为提取到单独的构建者结构中，以保证初始化
+// 后的对象(Target)的数据可靠性。此处用以保证所有奖品都确定后才能开始抽奖
+struct LotteryBuilder {
+    prices: Vec&lt;Price&gt;,
+}
+
+impl LotteryBuilder {
+    fn new() -&gt; Self {
+        LotteryBuilder {
+            prices: Vec::new(),
+        }
+    }
+
+    fn add_price(&amp;mut self, name: &amp;str, cap: usize) -&gt; &amp;mut Self {
+        self.prices.push(Price { name: name.into(), cap });
+        self
+    }
+
+    fn build&lt;P: Clone&gt;(&amp;self) -&gt; Lottery&lt;P&gt; {
+        let lucky_cap = self.prices.iter()
+            .map(|p| p.cap)
+            .sum::&lt;usize&gt;();
+
+        Lottery {
+            total: 0,
+            prices: self.prices.clone(),
+            lucky: std::vec::from_elem(Option::&lt;P&gt;::None, lucky_cap),
+        }
+    }
+}
+
+fn main() {
+    let v = vec![8, 1, 1, 9, 2];
+    let mut lottery = LotteryBuilder::new()
+        .add_price(&quot;一等奖&quot;, 1)
+        .add_price(&quot;二等奖&quot;, 1)
+        .add_price(&quot;三等奖&quot;, 5)
+        .build::&lt;usize&gt;();
+
+
+    for it in v {
+        lottery.sample(it);
+        println!(&quot;{:?}&quot;, lottery.samples());
+    }
+
+    println!(&quot;{:?}&quot;, lottery.release().unwrap());
+}
+</code></pre></pre>
+<h2 id="优点"><a class="header" href="#优点">优点</a></h2>
+<ul>
+<li>流式处理，可以适应任意规模的参与人群</li>
+<li>在保证每一位抽奖者都有相同的概率获得特定奖项的同时，还能保证每一个抽奖者的获得的奖项均不相同</li>
+</ul>
+<h2 id="缺点"><a class="header" href="#缺点">缺点</a></h2>
+<ul>
+<li>所有参与抽奖的人都必须<strong>依次</strong>经过服务器处理，因为需要获知准确的总人数来保证等概率性。
+一个改进的方法是，在人数足够多的时候，将总人数用总人数的特定数量级替代（给后续参加者的
+一点点小福利——但是因为总人数足够多，所以总体中奖概率还是很低），在客户端完成中奖的选定</li>
+<li><strong>等概率性完全依赖随机数 <code>r</code> 生成</strong>。 因为奖品初始化时不需要考虑打乱顺序，因此如果在
+随机这一步被技术破解，使得抽奖者可以选择自己能获取的奖项，则会破坏公平性。改进方案是，
+在 <code>release</code> 的时候再一次对奖品顺序进行随机的打乱。</li>
+<li>这种抽奖方式还限定了每人只能抽取一次奖品，否则会出现一个人占有多个奖项的情况。</li>
+</ul>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">2</sup>
+<p>可以参考<a href="https://huangjj27.gitlab.io/reservoirsampling/#%E5%85%AC%E5%B9%B3%E6%80%A7%E7%AD%89%E6%A6%82%E7%8E%87--frackn--%E6%8A%BD%E5%8F%96-%E8%AF%81%E6%98%8E">博主以前的博客</a></p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">3</sup>
+<p>作者理解的面向对象 = 对象是交互的最基本单元 + 对象通过相互发送消息进行交互。而特质/接口以及对象其他公开的方法定义了对象可以向外发送/从外接收的消息。</p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">1</sup>
+<p>该条件为用以减轻开奖时发通知的压力，并非核心需求，因为对参与抽奖的玩家负责的原因，我们还是需要储存每个玩家每次的抽奖情况信息</p>
+</div>
+<h2 id="下一步可能展开的工作"><a class="header" href="#下一步可能展开的工作">下一步可能展开的工作</a></h2>
+<p>目前所有抽奖者都按照相等的概率抽奖，而在一些场景下可能按照一些规则给与某些抽奖者优惠
+（例如绩效越高的员工中奖概率越大），因此下一步可能考虑如何按照权重赋予每位抽奖者各自的
+中奖概率。</p>
+<h2 id="致谢"><a class="header" href="#致谢">致谢</a></h2>
+<p>感谢茶壶君（<a href="https://github.com/ksqsf">@ksqsf</a>）一语惊醒梦中人，清楚明确地表达了需求；
+感谢张汉东老师 (<a href="https://github.com/ZhangHanDong">@ZhangHanDong</a>)老师提点了之后可以开展研究的方向；
+感谢在这次讨论中提供意见的其他 Rust 社区的朋友，谢谢你们！</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="总结一次面试"><a class="header" href="#总结一次面试">总结一次面试</a></h1>
+<h2 id="最值得总结的三个问题"><a class="header" href="#最值得总结的三个问题">最值得总结的三个问题</a></h2>
+<h3 id="线程同步有哪些方法如何用这些方法实现一个-rwlock"><a class="header" href="#线程同步有哪些方法如何用这些方法实现一个-rwlock">线程同步有哪些方法？如何用这些方法实现一个 RwLock？</a></h3>
+<p>线程同步的目的在于解决多个线程访问关键资源时的竞争状态。一个数据竞争的简单例子如下：</p>
+<pre><pre class="playground"><code class="language-rust edition2018">use std::thread;
+fn main() {
+  let mut s = String::from(&quot;Hello&quot;);
+
+  let thread1 = thread::spawn(|| {
+    println!(&quot;{}&quot;, s);
+  });
+
+  let thread2 = thread::spawn(|| {
+    s.push_str(&quot;World!&quot;);
+    println!(&quot;{}&quot;, s);
+  });
+
+  thread1.join();
+  thread2.join();
+}
+</code></pre></pre>
+<p>上文的代码中 <code>thread1</code> 试图打印 <code>s</code>, 预期得到输出 <code>Hello</code>, 但是 <code>thread2</code> 却改变了 <code>s</code> 的内容，
+那么 <code>thread1</code> 最终打印内容将取决于两个线程哪个先完成: 如果 <code>thread1</code> 先完成了，那么
+将打印 <code>Hello</code>; 如果 <code>thread2</code> 先完成了，那么将打印 <code>HelloWorld!</code>。</p>
+<p>实际上得益于 Rust 的所有权系统与生命周期（lifetime）检查，上述示例并不能编译——子线程可能
+会在主程序结束后继续运行，导致子线程捕获的 <code>s</code> 的引用失效；另外 <code>thread2</code> 直接修改了 <code>s</code>，
+换言之只会允许 <code>thread2</code> 独占地持有 <code>s</code> 的可变引用（<code>&amp;mut s</code>)，而不允许其他线程持有 <code>s</code>
+的任何引用。</p>
+<p>在 Rust 编程中，主要有以下线程同步的方法：</p>
+<ul>
+<li>互斥锁(Mutex)
+我们可以使用互斥锁 <code>Mutex&lt;T&gt;</code> 来控制只能有单独一个线程读取/修改
+对象。通常实践是在外面加上原子引用计数 <code>Arc</code> 变成 <code>Arc&lt;Mutex&lt;T&gt;&gt;</code>，来减少 <code>Mutex</code>
+拷贝的开销。对于多读少写的场景，可以用 <code>RwLock</code> 提高并发。</li>
+<li>条件变量(CondVar)
+条件变量用于“阻塞”线程并使得线程在等待事件时不需要消耗 CPU 时间。通常会与放进互斥锁
+布尔型的预言值（状态值）关联使用，在状态值发生变化时通知条件变量。</li>
+<li>屏障(Barrier)
+屏障用于在某个需要若干线程 <strong>都完成</strong> 前置操作后再开始计算的操作之前，让所有所需线程
+的状态都达到能开始进行计算的状态。</li>
+</ul>
+<h3 id="有什么问题是生存期标注无法修正的请给出一个例子"><a class="header" href="#有什么问题是生存期标注无法修正的请给出一个例子">有什么问题是生存期标注无法修正的？请给出一个例子</a></h3>
+<p>这道问题最后我也并没有理解，“生命周期标注无法修正的问题”，字面意思是，即使我们按照我们
+期望的程序语义来修正了生命周期标注，这个程序仍然不能通过编译，或者再运行时仍然不能得到
+期望结果。按此描述，一个可能的例子是，我们尝试从一个较短的引用返回一个较长的引用：</p>
+<pre><pre class="playground"><code class="language-rust edition2018">fn longhten&lt;'a&gt;(s_ref: &amp;'a str) -&gt; &amp;'static str {
+    s_ref
+}
+
+fn main() {
+    let s = String::from(&quot;hello&quot;);
+
+    let static_ref = longhten(&amp;s);
+
+    println!(&quot;{}&quot;, static_ref);
+}
+
+</code></pre></pre>
+<h3 id="waker-如何被唤醒-reactor要怎么实现"><a class="header" href="#waker-如何被唤醒-reactor要怎么实现">Waker 如何被唤醒？ Reactor要怎么实现？</a></h3>
+<p>Reactor 作为反应器，上面同时挂载了成千上万个待唤醒的事件，这里使用了mio统一封装了操作系统的多路复用API。
+在Linux中使用的是Epoll<sup class="footnote-reference"><a href="#3">1</a></sup>，在Mac中使用的则是Kqueue<sup class="footnote-reference"><a href="#2">2</a></sup></p>
+<pre><code class="language-ignore">loop {
+    // 轮询事件是否超时
+    poll.poll(&amp;events, timeout);
+    for event in events.iter() {
+        if (event.is_readable()) {
+            for waker in event.readers.wakers {
+                waker.wake();
+            }
+        }
+        if (event.is_writeable()) {
+            for waker in event.writers.wakers {
+                waker.wake();
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="一面----手写代码"><a class="header" href="#一面----手写代码">一面 -- 手写代码</a></h2>
+<h3 id="1-实现一个二分查找函数"><a class="header" href="#1-实现一个二分查找函数">1. 实现一个二分查找函数</a></h3>
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">use std::cmp::Ordering;
+</span><span class="boring">
+</span>/// 给出一个从小到大排列的数组，请实现一个函数，用二分法把指定数组 x 的位置找出来。若 x
+/// 不存在，则返回 -1. 若 x 存在多个，请返回 x 在数组中第一次出现的位置
+fn find(arr: Vec&lt;i32&gt;, x: i32) -&gt; i32 {
+    let (mut left, mut right) = (0, arr.len() - 1);
+    loop {
+        if left &gt; right {
+            return -1;
+        }
+
+        let mut mid = (left + right) / 2;
+        match arr[mid].cmp(&amp;x) {
+            // 记得要排除已经命中的元素！
+            Ordering::Less =&gt; left = mid + 1,
+            Ordering::Greater =&gt; right = mid - 1,
+            Ordering::Equal =&gt; {
+                while mid &gt;= 1 &amp;&amp; arr[mid - 1] == x {
+                    mid -= 1;
+                }
+
+                return mid as i32;
+            },
+        }
+    }
+}
+
+<span class="boring">#[cfg(test)]
+</span><span class="boring">mod test {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn should_return_minus1() {
+</span><span class="boring">        let arr = vec![1, 3, 5];
+</span><span class="boring">        let x = 2;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(find(arr, x), -1);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn should_return_mid() {
+</span><span class="boring">        let arr = vec![1, 3, 5, 7, 9, 10, 10];
+</span><span class="boring">        let x = 7;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(find(arr, x), 3);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn should_return_first() {
+</span><span class="boring">        let arr = vec![1, 3, 5, 7, 9, 10, 10];
+</span><span class="boring">        let x = 10;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(find(arr, x), 5);
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>
+<p>Q: 请分析该函数的算法复杂度？</p>
+<ul>
+<li>A: 时间复杂度 \( O(\log n) \)，最坏情况下的事件复杂度是 \( O(n) \)</li>
+</ul>
+</li>
+<li>
+<p>Q: 请优化这个算法？</p>
+<ul>
+<li>A：一个优化方法是 <strong>插值查找法</strong>，利用如下公式自动根据查找到的元素与目标的距离来修正下一次查找
+的区间范围，提高查找速度：</li>
+</ul>
+</li>
+</ul>
+<p>\[ mid = left + { key - arr[left] \over arr[right] - key } (right - left) \]</p>
+<h3 id="2-镜像二叉树"><a class="header" href="#2-镜像二叉树">2. 镜像二叉树</a></h3>
+<p>请反转二叉树。如给出以下二叉树：</p>
+<pre><code class="language-markdown">     1
+   /   \
+  2     3
+ / \   / \
+4   5 6   7
+</code></pre>
+<p>反转为：</p>
+<pre><code class="language-markdown">     1
+   /   \
+  3     2
+ / \   / \
+7   6 5   4
+</code></pre>
+<p>递归解法：</p>
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">use std::convert::Into;
+</span><span class="boring">
+</span>struct Node {
+    val: i32,
+    left: NodeLink,
+    right: NodeLink,
+}
+
+type NodeLink = Option&lt;Box&lt;Node&gt;&gt;;
+
+<span class="boring">fn construct_tree() -&gt; Box&lt;Node&gt; {
+</span><span class="boring">    let l3left1 = Node {
+</span><span class="boring">        val: 4,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3right1 = Node {
+</span><span class="boring">        val: 5,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3left2 = Node {
+</span><span class="boring">        val: 6,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3right2 = Node {
+</span><span class="boring">        val: 7,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l2left = Node {
+</span><span class="boring">        val: 2,
+</span><span class="boring">        left: Some(Box::new(l3left1)),
+</span><span class="boring">        right: Some(Box::new(l3right1)),
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">
+</span><span class="boring">    let l2right = Node {
+</span><span class="boring">        val: 3,
+</span><span class="boring">        left: Some(Box::new(l3left2)),
+</span><span class="boring">        right: Some(Box::new(l3right2)),
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    Box::new(Node {
+</span><span class="boring">        val: 1,
+</span><span class="boring">        left: Some(Box::new(l2left)),
+</span><span class="boring">        right: Some(Box::new(l2right)),
+</span><span class="boring">    })
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn construct_mirror() -&gt; Box&lt;Node&gt; {
+</span><span class="boring">    let l3left1 = Node {
+</span><span class="boring">        val: 7,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3right1 = Node {
+</span><span class="boring">        val: 6,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3left2 = Node {
+</span><span class="boring">        val: 5,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3right2 = Node {
+</span><span class="boring">        val: 4,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l2left = Node {
+</span><span class="boring">        val: 3,
+</span><span class="boring">        left: Some(Box::new(l3left1)),
+</span><span class="boring">        right: Some(Box::new(l3right1)),
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">
+</span><span class="boring">    let l2right = Node {
+</span><span class="boring">        val: 2,
+</span><span class="boring">        left: Some(Box::new(l3left2)),
+</span><span class="boring">        right: Some(Box::new(l3right2)),
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    Box::new(Node {
+</span><span class="boring">        val: 1,
+</span><span class="boring">        left: Some(Box::new(l2left)),
+</span><span class="boring">        right: Some(Box::new(l2right)),
+</span><span class="boring">    })
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Into&lt;Vec&lt;i32&gt;&gt; for Box&lt;Node&gt; {
+</span><span class="boring">    fn into(mut self) -&gt; Vec&lt;i32&gt; {
+</span><span class="boring">        let v_left: Vec&lt;i32&gt;;
+</span><span class="boring">        let v_right: Vec&lt;i32&gt;;
+</span><span class="boring">        v_left = if let Some(node) = self.left.take() {
+</span><span class="boring">            node.into()
+</span><span class="boring">        } else {
+</span><span class="boring">            Vec::new()
+</span><span class="boring">        };
+</span><span class="boring">
+</span><span class="boring">        v_right = if let Some(node) = self.right.take() {
+</span><span class="boring">            node.into()
+</span><span class="boring">        } else {
+</span><span class="boring">            Vec::new()
+</span><span class="boring">        };
+</span><span class="boring">
+</span><span class="boring">       let mut v = Vec::new();
+</span><span class="boring">       v.push(self.val);
+</span><span class="boring">       v.extend(v_left.into_iter());
+</span><span class="boring">       v.extend(v_right.into_iter());
+</span><span class="boring">
+</span><span class="boring">       v
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn mirror(root: &amp;mut Node) {
+    let (mut tmp_left, mut tmp_right) = (NodeLink::None, NodeLink::None);
+
+    if let Some(mut node) = root.left.take() {
+        mirror(&amp;mut node);
+        tmp_left = Some(node);
+    }
+
+    if let Some(mut node) = root.right.take() {
+        mirror(&amp;mut node);
+        tmp_right = Some(node);
+    }
+
+    root.left = tmp_right;
+    root.right = tmp_left;
+}
+
+<span class="boring">#[cfg(test)]
+</span><span class="boring">mod test {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn should_mirrored() {
+</span><span class="boring">        let mut tree = construct_tree();
+</span><span class="boring">        let expect = construct_mirror();
+</span><span class="boring">
+</span><span class="boring">        let mirror = mirror(&amp;mut tree);
+</span><span class="boring">        assert_eq!(&lt;Box&lt;Node&gt; as Into&lt;Vec&lt;i32&gt;&gt;&gt;::into(tree), &lt;Box&lt;Node&gt; as Into&lt;Vec&lt;i32&gt;&gt;&gt;::into(expect));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>Q: 请优化这个算法？
+<ul>
+<li>A：如果不用递归（因为递归会加深调用栈），可以使用 <strong>广度优先搜索算法</strong> 来自根向叶
+逐层反转左右子节点的指针，并将子节点的指针放入到队列中待进行处理。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">3</sup>
+<p><a href="https://baike.baidu.com/item/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5">线程同步 -- 百度百科</a></p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p><a href="https://rustcc.cn/article?id=e6d50145-4bc2-4f1e-84da-c39c8217640b">Rust异步浅谈 -- leaxoy</a></p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><style>
+.bevy_img {
+    max-height: 400px;
+    max-width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+</style>
+<h1 id="用-bevy-游戏引擎编写贪吃蛇译"><a class="header" href="#用-bevy-游戏引擎编写贪吃蛇译">用 <code>Bevy</code> 游戏引擎编写贪吃蛇（译）</a></h1>
+<blockquote>
+<p>原文：<a href="https://mbuffett.com/posts/bevy-snake-tutorial/#0.3">https://mbuffett.com/posts/bevy-snake-tutorial/#0.3</a></p>
+</blockquote>
+<p><a href="https://bevyengine.org/">Bevy</a> 最近普及开来了，但是相关学习资料还是很少。这篇文章尝试提供 Bevy 官方书（The Bevy book）的下一步学习。最后产品看起来像这样：</p>
+<video autoplay="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/game_over.mp4" type="video/mp4">
+</video>
+<p>这大约是 300 行 Rust 代码；也需要花点时间深入。如果你想快进到成品代码，请点 <a href="https://github.com/marcusbuffett/bevy_snake/tree/tutorial">这里</a>。每一个小节开头都有一份代码差异，这应该会在你不是很清晰哪里需要插入代码的时候更加清晰一点。</p>
+<h2 id="新的空的-bevy-应用"><a class="header" href="#新的空的-bevy-应用">新的空的 Bevy 应用</a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/174c226">点击查看差异</a></p>
+</blockquote>
+<p>我们现在像 Bevy 官方书那样开始，整一个啥都不干的应用。运行 <code>cargo new bevy-snake</code>, 然后把以下代码放到你的 <code>main.rs</code> ：</p>
+<pre><code class="language-rs">use bevy::prelude::*;
+
+fn main() {
+    App::build().run();
+}
+</code></pre>
+<p>我们还需要在 <code>Cargo.toml</code> 将 Bevy 作为依赖添加，因为我（原文作者，下同）知道这个教程之后要干嘛，我们现在也提前添加 <code>rand</code>库吧。</p>
+<pre><code class="language-toml">// ...
+
+[dependencies]
+bevy = &quot;0.3.0&quot;
+rand = &quot;0.7.3&quot;
+</code></pre>
+<h2 id="创建窗口"><a class="header" href="#创建窗口">创建窗口</a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/3f7c30b">点击查看差异</a></p>
+</blockquote>
+<p>我们现在要创建一个2D游戏，需要很多不同的系统；用来创建窗口的，用来做渲染循环的，用来处理输出的，用来处理精灵（sprites)的，等等。幸运的是，Bevy的默认插件给了我们以上所有选项：</p>
+<pre><code class="language-rs">fn main() {
+    App::build().add_plugins(DefaultPlugins).run();
+}
+</code></pre>
+<p>然而 Bevy 的默认插件不包括摄像机（camera），所以我们来插入一个 2D 摄像机，只要我们创建我们第一个系统就可以设置了：</p>
+<pre><code class="language-rs">fn setup(mut commands: Commands) {
+    commands.spawn(Camera2dComponents::default());
+}
+</code></pre>
+<p><a href="https://docs.rs/bevy_ecs/0.2.1/bevy_ecs/struct.Commands.html"><code>Cammands</code></a> 通常用来排列命令，来更改游戏世界与资源。在这里，我们创建一个带有 2D 摄像机组件的实体。为Bevy的魔法做点准备吧：</p>
+<pre><code class="language-rs">App::build()
+    .add_startup_system(setup.system()) // &lt;--
+    .add_plugins(DefaultPlugins)
+    .run();
+</code></pre>
+<p>我们需要做的只是在我们的函数是调用 <code>.system()</code>，然后 Bevy 会神奇地在启动地时候调用 <code>commands</code> 参数。再运行一次 app， 你应该能看到一个像这样的空窗口：</p>
+<p><img src="https://mbuffett.com/bevy_snake/new_pics/empty_window.png" alt="" /></p>
+<h2 id="开始编写一条蛇"><a class="header" href="#开始编写一条蛇">开始编写一条蛇</a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/baaefcc">点击查看差异</a></p>
+</blockquote>
+<p>我们来写个蛇头放在窗口上吧。我们先定义几个结构体：</p>
+<pre><code class="language-rs">struct SnakeHead;
+struct Materials {
+    head_material: Handle&lt;ColorMaterial&gt;,
+}
+</code></pre>
+<p><code>SnakeHead</code> 仅仅是一个空结构体，我们会把它当作一个组件来使用，它就是像某种标签，我们会放到一个实体上，之后我们能通过查询带有 <code>SnakeHead</code> 组件的实体来找到这个实体。像这样的空结构体在 Bevy 中是一种常见的模式，组件经常不需要他们自己的任何状态。 <code>Materials</code> 以后会变成一种资源，用来存储我们给蛇头使用的材质，也会用来存储蛇身和食物的材质。</p>
+<p><code>head_material</code> 句柄应该在游戏设置的时候就应该创建好，所以我们接下来要做的是，修改我们的 <code>setup</code> 函数：</p>
+<pre><code class="language-rs">fn setup(mut commands: Commands, mut materials: ResMut&lt;Assets&lt;ColorMaterial&gt;&gt;) {
+    commands.spawn(Camera2dComponents::default());
+    commands.insert_resource(Materials {
+        head_material: materials.add(Color::rgb(0.7, 0.7, 0.7).into()),
+    });
+}
+</code></pre>
+<blockquote>
+<p><strong>注意：</strong> Bevy要求在注册系统时按照特定的顺序。命令（Commands） -&gt; 资源（Resources） -&gt; 组件（Components）/查询（Queries）。如果你在弄乱一个系统之后获得一个神秘的编译时错误，请检查你的顺序。</p>
+</blockquote>
+<p><code>materials.add</code> 会返回 <code>Handle&lt;ColorMaterial&gt;</code>。我们创建了使用这个新建 handle 的 <code>Materials</code> 结构体。之后，我们尝试访问类型为 <code>Materials</code> 的资源， Bevy会找到我们这个结构体。现在我们来在新的系统里创建我们的蛇头实体，然后你会看到我们如何使用前述资源的：</p>
+<pre><code class="language-rs">fn game_setup(mut commands: Commands, materials: Res&lt;Materials&gt;) {
+    commands
+        .spawn(SpriteComponents {
+            material: materials.head_material.clone(),
+            sprite: Sprite::new(Vec2::new(10.0, 10.0)),
+            ..Default::default()
+        })
+        .with(SnakeHead);
+}
+</code></pre>
+<p>现在我们有了新的系统，它会寻找类型为 <code>Materials</code> 的资源。它也会创建（spawn）一个新实体，带有 <code>SpriteComponents</code> 和 <code>SnakeHead</code> 组件。为了创建 <code>SpriteComponents</code>, 我们将我们之间创建的颜色的 handle 传入，并且给精灵 10x10 的大小。我们将这个系统添加到我们 app 的构建器：</p>
+<pre><code class="language-rs">.add_startup_system(setup.system())
+.add_startup_stage(&quot;game_setup&quot;) // &lt;--
+.add_startup_system_to_stage(&quot;game_setup&quot;, game_setup.system()) // &lt;--
+</code></pre>
+<p>我们需要一个新的场景而不是再一次调用 <code>add_startup_system</code> 的原因是，我们需要使用在 <code>setup</code> 函数中插入的资源。这次运行后，你应该在屏幕中央看到蛇头：</p>
+<p><img src="https://mbuffett.com/bevy_snake/new_pics/snake_pixel.png" alt="" /></p>
+<p>好了，可能我们叫它“蛇头”有点过了，你可以看到一个 10x10 的白色精灵。</p>
+<h2 id="移动小蛇"><a class="header" href="#移动小蛇">移动小蛇</a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/fde99c9">点击查看差异</a></p>
+</blockquote>
+<p>如果小蛇不运动，那么游戏很无趣，所以我们先让蛇头动起来。我们之后再担心输入，现在我们的目标是让蛇头移动。所以我们来创建一个系统来移动所有的蛇头：</p>
+<pre><code class="language-rs">fn snake_movement(mut head_positions: Query&lt;(&amp;SnakeHead, &amp;mut Transform)&gt;) {
+    for (_head, mut transform) in head_positions.iter_mut() {
+        *transform.translation.y_mut() += 2.;
+    }
+}
+</code></pre>
+<p>这里有个新概念， <code>Query</code> 类型。我们用它来迭代所有拥有 <code>SnakeHead</code> 组件以及 <code>Transform</code> 组件的实体。我们不需要担心实际上如何创建查询类型， bevy 会帮我们创建好并用它调用我们的函数，算是 ECS 魔法的一部分。所以我们来加上这个系统， 然后看看会发生些什么：</p>
+<pre><code class="language-rs">.add_startup_system_to_stage(&quot;game_setup&quot;, game_setup.system())
+.add_system(snake_movement.system()) // &lt;--
+.add_plugins(DefaultPlugins)
+</code></pre>
+<p>这是我们看到的，一头蛇移出了屏幕：</p>
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/moving_up.mp4" type="video/mp4">
+</video>
+<p>你可能再思考 Transform 组件。当我们生成 <code>SnakeHead</code> 时，我们并没有给它 <code>Transform</code>，所以我们怎么就能找到一个同事拥有 <code>SnakeHead</code> 和 <code>Transform</code> 组件的实体呢？实际上 <code>SpriteComponents</code> 是一捆组件。就 <code>SpriteComponents</code> 来说，它包含了 <code>Transform</code> 组件，以及一堆其他组件（如 <code>Sprite</code>, <code>Mesh</code>, <code>Draw</code>, <code>Rotation</code>, <code>Sale</code>）。</p>
+<h2 id="控制小蛇"><a class="header" href="#控制小蛇">控制小蛇</a></h2>
+<p>我们来修改我们小蛇的移动系统，使得我们可以控制小蛇：</p>
+<pre><code class="language-rs">fn snake_movement(
+    keyboard_input: Res&lt;Input&lt;KeyCode&gt;&gt;,
+    mut head_positions: Query&lt;With&lt;SnakeHead, &amp;mut Transform&gt;&gt;,
+) {
+    for mut transform in head_positions.iter_mut() {
+        if keyboard_input.pressed(KeyCode::Left) {
+            *transform.translation.x_mut() -= 2.;
+        }
+        if keyboard_input.pressed(KeyCode::Right) {
+            *transform.translation.x_mut() += 2.;
+        }
+        if keyboard_input.pressed(KeyCode::Down) {
+            *transform.translation.y_mut() -= 2.;
+        }
+        if keyboard_input.pressed(KeyCode::Up) {
+            *transform.translation.y_mut() += 2.;
+        }
+    }
+}
+</code></pre>
+<p>留意到我们的查询 <code>Query&lt;(&amp;SnakeHead, &amp;mut Transform)&gt;</code> 改为了 <code>Query&lt;With&lt;SnakeHead, &amp;mut Transform&gt;&gt;</code>，其实当前版本没有必要更改，旧的查询依然能很好地工作。我想，第一个系统的类型签名可能简单些，但是现在我们用正确的方式编写类型。这写法更正确是因为我们其实不需要 SnakeHead 组件。所以 <code>With</code> 类型允许我们说，“我们需要那些有蛇头的实体，但是我不关心蛇头组件，只给我 transform 组件就好。”每个系统访问的组件越少，bevy就能并行越多的系统。例如，如果另外一个系统正在修改 <code>SnakeHead</code> 组件，那这个系统旧不能在用旧写法的时候并行了。</p>
+<p>现在，我们能控制小蛇了，尽管它动起来不那么像蛇：</p>
+<video autoplay="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/game_over.mp4" type="video/mp4">
+</video>
+<h2 id="码格子"><a class="header" href="#码格子">码格子</a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/d1f4225">点击查看差异</a></p>
+</blockquote>
+<p>到现在我们一直在用窗口的坐标，但这种方法只能在 (0, 0) 坐标在窗口正中央，并且单位是像素的时候有效。贪吃蛇游戏通常用格子，所以如果我们把我们的贪吃蛇设置成 10x10，那我们的窗口会 <strong>真的</strong> 很小。我们让日子变得轻松些吧，我们选择用我们自己的位置和尺寸。然后，我们用系统来处理变换到窗口的坐标。</p>
+<p>我们先定义格子为 10x10。在程序文件开头定义如下变量：</p>
+<pre><code class="language-rs">const ARENA_WIDTH: u32 = 10;
+const ARENA_HEIGHT: u32 = 10;
+</code></pre>
+<p>以及我们用于处理位置/尺寸的结构体：</p>
+<pre><code class="language-rs">#[derive(Default, Copy, Clone, Eq, PartialEq, Hash)]
+struct Position {
+    x: i32,
+    y: i32,
+}
+
+struct Size {
+    width: f32,
+    height: f32,
+}
+impl Size {
+    pub fn square(x: f32) -&gt; Self {
+        Self {
+            width: x,
+            height: x,
+        }
+    }
+}
+</code></pre>
+<p>相对直接地，有一个辅助方法来获取一个有相等长宽的 <code>Size</code>. Position 派生了一些很有用的 trait，所以我们不必不停地回顾这个结构体。 <code>Size</code> 可以仅仅包含一个浮点数，因为所有的对象最后都有相等的长度和宽度，但是我给它长度和宽度好像有点不对。我们现在把这些组件添加到我们生成的蛇头上：</p>
+<pre><code class="language-rs">commands
+    .spawn(SpriteComponents {
+        material: materials.head_material.clone(),
+        sprite: Sprite::new(Vec2::new(10.0, 10.0)),
+        ..Default::default()
+    })
+    .with(SnakeHead)
+    .with(Position { x: 3, y: 3 }) // &lt;--
+    .with(Size::square(0.8)); // &lt;--
+</code></pre>
+<p>这些组件暂时不做任何事情，我们现在就来将我们的尺寸映射到精灵的尺寸：</p>
+<pre><code class="language-rs">fn size_scaling(windows: Res&lt;Windows&gt;, mut q: Query&lt;(&amp;Size, &amp;mut Sprite)&gt;) {
+    let window = windows.get_primary().unwrap();
+    for (sprite_size, mut sprite) in q.iter_mut() {
+        sprite.size = Vec2::new(
+            sprite_size.width / ARENA_WIDTH as f32 * window.width() as f32,
+            sprite_size.height / ARENA_HEIGHT as f32 * window.height() as f32,
+        );
+    }
+}
+</code></pre>
+<p>这个尺寸变换逻辑是这样的：如果某个对象有一个单位格子宽度，格子宽40，然后窗口现在 400px 宽，那么它应该有10哥宽度。下面我们做位置系统：</p>
+<pre><code class="language-rs">fn position_translation(windows: Res&lt;Windows&gt;, mut q: Query&lt;(&amp;Position, &amp;mut Transform)&gt;) {
+    fn convert(pos: f32, bound_window: f32, bound_game: f32) -&gt; f32 {
+        let tile_size = bound_window / bound_game;
+        pos / bound_game * bound_window - (bound_window / 2.) + (tile_size / 2.)
+    }
+    let window = windows.get_primary().unwrap();
+    for (pos, mut transform) in q.iter_mut() {
+        transform.translation = Vec3::new(
+            convert(pos.x as f32, window.width() as f32, ARENA_WIDTH as f32),
+            convert(pos.y as f32, window.height() as f32, ARENA_HEIGHT as f32),
+            0.0,
+        );
+    }
+}
+</code></pre>
+<!-- TODO: 翻译结果混乱，需要重新翻译 -->
+<p>位置变换：如果项目的 X 坐标在我们的系统中是 5，宽度是 10，并且窗口宽度是200，那么坐标应该是 5/10 * 200 - 200 / 2。我们减去一半的窗口宽度，因为我们的做消息是从左下角开始，然后替换到正中央。然后我们再加上半个格子，因为我们想要我们精灵的左下角对齐格子的左下角，而不是精灵中心对齐。</p>
+<p>然后我们把这些系统加到我们的应用构建器上：</p>
+<pre><code class="language-rs">.add_system(snake_movement.system())
+.add_system(position_translation.system()) &lt;--
+.add_system(size_scaling.system()) &lt;--
+.add_plugins(DefaultPlugins)
+.run();
+</code></pre>
+<blockquote>
+<p><strong>注意：</strong> 现在最明显的问题是小蛇被压扁了。另外一个问题是我们破环了我们的输入处理。我们先修复输入处理，然后我们得记得回来处理我们被压扁的小蛇，把它恢复原状。</p>
+</blockquote>
+<p><img src="https://mbuffett.com/bevy_snake/new_pics/squished_snake.png" alt="" /></p>
+<h2 id="使用我们的格子"><a class="header" href="#使用我们的格子">使用我们的格子</a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/0f39c51">点击查看差异</a></p>
+</blockquote>
+<p>我们现在配置好了格子坐标，现在我们需要更新我们的 <code>snake_movement</code> 系统。之前我们使用 <code>Transform</code> 的地方，现在替换成 <code>Position</code>：</p>
+<pre><code class="language-rs">fn snake_movement(
+    keyboard_input: Res&lt;Input&lt;KeyCode&gt;&gt;,
+    mut head_positions: Query&lt;With&lt;SnakeHead, &amp;mut Position&gt;&gt;,
+) {
+    for mut pos in head_positions.iter_mut() {
+        if keyboard_input.pressed(KeyCode::Left) {
+            pos.x -= 1;
+        }
+        if keyboard_input.pressed(KeyCode::Right) {
+            pos.x += 1;
+        }
+        if keyboard_input.pressed(KeyCode::Down) {
+            pos.y -= 1;
+        }
+        if keyboard_input.pressed(KeyCode::Up) {
+            pos.y += 1;
+        }
+    }
+}
+</code></pre>
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/moving_grid.mp4" type="video/mp4">
+</video>
+<h2 id="调整窗口大小1"><a class="header" href="#调整窗口大小1">调整窗口大小<sup class="footnote-reference"><a href="#1">1</a></sup></a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/dce7a53">点击查看差异</a></p>
+</blockquote>
+<p>我们上一步中的小蛇被压扁了，是因为默认的窗口尺寸并不是方形的，然而我们的格子是，所以我们每个格坐标会宽度长于高度。我们修复它最简单的方法，是在构建 app 的时候创建一个 <code>WindowDescriptor</code> 资源：</p>
+<pre><code class="language-rs">    App::build()
+        .add_resource(WindowDescriptor { // &lt;--
+            title: &quot;Snake!&quot;.to_string(), // &lt;--
+            width: 200,                 // &lt;--
+            height: 200,                // &lt;--
+            ..Default::default()         // &lt;--
+        })
+        .add_startup_system(setup.system())
+</code></pre>
+<p>同时，我们改一下背景颜色，插入这个 <code>use</code> 语句来引入 <code>ClearColor</code> 结构体：</p>
+<pre><code class="language-rs">use bevy::render::pass::ClearColor;
+</code></pre>
+<p>然后在 app 构建器增加资源：</p>
+<pre><code class="language-rs">.add_resource(ClearColor(Color::rgb(0.04, 0.04, 0.04)))
+</code></pre>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>原文中这里的规格是 2000，但是 2000 的规则放 10x10 显然太大了， 这里改成 200</p>
+</div>
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/moving_square_grid.mp4" type="video/mp4">
+</video>
+<h2 id="生成食物"><a class="header" href="#生成食物">生成食物</a></h2>
+<p>现在我们的小蛇可以到处移动了，该喂点东西给它了。现在我们给 <code>Materials</code> 加一个 <code>food_materials</code> 字段：</p>
+<pre><code class="language-rs">struct Materials {
+    head_material: Handle&lt;ColorMaterial&gt;,
+    food_material: Handle&lt;ColorMaterial&gt;, // &lt;--
+}
+</code></pre>
+<p>然后把这个新材质加到我们的 <code>setup</code> 函数里：</p>
+<pre><code class="language-rs">commands.insert_resource(Materials {
+    head_material: materials.add(Color::rgb(0.7, 0.7, 0.7).into()),
+    food_material: materials.add(Color::rgb(1.0, 0.0, 1.0).into()), // &lt;--
+});
+</code></pre>
+<p>然后我们需要 <code>Duration</code> 给要创建的定时器使用，而且我们还需要 <code>random</code> 来随机分配食物的位置。先在程序里引入这些：</p>
+<pre><code class="language-rs">use rand::prelude::random;
+use std::time::Duration;
+</code></pre>
+<p>然后我们因素两个新结构体： <code>Food</code> 组件让我们知道哪个实体是食物，以及一个定时制造食物的定时器：</p>
+<pre><code class="language-rs">struct Food;
+
+struct FoodSpawnTimer(Timer);
+impl Default for FoodSpawnTimer {
+    fn default() -&gt; Self {
+        Self(Timer::new(Duration::from_millis(1000), true))
+    }
+}
+</code></pre>
+<p>至于实现 <code>Default</code> 的原因，会在我解释下面的系统的时候说明：</p>
+<pre><code>fn food_spawner(
+    mut commands: Commands,
+    materials: Res&lt;Materials&gt;,
+    time: Res&lt;Time&gt;,
+    mut timer: Local&lt;FoodSpawnTimer&gt;,
+) {
+    timer.0.tick(time.delta_seconds);
+    if timer.0.finished {
+        commands
+            .spawn(SpriteComponents {
+                material: materials.food_material.clone(),
+                ..Default::default()
+            })
+            .with(Food)
+            .with(Position {
+                x: (random::&lt;f32&gt;() * ARENA_WIDTH as f32) as i32,
+                y: (random::&lt;f32&gt;() * ARENA_HEIGHT as f32) as i32,
+            })
+            .with(Size::square(0.8));
+    }
+}
+</code></pre>
+<p>我们引入了局部资源概念，具体而言是 <code>timer</code> 参数。 Bevy 会看到这个参数并且实例化一个 <code>FoodSpawnTimer</code> 类型的值，用的是我们的 <code>Default</code> 实现。这会在这个系统第一次运行是发生，之后这个系统会一直重用相同的定时器。像这样使用局部资源要比手动注册资源更贴近工程化。这个定时器会一直重复，所以我们只需要调用 <code>tick</code> 函数，然后无论这个系统在定时器完成后什么时候跑，我们就随机创建一些食物。</p>
+<p>你可能知道下一步是什么了，把这个系统加到应用构建器上：</p>
+<pre><code class="language-rs">.add_system(food_spawner.system())
+</code></pre>
+<p>现在我们的程序看起来像这样：</p>
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/food_spawning.mp4" type="video/mp4">
+</video>
+<h2 id="更像蛇的移动"><a class="header" href="#更像蛇的移动">更像蛇的移动</a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/f4e6100">点击查看差异</a></p>
+</blockquote>
+<p>我们现在准备定时触发小蛇移动。具体说来，我们想小蛇一直在移动，无论我们是否按下按键；并且我们想要它每隔 X 秒移动一次，而不是每一帧都移动。我们会改动几个地方，所以如果你不太清楚要改动哪里，查看这一小节的差异吧。</p>
+<p>首先，我们需要加一个方向枚举：</p>
+<pre><code class="language-rs">#[derive(PartialEq, Copy, Clone)]
+enum Direction {
+    Left,
+    Up,
+    Right,
+    Down,
+}
+
+impl Direction {
+    fn opposite(self) -&gt; Self {
+        match self {
+            Self::Left =&gt; Self::Right,
+            Self::Right =&gt; Self::Left,
+            Self::Up =&gt; Self::Down,
+            Self::Down =&gt; Self::Up,
+        }
+    }
+}
+</code></pre>
+<p>然后把这个方向枚举加到我们的 <code>SnakeHead</code> 结构体，使得它知道应该要往哪里移动：</p>
+<pre><code class="language-rs">struct SnakeHead {
+    direction: Direction,
+}
+</code></pre>
+<p>我们也得在实例化 <code>SnakeHead</code> 组件的时候给定初始方向，例如我们让它一开始往上走：</p>
+<pre><code class="language-rs">.with(SnakeHead {
+    direction: Direction::Up,
+})
+</code></pre>
+<p>小蛇通常移动不是很流畅，是一种一步步来的行动。就行我们生成食物的时候，我们需要使用定时器来让系统没每隔 X秒/毫秒才跑一次。我们需要创建一个结构体来持有定时器：</p>
+<pre><code class="language-rs">struct SnakeMoveTimer(Timer);
+</code></pre>
+<p>然后我们把它当成资源加到我们的 app 构建器：</p>
+<pre><code class="language-rs">.add_resource(SnakeMoveTimer(Timer::new(
+    Duration::from_millis(150. as u64),
+    true,
+)))
+</code></pre>
+<p>我们之所以不把这个定时器像生成食物的时候把定时器看成局部资源，是因为我们将会在几个系统里用上它，所以我帮你节约了一些重构的工作。因为我们需要在几个系统里使用它，我们需要创建一个新系统来触发这个定时器：</p>
+<pre><code class="language-rs">fn snake_timer(time: Res&lt;Time&gt;, mut snake_timer: ResMut&lt;SnakeMoveTimer&gt;) {
+    snake_timer.0.tick(time.delta_seconds);
+}
+</code></pre>
+<p>我们也可以把这段触发逻辑直接放到 <code>snake_movement</code> 系统里，但是我比较喜欢整洁地吧它放到一个单独的系统中，因为这个定时器会用在几个地方。我们把这个系统也加到 app上：</p>
+<pre><code class="language-rs">.add_system(snake_timer.system())
+</code></pre>
+<p>现在我们可以做方向逻辑的核心部分，也就是 <code>snake_movement</code> 系统，以下是更新后的版本：</p>
+<pre><code class="language-rs">fn snake_movement(
+    keyboard_input: Res&lt;Input&lt;KeyCode&gt;&gt;,
+    snake_timer: ResMut&lt;SnakeMoveTimer&gt;,
+    mut heads: Query&lt;(Entity, &amp;mut SnakeHead)&gt;,
+    mut positions: Query&lt;&amp;mut Position&gt;,
+) {
+    if let Some((head_entity, mut head)) = heads.iter_mut().next() {
+        let mut head_pos = positions.get_mut(head_entity).unwrap();
+        let dir: Direction = if keyboard_input.pressed(KeyCode::Left) {
+            Direction::Left
+        } else if keyboard_input.pressed(KeyCode::Down) {
+            Direction::Down
+        } else if keyboard_input.pressed(KeyCode::Up) {
+            Direction::Up
+        } else if keyboard_input.pressed(KeyCode::Right) {
+            Direction::Right
+        } else {
+            head.direction
+        };
+        if dir != head.direction.opposite() {
+            head.direction = dir;
+        }
+        if !snake_timer.0.finished {
+            return;
+        }
+        match &amp;head.direction {
+            Direction::Left =&gt; {
+                head_pos.x -= 1;
+            }
+            Direction::Right =&gt; {
+                head_pos.x += 1;
+            }
+            Direction::Up =&gt; {
+                head_pos.y += 1;
+            }
+            Direction::Down =&gt; {
+                head_pos.y -= 1;
+            }
+        };
+    }
+}
+</code></pre>
+<p>这里没有什么新概念，仅仅是游戏逻辑。你可能在想为什么我们需要获取拥有 <code>SankeHead</code> 组件的 <code>Entity</code>， 然后用另外一个独立的查询来获取位置， 而不是用像 <code>Query&lt;Entity, &amp;SnakeHead, &amp;mut Position&gt;</code> 这样的参数。原因在于，我们之后可能需要其他实体的位置，而分开两个查询访问相同的组件是不会允许放在 Bevy app 构建器上的。这样改了之后，你会获得一个蛇头移动的稍微……像蛇一样：</p>
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/moving_snake_like.mp4" type="video/mp4">
+</video>
+<h2 id="加个尾巴"><a class="header" href="#加个尾巴">加个尾巴</a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/7c8e2f7">点击查看差异</a></p>
+</blockquote>
+<p>小蛇的尾巴有点复杂。对于每蛇尾的分段，我们需要知道它下一步需要到哪里。我们准备这样实现：将这些分段放到 <code>Vec</code>，然后存储为资源。这样，当我们更新分段的位置时，我们能够迭代所有的分段并且设置每个分段的位置为前一个分段的位置。</p>
+<p>我们加一个 <code>segment_material</code> 字段到我们趁手的 <code>Materials</code> 结构体：</p>
+<pre><code class="language-rs">struct Materials {
+    head_material: Handle&lt;ColorMaterial&gt;,
+    segment_material: Handle&lt;ColorMaterial&gt;, // &lt;--
+    food_material: Handle&lt;ColorMaterial&gt;,
+}
+</code></pre>
+<p>老调重弹，把 <code>segment_material</code> 加到 <code>setup</code> 中：</p>
+<pre><code class="language-rs">commands.insert_resource(Materials {
+    head_material: materials.add(Color::rgb(0.7, 0.7, 0.7).into()),
+    segment_material: materials.add(Color::rgb(0.3, 0.3, 0.3).into()), // &lt;--
+    food_material: materials.add(Color::rgb(1.0, 0.0, 1.0).into()),
+});
+</code></pre>
+<p>然后一个给蛇身分段的组件：</p>
+<pre><code class="language-rs">struct SnakeSegment;
+</code></pre>
+<p>然后我们再加上我们说到的，用来存储分段列表的资源：</p>
+<pre><code class="language-rs">#[derive(Default)]
+struct SnakeSegments(Vec&lt;Entity&gt;);
+</code></pre>
+<p>再把它作为资源加到我们的 app 上：</p>
+<pre><code class="language-rs">.add_resource(SnakeSegments::default())
+</code></pre>
+<p>我们我们需要从几个地方生成分段（当你吃食物或者你初始化小蛇的时候），我们需要先创建一个辅助函数：</p>
+<pre><code class="language-rs">fn spawn_segment(
+    commands: &amp;mut Commands,
+    material: &amp;Handle&lt;ColorMaterial&gt;,
+    position: Position,
+) -&gt; Entity {
+    commands
+        .spawn(SpriteComponents {
+            material: material.clone(),
+            ..SpriteComponents::default()
+        })
+        .with(SnakeSegment)
+        .with(position)
+        .with(Size::square(0.65))
+        .current_entity()
+        .unwrap()
+}
+</code></pre>
+<p>这看上去非常像我们生成 <code>SnakeHead</code> 的函数，但是替换了 <code>SnakeHead</code> 组件，我们用的是 <code>SnakeSegment</code> 组件。这里要说的新知识点，就是我们最后通过 <code>current_entity</code> 函数，获取了生成的 <code>Entity</code> （其实只是个 id），然后将它返回给调用者以便使用它。现在，我们需要修改我们的游戏配置函数。并非只是生成一个蛇头，它现在要生成一个蛇身的分段：</p>
+<pre><code class="language-rs">fn spawn_snake(
+    mut commands: Commands,
+    materials: Res&lt;Materials&gt;,
+    mut segments: ResMut&lt;SnakeSegments&gt;,
+) {
+    segments.0 = vec![
+        commands
+            .spawn(SpriteComponents {
+                material: materials.head_material.clone(),
+                ..Default::default()
+            })
+            .with(SnakeHead {
+                direction: Direction::Up,
+            })
+            .with(SnakeSegment)
+            .with(Position { x: 3, y: 3 })
+            .with(Size::square(0.8))
+            .current_entity()
+            .unwrap(),
+        spawn_segment(
+            &amp;mut commands,
+            &amp;materials.segment_material,
+            Position { x: 3, y: 2 },
+        ),
+    ];
+}
+</code></pre>
+<p>我们第一个分段是头部，现在我们多加了一个 <code>with(SnakeSegment)</code>。第二个分段来自我们的 <code>spawn_segment</code> 函数。我们现在得到了一条小小的尾巴：</p>
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/detached_tail.mp4" type="video/mp4">
+</video>
+<h2 id="让尾巴跟着小蛇活动"><a class="header" href="#让尾巴跟着小蛇活动">让尾巴跟着小蛇活动</a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/2f57b9b">点击查看差异</a></p>
+</blockquote>
+<p>正如我记得那样，蛇尾没有脱离蛇头，是贪吃蛇游戏中重要的一部分。我们来看看，我们可以怎么修改 <code>snake_movement</code> 函数，来更接近原汁原味的游戏。首先要做的事把 <code>SnakeSegments</code> 资源到 <code>snake_movement</code> 函数上：</p>
+<pre><code class="language-rs">fn snake_movement(
+    keyboard_input: Res&lt;Input&lt;KeyCode&gt;&gt;,
+    snake_timer: ResMut&lt;SnakeMoveTimer&gt;,
+    segments: ResMut&lt;SnakeSegments&gt;, // &lt;--
+    mut heads: Query&lt;(Entity, &amp;mut SnakeHead)&gt;,
+    mut positions: Query&lt;&amp;mut Position&gt;,
+</code></pre>
+<p>现在，直接在最前面的 <code>if let</code> 后面，我们加上所有分段的位置（当然，不要忘了蛇头的位置）：</p>
+<pre><code class="language-rs">let segment_positions = segments
+    .0
+    .iter()
+    .map(|e| *positions.get_mut(*e).unwrap())
+    .collect::&lt;Vec&lt;Position&gt;&gt;();
+</code></pre>
+<p>然后我们要做的是在 <code>if let</code> 的末尾迭代蛇身分段（跳过蛇头，因为我们已经通过用户输入更新了位置），然后让每个分段的位置都变成前一个分段的。例如，第一个蛇身分段设置为当前蛇头（更新前）的位置，第二段的设置为第一段的。</p>
+<pre><code class="language-rs">segment_positions
+    .iter()
+    .zip(segments.0.iter().skip(1))
+    .for_each(|(pos, segment)| {
+        *positions.get_mut(*segment).unwrap() = *pos;
+    });
+</code></pre>
+<p>现在我们的游戏看起来应该像这样：</p>
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/tail_following.mp4" type="video/mp4">
+</video>
+<h2 id="小蛇成长"><a class="header" href="#小蛇成长">小蛇成长</a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/0533569">点击查看差异</a></p>
+</blockquote>
+<p>小蛇已经饿坏了。我们现在需要家一个系统来让小蛇猎食：</p>
+<pre><code class="language-rs">fn snake_eating(
+    mut commands: Commands,
+    snake_timer: ResMut&lt;SnakeMoveTimer&gt;,
+    mut growth_events: ResMut&lt;Events&lt;GrowthEvent&gt;&gt;,
+    food_positions: Query&lt;With&lt;Food, (Entity, &amp;Position)&gt;&gt;,
+    head_positions: Query&lt;With&lt;SnakeHead, &amp;Position&gt;&gt;,
+) {
+    if !snake_timer.0.finished {
+        return;
+    }
+    for head_pos in head_positions.iter() {
+        for (ent, food_pos) in food_positions.iter() {
+            if food_pos == head_pos {
+                commands.despawn(ent);
+                growth_events.send(GrowthEvent);
+            }
+        }
+    }
+}
+</code></pre>
+<p>只是迭代所有的食物位置，来看他们是不是和蛇头共享一个位置，如果是这样，我们就用 <code>despawn</code> 者趁手的函数移除食物，然后触发一个 <code>GrowthEvent</code>。我们来创建这个结构体：</p>
+<pre><code class="language-rs">struct GrowthEvent;
+</code></pre>
+<p>使用事件是个新概念。你可以在系统间发送或接受事件，他们可以是任意类型的结构体，使得你可以在事件里包括任何你需要发送的数据。例如，你可能有一个系统发送跳跃事件，然后一个独立的系统来处理他们。在我们的这个案例中，我们需要一个系统来发送成长事件，以及一个成长系统来处理它们。你需要注册事件，就像我们对资源和系统做的那样：</p>
+<pre><code class="language-rs">.add_event::&lt;GrowthEvent&gt;()
+</code></pre>
+<p>然后在这里我们也加上 <code>snake_eating</code> 系统：</p>
+<pre><code class="language-rs">.add_system(snake_eating.system())
+</code></pre>
+<p>现在小蛇应该能够猎食了。但是小蛇现在就像个黑洞，吃多少也不长大。在思考成长这事时，需要注意我们需要知道最后的分段移动前在哪里，因为那里是新的分段成长的位置。现在我们来创建一个新资源：</p>
+<pre><code class="language-rs">#[derive(Default)]
+struct LastTailPosition(Option&lt;Position&gt;);
+</code></pre>
+<p>然后在 app 构建器上：</p>
+<pre><code class="language-rs">.add_resource(LastTailPosition::default())
+</code></pre>
+<p>我们也要对 <code>snake_movement</code> 系统做一点小修改，来更新 <code>LastTailPosition</code> 资源。首先先把这个资源加到参数中：</p>
+<pre><code class="language-rs">fn snake_movement(
+    // ...
+    mut last_tail_position: ResMut&lt;LastTailPosition&gt;, // &lt;--
+    // ...
+</code></pre>
+<p>然后就是给这个资源分配最后的一个分段的位置。这段代码放在我们迭代过了 <code>segment_positions</code> 之后：</p>
+<pre><code class="language-rs">last_tail_position.0 = Some(*segment_positions.last().unwrap()); // &lt;--
+</code></pre>
+<p>之后，小蛇成长的函数就很清晰了：</p>
+<pre><code class="language-rs">fn snake_growth(
+    mut commands: Commands,
+    last_tail_position: Res&lt;LastTailPosition&gt;,
+    growth_events: Res&lt;Events&lt;GrowthEvent&gt;&gt;,
+    mut segments: ResMut&lt;SnakeSegments&gt;,
+    mut growth_reader: Local&lt;EventReader&lt;GrowthEvent&gt;&gt;,
+    materials: Res&lt;Materials&gt;,
+) {
+    if growth_reader.iter(&amp;growth_events).next().is_some() {
+        segments.0.push(spawn_segment(
+            &amp;mut commands,
+            &amp;materials.segment_material,
+            last_tail_position.0.unwrap(),
+        ));
+    }
+}
+</code></pre>
+<p>以及追加系统：</p>
+<pre><code class="language-rs">.add_system(snake_growth.system())
+</code></pre>
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/growing.mp4" type="video/mp4">
+</video>
+<h2 id="撞墙或者咬尾巴"><a class="header" href="#撞墙或者咬尾巴">撞墙（或者咬尾巴）</a></h2>
+<blockquote>
+<p><a href="https://github.com/marcusbuffett/bevy_snake/commit/bd2b307">点击查看差异</a></p>
+</blockquote>
+<p>现在我们来增加撞墙和咬尾巴来触发游戏结束（game over）。我们使用一个新事件，就像我们在“小蛇成长小节”中那样：</p>
+<pre><code class="language-rs">struct GameOverEvent;
+</code></pre>
+<p>并把它注册到 app 构建器上：</p>
+<pre><code class="language-rs">.add_event::&lt;GameOverEvent&gt;()
+</code></pre>
+<p>在我们的 <code>snake_movement</code> 系统中，我们想要访问 “游戏结束” 事件，使得我们能够发送事件：</p>
+<pre><code class="language-rs">fn snake_movement(
+    // ...
+    mut game_over_events: ResMut&lt;Events&lt;GameOverEvent&gt;&gt;, // &lt;--
+    // ...
+) {
+</code></pre>
+<p>我们先关注在撞墙事件上面。把这部分代码放到 <code>match &amp;head.direction {</code> 后面：</p>
+<pre><code class="language-rs">if head_pos.x &lt; 0
+    || head_pos.y &lt; 0
+    || head_pos.x as u32 &gt;= ARENA_WIDTH
+    || head_pos.y as u32 &gt;= ARENA_HEIGHT
+{
+    game_over_events.send(GameOverEvent);
+}
+</code></pre>
+<p>好了，现在我们的 <code>snake_movement</code> 系统可以发送 “游戏结束” 事件了，我们再来创建一个系统来监听这些事件：</p>
+<pre><code class="language-rs">fn game_over(
+    mut commands: Commands,
+    mut reader: Local&lt;EventReader&lt;GameOverEvent&gt;&gt;,
+    game_over_events: Res&lt;Events&lt;GameOverEvent&gt;&gt;,
+    materials: Res&lt;Materials&gt;,
+    segments_res: ResMut&lt;SnakeSegments&gt;,
+    food: Query&lt;With&lt;Food, Entity&gt;&gt;,
+    segments: Query&lt;With&lt;SnakeSegment, Entity&gt;&gt;,
+) {
+    if reader.iter(&amp;game_over_events).next().is_some() {
+        for ent in food.iter().chain(segments.iter()) {
+            commands.despawn(ent);
+        }
+        spawn_snake(commands, materials, segments_res);
+    }
+}
+</code></pre>
+<p>这里有个很酷的点: 我们可以直接使用 <code>spawn_snake</code> 函数，现在它既是一个系统，也是一个辅助函数了。</p>
+<p>最后一个修改点，就是我们得让小蛇咬到尾巴的时候也会触发 “游戏结束” 事件。在 <code>snake_movement</code> 系统中，在我们检查完边界的部分后添加：</p>
+<pre><code class="language-rs">if segment_positions.contains(&amp;head_pos) {
+    game_over_events.send(GameOverEvent);
+}
+</code></pre>
+<p>最后，我们的成果：</p>
+<video controls="" loop="" muted="" playsinline="" class="bevy_img">
+    <source src="https://mbuffett.com/bevy_snake/new_gifs/game_over.mp4" type="video/mp4">
+</video>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rust-安全应用开发51条"><a class="header" href="#rust-安全应用开发51条">Rust 安全应用开发51条</a></h1>
+<blockquote>
+<p>本文摘自法国国家网络安全局(ASSNI)的《用 Rust 开发安全应用的编程规则》（<a href="https://www.ssi.gouv.fr/uploads/2020/06/anssi-guide-programming_rules_to_develop_secure_applications_with_rust-v1.0.pdf"><em>PROGRAMMING RULES TO DEVELOPSECURE APPLICATIONS WITH RUST</em></a>）</p>
+</blockquote>
+<ol>
+<li>要使用 stable 编译工具链</li>
+<li>要在 cargo 配置文件中将重要变量保持为默认值</li>
+<li>要在运行 cargo 时保持编译环境变量为默认值</li>
+<li>要周期地使用 linter</li>
+<li>要使用 Rust 格式器（rustfmt）</li>
+<li>要人工检查自动修复</li>
+<li>要检查依赖版本是否过期（cargo-outdated)</li>
+<li>要检查依赖的安全脆弱性（vulnerabilities）（cargo-audit)</li>
+<li>要遵循命名转换</li>
+<li>不要使用 <code>unsafe</code> 块</li>
+<li>要用合适的算术操作来处理潜在的溢出</li>
+<li>推荐实现包含了所有可能错误的自定义错误类型</li>
+<li>推荐使用 <code>?</code> 操作符且不使用 <code>try!</code> 宏</li>
+<li>不要使用能导致 <code>panic!</code> 的函数</li>
+<li>要测试数组索引使用是否正确，或者使用 <code>get</code> 方法</li>
+<li>要在 FFI 中正确地处理 <code>panic!</code></li>
+<li>不要使用 <code>forget</code></li>
+<li>推荐使用 clippy 检查 <code>forget</code> 的使用</li>
+<li>不要泄露内存</li>
+<li>要释放包裹在 <code>ManaullyDrop</code> 里的值</li>
+<li>总是调用 <code>into_rawed</code> 值对应的 <code>from_raw</code> 函数</li>
+<li>不要使用未初始化内存</li>
+<li>使用完敏感数据后要将内存清零</li>
+<li>推荐校验 <code>Drop</code> 实现</li>
+<li>不要再 <code>Drop</code> 实现内部恐慌（panic）</li>
+<li>不允许 <code>Drop</code> 的循环引用</li>
+<li>推荐不依赖 <code>Drop</code> 来保证安全</li>
+<li>推荐校验 <code>Send</code> 和 <code>Sync</code> 实现</li>
+<li>要遵循标准库比较特质（trait）的不变之处</li>
+<li>推荐使用标准库比较特质的默认实现</li>
+<li>推荐尽可能派生（derive）比较特质</li>
+<li>要在 FFI 中只使用 C 兼容类型</li>
+<li>在 FFI 边界要使用兼容性的类型</li>
+<li>推荐使用绑定自动生成工具</li>
+<li>在绑定到平台依赖类型时，要使用可移植别名 <code>c_*</code></li>
+<li>推荐在 Rust 中检查外部类型</li>
+<li>推荐指针类型而不是引用类型<sup class="footnote-reference"><a href="#1">1</a></sup></li>
+<li>不要使用未检查的外部引用</li>
+<li>检查外部指针</li>
+<li>要标记 FFI 中的函数指针类型为 <code>extern</code> 和 <code>unsafe</code></li>
+<li>检查外部函数指针</li>
+<li>建议不在 FFI 边界使用不美容的 Rust <code>enum</code> 类型</li>
+<li>建议为外部不透明类型使用专门的 Rust 类型</li>
+<li>推荐使用不完整的 C/C++ <code>struct</code> 指针来使得类型不透明</li>
+<li>不要在 FFI 边界使用实现了 <code>Drop</code> 的类型</li>
+<li>要确保在 FFI 中清除数据所有权</li>
+<li>推荐将外部数据包裹在可释放内存的包装类型</li>
+<li>要在 FFI 中 正确地处理 <code>panic!</code></li>
+<li>推荐为外部库提供安全的包装</li>
+<li>推荐只暴露专门的 C 兼容 API</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="在天河二号上配置-rust-运行环境"><a class="header" href="#在天河二号上配置-rust-运行环境">在天河二号上配置 Rust 运行环境</a></h1>
+<blockquote>
+<p>受朋友委托，需要帮忙在“天河二号”超级计算机上配置 Rust 编程语言运行环境，并配置安装 <a href="https://github.com/sirkibsirkib/rust-overlaps"><code>rust-overlaps</code></a>。</p>
+</blockquote>
+<h2 id="阅读须知"><a class="header" href="#阅读须知">阅读须知</a></h2>
+<p>本文将不涉及：</p>
+<ul>
+<li><a href="http://www.nscc-gz.cn/Service/Igotto.html">如何申请天河二号计算资源</a></li>
+<li><a href="https://tlanyan.me/tianhe-ii-guide/">如何分布式运行程序</a></li>
+</ul>
+<h2 id="通过-rust-独立包安装适合-天河二号的-rust-运行环境"><a class="header" href="#通过-rust-独立包安装适合-天河二号的-rust-运行环境">通过 Rust 独立包安装适合 天河二号的 Rust 运行环境</a></h2>
+<ol start="0">
+<li>ssh 远程登录到天河二号<sup class="footnote-reference"><a href="#1">1</a></sup>：
+<pre><code class="language-shell">$ ssh -i${YOUR_CERTIFICATE_ID} -P${SSH_PORT} ${YOUR_USERNAME}@server.ip.in.vpn
+</code></pre>
+</li>
+<li>获取超算的服务器平台架构：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ uname -r
+</code></pre>
+</li>
+<li>了解平台架构后，获取对应平台的<a href="https://forge.rust-lang.org/infra/other-installation-methods.html#standalone">Rust 独立安装包</a>, 并上传至超算。此处以<code>x86_64</code>架构为例：
+<pre><code class="language-shell">$ scp -i${YOUR_CERTIFICATE_ID} -P${SSH_PORT} rust-1.44.0-x86_64-unknown-linux-gnu.tar.gz you@server.ip.in.vpn:~
+</code></pre>
+</li>
+<li>解压安装压缩包：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ tar -zxvf rust-1.44.0-x86_64-unknown-linux-gnu.tar.gz
+</code></pre>
+</li>
+<li>切换到解压缩目录，并执行安装命令:
+<pre><code class="language-shell">[you@tainhe2-H ~]$ cd rust-1.44.0-x86_64-unknown-linux-gnu
+[you@tainhe2-H rust-1.44.0-x86_64-unknown-linux-gnu]$ ./install.sh --prefix=~/rust --disable-ldconfig --verbose
+</code></pre>
+此命令会将 Rust 安装在 <code>~/rust</code> 文件夹中，rust 的 可执行文件将会放在 <code>~/rust/bin</code>文件夹中。</li>
+<li>编辑<code>~/.bashrc</code>, 增加下面这一行配置：
+<pre><code class="language-shell">export PATH=$HOME/rust/bin:$PATH
+</code></pre>
+</li>
+<li>使<code>~/.bashrc</code>生效：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ source ~/.bashrc
+</code></pre>
+</li>
+<li>检查 Rust 是否成功安装：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ cargo --version
+cargo 1.44.0 (05d080faa 2020-05-06)
+</code></pre>
+</li>
+</ol>
+<h2 id="离线安装-rust-overlaps"><a class="header" href="#离线安装-rust-overlaps">离线安装 <code>rust-overlaps</code></a></h2>
+<ol start="0">
+<li>在本地联网环境拷贝源代码：
+<pre><code class="language-shell">git clone https://github.com/sirkibsirkib/rust-overlaps.git
+</code></pre>
+</li>
+<li>修复源码的 <code>Cargo.toml</code> 的<code>version</code><sup class="footnote-reference"><a href="#2">2</a></sup>:
+<pre><code class="language-toml">version = &quot;1.1.0&quot;
+</code></pre>
+</li>
+<li>在代码仓库目录下执行 <code>cargo vendor</code>，获取依赖的源码<sup class="footnote-reference"><a href="#3">3</a></sup>：
+<pre><code class="language-shell">rust-overlaps$ cargo vendor --respect-source-config
+</code></pre>
+下载好的依赖将会存放到 <code>vendor</code>文件夹中。</li>
+<li>在 <code>rust-overlaps</code> 文件夹中添加 <code>.cargo/config</code> 文件，以便在超算的离线环境中使用本地缓存好的依赖源码进行编译：
+<pre><code class="language-toml">[source.crates-io]
+replace-with = &quot;vendored-sources&quot;
+
+[source.vendored-sources]
+directory = &quot;vendor&quot;
+</code></pre>
+</li>
+<li>将源码文件夹打包成 <code>.zip</code> 包，然后上传到超算:
+<pre><code class="language-shell">$ scp -i${YOUR_CERTIFICATE_ID} -P${SSH_PORT} rust-overlaps.zip you@server.ip.in.vpn:~
+</code></pre>
+</li>
+<li>在超算中解压：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ unzip rust-overlaps.zip
+</code></pre>
+</li>
+<li>离线安装<sup class="footnote-reference"><a href="#3">3</a></sup>:
+<pre><code class="language-shell">[you@tainhe2-H ~]$ cd rust-overlaps
+[you@tainhe2-H rust-overlaps]$ cargo install --path . --offline
+</code></pre>
+</li>
+<li>检查是否安装成功：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ rust-overlaps --version
+ASPOPsolver 1.0
+</code></pre>
+</li>
+</ol>
+<h2 id="小结"><a class="header" href="#小结">小结</a></h2>
+<p>当我看到 <code>rust-overlaps</code> 已经超过三年没有更新之后，我就觉得很可能不能够成功编译——但是 Rust 从来没有让我失望 —— 在本文中，我们使用的是最新稳定版的 <code>Rust 1.44</code>， 然而编译一个三年的旧库一次就可以编译成功了。同样，得益于 Rust 以 crate 为单位的并行与增量编译，让编译命令中断后可以继续执行而不需从头编译。这个故事告诉我们，充分吸收现代学术成果的工具比起偏旧的工具对于效率提高有重要影响！</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>ssh登陆前还需登录VPN环境，账号密码为管理员提供的账号密码。</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Rust仓库的版本号遵循<a href="https://semver.org/lang/zh-CN/">语义化版本</a>，因此必须为<code>x.y.z</code>的形式。更多参见<a href="https://github.com/sirkibsirkib/rust-overlaps/issues/2">sirkibsirkib/rust-overlaps#2</a></p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p><code>cargo</code>编译中断，可以重新运行命令继续安装，直到安装完成。</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="设计模式在-rust-中的实践"><a class="header" href="#设计模式在-rust-中的实践">设计模式在 Rust 中的实践</a></h1>
+<p>[设计模式] 在 Rust 中的应用与其在其他语言中的应用有很多不同之处，本系列为个人在使用 Rust 编程的时候遇到的一些设计模式，并结合自己的思考对 Rust 编写过程中设计模式有特点地优化。</p>
+<p>特别提醒： <strong>没有银弹！没有银弹！没有银弹！</strong> 所有的设计都是为了解决特定场景下的问题，脱离场景扯设计模式都是耍流氓！</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="构建器builder模式"><a class="header" href="#构建器builder模式">构建器（Builder）模式</a></h1>
+<h2 id="示例"><a class="header" href="#示例">示例</a></h2>
+<p>通常在 Rust 中的实现是通过 不断重建 <code>Builder</code> 来构造最后的类型：</p>
+<pre><code class="language-rs no_run">struct Counter {
+    counted1: usize,
+    counted2: usize,
+    done: bool,
+}
+
+struct CounterBuilder {
+    counted1: usize,
+    counted2: usize,
+}
+
+impl CounterBuilder {
+    // 构建器需要有默认的参数配置，然后从默认配置触发进行构建。
+    // 不适用 #[derive(std::default::Default)]，因为默认配置可能不一样
+    fn default() -&gt; Self {
+        CounterBuiler {
+            counted1: 5,
+            counted2: 0,
+        }
+    }
+
+    // 属性定制方法。消耗原本的构建器，修改属性后重新生成新构建器
+    fn set_counted1(self, cnt: usize) -&gt; Self {
+        self.counted1 = cnt;
+        self
+    }
+
+    fn set_counted2(self, cnt: usize) -&gt; Self {
+        self.counted2 = cnt;
+        self
+    }
+
+    // 最后通过 `build` 方法生成所需类型
+    fn build(self) -&gt; Counter {
+        Counter {
+            counted1: self.counted1,
+            counted2: self.counted2,
+            done: false,
+        }
+    }
+}
+</code></pre>
+<h2 id="个人实践"><a class="header" href="#个人实践">个人实践</a></h2>
+<p>在设置属性方法的时候，通常的实现是通过消耗原本的构造器后生成新构造器，这使得如果配置构造器的过程不能连续调用属性设置方法时，必须重新捕获构造器：</p>
+<pre><code class="language-rs no_run">let mut builder = CounterBuilder::default();
+
+// ... 进行一些计算，获得需要配置的值
+let cnt1 = operations();
+
+builder = builder.set_counted1(cnt);
+
+// ... 进行一些计算，获得需要配置的值
+let cnt2 = operations();
+
+builder = builder.set_counted(cnt2);
+</code></pre>
+<p>以上代码通常出现在需要流计算并及时记录参数配置的时候。并且，如果构造器被更大型的数据结构持有时，消耗并重新构建构造器可能会对性能有点影响。因此在博主个人实现时通常采取传递<code>&amp;mut self</code> 引用的方法来实现属性设置方法：</p>
+<pre><code class="language-rs  no_run">    // ...
+    // 属性定制方法。消耗原本的构建器，修改属性后重新生成新构建器
+    fn set_counted1(&amp;mut self, cnt: usize) -&gt; &amp;mut Self {
+        self.counted1 = cnt;
+        self
+    }
+
+    fn set_counted2(&amp;mut self, cnt: usize) -&gt; &amp;mut Self {
+        self.counted2 = cnt;
+        self
+    }
+
+// ...
+</code></pre>
+<p>改成如上形式的函数签名，即可 <a href="rust-patterns/builder.html#%E7%81%B5%E6%B4%BB%E6%9E%84%E9%80%A0">灵活构造</a> 目标结构:</p>
+<pre><code class="language-rs no_run">let mut builder = CounterBuilder::default();
+
+// ... 进行一些计算，获得需要配置的值
+let cnt1 = operations();
+
+builder.set_counted1(cnt);
+
+// ... 进行一些计算，获得需要配置的值
+let cnt2 = operations();
+
+builder.set_counted(cnt2);
+
+// ... 可能还要等待别的操作完成后再进行构建
+
+let counter = builder.build();
+</code></pre>
+<h2 id="更好用的工具"><a class="header" href="#更好用的工具">更好用的工具</a></h2>
+<p>本文在微信公众号发布之后，微信粉丝 @福糙·仁波切 推荐了 <a href="https://github.com/dtolnay/proc-macro-workshop">dtolnay/proc-macro-workshop</a> 中的 <a href="https://docs.rs/derive_builder/0.9.0/derive_builder/">derive_builder</a>，能够更快地实现自定义的Builder。例如，上文中的示例使用该库可以大大减少代码:</p>
+<pre><code class="language-rs no_run">use derive_builder::Builder;
+
+struct Counter {
+    #[builder(default = &quot;5&quot;)]
+    counted1: usize,
+
+    #[builder(default)]
+    counted2: usize,
+
+    #[builder(default)]
+    done: bool,
+}
+
+</code></pre>
+<p>甚至可以快速自定义自己的 setter：</p>
+<pre><code class="language-rs no_run">use derive_builder::Builder;
+
+struct Counter {
+    #[builder(default = &quot;5&quot;)]
+    counted1: usize,
+
+    #[builder(default)]
+    counted2: usize,
+
+    #[builder(default)]
+    done: bool,
+}
+
+impl CounterBuilder {
+    fn set_counted2(&amp;mut self, cnt: usize) -&gt; &amp;mut Self {
+        // 注意生成的构造器的字段为 `Option`
+        self.counted2 = Some(if cnt &gt; 100 { 100 } else { cnt });
+        self
+    }
+}
+
+fn main() {
+    let mut builder = CounterBuilder::default();
+
+    builder.set_counted2(123);
+
+    let counter = builder.build();
+
+    println!(&quot;{:?}&quot;, counter);
+}
+
+</code></pre>
+<h2 id="为什么使用构造器模式"><a class="header" href="#为什么使用构造器模式">为什么使用构造器模式</a></h2>
+<ul>
+<li><strong>构造过程可控</strong>。通常实现构造器模式的时候，我们会将构造器所需要配置的属性设置为私有<sup class="footnote-reference"><a href="#1">1</a></sup>，并且只能通过我们提供的属性设置方法进行设置，使得构造过程可控。另外，可以通过属性设置方法提前恐慌（panic）来阻止生成无效对象。</li>
+<li><strong>设置方法职责专一</strong>。属性设置方法 <a href="https://baike.baidu.com/item/%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99">职责专一</a>，只会负责设置一种属性，只有在该属性的设置规则改变时，相应的属性设置方法才需要进行修改；</li>
+<li><strong>构造灵活</strong>。多个属性设置方法可以自由的组合在一起，也可以分步组合构造。</li>
+<li><strong>可批量构造</strong>。我们除了使用消耗性的 <code>build(self)</code> 方法，也可以使用非消耗性的 <code>fn build(&amp;self)</code> 方法，使得构造器可以多次复用。</li>
+<li><strong>符合开闭原则</strong>。当某一属性的设置方法内部实现发生变化的时候，不影响其他属性的设置方式；而新增属性及其设置方法时，可以通过链式调用很方便地增加新属性的设置。</li>
+</ul>
+<h2 id="为什么不使用构造器模式"><a class="header" href="#为什么不使用构造器模式">为什么不使用构造器模式</a></h2>
+<p>构造器模式由于有以下缺点而在部分场景中不适用：</p>
+<ul>
+<li><strong>在构造完成前无法使用被构造对象</strong>。在构造完成之前，构造器并不生成被构造对象，因此在整个构造设置完成之前，无法使用被构造对象。</li>
+<li><strong>构造器与被构造对象使用相同的属性设置方法，造成代码重复并无法复用</strong>。考虑需要只通过属性设置方法来修改对象的场景，当被构造对象在使用过程中需要频繁设置属性，那么就需要编写对应的属性设置方法；而如果还使用构造器进行对象构造，那么属性设置方法就会重复，并且可能造成构造器与被构造对象的属性设置行为不一致的问题<sup class="footnote-reference"><a href="#2">2</a></sup>。</li>
+</ul>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Rust 语言中默认语言项(Item)的可见性都是私有的，如需公开语言项给其他模块使用，需要使用 <code>pub</code> 关键字放开。
+<sup class="footnote-reference"><a href="#2">2</a></sup>: 一个绕开的行为不一致问题的方法是将属性设置规则抽取为静态函数，但仍然无法避免过度封装的问题。不过，可以将过度封装的事情交给过程宏等自动代码生成手段，例如文中举例的 <code>derive_builder</code></p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="抽象工厂abstract-factory模式"><a class="header" href="#抽象工厂abstract-factory模式">抽象工厂（Abstract Factory）模式</a></h1>
+<h2 id="场景需求"><a class="header" href="#场景需求">场景需求</a></h2>
+<p>我们在设计游戏的时候，经常会遇到设计类似关卡的需求，例如 RPG 游戏中的副本（dungeon），每种副本都循序类似的模式、类似的行为，但是采用资源不同，行为的细节可能有所差异，为了方便我们新增新的副本，同时使得原有副本的修改尽可能少影响游戏的运行机制（所谓符合开闭原则），我们可以采用抽象工厂模式来统一管理游戏副本的生成。</p>
+<h2 id="场景设计"><a class="header" href="#场景设计">场景设计</a></h2>
+<p>我们先设计一个简单的副本模式，包含了一个 Boss 和若干小怪，小怪数量在范围内随机波动。小怪和 Boss 都拥有血量，但是只有Boss 能攻击。我们把这个模式定义为结构：</p>
+<pre><code class="language-rs no_run">struct Dungeon {
+    boss: Box&lt;dyn Boss&gt;,
+    monsters: Vec&lt;Box&lt;dyn Monster&gt;&gt;,
+}
+
+trait Monster {
+    // 获知当前血量
+    fn life(&amp;self) -&gt; u64;
+
+    // 怪物血量可以因受到攻击降低，也可自行回复
+    fn change_life(&amp;mut self, diff: i32);
+}
+
+trait Boss: Monster {
+    // Boss 能攻击玩家（Hero）
+    fn attack(&amp;self target: &amp;mut Box&lt;dyn Hero&gt;);
+}
+</code></pre>
+<p>上面在运行时已经不关心具体是什么副本（当然，副本的元数据可以添加为 <code>Dungeon</code> 结构的字段），我们只需要知道它有一个 <code>Boss</code> 和若干 <code>Monster</code>。</p>
+<p>然后，我们建立抽象工厂：</p>
+<pre><code>use rand::random;
+trait DungeonFactory {
+    fn create_boss(&amp;self) -&gt; Box&lt;dyn Boss&gt;
+    fn create_mosters(&amp;self, amount: usize) -&gt; Vec&lt;Box&lt;dyn Monster&gt;&gt;
+
+    fn generate_dungeon(&amp;self) -&gt; Dungeon {
+        Dungeon {
+            boss: self.create_boss(),
+            monsters: self.create_monsters(random::&lt;u8&gt;() % 2 + 2), // 2 ~ 3 只小怪
+        }
+    }
+}
+</code></pre>
+<p>然后，我们创建新手副本的具体工厂:</p>
+<pre><code class="language-rs no_run">struct NewbieDungeonFactory;
+
+impl DungeonFactory for NewBieDungeonFactory {
+    fn create_boss(&amp;self) -&gt; Box&lt;dyn Boss&gt; {
+        NewBieBoss::new()
+    }
+
+    // 新手副本甚至没有小怪，
+    fn create_mosters(&amp;self, amount: usize) -&gt; Vec&lt;Box&lt;dyn Monster&gt;&gt; {
+        Vec::new()
+    }
+
+    // generate_dungeon 已有默认实现，不需要修改。
+}
+
+// 新手副本，boss极弱
+struct NewbieBoss {
+    max_life: u8,
+    life: u8,
+    attack: u8,
+}
+
+impl NewbieBoss {
+    fn new() -&gt; Self {
+        NewBieBoss {
+            max_life: 5,
+            life: 5,
+            attack: 1,
+        }
+    }
+}
+
+impl Monster for NewBieBoss {
+    fn life(&amp;self) -&gt; u64 {
+        self.life as u64
+    }
+
+    fn change_life(&amp;mut self, diff: i32) {
+        self.life = match self.life + diff {
+            n if n &lt; 0 =&gt; 0,
+            n if n &gt; self.max_life =&gt; self.max_life
+            n =&gt; n
+        };
+    }
+}
+
+impl Boss for NewbieBoss {
+    fn attack(&amp;self, target: &amp;mut Box&lt;dyn Hero&gt;) {
+        target.attacked_wtih(self.attack);
+    }
+}
+</code></pre>
+<p>上面的工厂看上去好像很多内容，主要是因为 <code>Boss</code>特质需要一个新载体 <code>NewBieBoss</code>，同时实现 <code>Boss</code> 载体的 <code>NewBieBoss</code> 也需要实现 <code>Monster</code> 特质（继承关系组合化）, 这部分的代码作为示例让读者理解设定的 <code>Dungeon</code> 模式的行为。</p>
+<p>接下来，我们可以新增一个新副本，新副本的小怪和 Boss 是新手副本的 <code>NewbieBoss</code>，但是小怪已经不能攻击玩家了（通过动态分发为 <code>dyn Monster</code> 对象来屏蔽 <code>Boss</code> 的攻击行为：</p>
+<pre><code class="language-rs no_run">struct JuniorDungeonFactory;
+
+impl DungeonFactory for JuniorDungeonFactory {
+    fn create_boss(&amp;self) -&gt; Box&lt;dyn Boss&gt; {
+        NewBieBoss::new()
+    }
+
+    // 新手副本甚至没有小怪，
+    fn create_mosters(&amp;self, amount: usize) -&gt; Vec&lt;Box&lt;dyn Monster&gt;&gt; {
+        vec![NewBieBoss::new(); amount]
+    }
+
+    // generate_dungeon 已有默认实现，不需要修改。
+}
+</code></pre>
+<p>我们可以看到，抽象工厂模式很方便地为我们重用了已有资源并确保副本的行为效果。</p>
+<h2 id="为什么使用抽象工厂模式"><a class="header" href="#为什么使用抽象工厂模式">为什么使用抽象工厂模式</a></h2>
+<ul>
+<li><strong>模式统一</strong>。通过抽象工厂可以快速地制作符合相同模式，但是资源细节稍有差异的工厂，生成具有同样属性的产品。</li>
+<li><strong>职责专一</strong>。每个具体工厂只有一个原因需要被修改——该工厂对应的副本细节变化了。</li>
+<li><strong>符合开闭原则</strong>。因为我们统一出了抽象工厂的接口，当我们修改具体工厂的具体实现细节时，并不会影响到接口调用；而新增具体工厂时只需要提供对应的接口，也可以方便地接入副本生成系统。</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rust-镜像"><a class="header" href="#rust-镜像">Rust 镜像</a></h1>
+<blockquote>
+<p>由于在 Rust 群经常有新人重复提问诸如 “Rust 下载很慢，怎么办？” “Rust 怎么安装更快” 一类的提问，因此整理国内常用的用于加速的镜像和反向代理。</p>
+</blockquote>
+<h2 id="阅读须知-1"><a class="header" href="#阅读须知-1">阅读须知</a></h2>
+<p>本文将不涉及：</p>
+<ul>
+<li>如何获得 <a href="https://github.com/rust-lang/rustup">Rustup</a>（Rust编程语言推荐工具链管理程序）</li>
+<li><a href="https://www.rust-lang.org/zh-CN/tools/install">如何在各平台安装 Rustup</a> （尽管下文会涉及到 Rustup 加速镜像有哪些可用）</li>
+</ul>
+<h2 id="使用国内镜像加速更新-rustup-工具链"><a class="header" href="#使用国内镜像加速更新-rustup-工具链">使用国内镜像加速更新 Rustup 工具链</a></h2>
+<p>我们需要指定 <code>RUSTUP_DIST_SERVER</code>（默认指向 <a href="https://static.rust-lang.org">https://static.rust-lang.org</a>）和 <code>RUSTUP_UPDATE_ROOT</code> （默认指向<a href="https://static.rust-lang.org/rustup">https://static.rust-lang.org/rustup</a>），这两个网站均在中国大陆境外，因此在中国大陆访问会很慢，需要配置成境内的镜像。</p>
+<p>以下 <code>RUSTUP_DIST_SERVER</code> 和 <code>RUSTUP_UPDATE_ROOT</code> 可以组合使用。</p>
+<pre><code class="language-shell"># 清华大学
+RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+
+# 中国科学技术大学
+RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+
+# 上海交通大学
+RUSTUP_DIST_SERVER=https://mirrors.sjtug.sjtu.edu.cn/rust-static/
+</code></pre>
+<p>​</p>
+<h2 id="使用国内镜像加速更新-crate-拉取"><a class="header" href="#使用国内镜像加速更新-crate-拉取">使用国内镜像加速更新 crate 拉取</a></h2>
+<p>将如下配置写入 <code>$HOME/.cargo/config</code> 文件<sup class="footnote-reference"><a href="#1">1</a></sup> <sup class="footnote-reference"><a href="#2">2</a></sup>：</p>
+<pre><code class="language-toml"># 放到 `$HOME/.cargo/config` 文件中
+[source.crates-io]
+registry = &quot;https://github.com/rust-lang/crates.io-index&quot;
+
+# 替换成你偏好的镜像源
+replace-with = 'sjtu'
+
+# 清华大学
+[source.tuna]
+registry = &quot;https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git&quot;
+
+# 中国科学技术大学
+[source.ustc]
+registry = &quot;git://mirrors.ustc.edu.cn/crates.io-index&quot;
+
+# 上海交通大学
+[source.sjtu]
+registry = &quot;https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index&quot;
+
+# rustcc社区 - 已失效！
+# [source.rustcc]
+# registry = &quot;https://code.aliyun.com/rustcc/crates.io-index.git&quot;
+
+# rustcc 1号源
+[source.rustcc]
+registry=&quot;git://crates.rustcc.com/crates.io-index&quot;
+
+# rustcc 2号源
+[source.rustcc2]
+registry=&quot;git://crates.rustcc.cn/crates.io-index&quot;
+</code></pre>
+<h3 id="参考资料"><a class="header" href="#参考资料">参考资料：</a></h3>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/rustup/">Rustup 镜像安装帮助 - 清华大学</a></p>
+<p><a href="https://mirrors.ustc.edu.cn/help/rust-static.html">Rust Toolchain 反向代理使用帮助 - 中国科学技术大学</a></p>
+<p><a href="https://rustcc.cn/article?id=0d125ec2-08fe-427a-9328-69cba6c4795c">国内Rust库文件镜像 - rustcc</a></p>
+<p><a href="https://github.com/rustcc/RustFAQ#%E5%9C%A8%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86cargo%E5%91%BD%E4%BB%A4%E9%80%9F%E5%BA%A6%E5%BE%88%E6%85%A2%E6%80%8E%E4%B9%88%E5%8A%9E">在中国大陆cargo命令速度很慢怎么办?</a></p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>如遇到 <code>invalid UTF-8</code> 的问题请去掉文中中文注释</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>建议不要用Windows默认的记事本编辑</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="在-wsl-中学习-rust-ffi"><a class="header" href="#在-wsl-中学习-rust-ffi">在 WSL 中学习 Rust FFI</a></h1>
+<blockquote>
+<p>博主最近从新学习 Rust FFI 的使用，但是手头上没有可用的 Linux 环境（Windows 编译c太麻烦了），于是就尝试着使用 WSL来搭建 Rust 环境和简易的 c 编译环境，并记录下中间遇到的一些坑。感谢 Unsafe Rust 群群友 @框框 对本文的首发赞助！感谢 Rust 深水群 @栗子 的 gcc 指导！</p>
+</blockquote>
+<h2 id="阅读须知-2"><a class="header" href="#阅读须知-2">阅读须知</a></h2>
+<p>阅读本文，你可以知道：</p>
+<ul>
+<li>一些配置 WSL 全局变量的技巧</li>
+<li>快速配置 Rust 编译运行环境</li>
+<li>简单的 gcc 编译技巧</li>
+</ul>
+<p>但是，本文不涉及：</p>
+<ul>
+<li><a href="https://docs.microsoft.com/zh-cn/windows/wsl/wsl2-install">如何安装 WSL?</a></li>
+<li><a href="https://www.zhihu.com/question/59714225">如何解决 WSL 中文乱码问题?</a>
+顺带一提的是，博主通过 VS Code 使用 WSL，因为 Win 10 已经配置成 UTF-8 编码，所以并没有出现乱码问题</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzIwMTAxMjg5Ng==&amp;mid=2247483684&amp;idx=2&amp;sn=3cd85509a27b6f74fa220bdb38db6c46&amp;chksm=96f522eba182abfdf3a738e880da8cb1b1d36f8ada87ed5fa9b5ef60a3025082f1ae78abd444#rd">Rustup 国内镜像有哪些?</a></li>
+<li><a href="https://doc.rust-lang.org/cargo/">cargo 详细使用教程</a></li>
+<li><a href="https://doc.rust-lang.org/nomicon/ffi.html">甚至不会讲 Rust FFI 是什么</a></li>
+</ul>
+<h2 id="wsl-rust-环境搭建"><a class="header" href="#wsl-rust-环境搭建">WSL Rust 环境搭建</a></h2>
+<p>由于 WSL 是新装的，没有 Rust 和 gcc/g++ 环境，因此需要安装：</p>
+<pre><code class="language-shell">sudo apt install gcc -y
+
+# 官方脚本
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</code></pre>
+<!-- 坑1：共享变量问题 -->
+<p>但是由于在国内访问 Rust 官方网站会很慢，因此设置镜像到 Windows 环境变量中：</p>
+<pre><code>RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+</code></pre>
+<p>然后，使用 <a href="https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-and-windows/"><code>WSLENV</code>环境变量</a>将上述变量共享到 WSL 中：</p>
+<pre><code>WSLENV=RUSTUP_DIST_SERVER:RUSTUP_UPDATE_ROOT
+</code></pre>
+<p>然后重启 WSL 终端，重新执行 Rust 一键脚本。</p>
+<p>以下两个项目均来自 《Rust编程之道》一书，源代码仓库在<a href="https://github.com/ZhangHanDong/tao-of-rust-codes">这里</a></p>
+<h2 id="rust-调用-cc"><a class="header" href="#rust-调用-cc">Rust 调用 C/C++</a></h2>
+<p>Rust 调用 C/C++ 代码可以使用 <code>cc</code> crate 配合 <code>build.rs</code> 预先编译好 C/C++ 的程序提供给 Rust 调用。</p>
+<p>首先，创建一个 binary 项目：</p>
+<pre><code>cargo new --bin ffi_learn
+</code></pre>
+<p>项目目录结构如下：</p>
+<pre><code>cpp_src
+    |-- sorting.h
+    |-- sorting.cpp
+src
+    |-- main.rs
+Cargo.toml
+build.rs
+</code></pre>
+<p>然后编写 <code>sorting.h</code> 和 <code>sorting.cpp</code>:</p>
+<pre><code class="language-cpp">// sorting.h
+#ifndef __SORTING_H__
+#define __SORTING_H__ &quot;sorting.h&quot;
+#include &lt;iostream&gt;
+#include &lt;functional&gt;
+#include &lt;algorithm&gt;
+#ifdef __cplusplus
+extern &quot;C&quot; {
+#endif
+
+void interop_sort(int[], size_t);
+
+#ifdef __cplusplus
+}
+#endif
+#endif
+</code></pre>
+<pre><code class="language-cpp">// sorting.cpp
+#include &quot;sorting.h&quot;
+
+void interop_sort(int numbers[], size_t size) {
+    int* start = &amp;numbers[0];
+    int* end = &amp;numbers[0] + size;
+
+    std::sort(start, end, [](int x, int y) { return x &gt; y; });
+}
+</code></pre>
+<p>然后给 <code>Cargo.toml</code> 的 <code>[build-dependecies]</code> 加上 <code>cc</code> crate 依赖：</p>
+<pre><code class="language-toml"># Cargo.toml
+# 其他配置
+
+[build-dependencies]
+cc = &quot;1&quot;
+</code></pre>
+<p>接着，我们通过 <code>cc</code> 调用对应平台的c/c++编译器，因为我们这个项目是 WSL，所以和调用我们刚安装的 <code>gcc</code>:</p>
+<pre><code class="language-rs">// build.rs
+// Rust 2018 不需要 extern crate 语句
+
+fn main() {
+    cc::Build::new()
+        .cpp(true)
+        .warnings(true)
+        .flag(&quot;-Wall&quot;)
+        .flag(&quot;-std=c++14&quot;)
+        .flag(&quot;-c&quot;)
+        .file(&quot;cpp_src/sorting.cpp&quot;)
+        .compile(&quot;sorting&quot;);    // sorting.so
+}
+</code></pre>
+<p>接着，我们在 Rust 主程序中，通过 <code>extern</code> 块引入<code>sorting.cpp</code>中的<code>interop_sort</code>函数，并调用它:</p>
+<pre><pre class="playground"><code class="language-rust no_run edition2018">// main.rs
+#[link(name = &quot;sorting&quot;, kind = &quot;static&quot;)]
+extern &quot;C&quot; {
+    fn interop_sort(arr: *mut i32, n: u32);
+}
+
+pub fn sort_from_cpp(arr: &amp;mut [i32]) {
+    unsafe {
+        // 传入必然有效的数组引用，并通过传入数组的长度来保证不会出现越界访问，从而保证函数内存安全
+        interop_sort(arr as *mut [i32] as *mut i32, arr.len() as u32);
+    }
+}
+
+fn main() {
+    let mut my_arr: [i32; 10] = [10, 42, -9, 12, 8, 25, 7, 13, 55, -1];
+    println!(&quot;Before sorting...&quot;);
+    println!(&quot;{:?}\n&quot;, my_arr);
+
+    sort_from_cpp(&amp;mut my_arr);
+
+    println!(&quot;After sorting...&quot;);
+    println!(&quot;{:?}\n&quot;, my_arr);
+}
+</code></pre></pre>
+<p>然后执行调用：</p>
+<pre><code class="language-shell">$ cargo run
+   Compiling ffi_learning v0.1.0 (/mnt/c/Users/huangjj27/Documents/codes/ffi_learning)
+warning: `extern` block uses type `[i32]`, which is not FFI-safe
+ --&gt; src/main.rs:3:26
+  |
+3 |     fn interop_sort(arr: &amp;[i32], n: u32);
+  |                          ^^^^^^ not FFI-safe
+  |
+  = note: `#[warn(improper_ctypes)]` on by default
+  = help: consider using a raw pointer instead
+  = note: slices have no C equivalent
+
+    Finished dev [unoptimized + debuginfo] target(s) in 4.71s
+     Running `target/debug/ffi_learn`
+Before sorting...
+[10, 42, -9, 12, 8, 25, 7, 13, 55, -1]
+
+After sorting...
+[55, 42, 25, 13, 12, 10, 8, 7, -1, -9]
+</code></pre>
+<p>我们看到，该函数提示我们 C 中并没有等价于 Rust slice 的类型，原因在于如果我们传递 slice，那么在 C/C++ 中就很容易访问超过数组长度的内存，造成内存不安全问题。但是，我们在 Rust 调用的时候，通过同时传入数组 <code>arr</code> 的长度 <code>arr.len()</code>, 来保证函数不会访问未经授权的内存。不过在实践中，应该划分模块，只允许确认过 内存安全的 safe Rust 功能跨越模块调用。</p>
+<h2 id="在-cc-中调用-rust"><a class="header" href="#在-cc-中调用-rust">在 C/C++ 中调用 Rust</a></h2>
+<p>接下来我们反过来互操作。项目结构如下：</p>
+<pre><code>c_src
+    |-- main.c
+src
+    |-- lib.rs
+    |-- callrust.h
+Cargo.toml
+makefile
+</code></pre>
+<p>然后配置 Rust 生成两种库——静态库（staticlib）和c动态库（cdylib）：</p>
+<pre><code class="language-toml"># Cargo.toml
+# ...
+
+[lib]
+name = &quot;callrust&quot;   # 链接库名字
+crate-type = [&quot;staticlib&quot;, &quot;cdylib&quot;]
+</code></pre>
+<p>然后添加我们的 Rust 函数：</p>
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// lib.rs
+
+// `#[no_mangle]` 关闭混淆功能以让 C 程序找到调用的函数
+// `extern` 默认导出为 C ABI
+#[no_mangle]
+pub extern fn print_hello_from_rust() {
+    println!(&quot;Hello from rust&quot;);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>当然，为了给 C 调用我们还需要编写一个头文件：</p>
+<pre><code class="language-c">// callrust.h
+void print_hello_from_rust();
+</code></pre>
+<p>在我们的 <code>main.c</code> 中库并调用：</p>
+<pre><code class="language-c">// main.c
+#include &quot;callrust.h&quot;
+#include &lt;stdio.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;inttypes.h&gt;
+
+int main(void) {
+    print_hello_from_rust();
+}
+</code></pre>
+<!-- 坑2：执行时需要指定LD_LIBRARY_PATH -->
+<p>编写 makefile，先调度cargo 编译出我们需要的 Rust 库（动态或链接），然后再运行：</p>
+<pre><code class="language-makefile">GCC_BIN ?= $(shell which gcc)
+CARGO_BIN ?= $(shell which cargo)
+
+# 动态链接 libcallrust.so
+share: clean cargo
+	mkdir cbin
+	$(GCC_BIN) -o ./cbin/main ./c_src/main.c -I./src -L./target/debug -lcallrust
+
+	# 注意动态链接再运行时也需要再次指定 `.so` 文件所在目录，否则会报错找不到！
+	LD_LIBRARY_PATH=./target/debug ./cbin/main
+
+# 静态链接 libcallrust.a
+static: clean cargo
+	mkdir cbin
+
+	# libcallrust.a 缺少了一些pthread, dl类函数，需要链接进来
+	$(GCC_BIN) -o ./cbin/main ./c_src/main.c -I./src ./target/debug/libcallrust.a -lpthread -ldl
+	./cbin/main
+
+clean:
+	$(CARGO_BIN) clean
+	rm -rf ./cbin
+
+cargo:
+	$(CARGO_BIN) build
+</code></pre>
+<h2 id="小结-1"><a class="header" href="#小结-1">小结</a></h2>
+<p>本文通过给出两个简单的示例来展示 Rust 通过 FFI 功能与 C/C++ 生态进行交互的能力, 并且指出几个在实践过程中容易浪费时间的坑：</p>
+<ol>
+<li>WSL的环境变量不生效 -&gt; 使用 <code>WSLENV</code> 变量从 Windows 引入使用。</li>
+<li><code>make share</code> 的时候提示 <code>libcallrust.so</code> 找不到 -&gt; 需要在运行时指定 <code>LD_LIBRARY_PATH</code> 变量，引入我们编译的 <code>libcallrust.so</code> 路径。</li>
+<li><code>make static</code>的时候遇到了<code>pthread_*</code> <code>dy*</code>系列函数未定义问题 -&gt; 通过动态链接系统库来支持运行。</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><p>WASM(Web Assembly)尽管是为了提高网页中性能敏感模块表现而提出的字节码标准, 但是WASM却不仅能用在浏览器(broswer)中, 也可以用在其他环境中. 在这些环境中, 我们则需要支持WASI(WebAssembly System Interface, WASM系统接口)的runtime来执行我们编译运行的wasm模块.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="wasi探索一----wasi简介与wasmtime配置"><a class="header" href="#wasi探索一----wasi简介与wasmtime配置">WASI探索（一） -- WASI简介与Wasmtime配置</a></h1>
+<h2 id="什么是wasi"><a class="header" href="#什么是wasi">什么是WASI?</a></h2>
+<p>WASI<sup class="footnote-reference"><a href="#1">1</a></sup>是一个新的API体系, 由<a href="https://github.com/CraneStation/wasmtime">Wasmtime项目</a>设计, 目的是为WASM设计一套引擎无关(engine-indepent), 面向非Web系统(non-Web system-oriented)的API标准. 目前, WASI核心API(WASI Core)在做覆盖文件, 网络等等模块的API, 但这些实现都是刚刚开始实现, 离实用还是有很长路要走.</p>
+<h2 id="关于wasm-runtime"><a class="header" href="#关于wasm-runtime">关于WASM runtime</a></h2>
+<p>在了解了WASI之后, 博主最后选定两个WASM运行时进行探索: WASMER 与 Wasmtime. 这两款运行时都号称开始支持了WASI标准, 但博主使用<a href="https://github.com/kubkon/rust-wasi-tutorial">rust-wasi-tutorial</a>对两款运行时进行试验后, 发现<a href="https://github.com/wasmerio/wasmer/issues/356">WASMER对于文件读取还是有些问题</a>, 而Wasmtime则是通过了规格测试(基于specs testsuite), 因此本文接下来着重于Wasmtime的配置介绍.</p>
+<h2 id="wasmtime与rust环境配置"><a class="header" href="#wasmtime与rust环境配置">Wasmtime与rust环境配置</a></h2>
+<p>由于目前Wasmtime与WASMER均只支持Unix-like环境, 接下来楼主将演示如何在WSL(Ubuntu 18.04)下配置Wasmtime. 而在目前比较方便生成wasm的编程语言中, 博主选择使用自带wasi目标的<a href="https://rust-lang.org">rust编程语言</a>, 可以&quot;零代价&quot;配置wasm相关工具链.</p>
+<h3 id="配置rust"><a class="header" href="#配置rust">配置rust</a></h3>
+<ol>
+<li>下载并安装rustup: <code>curl https://sh.rustup.rs -sSf | sh</code>, 安装时使用默认 <code>stable-x86_64-unknown-linux-gnu</code>工具链, 后面我们还会自行添加用于编译wasm的<code>nightly</code>工具链.</li>
+<li>为cargo配置ustc反代, 提高crates(rust库)下载速度<sup class="footnote-reference"><a href="#2">2</a></sup></li>
+<li>安装rustfmt: <code>rustup component add rustfmt --toolchain stable-x86_64-unknown-linux-gnu</code>. Wasmtime的test脚本需要用到该组件.</li>
+<li>安装rust nightly工具链: <code>rustup toolchain add nightly-x86_64-unknown-linux-gnu</code>. 当前rust的WASI目标还在开发中, 尚未稳定<sup class="footnote-reference"><a href="#3">3</a></sup>.</li>
+<li>安装rust WASI目标: <code>rustup target add wasm32-unknown-wasi</code><sup class="footnote-reference"><a href="#3">3</a></sup>.</li>
+</ol>
+<h3 id="配置wasmtime"><a class="header" href="#配置wasmtime">配置Wasmtime</a></h3>
+<ol>
+<li>安装cmake与clang: <code>sudo apt install cmake clang</code>, 用于编译Wasmtime. Wasmtime目前尚未有正式发布版本, 故需要我们自行编译.</li>
+<li>拷贝Wasmtime源码: <code>git clone --recursive git@github.com:CraneStation/wasmtime.git ~/wasmtime</code>.</li>
+<li>切换到Wasm源码目录: <code>cd ~/wasmtime</code></li>
+<li>执行测试脚本: <code>./scripts/test-all.sh</code>. 当脚本执行完毕并通过测试后, 说明wasmtime已经正常编译并且能在当前WSL环境下正常工作, 可以使用生成的wasmtime可执行文件.</li>
+<li>将生成的wasmtime拷贝到<code>/usr/bin</code>目录中: <code>cp ~/wasmtime/target/release/wasmtime /usr/bin</code>, 以便在整个WSL环境中任意目录执行wasmtime. wasmtime是个单文件(stand alone)运行时.</li>
+<li>执行<code>wasmtime --help</code>命令, 确认wasmtime成功安装.</li>
+</ol>
+<h2 id="试验"><a class="header" href="#试验">试验</a></h2>
+<p>GitHub上面已经有了比较简单的<a href="https://github.com/kubkon/rust-wasi-tutorial">试验</a>, 大家按照上面的说明
+去试验即可. 下一篇文章, 博主将会把<a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">猜数字</a>编译成WASI目标并执行, 同时会尝试把一些常用的库尝试编译, 来探究
+当前社区对WASI支持的程度.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://github.com/CraneStation/wasmtime/blob/master/docs/WASI-overview.md#wasi-webassembly-system-interface">WASI概要</a></p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p><a href="https://lug.ustc.edu.cn/wiki/mirrors/help/rust-crates#rust_crates_%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9">rust crates 镜像使用帮助 - 中国科学技术大学</a></p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>截至2020年1月19日，WASI目标已经稳定并重命名为<code>wasm32-wasi</code></p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="wasi探索二----wasi版猜数字"><a class="header" href="#wasi探索二----wasi版猜数字">WASI探索（二） -- WASI版猜数字</a></h1>
+<blockquote>
+<p>猜数字作为入门Rust时第一次编写并具有实际功能的程序，适合让读者快速掌握rust的基本概念。同时，为了让程序更加有趣，博主在原本的猜数字程序上添加了日志和从运行时参数传递游戏难度的功能。此外，由于博主偏好改变，本文还会涉及到另外一款WASI运行时Wasmer，以及他们为了丰富WASI生态而推出的wasm包管理器wapm。</p>
+</blockquote>
+<h2 id="阅读须知-3"><a class="header" href="#阅读须知-3">阅读须知</a></h2>
+<p>学习外部资料更有助于读者了解相关生态，因此本文将不赘述：</p>
+<ul>
+<li><a href="wasi//posts/first-wasi">WASI是什么？</a></li>
+<li><a href="https://wapm.io/help/install">Wasmer与wapm如何安装？</a></li>
+<li><a href="https://www.rust-lang.org/zh-CN/">rust是什么？</a> <a href="https://www.rust-lang.org/zh-CN/tools/install">如何安装Rust？</a> <a href="https://www.rust-lang.org/zh-CN/learn">如何学习rust？</a></li>
+<li><a href="https://doc.rust-lang.org/cargo/index.html">cargo是什么？要怎样使用？</a></li>
+<li><a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">猜数字原版程序在哪？</a></li>
+<li><a href="https://docs.rs/log/0.4.6/log/">log crate</a>与<a href="https://docs.rs/env_logger/0.6.1/env_logger/">env_log crate</a>详细如何使用？</li>
+<li><a href="https://docs.rs/releases/search?query=structopt">structopt</a>如何使用？</li>
+</ul>
+<p>而阅读本文，你将了解：</p>
+<ul>
+<li>如何用日志debug的一些原则</li>
+<li>一个简单的配置文件的设计</li>
+<li>读者对Wasmer的一些浅薄看法</li>
+</ul>
+<h2 id="原版猜数字"><a class="header" href="#原版猜数字">原版猜数字</a></h2>
+<p>我们从<a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">官方书</a>拷贝了一份猜数字程序：</p>
+<pre><pre class="playground"><code class="language-rust no_run edition2018">// main.rs
+use std::io;
+use std::cmp::Ordering;
+use rand::Rng;
+
+fn main() {
+    println!(&quot;Guess the number!&quot;);
+
+    let secret_number = rand::thread_rng().gen_range(1, 101);
+
+    loop {
+        println!(&quot;Please input your guess.&quot;);
+
+        let mut guess = String::new();
+
+        io::stdin().read_line(&amp;mut guess)
+            .expect(&quot;Failed to read line&quot;);
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) =&gt; num,
+            Err(_) =&gt; continue,
+        };
+
+        println!(&quot;You guessed: {}&quot;, guess);
+
+        match guess.cmp(&amp;secret_number) {
+            Ordering::Less =&gt; println!(&quot;Too small!&quot;),
+            Ordering::Greater =&gt; println!(&quot;Too big!&quot;),
+            Ordering::Equal =&gt; {
+                println!(&quot;You win!&quot;);
+                break;
+            }
+        }
+    }
+}
+</code></pre></pre>
+<pre><code class="language-toml"># Cargo.toml
+[package]
+name = &quot;guessing_game&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;Your Name &lt;you@example.com&gt;&quot;]
+edition = &quot;2018&quot;
+
+[dependencies]
+rand = &quot;0.3.14&quot;
+</code></pre>
+<h2 id="一次游戏只猜一个数"><a class="header" href="#一次游戏只猜一个数">一次游戏只猜一个数</a></h2>
+<p>我们可以看到，这个程序每次运行，只能猜一个数字，如果要继续玩就只能重新启动。但是博主想让这个游戏，能在一次运行时
+可以生成不同难度关卡，因此首先我们将“猜一个数字”逻辑抽取成可复用函数</p>
+<pre><pre class="playground"><code class="language-rust no_run edition2018"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// main.rs
+fn guess_a_number() {
+    println!(&quot;Guess the number!&quot;);
+
+    let secret_number = rand::thread_rng().gen_range(1, 101);
+
+    loop {
+        println!(&quot;Please input your guess.&quot;);
+
+        let mut guess_str = String::new();
+
+        io::stdin().read_line(&amp;mut guess_str)
+            .expect(&quot;Failed to read line&quot;);
+
+        let guess: u32 = match guess_str.trim().parse() {
+            Ok(num) =&gt; num,
+            Err(_) =&gt; continue,
+        };
+
+        println!(&quot;You guessed: {}&quot;, guess);
+
+        match guess.cmp(&amp;secret_number) {
+            Ordering::Less =&gt; println!(&quot;Too small!&quot;),
+            Ordering::Greater =&gt; println!(&quot;Too big!&quot;),
+            Ordering::Equal =&gt; {
+                println!(&quot;You win!&quot;);
+                break;
+            }
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>再将配置文件修改一下：</p>
+<pre><code class="language-toml"># guess_wasi/Cargo.toml
+[package]
+name = &quot;guess_wasi&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;huangjj27 &lt;huangjj.27@qq.com&gt;&quot;]
+edition = &quot;2018&quot;
+
+[dependencies]
+rand = &quot;0.7&quot;
+</code></pre>
+<p>此外，猜数字游戏的难度取决于随机生成数字的范围, 为了生成不同的难度关卡，我们需要<code>guess_a_number</code>接受一组控制
+生成数字范围的参数：</p>
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// main.rs
+/// 生成熟悉范围的下界（lower bound，lb)与上界（higher bound，hb）在主函数中读取配置文件得到
+fn guess_a_number((lb, hb): (u32, u32)) {
+    println!(&quot;Guess the number!&quot;);
+
+    let secret_number = rand::thread_rng().gen_range(lb, hb + 1);
+
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这里在传入参数时，直接<a href="https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html?highlight=destruct#destructuring-to-break-apart-values">解构</a>了<a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#compound-types">元组</a>, 这样后面就可以直接使用传入的上界与下界来控制生成数范围</p>
+<p>然后，博主发现， 原版猜数字如果解析数字错误的话会直接跳过，博主觉得这里应该至少提醒一下用户输入错误了：</p>
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// main.rs
+fn guess_a_number((lb, hb): (u32, u32)) {
+    // ...
+        let guess: u32 = match guess_str.trim().parse() {
+            Ok(num) =&gt; num,
+            Err(_) =&gt; {
+                println!(&quot;Input not a number! please input a number&quot;);
+                continue;
+            },
+        };
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="加上log追踪生成的数据情况"><a class="header" href="#加上log追踪生成的数据情况">加上log追踪生成的数据情况</a></h2>
+<p>使用log去追踪数据与可能产生bug的代码有以下好处：</p>
+<ul>
+<li>了解运行时所关注的数据情况， 方便定位bug</li>
+<li>清晰地知道实际运行流程是否如期望那样执行</li>
+<li>即便使用release版目标， 仍然可以获得需要的分析信息</li>
+<li>区分产生信息的层级，以便将精力集中在优先需要处理的信息中</li>
+</ul>
+<p>回到猜数字游戏上，博主想要知道每一次游戏中知道生成的<code>secret_number</code>是多少， 并且根据运行时输入的日志层级的参数
+决定是否显示这个数字，需求相对简单，因此使用rust生态中比较常用的<a href="https://docs.rs/log/0.4.6/log/">log crate</a>与<a href="https://docs.rs/env_logger/0.6.1/env_logger/">env_log crate</a>。在<code>Cargo.toml</code>中加入两个新依赖：</p>
+<pre><code class="language-toml"># guess_wasi/Cargo.toml
+
+# ...
+
+[dependencies]
+rand = &quot;0.7&quot;
+
+# 总是使用最新的log与env_log
+log = &quot;*&quot;
+env_logger = &quot;*&quot;
+</code></pre>
+<p>加入追踪日志代码：</p>
+<pre><pre class="playground"><code class="language-rust edition2018">// main.rs
+use log::{trace, debug};
+
+fn main() {
+    // 别忘了初始化日志生成器， 才能获取日志！
+    env_log::init();
+    guess_a_number((1, 100));
+}
+
+fn guess_a_number((lb, hb): (u32, u32)) {
+    println!(&quot;Guess the number!&quot;);
+
+    let secret_number = rand::thread_rng().gen_range(lb, hb + 1);
+    trace!(&quot;secret number: {}&quot;, secret);
+
+    loop {
+        println!(&quot;Please input your guess.&quot;);
+
+        let mut guess_str = String::new();
+        io::stdin().read_line(&amp;mut guess_str)
+            .expect(&quot;Failed to read line&quot;);
+        debug!(&quot;scaned string: {:?}&quot;, guess_str);
+
+        // ...
+    }
+}
+</code></pre></pre>
+<h2 id="向高难度挑战"><a class="header" href="#向高难度挑战">向高难度挑战！</a></h2>
+<p>现在我们来到最后了一个需求：通过运行时参数来给每次游戏输入多个游戏难度，这个难度由随机数生成的范围决定-- 随机数
+生成的范围越大，一次猜中这个数的概率就越小。为方便地写出输入参数的命令，我们需要引入<code>structopt</code>库（crate）,
+最后获得类似<code>--levels=10 100 1000</code>这样的参数输入方式, 参数中每个数字表示每次生成随机数的生成范围上界。</p>
+<p>配置文件追加：</p>
+<pre><code class="language-toml"># guess_wasi/Cargo.toml
+
+# ...
+
+[dependencies]
+rand = &quot;0.7&quot;
+
+# 总是使用最新的log与env_log
+log = &quot;*&quot;
+env_logger = &quot;*&quot;
+
+structopt = &quot;*&quot;
+</code></pre>
+<p>编写参数代码。</p>
+<pre><pre class="playground"><code class="language-rust edition2018">// main.rs
+
+// ...
+use structopt::StructOpt;
+
+// 定义参数只需要把他们的名字和类型写在一个参数结构体中即可！
+#[derive(StructOpt)]
+#[structopt(name=&quot;guess_wasi&quot;)]
+struct Opt {
+    #[structopt(long=&quot;levels&quot;)]
+    levels: Vec&lt;u32&gt;,
+}
+
+fn main() {
+    env_logger::init();
+
+    // 获取并访问levels参数, 只需要访问参数结构体的对应成员即可， 细节处理可以方便地交给库执行！
+    let opt = Opt::from_args();
+    for &amp;lv in &amp;opt.levels {
+        println!(&quot;given number range 0~{}&quot;, lv);
+        guess_a_number((0, lv));
+    }
+}
+</code></pre></pre>
+<h2 id="完整代码"><a class="header" href="#完整代码">完整代码</a></h2>
+<pre><code class="language-toml">[package]
+name = &quot;guess_wasi&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;huangjj27 &lt;huangjj.27@qq.com&gt;&quot;]
+edition = &quot;2018&quot;
+
+[dependencies]
+rand = &quot;0.7&quot;
+
+# 总是使用最新的log与env_log
+log = &quot;*&quot;
+env_logger = &quot;*&quot;
+
+structopt = &quot;*&quot;
+</code></pre>
+<pre><pre class="playground"><code class="language-rust edition2018">// guess_wasi/main.rs
+use std::io;
+use std::cmp::Ordering;
+use rand::Rng;
+use log::{debug, trace};
+
+use structopt::StructOpt;
+
+// 定义参数只需要把他们的名字和类型写在一个参数结构体中即可！
+#[derive(StructOpt)]
+#[structopt(name=&quot;guess_wasi&quot;)]
+struct Opt {
+    #[structopt(long=&quot;levels&quot;)]
+    levels: Vec&lt;u32&gt;,
+}
+
+fn main() {
+    env_logger::init();
+
+    // 获取并访问levels参数, 只需要访问参数结构体的对应成员即可， 细节处理可以方便地交给库执行！
+    let opt = Opt::from_args();
+    for &amp;lv in &amp;opt.levels {
+        println!(&quot;given number range 0~{}&quot;, lv);
+        guess_a_number((0, lv));
+    }
+}
+
+// 一场游戏有多个难度，我们每个难度只猜一个数字，然后变难
+fn guess_a_number((lb, hb): (u32, u32)) {
+    let secret = rand::thread_rng().gen_range(lb, hb + 1);
+    trace!(&quot;secret number: {}&quot;, secret);
+
+    loop {
+        println!(&quot;Please input your guess.&quot;);
+
+        let mut guess_str = String::new();
+        io::stdin().read_line(&amp;mut guess_str)
+            .expect(&quot;Failed to read line&quot;);
+        debug!(&quot;scaned string: {:?}&quot;, guess_str);
+
+        let guess: u32 = match guess_str.trim().parse() {
+            Ok(num) =&gt; num,
+            Err(_) =&gt; {
+                println!(&quot;Input not a number! please input a number&quot;);
+                continue;
+            },
+        };
+
+        println!(&quot;You guessed: {}&quot;, guess);
+
+        match guess.cmp(&amp;secret) {
+            Ordering::Less =&gt; println!(&quot;too small!&quot;),
+            Ordering::Greater =&gt; println!(&quot;too big!&quot;),
+            Ordering::Equal =&gt; {
+                println!(&quot;You get it!&quot;);
+                break;
+            }
+        }
+    }
+}
+</code></pre></pre>
+<p>读到这里，读者可以发现前文<strong>根本没涉及到WASI，甚至没有涉及WASM</strong>。这因为WASI作为应用与运行时交互的接口，被rust编译器封装成为编译目标，读者只需要编译到对应目标即可让自己的程序在对应平台上运行. 这是Rust编程语言现代化与工程学的体现：
+一般应用研发工程师可以通过使用已经适配所需平台的底层库(这些底层库通常已经针对所有支持平台做了最优化适配)，就能让自己的应用支持对应的平台而无需重新编写针对某平台的特化版本源码！</p>
+<h2 id="是时候编译成wasi目标了"><a class="header" href="#是时候编译成wasi目标了">是时候编译成WASI目标了</a></h2>
+<p>我们还需要添加对应的编译目标：</p>
+<pre><code>rustup target add wasm32-wasi
+</code></pre>
+<p>编译到<code>wasm32-wasi</code>目标上：</p>
+<pre><code>$ cargo build --target=wasm32-wasi --release
+   Compiling proc-macro2 v1.0.18
+   Compiling version_check v0.9.2
+   Compiling unicode-xid v0.2.0
+   Compiling syn v1.0.30
+   Compiling cfg-if v0.1.10
+   Compiling memchr v2.3.3
+   Compiling getrandom v0.1.14
+   Compiling wasi v0.9.0+wasi-snapshot-preview1
+   Compiling lazy_static v1.4.0
+   Compiling bitflags v1.2.1
+   Compiling atty v0.2.14
+   Compiling unicode-width v0.1.7
+   Compiling unicode-segmentation v1.6.0
+   Compiling log v0.4.8
+   Compiling quick-error v1.2.3
+   Compiling ansi_term v0.11.0
+   Compiling ppv-lite86 v0.2.8
+   Compiling regex-syntax v0.6.18
+   Compiling strsim v0.8.0
+   Compiling vec_map v0.8.2
+   Compiling termcolor v1.1.0
+   Compiling thread_local v1.0.1
+   Compiling textwrap v0.11.0
+   Compiling proc-macro-error-attr v1.0.2
+   Compiling proc-macro-error v1.0.2
+   Compiling humantime v1.3.0
+   Compiling heck v0.3.1
+   Compiling quote v1.0.7
+   Compiling rand_core v0.5.1
+   Compiling clap v2.33.1
+   Compiling regex v1.3.9
+   Compiling rand_chacha v0.2.2
+   Compiling env_logger v0.7.1
+   Compiling syn-mid v0.5.0
+   Compiling rand v0.7.3
+   Compiling structopt-derive v0.4.7
+   Compiling structopt v0.3.14
+   Compiling guess_wasi v0.1.0 (C:\Users\huangjj27\Documents\codes\huangjj27.github.io\code\guess_wasi)
+    Finished release [optimized] target(s) in 4m 58s
+</code></pre>
+<p>现在，我们来运行一下程序吧：</p>
+<pre><code>$ wasmer --version
+wasmer 0.13.1
+$ wasmer run .\target\wasm32-wasi\release\guess.wasm --env RUST_LOG=trace -- --levels 10 100 1000
+given number range 0~10
+[2020-06-09T14:55:58Z TRACE guess] secret number: 10
+Please input your guess.
+5
+[2020-06-09T14:56:02Z DEBUG guess] scaned string: &quot;5\r\n&quot;
+You guessed: 5
+too small!
+Please input your guess.
+8
+[2020-06-09T14:56:04Z DEBUG guess] scaned string: &quot;8\r\n&quot;
+You guessed: 8
+too small!
+Please input your guess.
+9
+[2020-06-09T14:56:07Z DEBUG guess] scaned string: &quot;9\r\n&quot;
+You guessed: 9
+too small!
+Please input your guess.
+10
+[2020-06-09T14:56:09Z DEBUG guess] scaned string: &quot;10\r\n&quot;
+You guessed: 10
+You get it!
+given number range 0~100
+[2020-06-09T14:56:09Z TRACE guess] secret number: 60
+Please input your guess.
+60
+[2020-06-09T14:56:25Z DEBUG guess] scaned string: &quot;60\r\n&quot;
+You guessed: 60
+You get it!
+given number range 0~1000
+[2020-06-09T14:56:25Z TRACE guess] secret number: 715
+Please input your guess.
+300
+[2020-06-09T14:56:32Z DEBUG guess] scaned string: &quot;300\r\n&quot;
+You guessed: 300
+too small!
+Please input your guess.
+720
+[2020-06-09T14:56:38Z DEBUG guess] scaned string: &quot;720\r\n&quot;
+You guessed: 720
+too big!
+Please input your guess.
+716
+[2020-06-09T14:56:41Z DEBUG guess] scaned string: &quot;716\r\n&quot;
+You guessed: 716
+too big!
+Please input your guess.
+714
+[2020-06-09T14:56:46Z DEBUG guess] scaned string: &quot;714\r\n&quot;
+You guessed: 714
+too small!
+Please input your guess.
+715
+[2020-06-09T14:56:48Z DEBUG guess] scaned string: &quot;715\r\n&quot;
+You guessed: 715
+You get it!
+$
+</code></pre>
+<p>调试后，确认我们的程序可以正常执行了， 去掉<code>--env RUST_LOG=trace</code>参数，享受自己制作的这个小游戏吧！</p>
+<!-- TODO：待更新 -->
+<h2 id="wasmer与wapm"><a class="header" href="#wasmer与wapm">Wasmer与Wapm</a></h2>
+<p><a href="https://github.com/wasmerio/wasmer">Wasmer</a>可以是说在WASI生态中响应速度仅次于Mozilla的组织，他们号称打造了
+一款可以让代码“一次构建，处处运行”（Build Once, Run Anywhere.)的运行时环境，该环境可以运行ECMAScripten标准与
+WASI标准的wasm栈机码。并且方便为wasm代码分发，该组织开发了类似于nodejs生态中npm的包管理工具wapm，这样用户就可以
+很轻松地发布自己的程序，以及利用他人的程序了--这促进了WASM生态的发展，同时作为生态底层的领导者，Wasmer也将拥有
+更多发言权。</p>
+<p>作为边缘人士（稍微知道WASM生态但没很深入了解），博主看到这项目背后的布局很像上世纪Sun公司的Java和JVM（尽管WASM并不是Wasmer的发明，但这样反而不必为WASM这样可以作为主流编程语言编译目标工具投入过多精力宣传，可以集中精力去优化wasmer与wapm；同时因为wasmer是使用MIT协议授权，不会产生类似OracleJDK专利权所属的问题，相信随着生态的进一步发展，在虚拟机运行时领域会逐步替代JVM成为主流，届时将解放程序员更多生产力 -- 不必要求掌握Java而是通过自己熟悉的编程语言（c/c++/rust/python/...)通过统一的标准相互调用（进一步微型化的微服务）。</p>
+<p>而这个在服务器/PC桌面应用占主导地位的标准，就是WASI。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="初等数论自我探索"><a class="header" href="#初等数论自我探索">初等数论自我探索</a></h1>
+<p>本系列文章以解决哥德巴赫猜想为目的（证明/证伪），把思路限制在初等数论（个人水平有限，理解不了更高级的工具），进行思考与尝试，本意是打发自己零散的通勤时间，走到哪算到哪。</p>
+<p>该系列文章的最初设想是有一天突然就想到，关于一个偶数 \( 2n (n \in Z^+) \)的素数相加的分拆，一定是关于整数 \( n \) 对称的，即若 \( 2n = p_1 + p_2 \)，其中 \( p_1 \), \( p_2 \) 为质数（\(p_1 \neq p_2 \)），那么：
+\[
+\exists d \in Z^+,
+\begin{cases}
+p_1 = n - d \\
+p_2 = n + d
+\end{cases}
+\]</p>
+<p>那么这个 \( d \) 和 \( n \) 有什么关系呢？适逢当时被科普了 <a href="https://www.zhihu.com/topic/19651932">黎曼猜想</a>, 得知黎曼 \( \Zeta \) 函数的非平凡零点很可能全部都位于直线 \( Re(z) = {1 \over 2} \) 上，那么会不会，最小的 \( d \) 也会在 \( n \cdot { 1 \over 2} \) 的边界内找得到呢？</p>
+<p>于是提出了以下猜想命题：
+\[ \tag{0} \label{0}
+\forall n \in Z^+, n \gt M, \exists d \in Z^+, d \le { n \over 2 }, Prime(n - d) \land Prime(n + d)
+\]</p>
+<p>其中 \( M \) 为常数，表示命题成立在某个整数以上的整数范围成立。也就是，证明有穷个整数之后的整数都满足性质\( \ref{0} \)，然后再逐个验证之前的整数满足该性质，就可以得出一个比偶数哥德巴赫猜想更充分的命题，从而直接可以推导出偶数哥德巴赫定理。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="若质数p不能整除偶数2n则p不整除2n-p"><a class="header" href="#若质数p不能整除偶数2n则p不整除2n-p">若质数p不能整除偶数2n，则p不整除2n-p</a></h1>
+<h2 id="命题形式化描述"><a class="header" href="#命题形式化描述">命题形式化描述</a></h2>
+<p>\[\label{1} \tag{1}
+\forall p \in Primes, p \lt 2n(n \in Z^+), p \nmid 2n \Rightarrow p \nmid 2n - p
+\]</p>
+<h2 id="一般化命题与反证法-1"><a class="header" href="#一般化命题与反证法-1">一般化命题与反证法 <sup class="footnote-reference"><a href="#1">1</a></sup></a></h2>
+<p>我们可以抽出一个更一般的命题：对任意正整数 \(a, b (a \lt b)\)，若 \( a \nmid b\)，则 \( a \nmid b - a \):
+\[\label{1.0} \tag{1.0}
+\forall a, b \in Z^+ (a \lt b), a \nmid b \Rightarrow a \mid b - a
+\]</p>
+<h3 id="反证法"><a class="header" href="#反证法">反证法</a></h3>
+<p>假设原结论不成立，即 \( a \mid b - a \) 成立，则：</p>
+<p>\( \because a \mid b - a, a \mid a \)</p>
+<p>\(  \therefore a \mid (b - a) + a \) （整除的线性性质），即 \( a \mid b \),</p>
+<p>这与假设 \( a \nmid b \) 矛盾！故假设不成立，原结论成立，即 \( a\mid b - a \),</p>
+<p>故命题 \( \ref{1.0} \) 成立。</p>
+<h3 id="代入条件"><a class="header" href="#代入条件">代入条件</a></h3>
+<p>令 \( a := p, b = 2n \), 则显然：</p>
+<p>\[
+p \in Primes, p \lt 2n \Rightarrow p \nmid 2n \Rightarrow p \nmid 2n - p
+\]</p>
+<p>即命题 \( \ref{1} \) 得证。</p>
+<hr />
+<p>(以下内容为作者之前思考过的另外一个比较迂回的证明方法，为后续叙述的引理）</p>
+<h2 id="一整数若不同时整除互质两数则不能整除后两数之差"><a class="header" href="#一整数若不同时整除互质两数则不能整除后两数之差">一整数若不同时整除互质两数，则不能整除后两数之差</a></h2>
+<h3 id="形式化描述"><a class="header" href="#形式化描述">形式化描述</a></h3>
+<p>\[ \label{1.1} \tag{1.1}
+\forall x \in Z^+ \land x &gt; 1, a \in Z^+ \land a &gt; 1, b \in Z^+ \land b &gt; 1; \quad
+(a, b) = 1,  x|a \lor x|b \Rightarrow x \nmid a-b
+\]</p>
+<h3 id="证明"><a class="header" href="#证明">证明</a></h3>
+<p>不妨设 \( a \gt b \)。易知\(x|a\)与\(x|b\)不同时成立, 否则\((a, b) \ge x\), 与 \((a, b) = 1\) 矛盾.
+分类讨论:</p>
+<ul>
+<li>
+<p>\(x|a, , x \nmid b\)</p>
+<p>\( \because x|a \)</p>
+<p>\( \therefore \exists  m \in Z^+,  mx=a. \)</p>
+<p>假设 \( x|a-b \),  即 \( \exists k \in Z^+,  kx=a-b \Leftrightarrow b = a-kx = (m-k)x. \)</p>
+<p>若 \( m = k \), 则 \( b = 0 \), 与 \( b &gt; 1 \) 矛盾;</p>
+<p>若 \( m \neq k \), 则 \( \exists (m-k) \in Z,  b = (m-k)x \Leftrightarrow x|b \),  与假设 \( x \nmid b \) 矛盾!</p>
+<p>故假设 \( x|a-b \) 不成立, \( x \nmid a-b. \)</p>
+</li>
+<li>
+<p>\(x \nmid a, , x|b\). 同理可得:
+若\( x|a-b\) ,  则 \( a = b + kx = (m+k)x \Leftrightarrow x|a \), 与 \(x \nmid a\) 矛盾! 故 \(x \nmid a-b \).</p>
+</li>
+</ul>
+<h3 id="代入条件-1"><a class="header" href="#代入条件-1">代入条件</a></h3>
+<p>令 \( x := p, a := 2n, b := p \)，显然有\( p \mid p \)。故，当 \(p \nmid 2n \)时， \( p \nmid 2n - p \)，即命题 \( \ref{1} \) 得证。</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>感谢中山大学数学专业的倪秉业师弟指出这个更简洁的证明方式！</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="整数和它两倍一倍半之间的合数可以整除整数的阶乘"><a class="header" href="#整数和它两倍一倍半之间的合数可以整除整数的阶乘">整数和它两倍（一倍半）之间的合数，可以整除整数的阶乘</a></h1>
+<h2 id="形式化描述-1"><a class="header" href="#形式化描述-1">形式化描述</a></h2>
+<p>\[ \label{2.1} \tag{2.1}
+\forall m \in Z^+, m \gt 8, n \in Z^+, m \lt n \lt 2m; \quad n \not \in Primes \Leftrightarrow n \mid m!
+\]</p>
+<h2 id="证明-1"><a class="header" href="#证明-1">证明</a></h2>
+<h3 id="充分性"><a class="header" href="#充分性">充分性</a></h3>
+<p>\[ \label{2.1.1} \tag{2.1.1}
+n \not \in Primes \Rightarrow n \mid m!
+\]</p>
+<p>因为 \( n \) 为合数，将其分为完全平方数和不完全平方数两种情况证明。</p>
+<h4 id="不完全平方数"><a class="header" href="#不完全平方数">不完全平方数</a></h4>
+<p>不妨设 \( n = ab (a \gt b \ge 2, (a, b) = 1) \)，则 \(b \lt a \lt m \)，证明如下：</p>
+<p>若 \( a \ge m \)，</p>
+<p>则 \(n = ab \ge 2a \ge 2m \Leftrightarrow n \ge 2m \)，</p>
+<p>这与 \( n \lt 2m \) 矛盾！</p>
+<p>故假设不成立，故 \(2 \le b \lt a \lt m \Rightarrow a \mid m!, b \mid m! \)。</p>
+<p>又 \( (a, b) = 1 \Rightarrow [a, b] = ab = n \)</p>
+<p>因此：\( a \mid m!, b \mid m \Rightarrow [a, b] \mid m! \Leftrightarrow n \mid m! \)。</p>
+<h4 id="完全平方数"><a class="header" href="#完全平方数">完全平方数</a></h4>
+<p>不妨设 \( n = k^2 \)，则 \(2 \lt k \lt 2k \lt m \)，证明如下：</p>
+<p>若 \( 2k \ge m \)，则 \( k \ge { m \over 2 } \)，</p>
+<p>则 \(n = k^2 \ge { m^2 \over 4 } \ge { 8 / 4 } \cdot m = 2m \Leftrightarrow n \ge 2m \)，</p>
+<p>这与 \( n \lt 2m \) 矛盾！</p>
+<p>故假设不成立，故 \( 2 \le k \lt 2k \lt m \Rightarrow 2k^2 \mid m! \)。</p>
+<p>因此：\( 2k^2 \mid m! \Leftrightarrow 2n | m! \Rightarrow n \mid m! \)。</p>
+<p><strong>综上，命题 \( \ref{2.1.1} \) 得证。</strong></p>
+<h3 id="必要性"><a class="header" href="#必要性">必要性</a></h3>
+<p>\[ \label{2.1.2} \tag{2.1.2}
+n \mid m! \Rightarrow n \not \in Primes
+\]</p>
+<p>反证：假设 \(n \in Primes \)，则：</p>
+<p>\( \because n &gt; m, n \in Primes, \)</p>
+<p>\( \therefore n \nmid 2, \space n \nmid 3, \space n \nmid 4, \space \dots, \space n \mid m \Rightarrow n \nmid m!， \)</p>
+<p>这与条件 \( n \mid m! \) 矛盾！故假设不成立，命题 \( \ref{2.1.2} \) 得证。</p>
+<p><strong>综上，命题 \( \ref{2.1} \) 得证。</strong></p>
+<h2 id="更强的结论"><a class="header" href="#更强的结论">更强的结论</a></h2>
+<p>显然对 \( \forall n \in (m, 3/2m) \Rightarrow n \in (m, 2n) \)，故：
+\[ \label{2.2} \tag{2.2}
+\forall m \in Z^+, m \gt 8, n \in Z^+, m \lt n \lt { 3m \over 2 }; \quad n \not \in Primes \Leftrightarrow n \mid m!
+\]</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="用初等数论探索哥德巴赫猜想"><a class="header" href="#用初等数论探索哥德巴赫猜想">用初等数论探索哥德巴赫猜想</a></h1>
+<blockquote>
+<p>在探索哥德巴赫猜想在初等数论框架内证明方式, 并由此发现一些显而易见的有趣结论: 若一个偶数2n能够拆分为两个奇素数的和的形式, 并且如果两个奇素数不相等, 那么这两个素数中较小的一个p(易知\( p \lt n \))必然不能整除n.</p>
+</blockquote>
+<h2 id="哥德巴赫猜想"><a class="header" href="#哥德巴赫猜想">哥德巴赫猜想</a></h2>
+<p>关于历史研究历程一类资料, 请参考<a href="https://en.wikipedia.org/wiki/Goldbach&#x27;s_conjecture">wiki</a>.</p>
+<p>本文将哥德巴赫猜想简单地描述为:</p>
+<blockquote>
+<p>给定任意整数\(n(n &gt; 1)\), 以及不超过n的所有素数<sup class="footnote-reference"><a href="#1">1</a></sup>的集合\( P = \{ p \mid Prime(p) \land p \lt n \} \). 设\(p\)为集合\( P \)中的一个元素, 猜想\(p\)对应的整数\(2n-p\)所组成的集合\(2n-P\)中, 必然存在素数元素.</p>
+</blockquote>
+<h2 id="引理"><a class="header" href="#引理">引理</a></h2>
+<h3 id="一-p中存在不整除n的元素"><a class="header" href="#一-p中存在不整除n的元素">(一) P中存在不整除n的元素</a></h3>
+<p>引理1:
+\[ \label{1.1} \tag{1.1}
+\exists p \in P, p \nmid n
+\]</p>
+<p>证明(反证法):</p>
+<p>假设命题\( \ref{1.1} \) 的反命题:
+\[\label{1.2} \tag{1.2}
+\forall p \in P, p \mid n \Leftrightarrow \forall p \in P, \exists m \in Z, m \neq 0 \land mp = n
+\]
+成立, 由伯特兰-切比雪夫定理(<a href="https://en.wikipedia.org/wiki/Bertrand%27s_postulate">Bertrand's postulate</a>)可知:
+\[
+\exists p_0, {n \over 2} \lt p_0 \lt n
+\]</p>
+<p>由假设\( \ref{1.2} \) 可得:
+\[{mp_0 \over 2} \lt p_0 \Rightarrow m \lt 2\].</p>
+<p>又\(m \in Z\), \(p_0 \gt 0, n \gt 0 \Rightarrow m = {n \over p_0} \gt 0\), 所以\(m = 1\), 即\(mp_0 = p_0 = n\), 这与\(p_0 \lt n\) 矛盾!</p>
+<p>所以命题\( \ref{1.2} \)不成立. 故命题\( \ref{1.1} \)成立.</p>
+<h3 id="二-给定正整数-x-若整除互质数对-a-b-之一则-x-不整除-a-b"><a class="header" href="#二-给定正整数-x-若整除互质数对-a-b-之一则-x-不整除-a-b">(二) 给定正整数 \(x\) 若整除互质数对\( a, b \)之一，则 \(x\) 不整除 \(a-b\)</a></h3>
+<p>\[ \label{2} \tag{2}
+(a, b) = 1, x \gt 1, a \gt 1, b \gt 1, x|a \lor x|b \Rightarrow x \nmid a-b
+\]</p>
+<p>证明:</p>
+<p>易知\(x|a\)与\(x|b\)不同时成立, 否则\((a, b) \ge x\), 与 \((a, b) = 1\) 矛盾.
+分类讨论:</p>
+<ul>
+<li>
+<p>\(x|a, , x \nmid b\)</p>
+<p>\( \because x|a \)</p>
+<p>\( \therefore \exists m \ge 1, m \in Z,  mx=a. \)</p>
+<p>假设 \( x|a-b \),  即 \( \exists k \in Z,  kx=a-b \Leftrightarrow b = a-kx = (m-k)x. \)</p>
+<p>若 \( m = k \), 则 \( b = 0 \), 与 \( b &gt; 1 \) 矛盾;</p>
+<p>若 \( m \neq k \), 则 \( \exists (m-k) \in Z,  b = (m-k)x \Leftrightarrow x|b \),  与假设 \( x \nmid b \) 矛盾!</p>
+<p>故假设 \( x|a-b \) 不成立, \( x \nmid a-b. \)</p>
+</li>
+<li>
+<p>\(x \nmid a, , x|b\). 同理可得:
+若\( x|a-b\) ,  则 \( a = b + kx = (m+k)x \Leftrightarrow x|a \), 与 \(x \nmid a\) 矛盾! 故 \(x \nmid a-b \).</p>
+</li>
+</ul>
+<h2 id="探索哥德巴赫猜想"><a class="header" href="#探索哥德巴赫猜想">探索哥德巴赫猜想</a></h2>
+<p>分类讨论:</p>
+<ul>
+<li>
+<p>若n为素数, 显然 \( 2n-n = n \) 亦为素数, 哥德巴赫猜想成立. <sup class="footnote-reference"><a href="#1">1</a></sup></p>
+</li>
+<li>
+<p>若n为合数, 则 \( n \ge 4 \). 由<a href="number_theory/goldbachs-conjecture.html#%E4%B8%80-p%E4%B8%AD%E5%AD%98%E5%9C%A8%E4%B8%8D%E6%95%B4%E9%99%A4n%E7%9A%84%E5%85%83%E7%B4%A0">引理(一)</a>, 将集合P以能否整除n划分为以下子集: \( S = \lbrace s \mid s|n \rbrace,  T = \lbrace t \mid t \nmid n \rbrace\)</p>
+<p>容易发现以下结论: \( \forall s \in S,  \because s|n, s|s,  \therefore s|2n-s \), 即若一个素数是n的素因子, 那么对应的整数 \( 2n-s \) 为合数. 故<strong>符合哥德巴赫猜想的数对 \( p \)与 \( 2n-p \)必然满足 \( p \nmid n \)(封面结论)</strong></p>
+<p>到这里, 我们可以得到一个哥德巴赫猜想的等价命题:</p>
+<blockquote>
+<p>对给定合数\(n\), 及小于\(n\)且不整除\(n\)的素数集合\( T = \lbrace t \mid Prime(t) \land t \lt n \land t \nmid n \rbrace \), 在集合\(T\)对应的整数集\(2n-T = \lbrace 2n - t \mid Prime(t) \land t \lt n \land t \nmid n \rbrace \)中是否存在素数</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="进一步探究"><a class="header" href="#进一步探究">进一步探究</a></h2>
+<h3 id="推论一"><a class="header" href="#推论一">推论一</a></h3>
+<p>\[ \label{3} \tag{3}
+\forall s \in S, t \in T,  s \nmid 2n-t
+\]
+而由<a href="number_theory/goldbachs-conjecture.html#%E4%BA%8C-%E7%BB%99%E5%AE%9A%E6%AD%A3%E6%95%B4%E6%95%B0-x-%E8%8B%A5%E6%95%B4%E9%99%A4%E4%BA%92%E8%B4%A8%E6%95%B0%E5%AF%B9-a-b-%E4%B9%8B%E4%B8%80%E5%88%99-x-%E4%B8%8D%E6%95%B4%E9%99%A4-a-b">引理(二)</a>可得:</p>
+<p>对于任意前述s, t, 有:</p>
+<ol>
+<li>\( Prime(s), Prime(t) \Rightarrow s \nmid t \)</li>
+<li>\( s|n \Rightarrow s|2n \)</li>
+</ol>
+<p>故: \( \forall s \in S, t \in T,  s \nmid 2n-t \)
+也就是, 至少集合 \( 2n-T \) 的元素不会被 \( S \) 中的元素整除， 命题 \( \ref{3} \) 证毕。</p>
+<h3 id="推论二"><a class="header" href="#推论二">推论二</a></h3>
+<p>对于\(T\)的子集 \( T_{\gt {n \over 2}} = T_1 = \lbrace t| t \in T, t \gt {n \over 2} \rbrace \), 具有以下性质:</p>
+<p>\[ \label{4} \tag{4}
+\forall t_1, t_2 \in T_1,  t_1 \nmid 2n-t_2
+\]</p>
+<p>证明如下:</p>
+<p>假设 \( \exists t_1, t_2,  t_1 \mid 2n-t_2 \), 即 \( \exists m \in Z^+, mt_1 = 2n - t_2 \).</p>
+<p>\( \because t_1, t_2为奇数, 2n为偶数 \)
+\( \therefore m为奇数. \)</p>
+<p>分类讨论:</p>
+<ol>
+<li>
+<p>当 \( m = 1 \) 时, t_1 + t_2 = 2n.</p>
+<p>\( \because t_1 \neq t_2, t_1 \lt n, t_2 \lt n, \therefore t_1 + t_2 \lt 2n \), 矛盾!</p>
+</li>
+<li>
+<p>当 \( m \ge 3 \)时:</p>
+<p>\(
+\because t_1 \gt {n \over 2},  t_2 \gt {n \over 2},
+\therefore mt_1 + t_2 \gt { mn \over 2 }  + { n \over 2 } \ge { 3n \over 2 } + { n \over 2 } = 2n
+\)
+, 矛盾!</p>
+</li>
+</ol>
+<p>故假设不成立, 命题 \( \ref{4} \) 证毕.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>如无特殊说明，本文中所有集合均为正整数集的子集</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>在本文中暂且抛去哥德巴赫猜想中对分解出的两个素数不能相等的要求。</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><!-- 引入font-awesome -->
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<h1 id="黄俊杰"><a class="header" href="#黄俊杰"><i class="fa fa-male" aria-hidden="true"></i> 黄俊杰</a></h1>
+<p><i class="fa fa-phone" aria-hidden="true"></i> 77u/KCs4NikxODgtMTk0OC0xMjYyDQo= ·
+<i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:huangjj.27@qq.com">huangjj.27@qq.com</a> ·
+<i class="fa fa-qq" aria-hidden="true"></i> 349373001 ·
+<i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/huangjj27">huangjj27</a> ·
+<i class="fa fa-gitlab" aria-hidden="true"></i> <a href="https://gitlab.com/huangjj27">huangjj27</a></p>
+<!-- <i class="fa fa-envelope-o" aria-hidden="true"></i> <349373001dc@gmail.com> · -->
+<p><i class="fa fa-book" aria-hidden="true"></i> <a href="./resume/%E9%BB%84%E4%BF%8A%E6%9D%B0-Rust.pdf">下载简历pdf</a> ·
+<i class="fa fa-book" aria-hidden="true"></i> tech-blog: <a href="https://huangjj27.github.io">https://huangjj27.github.io</a> ·
+<i class="fa fa-book" aria-hidden="true"></i> 微信技术公众号: 坏姐姐日常入门Rust</p>
+<h2 id="教育背景"><a class="header" href="#教育背景"><i class="fa fa-graduation-cap" aria-hidden="true"></i> 教育背景</a></h2>
+<p>2013.9 -- 2017.7 <strong>中山大学</strong> 数据科学与计算机学院(原软件学院) <strong>软件工程</strong> <strong><em>工学学士</em></strong></p>
+<h2 id="项目经历"><a class="header" href="#项目经历"><i class="fa fa-users" aria-hidden="true"></i> 项目经历</a></h2>
+<h3 id="数字化营业厅-202109---至今"><a class="header" href="#数字化营业厅-202109---至今">数字化营业厅 2021.09 - 至今</a></h3>
+<p><strong><em>测试工程师</em>: 业务测试、自动化测试、性能测试</strong></p>
+<ul>
+<li>负责数字化营业厅项目下的叫号系统与数据赋能看板项目的功能测试</li>
+<li>针对热点性能的接口与流程进行性能测试</li>
+<li>辅助运营人员排查与定位营业员反馈的生产问题</li>
+</ul>
+<p>Bonus:</p>
+<ul>
+<li>编写接口自动化测试用例（Postman），并设定生产环境的每日自动巡检（企业微信 bot）</li>
+<li>使用 <a href="https://book.goose.rs/">goose</a>、<a href="https://locust.io/">locus</a>框架编写性能测试用例</li>
+<li>制定性能测试需求评估、性能测试报告规范</li>
+<li>review 项目代码，并通过项目代码补充对 DES、AES、HTTP设计规范的了解</li>
+</ul>
+<h3 id="银行业客户经理智能推荐与客户反馈收集项目-202011---202109"><a class="header" href="#银行业客户经理智能推荐与客户反馈收集项目-202011---202109">银行业客户经理智能推荐与客户反馈收集项目 2020.11 - 2021.09</a></h3>
+<p><strong><em>大数据开发工程师: 大数据 EDI 开发</em></strong></p>
+<ul>
+<li>负责子项目的架构优化、详细设计及部分代码实现</li>
+<li>使得原本执行需要 40 小时的作业降至平均完成时间 6 小时</li>
+<li>通过 GitLab 管理项目源代码，进行问题追踪、代码评审、自动化流水构建、自动化测试执行</li>
+<li>负责子项目程序优化，进行 excel 配置自动化转化为数据库工具的开发</li>
+<li>负责子项目部分功能的测试，利用了 Python 工具自动化执行测试用例</li>
+<li>负责子项目中关键词词频分析相关部分程序的维护</li>
+</ul>
+<h3 id="hiveql-静态代码扫描检查工具-20194"><a class="header" href="#hiveql-静态代码扫描检查工具-20194">HiveQL 静态代码扫描检查工具 2019.4</a></h3>
+<p><strong><em>大数据开发工程师: 大数据 EDI 开发</em></strong></p>
+<ul>
+<li>自发地将银行客户用于 Hive QL 静态扫描规则的工具 CLI 化改造(基于 Python)</li>
+<li>与上下游沟通，将该工具部署至 CI 平台</li>
+<li>该工具成功阻止多次高风险代码提交</li>
+<li>对相关员工讲演培训</li>
+</ul>
+<h3 id="客户个人金融业务管理平台-20188----20194"><a class="header" href="#客户个人金融业务管理平台-20188----20194">客户个人金融业务管理平台 2018.8 -- 2019.4</a></h3>
+<p><strong><em>大数据开发工程师: 大数据 EDI 开发</em></strong></p>
+<ul>
+<li>基于银行客户内 EDI 框架（基于 Hadoop 与 Hive）进项业务项目开发</li>
+<li>基于 Hive 特性与调度流程优化提高已有项目代码效率</li>
+<li>组织相关开发经验分享</li>
+</ul>
+<p>（下列项目均为业余项目/开源贡献项目）</p>
+<h3 id="rust-中的异步编程"><a class="header" href="#rust-中的异步编程"><a href="https://huangjj27.github.io/async-book/index.html">《Rust 中的异步编程》</a></a></h3>
+<ul>
+<li><a href="https://rust-lang.github.io/async-book/index.html"><em>Asynchronous Programming in Rust</em></a> 一书翻译</li>
+<li>该书详细地介绍了在 Rust 中异步编程的基础设施 <code>Future</code> trait、<code>Waker</code>类型，为了使 <code>Future</code>
+正常工作的 <code>Pin&lt;T&gt;</code> 智能指针与 <code>Unpin</code> trait，以及方便开发而引用的 <code>async/await</code> 语法糖</li>
+<li>该书亦给出了示例构建一个简单的执行器，以及实现一个简单的利用异步优化性能的简单 HTTP 服务器</li>
+</ul>
+<h3 id="env_logger"><a class="header" href="#env_logger"><a href="https://github.com/env-logger-rs/env_logger">env_logger</a></a></h3>
+<ul>
+<li>在 std 环境下使用比较广泛的 logger</li>
+<li>为该库 <a href="https://github.com/env-logger-rs/env_logger/pull/148">实现了基础的 wasm32-unknown-unknown 目标的支持</a>, 让该库支持浏览器环境</li>
+<li>因为内部结构实现的原因（formatter 格式化后记录丢失了 <code>log::Level</code> 信息，writter 直接
+使用前述记录写入日志），暂时未实现在浏览器环境中的 log 分级。</li>
+</ul>
+<h3 id="tlssigapi---使用-rust-重写-tencent-login-service-signature-api"><a class="header" href="#tlssigapi---使用-rust-重写-tencent-login-service-signature-api"><a href="https://github.com/huangjj27/TLSSigAPI">TLSSigAPI</a> - 使用 Rust 重写 Tencent Login Service Signature API</a></h3>
+<ul>
+<li>参考了 <a href="https://github.com/tencentyun/tls-sig-api-python">Python</a> 程序实现</li>
+<li>补足了单元测试用例、集成测试用例</li>
+</ul>
+<h2 id="技能"><a class="header" href="#技能"><i class="fa fa-cogs" aria-hidden="true"></i> 技能</a></h2>
+<ul>
+<li>后端开发/web 开发
+<ul>
+<li>熟悉 Rust-lang，熟悉生命周期约束、所有权系统并对其进行分析</li>
+<li>熟悉面向对象编程的概念以及<a href="https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)">SOLID原则</a></li>
+<li>熟悉基本的算法与数据结构</li>
+<li>了解 <a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">RESTful API设计</a></li>
+</ul>
+</li>
+<li>版本管理
+<ul>
+<li>熟练使用 git/github/gitlab进行代码版本管理</li>
+<li>具有良好的版本管理意识, 熟悉 <a href="http://semver.org/lang/zh-CN/">语义化版本</a> 规则</li>
+</ul>
+</li>
+<li>软件测试 -- 有功能测试、单元测试、集成测试、接口测试经验，也熟悉使用 Rust 测试套件</li>
+<li>外语 -- 英语（CET6）</li>
+</ul>
+<!--
+## <i class="fa fa-heart" aria-hidden="true"></i> 期望
+- 工作地点: 广州
+- 期望岗位:
+    - 测试工程师
+        - 负责项目产品的自动化测试
+        - 参与开发、维护公司的自动化测试框架
+    - rust后端工程师
+        - 参与项目软件架构, 源码管理流程方案的决策
+        - 抽象, 建模项目需求, 分析关键对象的行为与状态变化
+        - 根据架构实现系统代码
+        - 对实现的代码编写单元测试, 集成测试, 性能测试用例代码
+        - 往架构师/设计师方向发展
+-->
+
+                    </main>
+
+                    <hr>
+                    <script src="https://utteranc.es/client.js"
+                            repo="huangjj27/blog-gitment"
+                            issue-term="title"
+                            label="utterances"
+                            theme="github-light"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+    </body>
+</html>

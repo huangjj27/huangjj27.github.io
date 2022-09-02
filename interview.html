@@ -1,0 +1,554 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>记一次面试 - huangjj27&#x27;s Tech blog</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="tauri-single-instance-bug-dangling.html">由 tauri 单例模式 bug “意外修复” 发现的 dangling</a></li><li class="chapter-item expanded "><a href="load-wasm-mistake.html">尝试在单 HTML 文件中嵌入 WASM 模块的错误操作</a></li><li class="chapter-item expanded "><a href="reservoir.html">蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item expanded "><a href="interview.html" class="active">记一次面试</a></li><li class="chapter-item expanded "><a href="snake-with-bevy.html">用 Bevy 游戏引擎编写贪吃蛇（译）</a></li><li class="chapter-item expanded "><a href="rust-safe-apps-51.html">Rust 安全应用开发51条</a></li><li class="chapter-item expanded "><a href="rust-tianhe-ii.html">在天河二号上配置 Rust 运行环境</a></li><li class="chapter-item expanded "><a href="rust-patterns/intro.html">设计模式在 Rust 中的实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust-patterns/builder.html">构建器（Builder）模式</a></li><li class="chapter-item expanded "><a href="rust-patterns/abstract-factory.html">抽象工厂（Abstract Factory）模式</a></li></ol></li><li class="chapter-item expanded "><a href="rust-mirror.html">Rust 镜像</a></li><li class="chapter-item expanded "><a href="rust-ffi.html">在 WSL 中学习 Rust FFI</a></li><li class="chapter-item expanded "><a href="wasi/intro.html">WASI探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="wasi/wasi_and_wasmtime.html">WASI简介与Wasmtime配置</a></li><li class="chapter-item expanded "><a href="wasi/wasi_guess.html">WASI版猜数字</a></li></ol></li><li class="chapter-item expanded "><a href="number_theory/intro.html">初等数论自我探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="number_theory/if_2n-p_is_divided_by_p.html">若质数p不能整除偶数2n，则p不整除2n-p</a></li><li class="chapter-item expanded "><a href="number_theory/single-composite-divsion.html">整数和它两倍间的合数的性质</a></li><li class="chapter-item expanded "><a href="number_theory/goldbachs-conjecture.html">用初等数论探索哥德巴赫猜想</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="resume.html">关于我</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">huangjj27&#x27;s Tech blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/huangjj27/huangjj27.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="总结一次面试"><a class="header" href="#总结一次面试">总结一次面试</a></h1>
+<h2 id="最值得总结的三个问题"><a class="header" href="#最值得总结的三个问题">最值得总结的三个问题</a></h2>
+<h3 id="线程同步有哪些方法如何用这些方法实现一个-rwlock"><a class="header" href="#线程同步有哪些方法如何用这些方法实现一个-rwlock">线程同步有哪些方法？如何用这些方法实现一个 RwLock？</a></h3>
+<p>线程同步的目的在于解决多个线程访问关键资源时的竞争状态。一个数据竞争的简单例子如下：</p>
+<pre><pre class="playground"><code class="language-rust edition2018">use std::thread;
+fn main() {
+  let mut s = String::from(&quot;Hello&quot;);
+
+  let thread1 = thread::spawn(|| {
+    println!(&quot;{}&quot;, s);
+  });
+
+  let thread2 = thread::spawn(|| {
+    s.push_str(&quot;World!&quot;);
+    println!(&quot;{}&quot;, s);
+  });
+
+  thread1.join();
+  thread2.join();
+}
+</code></pre></pre>
+<p>上文的代码中 <code>thread1</code> 试图打印 <code>s</code>, 预期得到输出 <code>Hello</code>, 但是 <code>thread2</code> 却改变了 <code>s</code> 的内容，
+那么 <code>thread1</code> 最终打印内容将取决于两个线程哪个先完成: 如果 <code>thread1</code> 先完成了，那么
+将打印 <code>Hello</code>; 如果 <code>thread2</code> 先完成了，那么将打印 <code>HelloWorld!</code>。</p>
+<p>实际上得益于 Rust 的所有权系统与生命周期（lifetime）检查，上述示例并不能编译——子线程可能
+会在主程序结束后继续运行，导致子线程捕获的 <code>s</code> 的引用失效；另外 <code>thread2</code> 直接修改了 <code>s</code>，
+换言之只会允许 <code>thread2</code> 独占地持有 <code>s</code> 的可变引用（<code>&amp;mut s</code>)，而不允许其他线程持有 <code>s</code>
+的任何引用。</p>
+<p>在 Rust 编程中，主要有以下线程同步的方法：</p>
+<ul>
+<li>互斥锁(Mutex)
+我们可以使用互斥锁 <code>Mutex&lt;T&gt;</code> 来控制只能有单独一个线程读取/修改
+对象。通常实践是在外面加上原子引用计数 <code>Arc</code> 变成 <code>Arc&lt;Mutex&lt;T&gt;&gt;</code>，来减少 <code>Mutex</code>
+拷贝的开销。对于多读少写的场景，可以用 <code>RwLock</code> 提高并发。</li>
+<li>条件变量(CondVar)
+条件变量用于“阻塞”线程并使得线程在等待事件时不需要消耗 CPU 时间。通常会与放进互斥锁
+布尔型的预言值（状态值）关联使用，在状态值发生变化时通知条件变量。</li>
+<li>屏障(Barrier)
+屏障用于在某个需要若干线程 <strong>都完成</strong> 前置操作后再开始计算的操作之前，让所有所需线程
+的状态都达到能开始进行计算的状态。</li>
+</ul>
+<h3 id="有什么问题是生存期标注无法修正的请给出一个例子"><a class="header" href="#有什么问题是生存期标注无法修正的请给出一个例子">有什么问题是生存期标注无法修正的？请给出一个例子</a></h3>
+<p>这道问题最后我也并没有理解，“生命周期标注无法修正的问题”，字面意思是，即使我们按照我们
+期望的程序语义来修正了生命周期标注，这个程序仍然不能通过编译，或者再运行时仍然不能得到
+期望结果。按此描述，一个可能的例子是，我们尝试从一个较短的引用返回一个较长的引用：</p>
+<pre><pre class="playground"><code class="language-rust edition2018">fn longhten&lt;'a&gt;(s_ref: &amp;'a str) -&gt; &amp;'static str {
+    s_ref
+}
+
+fn main() {
+    let s = String::from(&quot;hello&quot;);
+
+    let static_ref = longhten(&amp;s);
+
+    println!(&quot;{}&quot;, static_ref);
+}
+
+</code></pre></pre>
+<h3 id="waker-如何被唤醒-reactor要怎么实现"><a class="header" href="#waker-如何被唤醒-reactor要怎么实现">Waker 如何被唤醒？ Reactor要怎么实现？</a></h3>
+<p>Reactor 作为反应器，上面同时挂载了成千上万个待唤醒的事件，这里使用了mio统一封装了操作系统的多路复用API。
+在Linux中使用的是Epoll<sup class="footnote-reference"><a href="#3">1</a></sup>，在Mac中使用的则是Kqueue<sup class="footnote-reference"><a href="#2">2</a></sup></p>
+<pre><code class="language-ignore">loop {
+    // 轮询事件是否超时
+    poll.poll(&amp;events, timeout);
+    for event in events.iter() {
+        if (event.is_readable()) {
+            for waker in event.readers.wakers {
+                waker.wake();
+            }
+        }
+        if (event.is_writeable()) {
+            for waker in event.writers.wakers {
+                waker.wake();
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="一面----手写代码"><a class="header" href="#一面----手写代码">一面 -- 手写代码</a></h2>
+<h3 id="1-实现一个二分查找函数"><a class="header" href="#1-实现一个二分查找函数">1. 实现一个二分查找函数</a></h3>
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">use std::cmp::Ordering;
+</span><span class="boring">
+</span>/// 给出一个从小到大排列的数组，请实现一个函数，用二分法把指定数组 x 的位置找出来。若 x
+/// 不存在，则返回 -1. 若 x 存在多个，请返回 x 在数组中第一次出现的位置
+fn find(arr: Vec&lt;i32&gt;, x: i32) -&gt; i32 {
+    let (mut left, mut right) = (0, arr.len() - 1);
+    loop {
+        if left &gt; right {
+            return -1;
+        }
+
+        let mut mid = (left + right) / 2;
+        match arr[mid].cmp(&amp;x) {
+            // 记得要排除已经命中的元素！
+            Ordering::Less =&gt; left = mid + 1,
+            Ordering::Greater =&gt; right = mid - 1,
+            Ordering::Equal =&gt; {
+                while mid &gt;= 1 &amp;&amp; arr[mid - 1] == x {
+                    mid -= 1;
+                }
+
+                return mid as i32;
+            },
+        }
+    }
+}
+
+<span class="boring">#[cfg(test)]
+</span><span class="boring">mod test {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn should_return_minus1() {
+</span><span class="boring">        let arr = vec![1, 3, 5];
+</span><span class="boring">        let x = 2;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(find(arr, x), -1);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn should_return_mid() {
+</span><span class="boring">        let arr = vec![1, 3, 5, 7, 9, 10, 10];
+</span><span class="boring">        let x = 7;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(find(arr, x), 3);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn should_return_first() {
+</span><span class="boring">        let arr = vec![1, 3, 5, 7, 9, 10, 10];
+</span><span class="boring">        let x = 10;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(find(arr, x), 5);
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>
+<p>Q: 请分析该函数的算法复杂度？</p>
+<ul>
+<li>A: 时间复杂度 \( O(\log n) \)，最坏情况下的事件复杂度是 \( O(n) \)</li>
+</ul>
+</li>
+<li>
+<p>Q: 请优化这个算法？</p>
+<ul>
+<li>A：一个优化方法是 <strong>插值查找法</strong>，利用如下公式自动根据查找到的元素与目标的距离来修正下一次查找
+的区间范围，提高查找速度：</li>
+</ul>
+</li>
+</ul>
+<p>\[ mid = left + { key - arr[left] \over arr[right] - key } (right - left) \]</p>
+<h3 id="2-镜像二叉树"><a class="header" href="#2-镜像二叉树">2. 镜像二叉树</a></h3>
+<p>请反转二叉树。如给出以下二叉树：</p>
+<pre><code class="language-markdown">     1
+   /   \
+  2     3
+ / \   / \
+4   5 6   7
+</code></pre>
+<p>反转为：</p>
+<pre><code class="language-markdown">     1
+   /   \
+  3     2
+ / \   / \
+7   6 5   4
+</code></pre>
+<p>递归解法：</p>
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">use std::convert::Into;
+</span><span class="boring">
+</span>struct Node {
+    val: i32,
+    left: NodeLink,
+    right: NodeLink,
+}
+
+type NodeLink = Option&lt;Box&lt;Node&gt;&gt;;
+
+<span class="boring">fn construct_tree() -&gt; Box&lt;Node&gt; {
+</span><span class="boring">    let l3left1 = Node {
+</span><span class="boring">        val: 4,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3right1 = Node {
+</span><span class="boring">        val: 5,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3left2 = Node {
+</span><span class="boring">        val: 6,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3right2 = Node {
+</span><span class="boring">        val: 7,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l2left = Node {
+</span><span class="boring">        val: 2,
+</span><span class="boring">        left: Some(Box::new(l3left1)),
+</span><span class="boring">        right: Some(Box::new(l3right1)),
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">
+</span><span class="boring">    let l2right = Node {
+</span><span class="boring">        val: 3,
+</span><span class="boring">        left: Some(Box::new(l3left2)),
+</span><span class="boring">        right: Some(Box::new(l3right2)),
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    Box::new(Node {
+</span><span class="boring">        val: 1,
+</span><span class="boring">        left: Some(Box::new(l2left)),
+</span><span class="boring">        right: Some(Box::new(l2right)),
+</span><span class="boring">    })
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn construct_mirror() -&gt; Box&lt;Node&gt; {
+</span><span class="boring">    let l3left1 = Node {
+</span><span class="boring">        val: 7,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3right1 = Node {
+</span><span class="boring">        val: 6,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3left2 = Node {
+</span><span class="boring">        val: 5,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l3right2 = Node {
+</span><span class="boring">        val: 4,
+</span><span class="boring">        left: None,
+</span><span class="boring">        right: None,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let l2left = Node {
+</span><span class="boring">        val: 3,
+</span><span class="boring">        left: Some(Box::new(l3left1)),
+</span><span class="boring">        right: Some(Box::new(l3right1)),
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">
+</span><span class="boring">    let l2right = Node {
+</span><span class="boring">        val: 2,
+</span><span class="boring">        left: Some(Box::new(l3left2)),
+</span><span class="boring">        right: Some(Box::new(l3right2)),
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    Box::new(Node {
+</span><span class="boring">        val: 1,
+</span><span class="boring">        left: Some(Box::new(l2left)),
+</span><span class="boring">        right: Some(Box::new(l2right)),
+</span><span class="boring">    })
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Into&lt;Vec&lt;i32&gt;&gt; for Box&lt;Node&gt; {
+</span><span class="boring">    fn into(mut self) -&gt; Vec&lt;i32&gt; {
+</span><span class="boring">        let v_left: Vec&lt;i32&gt;;
+</span><span class="boring">        let v_right: Vec&lt;i32&gt;;
+</span><span class="boring">        v_left = if let Some(node) = self.left.take() {
+</span><span class="boring">            node.into()
+</span><span class="boring">        } else {
+</span><span class="boring">            Vec::new()
+</span><span class="boring">        };
+</span><span class="boring">
+</span><span class="boring">        v_right = if let Some(node) = self.right.take() {
+</span><span class="boring">            node.into()
+</span><span class="boring">        } else {
+</span><span class="boring">            Vec::new()
+</span><span class="boring">        };
+</span><span class="boring">
+</span><span class="boring">       let mut v = Vec::new();
+</span><span class="boring">       v.push(self.val);
+</span><span class="boring">       v.extend(v_left.into_iter());
+</span><span class="boring">       v.extend(v_right.into_iter());
+</span><span class="boring">
+</span><span class="boring">       v
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn mirror(root: &amp;mut Node) {
+    let (mut tmp_left, mut tmp_right) = (NodeLink::None, NodeLink::None);
+
+    if let Some(mut node) = root.left.take() {
+        mirror(&amp;mut node);
+        tmp_left = Some(node);
+    }
+
+    if let Some(mut node) = root.right.take() {
+        mirror(&amp;mut node);
+        tmp_right = Some(node);
+    }
+
+    root.left = tmp_right;
+    root.right = tmp_left;
+}
+
+<span class="boring">#[cfg(test)]
+</span><span class="boring">mod test {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn should_mirrored() {
+</span><span class="boring">        let mut tree = construct_tree();
+</span><span class="boring">        let expect = construct_mirror();
+</span><span class="boring">
+</span><span class="boring">        let mirror = mirror(&amp;mut tree);
+</span><span class="boring">        assert_eq!(&lt;Box&lt;Node&gt; as Into&lt;Vec&lt;i32&gt;&gt;&gt;::into(tree), &lt;Box&lt;Node&gt; as Into&lt;Vec&lt;i32&gt;&gt;&gt;::into(expect));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>Q: 请优化这个算法？
+<ul>
+<li>A：如果不用递归（因为递归会加深调用栈），可以使用 <strong>广度优先搜索算法</strong> 来自根向叶
+逐层反转左右子节点的指针，并将子节点的指针放入到队列中待进行处理。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">3</sup>
+<p><a href="https://baike.baidu.com/item/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5">线程同步 -- 百度百科</a></p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p><a href="https://rustcc.cn/article?id=e6d50145-4bc2-4f1e-84da-c39c8217640b">Rust异步浅谈 -- leaxoy</a></p>
+</div>
+
+                    </main>
+
+                    <hr>
+                    <script src="https://utteranc.es/client.js"
+                            repo="huangjj27/blog-gitment"
+                            issue-term="title"
+                            label="utterances"
+                            theme="github-light"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="reservoir.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="snake-with-bevy.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="reservoir.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="snake-with-bevy.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+    </body>
+</html>

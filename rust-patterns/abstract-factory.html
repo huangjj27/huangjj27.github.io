@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>抽象工厂（Abstract Factory）模式 - huangjj27&#x27;s Tech blog</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../tauri-single-instance-bug-dangling.html">由 tauri 单例模式 bug “意外修复” 发现的 dangling</a></li><li class="chapter-item expanded "><a href="../load-wasm-mistake.html">尝试在单 HTML 文件中嵌入 WASM 模块的错误操作</a></li><li class="chapter-item expanded "><a href="../reservoir.html">蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item expanded "><a href="../interview.html">记一次面试</a></li><li class="chapter-item expanded "><a href="../snake-with-bevy.html">用 Bevy 游戏引擎编写贪吃蛇（译）</a></li><li class="chapter-item expanded "><a href="../rust-safe-apps-51.html">Rust 安全应用开发51条</a></li><li class="chapter-item expanded "><a href="../rust-tianhe-ii.html">在天河二号上配置 Rust 运行环境</a></li><li class="chapter-item expanded "><a href="../rust-patterns/intro.html">设计模式在 Rust 中的实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust-patterns/builder.html">构建器（Builder）模式</a></li><li class="chapter-item expanded "><a href="../rust-patterns/abstract-factory.html" class="active">抽象工厂（Abstract Factory）模式</a></li></ol></li><li class="chapter-item expanded "><a href="../rust-mirror.html">Rust 镜像</a></li><li class="chapter-item expanded "><a href="../rust-ffi.html">在 WSL 中学习 Rust FFI</a></li><li class="chapter-item expanded "><a href="../wasi/intro.html">WASI探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../wasi/wasi_and_wasmtime.html">WASI简介与Wasmtime配置</a></li><li class="chapter-item expanded "><a href="../wasi/wasi_guess.html">WASI版猜数字</a></li></ol></li><li class="chapter-item expanded "><a href="../number_theory/intro.html">初等数论自我探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../number_theory/if_2n-p_is_divided_by_p.html">若质数p不能整除偶数2n，则p不整除2n-p</a></li><li class="chapter-item expanded "><a href="../number_theory/single-composite-divsion.html">整数和它两倍间的合数的性质</a></li><li class="chapter-item expanded "><a href="../number_theory/goldbachs-conjecture.html">用初等数论探索哥德巴赫猜想</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../resume.html">关于我</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">huangjj27&#x27;s Tech blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/huangjj27/huangjj27.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="抽象工厂abstract-factory模式"><a class="header" href="#抽象工厂abstract-factory模式">抽象工厂（Abstract Factory）模式</a></h1>
+<h2 id="场景需求"><a class="header" href="#场景需求">场景需求</a></h2>
+<p>我们在设计游戏的时候，经常会遇到设计类似关卡的需求，例如 RPG 游戏中的副本（dungeon），每种副本都循序类似的模式、类似的行为，但是采用资源不同，行为的细节可能有所差异，为了方便我们新增新的副本，同时使得原有副本的修改尽可能少影响游戏的运行机制（所谓符合开闭原则），我们可以采用抽象工厂模式来统一管理游戏副本的生成。</p>
+<h2 id="场景设计"><a class="header" href="#场景设计">场景设计</a></h2>
+<p>我们先设计一个简单的副本模式，包含了一个 Boss 和若干小怪，小怪数量在范围内随机波动。小怪和 Boss 都拥有血量，但是只有Boss 能攻击。我们把这个模式定义为结构：</p>
+<pre><code class="language-rs no_run">struct Dungeon {
+    boss: Box&lt;dyn Boss&gt;,
+    monsters: Vec&lt;Box&lt;dyn Monster&gt;&gt;,
+}
+
+trait Monster {
+    // 获知当前血量
+    fn life(&amp;self) -&gt; u64;
+
+    // 怪物血量可以因受到攻击降低，也可自行回复
+    fn change_life(&amp;mut self, diff: i32);
+}
+
+trait Boss: Monster {
+    // Boss 能攻击玩家（Hero）
+    fn attack(&amp;self target: &amp;mut Box&lt;dyn Hero&gt;);
+}
+</code></pre>
+<p>上面在运行时已经不关心具体是什么副本（当然，副本的元数据可以添加为 <code>Dungeon</code> 结构的字段），我们只需要知道它有一个 <code>Boss</code> 和若干 <code>Monster</code>。</p>
+<p>然后，我们建立抽象工厂：</p>
+<pre><code>use rand::random;
+trait DungeonFactory {
+    fn create_boss(&amp;self) -&gt; Box&lt;dyn Boss&gt;
+    fn create_mosters(&amp;self, amount: usize) -&gt; Vec&lt;Box&lt;dyn Monster&gt;&gt;
+
+    fn generate_dungeon(&amp;self) -&gt; Dungeon {
+        Dungeon {
+            boss: self.create_boss(),
+            monsters: self.create_monsters(random::&lt;u8&gt;() % 2 + 2), // 2 ~ 3 只小怪
+        }
+    }
+}
+</code></pre>
+<p>然后，我们创建新手副本的具体工厂:</p>
+<pre><code class="language-rs no_run">struct NewbieDungeonFactory;
+
+impl DungeonFactory for NewBieDungeonFactory {
+    fn create_boss(&amp;self) -&gt; Box&lt;dyn Boss&gt; {
+        NewBieBoss::new()
+    }
+
+    // 新手副本甚至没有小怪，
+    fn create_mosters(&amp;self, amount: usize) -&gt; Vec&lt;Box&lt;dyn Monster&gt;&gt; {
+        Vec::new()
+    }
+
+    // generate_dungeon 已有默认实现，不需要修改。
+}
+
+// 新手副本，boss极弱
+struct NewbieBoss {
+    max_life: u8,
+    life: u8,
+    attack: u8,
+}
+
+impl NewbieBoss {
+    fn new() -&gt; Self {
+        NewBieBoss {
+            max_life: 5,
+            life: 5,
+            attack: 1,
+        }
+    }
+}
+
+impl Monster for NewBieBoss {
+    fn life(&amp;self) -&gt; u64 {
+        self.life as u64
+    }
+
+    fn change_life(&amp;mut self, diff: i32) {
+        self.life = match self.life + diff {
+            n if n &lt; 0 =&gt; 0,
+            n if n &gt; self.max_life =&gt; self.max_life
+            n =&gt; n
+        };
+    }
+}
+
+impl Boss for NewbieBoss {
+    fn attack(&amp;self, target: &amp;mut Box&lt;dyn Hero&gt;) {
+        target.attacked_wtih(self.attack);
+    }
+}
+</code></pre>
+<p>上面的工厂看上去好像很多内容，主要是因为 <code>Boss</code>特质需要一个新载体 <code>NewBieBoss</code>，同时实现 <code>Boss</code> 载体的 <code>NewBieBoss</code> 也需要实现 <code>Monster</code> 特质（继承关系组合化）, 这部分的代码作为示例让读者理解设定的 <code>Dungeon</code> 模式的行为。</p>
+<p>接下来，我们可以新增一个新副本，新副本的小怪和 Boss 是新手副本的 <code>NewbieBoss</code>，但是小怪已经不能攻击玩家了（通过动态分发为 <code>dyn Monster</code> 对象来屏蔽 <code>Boss</code> 的攻击行为：</p>
+<pre><code class="language-rs no_run">struct JuniorDungeonFactory;
+
+impl DungeonFactory for JuniorDungeonFactory {
+    fn create_boss(&amp;self) -&gt; Box&lt;dyn Boss&gt; {
+        NewBieBoss::new()
+    }
+
+    // 新手副本甚至没有小怪，
+    fn create_mosters(&amp;self, amount: usize) -&gt; Vec&lt;Box&lt;dyn Monster&gt;&gt; {
+        vec![NewBieBoss::new(); amount]
+    }
+
+    // generate_dungeon 已有默认实现，不需要修改。
+}
+</code></pre>
+<p>我们可以看到，抽象工厂模式很方便地为我们重用了已有资源并确保副本的行为效果。</p>
+<h2 id="为什么使用抽象工厂模式"><a class="header" href="#为什么使用抽象工厂模式">为什么使用抽象工厂模式</a></h2>
+<ul>
+<li><strong>模式统一</strong>。通过抽象工厂可以快速地制作符合相同模式，但是资源细节稍有差异的工厂，生成具有同样属性的产品。</li>
+<li><strong>职责专一</strong>。每个具体工厂只有一个原因需要被修改——该工厂对应的副本细节变化了。</li>
+<li><strong>符合开闭原则</strong>。因为我们统一出了抽象工厂的接口，当我们修改具体工厂的具体实现细节时，并不会影响到接口调用；而新增具体工厂时只需要提供对应的接口，也可以方便地接入副本生成系统。</li>
+</ul>
+
+                    </main>
+
+                    <hr>
+                    <script src="https://utteranc.es/client.js"
+                            repo="huangjj27/blog-gitment"
+                            issue-term="title"
+                            label="utterances"
+                            theme="github-light"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../rust-patterns/builder.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../rust-mirror.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../rust-patterns/builder.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../rust-mirror.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+    </body>
+</html>

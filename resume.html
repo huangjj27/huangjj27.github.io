@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>关于我 - huangjj27&#x27;s Tech blog</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="tauri-single-instance-bug-dangling.html">由 tauri 单例模式 bug “意外修复” 发现的 dangling</a></li><li class="chapter-item expanded "><a href="load-wasm-mistake.html">尝试在单 HTML 文件中嵌入 WASM 模块的错误操作</a></li><li class="chapter-item expanded "><a href="reservoir.html">蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item expanded "><a href="interview.html">记一次面试</a></li><li class="chapter-item expanded "><a href="snake-with-bevy.html">用 Bevy 游戏引擎编写贪吃蛇（译）</a></li><li class="chapter-item expanded "><a href="rust-safe-apps-51.html">Rust 安全应用开发51条</a></li><li class="chapter-item expanded "><a href="rust-tianhe-ii.html">在天河二号上配置 Rust 运行环境</a></li><li class="chapter-item expanded "><a href="rust-patterns/intro.html">设计模式在 Rust 中的实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust-patterns/builder.html">构建器（Builder）模式</a></li><li class="chapter-item expanded "><a href="rust-patterns/abstract-factory.html">抽象工厂（Abstract Factory）模式</a></li></ol></li><li class="chapter-item expanded "><a href="rust-mirror.html">Rust 镜像</a></li><li class="chapter-item expanded "><a href="rust-ffi.html">在 WSL 中学习 Rust FFI</a></li><li class="chapter-item expanded "><a href="wasi/intro.html">WASI探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="wasi/wasi_and_wasmtime.html">WASI简介与Wasmtime配置</a></li><li class="chapter-item expanded "><a href="wasi/wasi_guess.html">WASI版猜数字</a></li></ol></li><li class="chapter-item expanded "><a href="number_theory/intro.html">初等数论自我探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="number_theory/if_2n-p_is_divided_by_p.html">若质数p不能整除偶数2n，则p不整除2n-p</a></li><li class="chapter-item expanded "><a href="number_theory/single-composite-divsion.html">整数和它两倍间的合数的性质</a></li><li class="chapter-item expanded "><a href="number_theory/goldbachs-conjecture.html">用初等数论探索哥德巴赫猜想</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="resume.html" class="active">关于我</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">huangjj27&#x27;s Tech blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/huangjj27/huangjj27.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!-- 引入font-awesome -->
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<h1 id="黄俊杰"><a class="header" href="#黄俊杰"><i class="fa fa-male" aria-hidden="true"></i> 黄俊杰</a></h1>
+<p><i class="fa fa-phone" aria-hidden="true"></i> 77u/KCs4NikxODgtMTk0OC0xMjYyDQo= ·
+<i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:huangjj.27@qq.com">huangjj.27@qq.com</a> ·
+<i class="fa fa-qq" aria-hidden="true"></i> 349373001 ·
+<i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/huangjj27">huangjj27</a> ·
+<i class="fa fa-gitlab" aria-hidden="true"></i> <a href="https://gitlab.com/huangjj27">huangjj27</a></p>
+<!-- <i class="fa fa-envelope-o" aria-hidden="true"></i> <349373001dc@gmail.com> · -->
+<p><i class="fa fa-book" aria-hidden="true"></i> <a href="./resume/%E9%BB%84%E4%BF%8A%E6%9D%B0-Rust.pdf">下载简历pdf</a> ·
+<i class="fa fa-book" aria-hidden="true"></i> tech-blog: <a href="https://huangjj27.github.io">https://huangjj27.github.io</a> ·
+<i class="fa fa-book" aria-hidden="true"></i> 微信技术公众号: 坏姐姐日常入门Rust</p>
+<h2 id="教育背景"><a class="header" href="#教育背景"><i class="fa fa-graduation-cap" aria-hidden="true"></i> 教育背景</a></h2>
+<p>2013.9 -- 2017.7 <strong>中山大学</strong> 数据科学与计算机学院(原软件学院) <strong>软件工程</strong> <strong><em>工学学士</em></strong></p>
+<h2 id="项目经历"><a class="header" href="#项目经历"><i class="fa fa-users" aria-hidden="true"></i> 项目经历</a></h2>
+<h3 id="数字化营业厅-202109---至今"><a class="header" href="#数字化营业厅-202109---至今">数字化营业厅 2021.09 - 至今</a></h3>
+<p><strong><em>测试工程师</em>: 业务测试、自动化测试、性能测试</strong></p>
+<ul>
+<li>负责数字化营业厅项目下的叫号系统与数据赋能看板项目的功能测试</li>
+<li>针对热点性能的接口与流程进行性能测试</li>
+<li>辅助运营人员排查与定位营业员反馈的生产问题</li>
+</ul>
+<p>Bonus:</p>
+<ul>
+<li>编写接口自动化测试用例（Postman），并设定生产环境的每日自动巡检（企业微信 bot）</li>
+<li>使用 <a href="https://book.goose.rs/">goose</a>、<a href="https://locust.io/">locus</a>框架编写性能测试用例</li>
+<li>制定性能测试需求评估、性能测试报告规范</li>
+<li>review 项目代码，并通过项目代码补充对 DES、AES、HTTP设计规范的了解</li>
+</ul>
+<h3 id="银行业客户经理智能推荐与客户反馈收集项目-202011---202109"><a class="header" href="#银行业客户经理智能推荐与客户反馈收集项目-202011---202109">银行业客户经理智能推荐与客户反馈收集项目 2020.11 - 2021.09</a></h3>
+<p><strong><em>大数据开发工程师: 大数据 EDI 开发</em></strong></p>
+<ul>
+<li>负责子项目的架构优化、详细设计及部分代码实现</li>
+<li>使得原本执行需要 40 小时的作业降至平均完成时间 6 小时</li>
+<li>通过 GitLab 管理项目源代码，进行问题追踪、代码评审、自动化流水构建、自动化测试执行</li>
+<li>负责子项目程序优化，进行 excel 配置自动化转化为数据库工具的开发</li>
+<li>负责子项目部分功能的测试，利用了 Python 工具自动化执行测试用例</li>
+<li>负责子项目中关键词词频分析相关部分程序的维护</li>
+</ul>
+<h3 id="hiveql-静态代码扫描检查工具-20194"><a class="header" href="#hiveql-静态代码扫描检查工具-20194">HiveQL 静态代码扫描检查工具 2019.4</a></h3>
+<p><strong><em>大数据开发工程师: 大数据 EDI 开发</em></strong></p>
+<ul>
+<li>自发地将银行客户用于 Hive QL 静态扫描规则的工具 CLI 化改造(基于 Python)</li>
+<li>与上下游沟通，将该工具部署至 CI 平台</li>
+<li>该工具成功阻止多次高风险代码提交</li>
+<li>对相关员工讲演培训</li>
+</ul>
+<h3 id="客户个人金融业务管理平台-20188----20194"><a class="header" href="#客户个人金融业务管理平台-20188----20194">客户个人金融业务管理平台 2018.8 -- 2019.4</a></h3>
+<p><strong><em>大数据开发工程师: 大数据 EDI 开发</em></strong></p>
+<ul>
+<li>基于银行客户内 EDI 框架（基于 Hadoop 与 Hive）进项业务项目开发</li>
+<li>基于 Hive 特性与调度流程优化提高已有项目代码效率</li>
+<li>组织相关开发经验分享</li>
+</ul>
+<p>（下列项目均为业余项目/开源贡献项目）</p>
+<h3 id="rust-中的异步编程"><a class="header" href="#rust-中的异步编程"><a href="https://huangjj27.github.io/async-book/index.html">《Rust 中的异步编程》</a></a></h3>
+<ul>
+<li><a href="https://rust-lang.github.io/async-book/index.html"><em>Asynchronous Programming in Rust</em></a> 一书翻译</li>
+<li>该书详细地介绍了在 Rust 中异步编程的基础设施 <code>Future</code> trait、<code>Waker</code>类型，为了使 <code>Future</code>
+正常工作的 <code>Pin&lt;T&gt;</code> 智能指针与 <code>Unpin</code> trait，以及方便开发而引用的 <code>async/await</code> 语法糖</li>
+<li>该书亦给出了示例构建一个简单的执行器，以及实现一个简单的利用异步优化性能的简单 HTTP 服务器</li>
+</ul>
+<h3 id="env_logger"><a class="header" href="#env_logger"><a href="https://github.com/env-logger-rs/env_logger">env_logger</a></a></h3>
+<ul>
+<li>在 std 环境下使用比较广泛的 logger</li>
+<li>为该库 <a href="https://github.com/env-logger-rs/env_logger/pull/148">实现了基础的 wasm32-unknown-unknown 目标的支持</a>, 让该库支持浏览器环境</li>
+<li>因为内部结构实现的原因（formatter 格式化后记录丢失了 <code>log::Level</code> 信息，writter 直接
+使用前述记录写入日志），暂时未实现在浏览器环境中的 log 分级。</li>
+</ul>
+<h3 id="tlssigapi---使用-rust-重写-tencent-login-service-signature-api"><a class="header" href="#tlssigapi---使用-rust-重写-tencent-login-service-signature-api"><a href="https://github.com/huangjj27/TLSSigAPI">TLSSigAPI</a> - 使用 Rust 重写 Tencent Login Service Signature API</a></h3>
+<ul>
+<li>参考了 <a href="https://github.com/tencentyun/tls-sig-api-python">Python</a> 程序实现</li>
+<li>补足了单元测试用例、集成测试用例</li>
+</ul>
+<h2 id="技能"><a class="header" href="#技能"><i class="fa fa-cogs" aria-hidden="true"></i> 技能</a></h2>
+<ul>
+<li>后端开发/web 开发
+<ul>
+<li>熟悉 Rust-lang，熟悉生命周期约束、所有权系统并对其进行分析</li>
+<li>熟悉面向对象编程的概念以及<a href="https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)">SOLID原则</a></li>
+<li>熟悉基本的算法与数据结构</li>
+<li>了解 <a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">RESTful API设计</a></li>
+</ul>
+</li>
+<li>版本管理
+<ul>
+<li>熟练使用 git/github/gitlab进行代码版本管理</li>
+<li>具有良好的版本管理意识, 熟悉 <a href="http://semver.org/lang/zh-CN/">语义化版本</a> 规则</li>
+</ul>
+</li>
+<li>软件测试 -- 有功能测试、单元测试、集成测试、接口测试经验，也熟悉使用 Rust 测试套件</li>
+<li>外语 -- 英语（CET6）</li>
+</ul>
+<!--
+## <i class="fa fa-heart" aria-hidden="true"></i> 期望
+- 工作地点: 广州
+- 期望岗位:
+    - 测试工程师
+        - 负责项目产品的自动化测试
+        - 参与开发、维护公司的自动化测试框架
+    - rust后端工程师
+        - 参与项目软件架构, 源码管理流程方案的决策
+        - 抽象, 建模项目需求, 分析关键对象的行为与状态变化
+        - 根据架构实现系统代码
+        - 对实现的代码编写单元测试, 集成测试, 性能测试用例代码
+        - 往架构师/设计师方向发展
+-->
+
+                    </main>
+
+                    <hr>
+                    <script src="https://utteranc.es/client.js"
+                            repo="huangjj27/blog-gitment"
+                            issue-term="title"
+                            label="utterances"
+                            theme="github-light"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="number_theory/goldbachs-conjecture.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="number_theory/goldbachs-conjecture.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+    </body>
+</html>

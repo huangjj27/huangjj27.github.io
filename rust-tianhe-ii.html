@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>在天河二号上配置 Rust 运行环境 - huangjj27&#x27;s Tech blog</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="tauri-single-instance-bug-dangling.html">由 tauri 单例模式 bug “意外修复” 发现的 dangling</a></li><li class="chapter-item expanded "><a href="load-wasm-mistake.html">尝试在单 HTML 文件中嵌入 WASM 模块的错误操作</a></li><li class="chapter-item expanded "><a href="reservoir.html">蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item expanded "><a href="interview.html">记一次面试</a></li><li class="chapter-item expanded "><a href="snake-with-bevy.html">用 Bevy 游戏引擎编写贪吃蛇（译）</a></li><li class="chapter-item expanded "><a href="rust-safe-apps-51.html">Rust 安全应用开发51条</a></li><li class="chapter-item expanded "><a href="rust-tianhe-ii.html" class="active">在天河二号上配置 Rust 运行环境</a></li><li class="chapter-item expanded "><a href="rust-patterns/intro.html">设计模式在 Rust 中的实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust-patterns/builder.html">构建器（Builder）模式</a></li><li class="chapter-item expanded "><a href="rust-patterns/abstract-factory.html">抽象工厂（Abstract Factory）模式</a></li></ol></li><li class="chapter-item expanded "><a href="rust-mirror.html">Rust 镜像</a></li><li class="chapter-item expanded "><a href="rust-ffi.html">在 WSL 中学习 Rust FFI</a></li><li class="chapter-item expanded "><a href="wasi/intro.html">WASI探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="wasi/wasi_and_wasmtime.html">WASI简介与Wasmtime配置</a></li><li class="chapter-item expanded "><a href="wasi/wasi_guess.html">WASI版猜数字</a></li></ol></li><li class="chapter-item expanded "><a href="number_theory/intro.html">初等数论自我探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="number_theory/if_2n-p_is_divided_by_p.html">若质数p不能整除偶数2n，则p不整除2n-p</a></li><li class="chapter-item expanded "><a href="number_theory/single-composite-divsion.html">整数和它两倍间的合数的性质</a></li><li class="chapter-item expanded "><a href="number_theory/goldbachs-conjecture.html">用初等数论探索哥德巴赫猜想</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="resume.html">关于我</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">huangjj27&#x27;s Tech blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/huangjj27/huangjj27.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="在天河二号上配置-rust-运行环境"><a class="header" href="#在天河二号上配置-rust-运行环境">在天河二号上配置 Rust 运行环境</a></h1>
+<blockquote>
+<p>受朋友委托，需要帮忙在“天河二号”超级计算机上配置 Rust 编程语言运行环境，并配置安装 <a href="https://github.com/sirkibsirkib/rust-overlaps"><code>rust-overlaps</code></a>。</p>
+</blockquote>
+<h2 id="阅读须知"><a class="header" href="#阅读须知">阅读须知</a></h2>
+<p>本文将不涉及：</p>
+<ul>
+<li><a href="http://www.nscc-gz.cn/Service/Igotto.html">如何申请天河二号计算资源</a></li>
+<li><a href="https://tlanyan.me/tianhe-ii-guide/">如何分布式运行程序</a></li>
+</ul>
+<h2 id="通过-rust-独立包安装适合-天河二号的-rust-运行环境"><a class="header" href="#通过-rust-独立包安装适合-天河二号的-rust-运行环境">通过 Rust 独立包安装适合 天河二号的 Rust 运行环境</a></h2>
+<ol start="0">
+<li>ssh 远程登录到天河二号<sup class="footnote-reference"><a href="#1">1</a></sup>：
+<pre><code class="language-shell">$ ssh -i${YOUR_CERTIFICATE_ID} -P${SSH_PORT} ${YOUR_USERNAME}@server.ip.in.vpn
+</code></pre>
+</li>
+<li>获取超算的服务器平台架构：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ uname -r
+</code></pre>
+</li>
+<li>了解平台架构后，获取对应平台的<a href="https://forge.rust-lang.org/infra/other-installation-methods.html#standalone">Rust 独立安装包</a>, 并上传至超算。此处以<code>x86_64</code>架构为例：
+<pre><code class="language-shell">$ scp -i${YOUR_CERTIFICATE_ID} -P${SSH_PORT} rust-1.44.0-x86_64-unknown-linux-gnu.tar.gz you@server.ip.in.vpn:~
+</code></pre>
+</li>
+<li>解压安装压缩包：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ tar -zxvf rust-1.44.0-x86_64-unknown-linux-gnu.tar.gz
+</code></pre>
+</li>
+<li>切换到解压缩目录，并执行安装命令:
+<pre><code class="language-shell">[you@tainhe2-H ~]$ cd rust-1.44.0-x86_64-unknown-linux-gnu
+[you@tainhe2-H rust-1.44.0-x86_64-unknown-linux-gnu]$ ./install.sh --prefix=~/rust --disable-ldconfig --verbose
+</code></pre>
+此命令会将 Rust 安装在 <code>~/rust</code> 文件夹中，rust 的 可执行文件将会放在 <code>~/rust/bin</code>文件夹中。</li>
+<li>编辑<code>~/.bashrc</code>, 增加下面这一行配置：
+<pre><code class="language-shell">export PATH=$HOME/rust/bin:$PATH
+</code></pre>
+</li>
+<li>使<code>~/.bashrc</code>生效：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ source ~/.bashrc
+</code></pre>
+</li>
+<li>检查 Rust 是否成功安装：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ cargo --version
+cargo 1.44.0 (05d080faa 2020-05-06)
+</code></pre>
+</li>
+</ol>
+<h2 id="离线安装-rust-overlaps"><a class="header" href="#离线安装-rust-overlaps">离线安装 <code>rust-overlaps</code></a></h2>
+<ol start="0">
+<li>在本地联网环境拷贝源代码：
+<pre><code class="language-shell">git clone https://github.com/sirkibsirkib/rust-overlaps.git
+</code></pre>
+</li>
+<li>修复源码的 <code>Cargo.toml</code> 的<code>version</code><sup class="footnote-reference"><a href="#2">2</a></sup>:
+<pre><code class="language-toml">version = &quot;1.1.0&quot;
+</code></pre>
+</li>
+<li>在代码仓库目录下执行 <code>cargo vendor</code>，获取依赖的源码<sup class="footnote-reference"><a href="#3">3</a></sup>：
+<pre><code class="language-shell">rust-overlaps$ cargo vendor --respect-source-config
+</code></pre>
+下载好的依赖将会存放到 <code>vendor</code>文件夹中。</li>
+<li>在 <code>rust-overlaps</code> 文件夹中添加 <code>.cargo/config</code> 文件，以便在超算的离线环境中使用本地缓存好的依赖源码进行编译：
+<pre><code class="language-toml">[source.crates-io]
+replace-with = &quot;vendored-sources&quot;
+
+[source.vendored-sources]
+directory = &quot;vendor&quot;
+</code></pre>
+</li>
+<li>将源码文件夹打包成 <code>.zip</code> 包，然后上传到超算:
+<pre><code class="language-shell">$ scp -i${YOUR_CERTIFICATE_ID} -P${SSH_PORT} rust-overlaps.zip you@server.ip.in.vpn:~
+</code></pre>
+</li>
+<li>在超算中解压：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ unzip rust-overlaps.zip
+</code></pre>
+</li>
+<li>离线安装<sup class="footnote-reference"><a href="#3">3</a></sup>:
+<pre><code class="language-shell">[you@tainhe2-H ~]$ cd rust-overlaps
+[you@tainhe2-H rust-overlaps]$ cargo install --path . --offline
+</code></pre>
+</li>
+<li>检查是否安装成功：
+<pre><code class="language-shell">[you@tainhe2-H ~]$ rust-overlaps --version
+ASPOPsolver 1.0
+</code></pre>
+</li>
+</ol>
+<h2 id="小结"><a class="header" href="#小结">小结</a></h2>
+<p>当我看到 <code>rust-overlaps</code> 已经超过三年没有更新之后，我就觉得很可能不能够成功编译——但是 Rust 从来没有让我失望 —— 在本文中，我们使用的是最新稳定版的 <code>Rust 1.44</code>， 然而编译一个三年的旧库一次就可以编译成功了。同样，得益于 Rust 以 crate 为单位的并行与增量编译，让编译命令中断后可以继续执行而不需从头编译。这个故事告诉我们，充分吸收现代学术成果的工具比起偏旧的工具对于效率提高有重要影响！</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>ssh登陆前还需登录VPN环境，账号密码为管理员提供的账号密码。</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Rust仓库的版本号遵循<a href="https://semver.org/lang/zh-CN/">语义化版本</a>，因此必须为<code>x.y.z</code>的形式。更多参见<a href="https://github.com/sirkibsirkib/rust-overlaps/issues/2">sirkibsirkib/rust-overlaps#2</a></p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p><code>cargo</code>编译中断，可以重新运行命令继续安装，直到安装完成。</p>
+</div>
+
+                    </main>
+
+                    <hr>
+                    <script src="https://utteranc.es/client.js"
+                            repo="huangjj27/blog-gitment"
+                            issue-term="title"
+                            label="utterances"
+                            theme="github-light"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="rust-safe-apps-51.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="rust-patterns/intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="rust-safe-apps-51.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="rust-patterns/intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+    </body>
+</html>

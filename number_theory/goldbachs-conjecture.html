@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>用初等数论探索哥德巴赫猜想 - huangjj27&#x27;s Tech blog</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../tauri-single-instance-bug-dangling.html">由 tauri 单例模式 bug “意外修复” 发现的 dangling</a></li><li class="chapter-item expanded "><a href="../load-wasm-mistake.html">尝试在单 HTML 文件中嵌入 WASM 模块的错误操作</a></li><li class="chapter-item expanded "><a href="../reservoir.html">蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item expanded "><a href="../interview.html">记一次面试</a></li><li class="chapter-item expanded "><a href="../snake-with-bevy.html">用 Bevy 游戏引擎编写贪吃蛇（译）</a></li><li class="chapter-item expanded "><a href="../rust-safe-apps-51.html">Rust 安全应用开发51条</a></li><li class="chapter-item expanded "><a href="../rust-tianhe-ii.html">在天河二号上配置 Rust 运行环境</a></li><li class="chapter-item expanded "><a href="../rust-patterns/intro.html">设计模式在 Rust 中的实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust-patterns/builder.html">构建器（Builder）模式</a></li><li class="chapter-item expanded "><a href="../rust-patterns/abstract-factory.html">抽象工厂（Abstract Factory）模式</a></li></ol></li><li class="chapter-item expanded "><a href="../rust-mirror.html">Rust 镜像</a></li><li class="chapter-item expanded "><a href="../rust-ffi.html">在 WSL 中学习 Rust FFI</a></li><li class="chapter-item expanded "><a href="../wasi/intro.html">WASI探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../wasi/wasi_and_wasmtime.html">WASI简介与Wasmtime配置</a></li><li class="chapter-item expanded "><a href="../wasi/wasi_guess.html">WASI版猜数字</a></li></ol></li><li class="chapter-item expanded "><a href="../number_theory/intro.html">初等数论自我探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../number_theory/if_2n-p_is_divided_by_p.html">若质数p不能整除偶数2n，则p不整除2n-p</a></li><li class="chapter-item expanded "><a href="../number_theory/single-composite-divsion.html">整数和它两倍间的合数的性质</a></li><li class="chapter-item expanded "><a href="../number_theory/goldbachs-conjecture.html" class="active">用初等数论探索哥德巴赫猜想</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../resume.html">关于我</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">huangjj27&#x27;s Tech blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/huangjj27/huangjj27.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="用初等数论探索哥德巴赫猜想"><a class="header" href="#用初等数论探索哥德巴赫猜想">用初等数论探索哥德巴赫猜想</a></h1>
+<blockquote>
+<p>在探索哥德巴赫猜想在初等数论框架内证明方式, 并由此发现一些显而易见的有趣结论: 若一个偶数2n能够拆分为两个奇素数的和的形式, 并且如果两个奇素数不相等, 那么这两个素数中较小的一个p(易知\( p \lt n \))必然不能整除n.</p>
+</blockquote>
+<h2 id="哥德巴赫猜想"><a class="header" href="#哥德巴赫猜想">哥德巴赫猜想</a></h2>
+<p>关于历史研究历程一类资料, 请参考<a href="https://en.wikipedia.org/wiki/Goldbach&#x27;s_conjecture">wiki</a>.</p>
+<p>本文将哥德巴赫猜想简单地描述为:</p>
+<blockquote>
+<p>给定任意整数\(n(n &gt; 1)\), 以及不超过n的所有素数<sup class="footnote-reference"><a href="#1">1</a></sup>的集合\( P = \{ p \mid Prime(p) \land p \lt n \} \). 设\(p\)为集合\( P \)中的一个元素, 猜想\(p\)对应的整数\(2n-p\)所组成的集合\(2n-P\)中, 必然存在素数元素.</p>
+</blockquote>
+<h2 id="引理"><a class="header" href="#引理">引理</a></h2>
+<h3 id="一-p中存在不整除n的元素"><a class="header" href="#一-p中存在不整除n的元素">(一) P中存在不整除n的元素</a></h3>
+<p>引理1:
+\[ \label{1.1} \tag{1.1}
+\exists p \in P, p \nmid n
+\]</p>
+<p>证明(反证法):</p>
+<p>假设命题\( \ref{1.1} \) 的反命题:
+\[\label{1.2} \tag{1.2}
+\forall p \in P, p \mid n \Leftrightarrow \forall p \in P, \exists m \in Z, m \neq 0 \land mp = n
+\]
+成立, 由伯特兰-切比雪夫定理(<a href="https://en.wikipedia.org/wiki/Bertrand%27s_postulate">Bertrand's postulate</a>)可知:
+\[
+\exists p_0, {n \over 2} \lt p_0 \lt n
+\]</p>
+<p>由假设\( \ref{1.2} \) 可得:
+\[{mp_0 \over 2} \lt p_0 \Rightarrow m \lt 2\].</p>
+<p>又\(m \in Z\), \(p_0 \gt 0, n \gt 0 \Rightarrow m = {n \over p_0} \gt 0\), 所以\(m = 1\), 即\(mp_0 = p_0 = n\), 这与\(p_0 \lt n\) 矛盾!</p>
+<p>所以命题\( \ref{1.2} \)不成立. 故命题\( \ref{1.1} \)成立.</p>
+<h3 id="二-给定正整数-x-若整除互质数对-a-b-之一则-x-不整除-a-b"><a class="header" href="#二-给定正整数-x-若整除互质数对-a-b-之一则-x-不整除-a-b">(二) 给定正整数 \(x\) 若整除互质数对\( a, b \)之一，则 \(x\) 不整除 \(a-b\)</a></h3>
+<p>\[ \label{2} \tag{2}
+(a, b) = 1, x \gt 1, a \gt 1, b \gt 1, x|a \lor x|b \Rightarrow x \nmid a-b
+\]</p>
+<p>证明:</p>
+<p>易知\(x|a\)与\(x|b\)不同时成立, 否则\((a, b) \ge x\), 与 \((a, b) = 1\) 矛盾.
+分类讨论:</p>
+<ul>
+<li>
+<p>\(x|a, , x \nmid b\)</p>
+<p>\( \because x|a \)</p>
+<p>\( \therefore \exists m \ge 1, m \in Z,  mx=a. \)</p>
+<p>假设 \( x|a-b \),  即 \( \exists k \in Z,  kx=a-b \Leftrightarrow b = a-kx = (m-k)x. \)</p>
+<p>若 \( m = k \), 则 \( b = 0 \), 与 \( b &gt; 1 \) 矛盾;</p>
+<p>若 \( m \neq k \), 则 \( \exists (m-k) \in Z,  b = (m-k)x \Leftrightarrow x|b \),  与假设 \( x \nmid b \) 矛盾!</p>
+<p>故假设 \( x|a-b \) 不成立, \( x \nmid a-b. \)</p>
+</li>
+<li>
+<p>\(x \nmid a, , x|b\). 同理可得:
+若\( x|a-b\) ,  则 \( a = b + kx = (m+k)x \Leftrightarrow x|a \), 与 \(x \nmid a\) 矛盾! 故 \(x \nmid a-b \).</p>
+</li>
+</ul>
+<h2 id="探索哥德巴赫猜想"><a class="header" href="#探索哥德巴赫猜想">探索哥德巴赫猜想</a></h2>
+<p>分类讨论:</p>
+<ul>
+<li>
+<p>若n为素数, 显然 \( 2n-n = n \) 亦为素数, 哥德巴赫猜想成立. <sup class="footnote-reference"><a href="#1">1</a></sup></p>
+</li>
+<li>
+<p>若n为合数, 则 \( n \ge 4 \). 由<a href="#%E4%B8%80-p%E4%B8%AD%E5%AD%98%E5%9C%A8%E4%B8%8D%E6%95%B4%E9%99%A4n%E7%9A%84%E5%85%83%E7%B4%A0">引理(一)</a>, 将集合P以能否整除n划分为以下子集: \( S = \lbrace s \mid s|n \rbrace,  T = \lbrace t \mid t \nmid n \rbrace\)</p>
+<p>容易发现以下结论: \( \forall s \in S,  \because s|n, s|s,  \therefore s|2n-s \), 即若一个素数是n的素因子, 那么对应的整数 \( 2n-s \) 为合数. 故<strong>符合哥德巴赫猜想的数对 \( p \)与 \( 2n-p \)必然满足 \( p \nmid n \)(封面结论)</strong></p>
+<p>到这里, 我们可以得到一个哥德巴赫猜想的等价命题:</p>
+<blockquote>
+<p>对给定合数\(n\), 及小于\(n\)且不整除\(n\)的素数集合\( T = \lbrace t \mid Prime(t) \land t \lt n \land t \nmid n \rbrace \), 在集合\(T\)对应的整数集\(2n-T = \lbrace 2n - t \mid Prime(t) \land t \lt n \land t \nmid n \rbrace \)中是否存在素数</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="进一步探究"><a class="header" href="#进一步探究">进一步探究</a></h2>
+<h3 id="推论一"><a class="header" href="#推论一">推论一</a></h3>
+<p>\[ \label{3} \tag{3}
+\forall s \in S, t \in T,  s \nmid 2n-t
+\]
+而由<a href="#%E4%BA%8C-%E7%BB%99%E5%AE%9A%E6%AD%A3%E6%95%B4%E6%95%B0-x-%E8%8B%A5%E6%95%B4%E9%99%A4%E4%BA%92%E8%B4%A8%E6%95%B0%E5%AF%B9-a-b-%E4%B9%8B%E4%B8%80%E5%88%99-x-%E4%B8%8D%E6%95%B4%E9%99%A4-a-b">引理(二)</a>可得:</p>
+<p>对于任意前述s, t, 有:</p>
+<ol>
+<li>\( Prime(s), Prime(t) \Rightarrow s \nmid t \)</li>
+<li>\( s|n \Rightarrow s|2n \)</li>
+</ol>
+<p>故: \( \forall s \in S, t \in T,  s \nmid 2n-t \)
+也就是, 至少集合 \( 2n-T \) 的元素不会被 \( S \) 中的元素整除， 命题 \( \ref{3} \) 证毕。</p>
+<h3 id="推论二"><a class="header" href="#推论二">推论二</a></h3>
+<p>对于\(T\)的子集 \( T_{\gt {n \over 2}} = T_1 = \lbrace t| t \in T, t \gt {n \over 2} \rbrace \), 具有以下性质:</p>
+<p>\[ \label{4} \tag{4}
+\forall t_1, t_2 \in T_1,  t_1 \nmid 2n-t_2
+\]</p>
+<p>证明如下:</p>
+<p>假设 \( \exists t_1, t_2,  t_1 \mid 2n-t_2 \), 即 \( \exists m \in Z^+, mt_1 = 2n - t_2 \).</p>
+<p>\( \because t_1, t_2为奇数, 2n为偶数 \)
+\( \therefore m为奇数. \)</p>
+<p>分类讨论:</p>
+<ol>
+<li>
+<p>当 \( m = 1 \) 时, t_1 + t_2 = 2n.</p>
+<p>\( \because t_1 \neq t_2, t_1 \lt n, t_2 \lt n, \therefore t_1 + t_2 \lt 2n \), 矛盾!</p>
+</li>
+<li>
+<p>当 \( m \ge 3 \)时:</p>
+<p>\(
+\because t_1 \gt {n \over 2},  t_2 \gt {n \over 2},
+\therefore mt_1 + t_2 \gt { mn \over 2 }  + { n \over 2 } \ge { 3n \over 2 } + { n \over 2 } = 2n
+\)
+, 矛盾!</p>
+</li>
+</ol>
+<p>故假设不成立, 命题 \( \ref{4} \) 证毕.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>如无特殊说明，本文中所有集合均为正整数集的子集</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>在本文中暂且抛去哥德巴赫猜想中对分解出的两个素数不能相等的要求。</p>
+</div>
+
+                    </main>
+
+                    <hr>
+                    <script src="https://utteranc.es/client.js"
+                            repo="huangjj27/blog-gitment"
+                            issue-term="title"
+                            label="utterances"
+                            theme="github-light"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../number_theory/single-composite-divsion.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../resume.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../number_theory/single-composite-divsion.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../resume.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+    </body>
+</html>

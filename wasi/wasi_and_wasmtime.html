@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>WASI简介与Wasmtime配置 - huangjj27&#x27;s Tech blog</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../tauri-single-instance-bug-dangling.html">由 tauri 单例模式 bug “意外修复” 发现的 dangling</a></li><li class="chapter-item expanded "><a href="../load-wasm-mistake.html">尝试在单 HTML 文件中嵌入 WASM 模块的错误操作</a></li><li class="chapter-item expanded "><a href="../reservoir.html">蓄水池算法改进 - 面向抽奖场景保证等概率性</a></li><li class="chapter-item expanded "><a href="../interview.html">记一次面试</a></li><li class="chapter-item expanded "><a href="../snake-with-bevy.html">用 Bevy 游戏引擎编写贪吃蛇（译）</a></li><li class="chapter-item expanded "><a href="../rust-safe-apps-51.html">Rust 安全应用开发51条</a></li><li class="chapter-item expanded "><a href="../rust-tianhe-ii.html">在天河二号上配置 Rust 运行环境</a></li><li class="chapter-item expanded "><a href="../rust-patterns/intro.html">设计模式在 Rust 中的实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust-patterns/builder.html">构建器（Builder）模式</a></li><li class="chapter-item expanded "><a href="../rust-patterns/abstract-factory.html">抽象工厂（Abstract Factory）模式</a></li></ol></li><li class="chapter-item expanded "><a href="../rust-mirror.html">Rust 镜像</a></li><li class="chapter-item expanded "><a href="../rust-ffi.html">在 WSL 中学习 Rust FFI</a></li><li class="chapter-item expanded "><a href="../wasi/intro.html">WASI探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../wasi/wasi_and_wasmtime.html" class="active">WASI简介与Wasmtime配置</a></li><li class="chapter-item expanded "><a href="../wasi/wasi_guess.html">WASI版猜数字</a></li></ol></li><li class="chapter-item expanded "><a href="../number_theory/intro.html">初等数论自我探索</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../number_theory/if_2n-p_is_divided_by_p.html">若质数p不能整除偶数2n，则p不整除2n-p</a></li><li class="chapter-item expanded "><a href="../number_theory/single-composite-divsion.html">整数和它两倍间的合数的性质</a></li><li class="chapter-item expanded "><a href="../number_theory/goldbachs-conjecture.html">用初等数论探索哥德巴赫猜想</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../resume.html">关于我</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">huangjj27&#x27;s Tech blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/huangjj27/huangjj27.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="wasi探索一----wasi简介与wasmtime配置"><a class="header" href="#wasi探索一----wasi简介与wasmtime配置">WASI探索（一） -- WASI简介与Wasmtime配置</a></h1>
+<h2 id="什么是wasi"><a class="header" href="#什么是wasi">什么是WASI?</a></h2>
+<p>WASI<sup class="footnote-reference"><a href="#1">1</a></sup>是一个新的API体系, 由<a href="https://github.com/CraneStation/wasmtime">Wasmtime项目</a>设计, 目的是为WASM设计一套引擎无关(engine-indepent), 面向非Web系统(non-Web system-oriented)的API标准. 目前, WASI核心API(WASI Core)在做覆盖文件, 网络等等模块的API, 但这些实现都是刚刚开始实现, 离实用还是有很长路要走.</p>
+<h2 id="关于wasm-runtime"><a class="header" href="#关于wasm-runtime">关于WASM runtime</a></h2>
+<p>在了解了WASI之后, 博主最后选定两个WASM运行时进行探索: WASMER 与 Wasmtime. 这两款运行时都号称开始支持了WASI标准, 但博主使用<a href="https://github.com/kubkon/rust-wasi-tutorial">rust-wasi-tutorial</a>对两款运行时进行试验后, 发现<a href="https://github.com/wasmerio/wasmer/issues/356">WASMER对于文件读取还是有些问题</a>, 而Wasmtime则是通过了规格测试(基于specs testsuite), 因此本文接下来着重于Wasmtime的配置介绍.</p>
+<h2 id="wasmtime与rust环境配置"><a class="header" href="#wasmtime与rust环境配置">Wasmtime与rust环境配置</a></h2>
+<p>由于目前Wasmtime与WASMER均只支持Unix-like环境, 接下来楼主将演示如何在WSL(Ubuntu 18.04)下配置Wasmtime. 而在目前比较方便生成wasm的编程语言中, 博主选择使用自带wasi目标的<a href="https://rust-lang.org">rust编程语言</a>, 可以&quot;零代价&quot;配置wasm相关工具链.</p>
+<h3 id="配置rust"><a class="header" href="#配置rust">配置rust</a></h3>
+<ol>
+<li>下载并安装rustup: <code>curl https://sh.rustup.rs -sSf | sh</code>, 安装时使用默认 <code>stable-x86_64-unknown-linux-gnu</code>工具链, 后面我们还会自行添加用于编译wasm的<code>nightly</code>工具链.</li>
+<li>为cargo配置ustc反代, 提高crates(rust库)下载速度<sup class="footnote-reference"><a href="#2">2</a></sup></li>
+<li>安装rustfmt: <code>rustup component add rustfmt --toolchain stable-x86_64-unknown-linux-gnu</code>. Wasmtime的test脚本需要用到该组件.</li>
+<li>安装rust nightly工具链: <code>rustup toolchain add nightly-x86_64-unknown-linux-gnu</code>. 当前rust的WASI目标还在开发中, 尚未稳定<sup class="footnote-reference"><a href="#3">3</a></sup>.</li>
+<li>安装rust WASI目标: <code>rustup target add wasm32-unknown-wasi</code><sup class="footnote-reference"><a href="#3">3</a></sup>.</li>
+</ol>
+<h3 id="配置wasmtime"><a class="header" href="#配置wasmtime">配置Wasmtime</a></h3>
+<ol>
+<li>安装cmake与clang: <code>sudo apt install cmake clang</code>, 用于编译Wasmtime. Wasmtime目前尚未有正式发布版本, 故需要我们自行编译.</li>
+<li>拷贝Wasmtime源码: <code>git clone --recursive git@github.com:CraneStation/wasmtime.git ~/wasmtime</code>.</li>
+<li>切换到Wasm源码目录: <code>cd ~/wasmtime</code></li>
+<li>执行测试脚本: <code>./scripts/test-all.sh</code>. 当脚本执行完毕并通过测试后, 说明wasmtime已经正常编译并且能在当前WSL环境下正常工作, 可以使用生成的wasmtime可执行文件.</li>
+<li>将生成的wasmtime拷贝到<code>/usr/bin</code>目录中: <code>cp ~/wasmtime/target/release/wasmtime /usr/bin</code>, 以便在整个WSL环境中任意目录执行wasmtime. wasmtime是个单文件(stand alone)运行时.</li>
+<li>执行<code>wasmtime --help</code>命令, 确认wasmtime成功安装.</li>
+</ol>
+<h2 id="试验"><a class="header" href="#试验">试验</a></h2>
+<p>GitHub上面已经有了比较简单的<a href="https://github.com/kubkon/rust-wasi-tutorial">试验</a>, 大家按照上面的说明
+去试验即可. 下一篇文章, 博主将会把<a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">猜数字</a>编译成WASI目标并执行, 同时会尝试把一些常用的库尝试编译, 来探究
+当前社区对WASI支持的程度.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://github.com/CraneStation/wasmtime/blob/master/docs/WASI-overview.md#wasi-webassembly-system-interface">WASI概要</a></p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p><a href="https://lug.ustc.edu.cn/wiki/mirrors/help/rust-crates#rust_crates_%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9">rust crates 镜像使用帮助 - 中国科学技术大学</a></p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>截至2020年1月19日，WASI目标已经稳定并重命名为<code>wasm32-wasi</code></p>
+</div>
+
+                    </main>
+
+                    <hr>
+                    <script src="https://utteranc.es/client.js"
+                            repo="huangjj27/blog-gitment"
+                            issue-term="title"
+                            label="utterances"
+                            theme="github-light"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../wasi/intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../wasi/wasi_guess.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../wasi/intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../wasi/wasi_guess.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+    </body>
+</html>
