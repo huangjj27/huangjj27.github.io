@@ -1,14 +1,29 @@
+image: rust
+variables:
+  CARGO_HOME: $CI_PROJECT_DIR/cargo
+
+cache:
+  paths:
+    - $CARGO_HOME/bin
+
 stages:
+    - check
     - deploy
+
+before_script:
+  - export PATH="$PATH:$CARGO_HOME/bin"
+  - mdbook --version || cargo install mdbook
+
+build:
+  stage: check
+  script:
+    - mdbook build
+  rules:
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "web"
 
 pages:
   stage: deploy
-  image: rust
-  variables:
-    CARGO_HOME: $CI_PROJECT_DIR/cargo
-  before_script:
-    - export PATH="$PATH:$CARGO_HOME/bin"
-    - mdbook --version || cargo install mdbook
   script:
     - mdbook build -d public
   rules:
@@ -16,6 +31,3 @@ pages:
   artifacts:
     paths:
       - public
-  cache:
-    paths:
-      - $CARGO_HOME/bin
