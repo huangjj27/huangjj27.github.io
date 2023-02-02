@@ -27,7 +27,7 @@ pages:
   script:
     - mdbook build -d public
   dependencies:
-    - check
+    - build
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
   artifacts:
