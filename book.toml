@@ -1,18 +1,18 @@
 [book]
 authors = ["huangjj27"]
-language = "en"
+language = "zh"
 multilingual = false
 src = "src"
-title = "huangjj27's Tech blog"
+title = "huangjj27 的技术博客"
 
 [rust]
-edition = "2018"
+edition = "2021"
 
 [output.html]
 mathjax-support = true
 no-section-label = true
-git-repository-url = "https://github.com/huangjj27/huangjj27.github.io"
-git-repository-icon = "fa-github"
+git-repository-url = "https://gitlab.com/huangjj27/huangjj27.gitlab.io"
+git-repository-icon = "fa-gitlab"
 
 [output.html.fold]
 enable = false
