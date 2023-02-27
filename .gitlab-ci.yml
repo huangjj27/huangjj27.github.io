@@ -26,8 +26,6 @@ pages:
   stage: deploy
   script:
     - mdbook build -d public
-  dependencies:
-    - build
   needs:
     - build
   rules:
