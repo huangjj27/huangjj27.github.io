@@ -28,6 +28,8 @@ pages:
     - mdbook build -d public
   dependencies:
     - build
+  needs:
+    - build
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
   artifacts:
