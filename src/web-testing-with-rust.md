@@ -24,6 +24,17 @@ Python 是一门非常适合编写即时性脚本的语言，能够简化很多�
 最开始因为 `goose` 性能框架支持 binary，并且认为可复用组件少而形成了单个负载测试独立作为项目、多个负责测试组成同一工作空间的架构：
 
 ```
+workspace
+|-- perf_binary1
+    |-- src/main.rs
+    |-- Cargo.toml
+|-- perf_binary2
+    |-- src/main.rs
+    |-- Cargo.toml
+|-- utils
+    |-- src/lib.rs
+    |-- Cargo.toml
+|-- Cargo.toml
 ```
 
 因为使用的是相同工作空间，多个项目之前可以共享依赖中间问题，但带来的问题是需要为每个负载测试创建新项目，增加配置复杂性。
@@ -32,6 +43,17 @@ Python 是一门非常适合编写即时性脚本的语言，能够简化很多�
 经常 [实践1](#实践no1----workspace)，发现了更好的方式通过 binary 的方式管理多个不同的负载测试用例，而 binary 所需的依赖可以作为可选依赖通过 `cargo features` 来引入：
 
 ```
+project
+    |-- src
+        |-- bin
+            |-- perf1.rs
+            |-- perf2.rs
+        |-- lib.rs
+        |-- utils
+            |-- util_module1.rs
+            |-- util_module2.rs
+            |-- ...
+|-- Cargo.toml
 ```
 
 ## 总结
