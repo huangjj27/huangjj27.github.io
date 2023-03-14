@@ -1,5 +1,6 @@
 # Summary
 
+- [在 web 项目中使用 Rust 组织测试代码](./web-testing-with-rust.md)
 - [由 tauri 单例模式 bug “意外修复” 发现的 dangling](./tauri-single-instance-bug-dangling.md)
 - [尝试在单 HTML 文件中嵌入 WASM 模块的错误操作](./load-wasm-mistake.md)
 - [蓄水池算法改进 - 面向抽奖场景保证等概率性](./reservoir.md)

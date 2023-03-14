@@ -11,7 +11,7 @@
 
 <i class="fa fa-book" aria-hidden="true"></i> [下载简历pdf](./resume/黄俊杰-Rust.pdf) ·
 <i class="fa fa-book" aria-hidden="true"></i> tech-blog: <https://huangjj27.github.io> ·
-<i class="fa fa-book" aria-hidden="true"></i> 微信技术公众号: 坏姐姐日常入门Rust
+<i class="fa fa-book" aria-hidden="true"></i> 微信技术公众号: 不如学点Rust
 
 ## <i class="fa fa-graduation-cap" aria-hidden="true"></i> 教育背景
 2013.9 -- 2017.7 **中山大学** 数据科学与计算机学院(原软件学院) **软件工程** **_工学学士_**
