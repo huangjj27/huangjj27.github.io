@@ -2,15 +2,16 @@
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 # <i class="fa fa-male" aria-hidden="true"></i> 黄俊杰
-<i class="fa fa-phone" aria-hidden="true"></i> 77u/KCs4NikxODgtMTk0OC0xMjYyDQo= ·
+<i class="fa fa-phone" aria-hidden="true"></i> 77u/KCs4NikxODgtMTk0OC0xMjYyDQo=
+
 <i class="fa fa-envelope-o" aria-hidden="true"></i> <huangjj.27@qq.com> ·
 <i class="fa fa-qq" aria-hidden="true"></i> 349373001 ·
 <i class="fa fa-github" aria-hidden="true"></i> [huangjj27](https://github.com/huangjj27) ·
-<i class="fa fa-gitlab" aria-hidden="true"></i> [huangjj27](https://gitlab.com/huangjj27)
+<i class="fa fa-gitlab" aria-hidden="true"></i> [huangjj27](https://jihulab.com/huangjj27)
 <!-- <i class="fa fa-envelope-o" aria-hidden="true"></i> <349373001dc@gmail.com> · -->
 
 <i class="fa fa-book" aria-hidden="true"></i> [下载简历pdf](./resume/黄俊杰-Rust.pdf) ·
-<i class="fa fa-book" aria-hidden="true"></i> tech-blog: <https://huangjj27.github.io> ·
+<i class="fa fa-book" aria-hidden="true"></i> tech-blog: <https://huangjj27.gitlab.io> ·
 <i class="fa fa-book" aria-hidden="true"></i> 微信技术公众号: 不如学点Rust
 
 ## <i class="fa fa-graduation-cap" aria-hidden="true"></i> 教育背景
@@ -24,8 +25,9 @@
 - 辅助运营人员排查与定位营业员反馈的生产问题
 
 Bonus:
-- 编写接口自动化测试用例（Postman），并设定生产环境的每日自动巡检（企业微信 bot）
-- 使用 [goose](https://book.goose.rs/)、[locus](https://locust.io/)框架编写性能测试用例
+- 提供数字化营业厅项目的密码验证方案，保障营业厅用户密码的隐私性与安全性，以及抵御彩虹表攻击
+- 编写接口自动化测试用例（Postman、Apifox），并设定生产环境的每日自动巡检（企业微信 bot）
+- 使用 [goose](https://book.goose.rs/)、[locust](https://locust.io/)框架编写性能测试用例
 - 制定性能测试需求评估、性能测试报告规范
 - review 项目代码，并通过项目代码补充对 DES、AES、HTTP设计规范的了解
 
