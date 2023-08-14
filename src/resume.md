@@ -10,7 +10,7 @@
 <i class="fa fa-gitlab" aria-hidden="true"></i> [huangjj27](https://jihulab.com/huangjj27)
 <!-- <i class="fa fa-envelope-o" aria-hidden="true"></i> <349373001dc@gmail.com> · -->
 
-<i class="fa fa-book" aria-hidden="true"></i> [下载简历pdf](./resume/黄俊杰-Rust.pdf) ·
+<i class="fa fa-book" aria-hidden="true"></i> [下载简历pdf](static/resume/黄俊杰-Rust.pdf) ·
 <i class="fa fa-book" aria-hidden="true"></i> tech-blog: <https://huangjj27.gitlab.io> ·
 <i class="fa fa-book" aria-hidden="true"></i> 微信技术公众号: 不如学点Rust
 
