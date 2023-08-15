@@ -25,11 +25,11 @@
 - 辅助运营人员排查与定位营业员反馈的生产问题
 
 Bonus:
-- 提供数字化营业厅项目的密码验证方案，保障营业厅用户密码的隐私性与安全性，以及抵御彩虹表攻击
-- 编写接口自动化测试用例（Postman、Apifox），并设定生产环境的每日自动巡检（企业微信 bot）
-- 使用 [goose](https://book.goose.rs/)、[locust](https://locust.io/)框架编写性能测试用例
+- 提供数字化营业厅项目的密码验证方案，保障营业厅用户密码的隐私性与安全性
+- 基于 Rust 与 WebAssembly 开发测试辅助工具
+- 编写接口自动化测试用例, 使用 [goose](https://book.goose.rs/)、[locust](https://locust.io/)框架编写性能测试用例
 - 制定性能测试需求评估、性能测试报告规范
-- review 项目代码，并通过项目代码补充对 DES、AES、HTTP设计规范的了解
+- review 项目代码
 
 ### 银行业客户经理智能推荐与客户反馈收集项目 2020.11 - 2021.09
 **_大数据开发工程师: 大数据 EDI 开发_**
@@ -80,16 +80,23 @@ Bonus:
 [TLSSigAPI]: https://github.com/huangjj27/TLSSigAPI
 
 ## <i class="fa fa-cogs" aria-hidden="true"></i> 技能
+- 数据分析开发
+    - 基于 HiveQL 的银行业务数据分析设计与开发
+    - 基于 polars/panda 的数据分析
 - 后端开发/web 开发
     - 熟悉 Rust-lang，熟悉生命周期约束、所有权系统并对其进行分析
-    - 熟悉面向对象编程的概念以及[SOLID原则]
+    - 熟悉面向对象编程的概念以及 [SOLID原则]
     - 熟悉基本的算法与数据结构
     - 了解 [RESTful API设计]
 - 版本管理
     - 熟练使用 git/github/gitlab进行代码版本管理
     - 具有良好的版本管理意识, 熟悉 [语义化版本] 规则
-- 软件测试 -- 有功能测试、单元测试、集成测试、接口测试经验，也熟悉使用 Rust 测试套件
-- 外语 -- 英语（CET6）
+- 软件测试
+    - 有功能测试、单元测试、集成测试、接口测试经验
+    - 熟悉 pytest、locust，可基于以上工具编写并部署自动化测试用例
+    - 也熟悉使用 Rust 测试套件
+- 外语
+    - 英语（CET6），可流畅阅读英文技术文档
 
 [RESTful API设计]: http://www.ruanyifeng.com/blog/2014/05/restful_api.html
 [SOLID原则]: https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)
