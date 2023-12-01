@@ -14,6 +14,9 @@ no-section-label = true
 git-repository-url = "https://gitlab.com/huangjj27/huangjj27.gitlab.io"
 git-repository-icon = "fa-gitlab"
 
+[output.html.print]
+enable = false
+
 [output.html.fold]
 enable = false
 level = 0
