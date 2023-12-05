@@ -88,7 +88,7 @@ h6:target::before {
     margin-right: auto;
     max-width: var(--content-max-width);
 }
-.content p { line-height: 1.45em; }
+.content p { line-height: 1.45em; text-indent: 2em; }
 .content ol { line-height: 1.45em; }
 .content ul { line-height: 1.45em; }
 .content a { text-decoration: none; }
