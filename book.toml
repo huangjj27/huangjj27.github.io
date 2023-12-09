@@ -27,11 +27,4 @@ copy-js = true
 line-numbers = false
 
 [output.html.search]
-enable = false
-
-[preprocessor.infisearch]
-command = "mdbook-infisearch"
-
-[output.infisearch]
-mode = "target"
-config = "infi_search.json"
+enable = false      # wait for a usable chinese searching plugin!
