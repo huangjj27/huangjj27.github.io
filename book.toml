@@ -11,6 +11,7 @@ edition = "2021"
 [output.html]
 mathjax-support = true
 no-section-label = true
+additional-js = ["assets/fzf.umd.js", "assets/elasticlunr.js"]
 git-repository-url = "https://gitlab.com/huangjj27/huangjj27.gitlab.io"
 git-repository-icon = "fa-gitlab"
 
@@ -27,4 +28,13 @@ copy-js = true
 line-numbers = false
 
 [output.html.search]
-enable = false      # wait for a usable chinese searching plugin!
+enable = true
+limit-results = 30
+teaser-word-count = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 1
+boost-paragraph = 1
+expand = true
+heading-split-level = 3
+copy-js = true
