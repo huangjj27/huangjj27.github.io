@@ -1,10 +1,10 @@
 <!-- 引入font-awesome -->
-<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.css" rel="stylesheet">
 
 # <i class="fa fa-male" aria-hidden="true"></i> Sunny Huang
 <i class="fa fa-phone" aria-hidden="true"></i> 77u/KCs4NikxODgtMTk0OC0xMjYyDQo=
 
-<i class="fa fa-fingerprint" aria-hidden="true"></i> 4237 514E 3573 DB47 EE84  5A2B CC7D A6E6 9494 7EE8
+<i class="fa fa-id-card" aria-hidden="true"></i> 4237 514E 3573 DB47 EE84  5A2B CC7D A6E6 9494 7EE8
 
 <i class="fa fa-envelope" aria-hidden="true"></i> <huangjj.27@qq.com> ·
 <i class="fa fa-github" aria-hidden="true"></i> [huangjj27](https://github.com/huangjj27) ·
