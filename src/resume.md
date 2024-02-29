@@ -1,16 +1,15 @@
 <!-- 引入font-awesome -->
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
 
-# <i class="fa fa-male" aria-hidden="true"></i> 黄俊杰
+# <i class="fa fa-male" aria-hidden="true"></i> Sunny Huang
 <i class="fa fa-phone" aria-hidden="true"></i> 77u/KCs4NikxODgtMTk0OC0xMjYyDQo=
 
-<i class="fa fa-envelope-o" aria-hidden="true"></i> <huangjj.27@qq.com> ·
-<i class="fa fa-qq" aria-hidden="true"></i> 349373001 ·
+<i class="fa fa-fingerprint" aria-hidden="true"></i> 4237 514E 3573 DB47 EE84  5A2B CC7D A6E6 9494 7EE8
+
+<i class="fa fa-envelope" aria-hidden="true"></i> <huangjj.27@qq.com> ·
 <i class="fa fa-github" aria-hidden="true"></i> [huangjj27](https://github.com/huangjj27) ·
 <i class="fa fa-gitlab" aria-hidden="true"></i> [huangjj27](https://jihulab.com/huangjj27)
-<!-- <i class="fa fa-envelope-o" aria-hidden="true"></i> <349373001dc@gmail.com> · -->
 
-<i class="fa fa-book" aria-hidden="true"></i> [下载简历pdf](static/resume/黄俊杰-Rust.pdf) ·
 <i class="fa fa-book" aria-hidden="true"></i> tech-blog: <https://huangjj27.gitlab.io> ·
 <i class="fa fa-book" aria-hidden="true"></i> 微信技术公众号: 不如学点Rust
 
