@@ -1,7 +1,6 @@
 [book]
 authors = ["huangjj27"]
 language = "zh"
-multilingual = false
 src = "src"
 title = "huangjj27 的技术博客"
 
