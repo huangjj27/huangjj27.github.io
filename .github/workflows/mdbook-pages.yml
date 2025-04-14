@@ -23,7 +23,7 @@ jobs:
     - name: Build mdbook
       run: mdbook build
     - name: Cache artifact
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: book
         path: ./book
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Get artifact
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v4
       with:
         name: book
     - name: Deploy
