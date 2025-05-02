@@ -33,7 +33,8 @@ classDiagram
     direction RL
 
     Pin --> "0..1" Doro
-    TodayDoros o-- "*" Doro
+    Planned o-- "*" Doro
+    Urgent o-- "*" Doro
     Doros o-- "*" Doro
 
     class Doro {
@@ -48,9 +49,12 @@ classDiagram
         new(desc: &str, estimate: usize) -> Doro
     }
 
-    class TodayDoros {
-        planned: VecDeque~Doro~
-        urgent: VecDeque~Doro~
+    class Planned {
+        doros: VecDeque~Doro~
+    }
+
+    class Urgent {
+        doros: VecDeque~Doro~
     }
 
     class Doros {
