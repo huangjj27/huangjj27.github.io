@@ -23,5 +23,46 @@
 在分析了以上需求后，我们得出的用例如上图所示。用户最核心的需求是管理活动与管理番茄情况。管理活动包括帮助用户专注在某一个活动上，而管理番茄又包含着预估单个活动需要的番茄数量，这种预估拓展了基础的管理代办活动的能力。此外，中断的记录与跟踪也扩展了管理番茄的能力。
 
 ## 核心对象分析
+### Doro
+活动是番茄工作法的一个核心对象。当人们想要记录下一个活动时，或许会对该活动截止完成时间(预期完成时间)有初步预估；与之相对的，该活动的实际开始时间（或者叫，最后一次置顶的时间）、实际结束时间则是另外一套需要记录下来的信息。而由于番茄工作法的特殊性，某一时刻最多仅会有一个活动“置顶”（Pinned）（需求4）。置顶可以视作全局唯一实例，下文的番茄钟倒计时同理（需求5）。此外，活动清单有专门预留给当天计划外紧急（Urgent）活动的空间，所以我们现在要考虑如何整合这几种相互关联的具体 Doro。
+
+因为每个 `Doro` 都可能是计划外添加进来的事件，所以应当有一个唯一标记字段 `unplanned`，
+而计划外紧急活动是每天都需要重新跟进以反映当天计划情况的，因此独立出额外的列表 `Urgencies`来跟进。
+
+```mermaid
+classDiagram
+    direction RL
+
+    Pin --> "0..1" Doro
+    TodayDoros o-- "*" Doro
+    Doros o-- "*" Doro
+
+    class Doro {
+        discription: String
+        unplanned: bool
+        due_at: Datetime
+        last_pinned_at: Datetime
+        done_at: Datetime
+        pomos: Vec~pomos~
+        with_description(desc: &str)
+        append_pomos(n: usize)
+        new(desc: &str, estimate: usize) -> Doro
+    }
+
+    class TodayDoros {
+        planned: VecDeque~Doro~
+        urgent: VecDeque~Doro~
+    }
+
+    class Doros {
+        inner: VecDeque~Doro~
+    }
+
+    class Pin {
+        pinned: Option~Doro~
+    }
+```
+
+### Pomo
 ## 对象关系分析
 ## 时序分析
