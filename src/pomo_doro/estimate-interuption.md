@@ -24,7 +24,7 @@
 
 ## 核心对象分析
 ### Doro
-活动是番茄工作法的一个核心对象。当人们想要记录下一个活动时，或许会对该活动截止完成时间(预期完成时间)有初步预估；与之相对的，该活动的实际开始时间（或者叫，最后一次置顶的时间）、实际结束时间则是另外一套需要记录下来的信息。而由于番茄工作法的特殊性，某一时刻最多仅会有一个活动“置顶”（Pinned）（需求4）。置顶可以视作全局唯一实例，下文的番茄钟倒计时同理（需求5）。此外，活动清单有专门预留给当天计划外紧急（Urgent）活动的空间，所以我们现在要考虑如何整合这几种相互关联的具体 Doro。
+活动是番茄工作法的核心对象。当人们想要记录下一个活动时，或许会对该活动截止完成时间(预期完成时间)有初步预估；与之相对的，该活动的实际开始时间（或者叫，最后一次置顶的时间）、实际结束时间则是另外一套需要记录下来的信息。而由于番茄工作法的特殊性，某一时刻最多仅会有一个活动“置顶”（Pinned）（需求4）。置顶可以视作全局唯一实例，下文的番茄钟倒计时同理（需求5）。此外，活动清单有专门预留给当天计划外紧急（Urgent）活动的空间，所以我们现在要考虑如何整合这几种相互关联的具体 Doro。
 
 因为每个 `Doro` 都可能是计划外添加进来的事件，所以应当有一个唯一标记字段 `outplanned`，而计划外紧急活动是每天都需要重新跟进以反映当天计划情况的，因此独立出额外的列表 `Urgencies`来跟进。
 
@@ -40,13 +40,13 @@ classDiagram
     class Doro {
         discription: String
         outplanned: bool
-        due_at: Datetime
-        last_pinned_at: Datetime
-        done_at: Datetime
-        pomos: Vec~pomos~
+        due_at: Option~Datetime~
+        last_pinned_at: Option~Datetime~
+        done_at: Option~Datetime~
+        pomos: Vec~Pomo~
         with_description(desc: &str)
         append_pomos(n: usize)
-        new(desc: &str, estimate: usize) -> Doro
+        Doro new(desc: &str, estimate: usize) $
     }
 
     class Planned {
@@ -63,6 +63,50 @@ classDiagram
 
     class Pin {
         pinned: Option~Doro~
+    }
+```
+
+然而以上的结构会存在以下问题：
+1. 频繁的 Doro 移动
+2. 在 Doros 清单看不到 TodayDoros 的事项
+3. Today表里看不到置顶的事项
+
+一个优化设计方法是，将除了存储了 `Doro` 对象的 `Doros` 清单以外，都做成 `Doros` 清单的视图，而 `DoroPin` 作为里的唯一项添加原子性操作：
+
+```mermaid
+classDiagram
+    direction LR
+
+    Doro "*" --o Doros
+    Doro "0..1" <.. DoroPin
+    DoroPin <.. Doros
+
+    class Doro {
+        discription: String
+        planned: bool
+        outplanned: bool
+        due_at: Option~Datetime~
+        last_pinned_at: Option~Datetime~
+        done_at: Option~Datetime~
+        pomos: Vec~Pomo~
+        with_description(desc: &str)
+        append_pomos(n: usize)
+        Doro new(desc: &str, estimate: usize) $
+    }
+
+    class Doros {
+        inner: VecDeque~Doro~
+        pin: DoroPin
+        &[Doro] planned()
+        &[Doro] urgent()
+        init()
+        pin(idx: usize)
+        unpin()
+        DoroPin pinned()
+    }
+
+    class DoroPin {
+        Arc~Mutex~Option~Doro~~~
     }
 ```
 
