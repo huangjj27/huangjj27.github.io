@@ -46,7 +46,7 @@ classDiagram
         pomos: Vec~Pomo~
         with_description(desc: &str)
         append_pomos(n: usize)
-        Doro new(desc: &str, estimate: usize) $
+        new(desc: &str, estimate: usize) Doro$
     }
 
     class Planned {
@@ -91,18 +91,17 @@ classDiagram
         pomos: Vec~Pomo~
         with_description(desc: &str)
         append_pomos(n: usize)
-        Doro new(desc: &str, estimate: usize) $
+        new(desc: &str, estimate: usize) Doro$
     }
 
     class Doros {
         inner: VecDeque~Doro~
-        pin: DoroPin
-        &[Doro] planned()
-        &[Doro] urgent()
+        pin: DoroPin$
+        planned() &[Doro]
+        urgent() &[Doro]
         init()
         pin(idx: usize)
         unpin()
-        DoroPin pinned()
     }
 
     class DoroPin {
