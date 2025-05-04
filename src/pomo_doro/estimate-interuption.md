@@ -71,7 +71,7 @@ classDiagram
 2. 在 Doros 清单看不到 TodayDoros 的事项
 3. Today表里看不到置顶的事项
 
-一个优化设计方法是，将除了存储了 `Doro` 对象的 `Doros` 清单以外，都做成 `Doros` 清单的视图，而 `DoroPin` 作为里的唯一项添加原子性操作：
+一个优化设计方法是，将除了存储了 `Doro` 对象的 `Doros` 清单以外，都做成 `Doros` 清单的视图，而 `DoroPin` 作为其唯一可操作项添加原子性操作：
 
 ```mermaid
 classDiagram
@@ -79,7 +79,7 @@ classDiagram
 
     Doro "*" --o Doros
     Doro "0..1" <.. DoroPin
-    DoroPin <.. Doros
+    DoroPin <-- Doros
 
     class Doro {
         discription: String
@@ -100,15 +100,74 @@ classDiagram
         planned() &[Doro]
         urgent() &[Doro]
         init()
-        pin(idx: usize)
-        unpin()
+        pin(idx: usize) DoroPin
+        add_doro(Doro)
+        edit(idx: usize) &mut Doro
+        remove_doro(idx: usize)
     }
 
     class DoroPin {
         Arc~Mutex~Option~Doro~~~
+        unpin()
     }
 ```
 
 ### Pomo
+类似的，番茄钟除了基本的开始与结束时间，还需要理清其类型（专用于某项实务的番茄钟还是常规工作节奏的番茄钟）、完成后的评级（坏、普通、完美的番茄）、预估类型（第几次预估）、包含的中断（干扰与打断），以及唯一锁定的、全局最多只有一个在运行的番茄钟。
+
+```mermaid
+classDiagram
+    Pomo o-- Interuption
+    Pomo ..> PomoType
+    Pomo ..> PomoStatus
+    Interuption ..> InteruptionType
+    PomoCountdown --> Pomo
+
+    class Pomo {
+        type: PomoType
+        status: PomoStatus
+        start_at: Option~Datetime~
+        end_at: Option~Datetime~
+        disturbations: Vec~Interuption~
+        disruption: Option~Interuption~
+    }
+
+    class PomoCountdown {
+        Arc~Mutex~Option~&mut Pomo~~~
+        interupt() Interuption
+        focus(Interuption)
+        deprecate(Interuption)
+    }
+
+    class Interuption {
+        type: InteruptionType
+        reson: String
+        start_at: Option~Datetime~
+        end_at: Option~Datetime~
+        add_doro()
+    }
+
+    class PomoType {
+        <<enum>>
+        Planned
+        Appended
+        More
+    }
+
+    class PomoStatus {
+        <<enum>>
+        Created
+        Done
+        Perfect
+        Deprecated
+    }
+
+    class InteruptionType {
+        <<enum>>
+        Interior
+        External
+    }
+```
+
 ## 对象关系分析
 ## 时序分析
