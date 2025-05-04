@@ -22,7 +22,7 @@
 
 在分析了以上需求后，我们得出的用例如上图所示。用户最核心的需求是管理活动，然后是借助番茄跟进活动执行情况。管理活动包括帮助用户专注在某一个活动上，而管理番茄又包含着预估单个活动需要的番茄数量，这种预估拓展了基础的管理代办活动的能力。此外，中断的记录与跟踪也扩展了管理番茄的能力。
 
-## 核心对象分析
+## 核心对象及其关系分析
 ### Doro
 活动是番茄工作法的核心对象。当人们想要记录下一个活动时，或许会对该活动截止完成时间(预期完成时间)有初步预估；与之相对的，该活动的实际开始时间（或者叫，最后一次置顶的时间）、实际结束时间则是另外一套需要记录下来的信息。而由于番茄工作法的特殊性，某一时刻最多仅会有一个活动“置顶”（Pinned）（需求4）。置顶可以视作全局唯一实例，下文的番茄钟倒计时同理（需求5）。此外，活动清单有专门预留给当天计划外紧急（Urgent）活动的空间，所以我们现在要考虑如何整合这几种相互关联的具体 Doro。
 
@@ -169,5 +169,93 @@ classDiagram
     }
 ```
 
-## 对象关系分析
+合并以上的对象关系，当前涉及对象及其关系如下：
+```mermaid
+classDiagram
+    Doro "*" --o Doros
+    Doro "0..1" <.. DoroPin
+    DoroPin <-- Doros
+    Doro *-- Pomo
+    Pomo o-- Interuption
+    Pomo ..> PomoType
+    Pomo ..> PomoStatus
+    Interuption ..> InteruptionType
+    PomoCountdown --> Pomo
+
+    class Doro {
+        discription: String
+        planned: bool
+        outplanned: bool
+        due_at: Option~Datetime~
+        last_pinned_at: Option~Datetime~
+        done_at: Option~Datetime~
+        pomos: Vec~Pomo~
+        with_description(desc: &str)
+        append_pomos(n: usize)
+        new(desc: &str, estimate: usize) Doro$
+    }
+
+    class Doros {
+        inner: VecDeque~Doro~
+        pin: DoroPin$
+        planned() &[Doro]
+        urgent() &[Doro]
+        init()
+        pin(idx: usize) DoroPin
+        add_doro(Doro)
+        edit(idx: usize) &mut Doro
+        remove_doro(idx: usize)
+    }
+
+    class DoroPin {
+        Arc~Mutex~Option~Doro~~~
+        unpin()
+    }
+
+    class Pomo {
+        type: PomoType
+        status: PomoStatus
+        start_at: Option~Datetime~
+        end_at: Option~Datetime~
+        disturbations: Vec~Interuption~
+        disruption: Option~Interuption~
+    }
+
+    class PomoCountdown {
+        Arc~Mutex~Option~&mut Pomo~~~
+        interupt() Interuption
+        focus(Interuption)
+        deprecate(Interuption)
+    }
+
+    class Interuption {
+        type: InteruptionType
+        reson: String
+        start_at: Option~Datetime~
+        end_at: Option~Datetime~
+        add_doro()
+    }
+
+    class PomoType {
+        <<enum>>
+        Planned
+        Appended
+        More
+    }
+
+    class PomoStatus {
+        <<enum>>
+        Created
+        Done
+        Perfect
+        Deprecated
+    }
+
+    class InteruptionType {
+        <<enum>>
+        Interior
+        External
+    }
+```
+
 ## 时序分析
