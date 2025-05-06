@@ -117,10 +117,10 @@ classDiagram
 
 ```mermaid
 classDiagram
-    Pomo o-- Interuption
+    Pomo o-- Interruption
     Pomo ..> PomoType
     Pomo ..> PomoStatus
-    Interuption ..> InteruptionType
+    Interruption ..> InterruptionType
     PomoCountdown --> Pomo
 
     class Pomo {
@@ -128,23 +128,23 @@ classDiagram
         status: PomoStatus
         start_at: Option~Datetime~
         end_at: Option~Datetime~
-        disturbations: Vec~Interuption~
-        disruption: Option~Interuption~
+        disturbations: Vec~Interruption~
+        disruption: Option~Interruption~
     }
 
     class PomoCountdown {
         Arc~Mutex~Option~&mut Pomo~~~
-        interupt() Interuption
-        focus(Interuption)
-        deprecate(Interuption)
+        interupt() Interruption
+        focus(Interruption)
+        deprecate(Interruption)
     }
 
-    class Interuption {
-        type: InteruptionType
+    class Interruption {
+        type: InterruptionType
         reason: String
-        start_at: Option~Datetime~
-        end_at: Option~Datetime~
-        add_doro()
+        start_at: Datetime
+        end_at: Datetime
+        create_doro(): Doro
     }
 
     class PomoType {
@@ -162,7 +162,7 @@ classDiagram
         Deprecated
     }
 
-    class InteruptionType {
+    class InterruptionType {
         <<enum>>
         Interior
         External
@@ -176,10 +176,10 @@ classDiagram
     Doro "0..1" <.. DoroPin
     DoroPin <-- Doros
     Doro *-- Pomo
-    Pomo o-- Interuption
+    Pomo o-- Interruption
     Pomo ..> PomoType
     Pomo ..> PomoStatus
-    Interuption ..> InteruptionType
+    Interruption ..> InterruptionType
     PomoCountdown --> Pomo
 
     class Doro {
@@ -217,19 +217,19 @@ classDiagram
         status: PomoStatus
         start_at: Option~Datetime~
         end_at: Option~Datetime~
-        disturbations: Vec~Interuption~
-        disruption: Option~Interuption~
+        disturbations: Vec~Interruption~
+        disruption: Option~Interruption~
     }
 
     class PomoCountdown {
         Arc~Mutex~Option~&mut Pomo~~~
-        interupt() Interuption
-        focus(Interuption)
-        deprecate(Interuption)
+        interupt() Interruption
+        focus(Interruption)
+        deprecate(Interruption)
     }
 
-    class Interuption {
-        type: InteruptionType
+    class Interruption {
+        type: InterruptionType
         reason: String
         start_at: Option~Datetime~
         end_at: Option~Datetime~
@@ -251,7 +251,7 @@ classDiagram
         Deprecated
     }
 
-    class InteruptionType {
+    class InterruptionType {
         <<enum>>
         Interior
         External
