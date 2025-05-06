@@ -141,7 +141,7 @@ classDiagram
 
     class Interuption {
         type: InteruptionType
-        reson: String
+        reason: String
         start_at: Option~Datetime~
         end_at: Option~Datetime~
         add_doro()
@@ -230,7 +230,7 @@ classDiagram
 
     class Interuption {
         type: InteruptionType
-        reson: String
+        reason: String
         start_at: Option~Datetime~
         end_at: Option~Datetime~
         add_doro()
