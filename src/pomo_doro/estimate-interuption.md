@@ -231,8 +231,8 @@ classDiagram
     class Interruption {
         type: InterruptionType
         reason: String
-        start_at: Option~Datetime~
-        end_at: Option~Datetime~
+        start_at: Datetime
+        end_at: Datetime
         add_doro()
     }
 
