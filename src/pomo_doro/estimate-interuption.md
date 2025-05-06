@@ -260,3 +260,16 @@ classDiagram
 
 ## 时序分析
 让我们从最简单的主流程开始分析。我们在活动清单 `Doros` 里创建了一个新活动 `Doro`，并预估了完成该活动需要的番茄数，然后将该活动置顶，并开始番茄倒计时，直到番茄钟结束，用户确认了该番茄完成，并重复几次番茄钟后，确认活动已完成：
+
+```mermaid
+sequenceDiagram
+    Doros ->>+ Doro: create_doro(estimate_pomos: usize)
+    Doros ->>+ DoroPin: doros.pin(idx: uszie)
+    DoroPin ->>+ PomoCountdown: start_pomo()
+    PomoCountdown ->>- DoroPin: PomoCountdown.done()
+    DoroPin ->>+ PomoCountdown: start_pomo()
+    PomoCountdown ->>- DoroPin: PomoCountdown.done()
+    DoroPin ->> Doro: Doro.done()
+    DoroPin ->>- Doros: DoroPin.unpin()
+    Doro ->>- Doros: Doro.complete(&mut Doros)
+```
