@@ -50,3 +50,40 @@ classDiagram
         unpin() Option~Doro~
     }
 ```
+
+## 对象关系分析
+活动清单由单个的活动聚合而成，而置顶依赖被选定的活动而工作：
+
+```mermaid
+classDiagram
+    direction LR
+    Doro "*" --o Doros
+    Doro "0..1" <.. DoroPin
+
+    class Doro {
+        description: String
+        due_at: Option~Datetime~
+        last_pinned_at: Option~Datetime~
+        done_at: Option~Datetime~
+        with_description(desc: &str) Doro$
+        with_desc(&mut self, desc: &str) &mut Self
+        with_due(&mut self, due: Datetime) &mut Self
+    }
+
+    class Doros {
+        inner: Arc~Mutex~Vec~Doro~~~
+        add(&mut self, doro: Doro)
+        edit(&mut self, idx: usize) &mut Doro
+        remove(&mut self, idx: usize) Doro
+        all(&self) &[Doro]
+    }
+
+    class DoroPin {
+        innner: Arc~Mutex~Option~Doro~~~
+        pin(&mut self, doro: Doro)
+        unpin() Option~Doro~
+    }
+```
+
+## 时序分析
+1. 活动清单与置顶容器是最
