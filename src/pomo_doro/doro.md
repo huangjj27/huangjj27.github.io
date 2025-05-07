@@ -18,8 +18,22 @@ classDiagram
         due_at: Option~Datetime~
         last_pinned_at: Option~Datetime~
         done_at: Option~Datetime~
-        with_description(desc: &str): Doro$
-        with_desc(&mut self, desc: &str): &mut Self
-        with_due(&mut self, due: Datetime): &mut Self
+        with_description(desc: &str) Doro$
+        with_desc(&mut self, desc: &str) &mut Self
+        with_due(&mut self, due: Datetime) &mut Self
+    }
+```
+
+### 活动清单(Doros)
+活动清单包含新增、编辑、删除（可回收）、查询活动的功能，也即活动清单的目的是管理活动。活动清单应该是全局唯一的
+```mermaid
+classDiagram
+
+    class Doros {
+        inner: Arc~Mutex~Vec~Doro~~~
+        add(&mut self, doro: Doro)
+        edit(&mut self, idx: usize) &mut Doro
+        remove(&mut self, idx: usize) Doro
+        all(&self) &[Doro]
     }
 ```
