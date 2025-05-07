@@ -25,7 +25,7 @@ classDiagram
 ```
 
 ### 活动清单(Doros)
-活动清单包含新增、编辑、删除（可回收）、查询活动的功能，也即活动清单的目的是管理活动。活动清单应该是全局唯一的
+活动清单包含新增、编辑、删除（可回收）、查询活动的功能，也即活动清单的目的是管理活动。活动清单全局唯一。
 ```mermaid
 classDiagram
 
@@ -35,5 +35,18 @@ classDiagram
         edit(&mut self, idx: usize) &mut Doro
         remove(&mut self, idx: usize) Doro
         all(&self) &[Doro]
+    }
+```
+
+### 置顶（DoroPin）
+置顶是番茄工作才会存在的概念，其目的是从活动清单中挑选一项活动保持专注，直到活动完成。置顶项也是全局唯一的。
+
+```mermaid
+classDiagram
+
+    class DoroPin {
+        innner: Arc~Mutex~Option~Doro~~~
+        pin(&mut self, doro: Doro)
+        unpin() Option~Doro~
     }
 ```
