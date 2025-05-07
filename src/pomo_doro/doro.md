@@ -21,6 +21,8 @@ classDiagram
         with_description(desc: &str) Doro$
         with_desc(&mut self, desc: &str) &mut Self
         with_due(&mut self, due: Datetime) &mut Self
+        done(&mut self)
+        undone(&mut self)
     }
 ```
 
@@ -39,7 +41,7 @@ classDiagram
 ```
 
 ### 置顶（DoroPin）
-置顶是番茄工作才会存在的概念，其目的是从活动清单中挑选一项活动保持专注，直到活动完成。置顶项也是全局唯一的。
+置顶是番茄工作才会存在的概念，其目的是从活动清单中挑选一项活动保持专注，直到活动完成。置顶项也是全局唯一的。置顶项可以任意置顶与取消，也可以获取内部活动的可访问引用（不使用`DerefMut` 是因为涉及到置顶项时总是可写的。
 
 ```mermaid
 classDiagram
@@ -47,7 +49,8 @@ classDiagram
     class DoroPin {
         innner: Arc~Mutex~Option~Doro~~~
         pin(&mut self, doro: Doro)
-        unpin() Option~Doro~
+        unpin(&mut self) Option~Doro~
+        pinned(&mut self) Option~&mut Doro~
     }
 ```
 
@@ -68,6 +71,8 @@ classDiagram
         with_description(desc: &str) Doro$
         with_desc(&mut self, desc: &str) &mut Self
         with_due(&mut self, due: Datetime) &mut Self
+        done(&mut self)
+        undone(&mut self)
     }
 
     class Doros {
@@ -81,9 +86,28 @@ classDiagram
     class DoroPin {
         innner: Arc~Mutex~Option~Doro~~~
         pin(&mut self, doro: Doro)
-        unpin() Option~Doro~
+        unpin(&mut self) Option~Doro~
+        pinned(&mut self) Option~&mut Doro~
     }
 ```
 
 ## 时序分析
-1. 活动清单与置顶容器是最
+时序分析主要是为了探讨在 Rust 的所有权模型下，是否会出现因对象所有权独占而无法被其他对象访问的情况。就活动、活动清单与置顶容器之间的互动，分析如下：
+
+1. 活动的创建后应当转移至活动清单
+2. 活动的操作应当由活动清单提取活动的独占可写引用来操作
+3. 当要置顶一项活动时，应该从活动清单获取独占的所有权，理由如下：
+    - 置顶活动通常预期是一直专注执行到完成，
+    - 置顶活动执行时可能会产生中断，中断可能产生新的活动添加到活动清单中，如果置顶活动系活动清单的独占可写引用，就会产生所有权冲突
+
+```mermaid
+sequenceDiagram
+    User ->>+ Doro: Doro::with_description
+    Doro ->>+ Doros: doros.add
+    Doros ->>- Doro: doros.remove
+    Doro ->>+ DoroPin: pin.pin
+    DoroPin -->> Doro: pin.pinned
+    Doro ->> Doro: doro.done
+    DoroPin ->>- Doro: pin.unpin
+    Doro ->>- Doros: doros.add
+```
