@@ -40,13 +40,13 @@ classDiagram
     }
 ```
 
-### 置顶（DoroPin）
+### 置顶（Pin）
 置顶是番茄工作才会存在的概念，其目的是从活动清单中挑选一项活动保持专注，直到活动完成。置顶项也是全局唯一的。置顶项可以任意置顶与取消，也可以获取内部活动的可访问引用（不使用`DerefMut` 是因为涉及到置顶项时总是可写的。
 
 ```mermaid
 classDiagram
 
-    class DoroPin {
+    class Pin {
         innner: Option~Doro~
         pin(&mut self, doro: Doro)
         unpin(&mut self) Option~Doro~
@@ -61,7 +61,7 @@ classDiagram
 classDiagram
     direction LR
     Doro "*" --o Doros
-    Doro "0..1" <.. DoroPin
+    Doro "0..1" <.. Pin
 
     class Doro {
         description: String
@@ -83,7 +83,7 @@ classDiagram
         all(&self) &[Doro]
     }
 
-    class DoroPin {
+    class Pin {
         innner: ~Option~Doro~
         pin(&mut self, doro: Doro)
         unpin(&mut self) Option~Doro~
@@ -105,9 +105,9 @@ sequenceDiagram
     User ->>+ Doro: Doro::with_description
     Doro ->>+ Doros: doros.add
     Doros ->>- Doro: doros.remove
-    Doro ->>+ DoroPin: pin.pin
-    DoroPin -->> Doro: pin.pinned
+    Doro ->>+ Pin: pin.pin
+    Pin -->> Doro: pin.pinned
     Doro ->> Doro: doro.done
-    DoroPin ->>- Doro: pin.unpin
+    Pin ->>- Doro: pin.unpin
     Doro ->>- Doros: doros.add
 ```
