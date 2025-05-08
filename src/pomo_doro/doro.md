@@ -21,8 +21,9 @@ classDiagram
         with_description(desc: &str) Doro$
         with_desc(&mut self, desc: &str) &mut Self
         with_due(&mut self, due: Datetime) &mut Self
-        done(&mut self)
-        undone(&mut self)
+        is_done(&self) bool
+        done(&mut self) Datetime
+        undone(&mut self) Option~Datetime~
     }
 ```
 
@@ -71,8 +72,9 @@ classDiagram
         with_description(desc: &str) Doro$
         with_desc(&mut self, desc: &str) &mut Self
         with_due(&mut self, due: Datetime) &mut Self
-        done(&mut self)
-        undone(&mut self)
+        is_done(&self) bool
+        done(&mut self) Datetime
+        undone(&mut self) Option~Datetime~
     }
 
     class Doros {
