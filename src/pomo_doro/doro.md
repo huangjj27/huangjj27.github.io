@@ -32,7 +32,7 @@ classDiagram
 classDiagram
 
     class Doros {
-        inner: Arc~Mutex~Vec~Doro~~~
+        inner: Vec~Doro~
         add(&mut self, doro: Doro)
         edit(&mut self, idx: usize) &mut Doro
         remove(&mut self, idx: usize) Doro
@@ -47,7 +47,7 @@ classDiagram
 classDiagram
 
     class DoroPin {
-        innner: Arc~Mutex~Option~Doro~~~
+        innner: Option~Doro~
         pin(&mut self, doro: Doro)
         unpin(&mut self) Option~Doro~
         pinned(&mut self) Option~&mut Doro~
@@ -76,7 +76,7 @@ classDiagram
     }
 
     class Doros {
-        inner: Arc~Mutex~Vec~Doro~~~
+        inner: Vec~Doro~
         add(&mut self, doro: Doro)
         edit(&mut self, idx: usize) &mut Doro
         remove(&mut self, idx: usize) Doro
@@ -84,7 +84,7 @@ classDiagram
     }
 
     class DoroPin {
-        innner: Arc~Mutex~Option~Doro~~~
+        innner: ~Option~Doro~
         pin(&mut self, doro: Doro)
         unpin(&mut self) Option~Doro~
         pinned(&mut self) Option~&mut Doro~
