@@ -1,8 +1,9 @@
 # Summary
 
 - [pomo_doro敏捷开发笔记](./pomo_doro/intro.md)
-    - [需求分析](./pomo_doro/requirement-analyzing.md)
-    - [sprint1-Doro](./pomo_doro/doro.md)
+    - [sprint-0.0.0 需求分析](./pomo_doro/requirement-analyzing.md)
+    - [sprint-0.0.1 Doro](./pomo_doro/doro.md)
+    - [sprint-0.0.2 Pomo](./pomo_doro/pomo.md)
     <!-- - [sprint1-doro, pomo & estimate, interuption](./pomo_doro/estimate-interuption.md) -->
     <!-- - [sprint2-pomo config、today list](./pomo_doro/config-list.md) -->
 - [在 web 项目中使用 Rust 组织测试代码](./web-testing-with-rust.md)
