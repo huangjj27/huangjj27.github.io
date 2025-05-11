@@ -17,5 +17,31 @@
 然后，需求4可以参考 `Pin` 的设计方式，使用全局的 `Countdown` 实例来限制，并且倒计时只有置顶的任务才可以操作（启动、停止、完成，以及后续会有的中断），可以将 `Countdown` 作为 `Pin` 的内部属性进行管理。
 
 ## 核心对象分析
+### Pomo
+番茄(Pomo)除了基本的开始与结束时间，还需要理清完成后的评级（坏、普通、完美的番茄）、预估类型（第几次预估(foresee)）此外，番茄作为活动的耗时预估，其创建时必然是由预估类型的：
+
+```mermaid
+classDiagram
+    class Pomo {
+        start_at: Option~Datetime~
+        end_at: Option~Datetime~
+        grade: Grade
+        foresee: Foresee
+        with_foresee(f: Foresee) Self$
+        with_grade(&mut self, g: Grade)
+    }
+```
+
+### Countdown
+番茄钟/倒计时（CountDown）主要应用是启动/结束番茄，以及管理其中的专注-休息循环。注意，番茄总是由活动持有，而任何对番茄钟的启动/停止都是从置顶活动中操作，因此直接从置顶活动中获取可变引用即可。
+```
+classDiagram
+    class Countdown {
+        inner: Option~&mut Pomo~
+        start_pomo(&mut self)
+        end_pomo(&mut self)
+    }
+```
+
 ## 对象关系分析
 ## 时序分析
