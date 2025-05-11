@@ -120,3 +120,35 @@ classDiagram
 ```
 
 ## 时序分析
+如下图，重新分析时序：用户与单个活动对象的交互是作为管理活动清单操作的中的一部分，所以调整用户交互的时序，先与活动清单交互，再由活动清单与单个对象交互。同理，重新梳理了置顶项的交互。
+```mermaid
+sequenceDiagram
+    User ->>+ Doros: Create new Doro
+    Doros ->> Doro: doros.add
+    Doro ->>+ Doro: Doro::with_description
+    Doro ->>+ Pomo: doro.with_new_foresee
+    Pomo --)- Doro: Pomo foreseed
+    Doro --)- Doros: ownership transfered
+    Doros --)- User: Doro created & added
+    User ->>+ Pin: Want Pin
+    User ->>+ Doros: Want Pin
+    Doros ->> Doros: doros.remove
+    Doros --)- Doro: Doro to be pinned returned
+    activate Doro
+    Pin ->> Doro: Pin.pin
+    Doro --)- Pin: ownership transfered
+    loop until all foresee done or unpin
+        Pin ->>+ Countdown: pin.focus
+        Countdown ->>+ Pomo: countdown.start_pomo
+        activate Pomo
+        Pin ->> Countdown: pin.break
+        Countdown ->>- Pomo: countdown.end_pomo
+        deactivate Pomo
+    end
+    Pin ->>+ Doro: pin.pinned
+    Doro ->> Doro: doro.done
+    Doro --)- Pin: mut reference destroyed
+    Pin ->>- Doro: pin.unpin
+    activate Doro
+    Doro ->>- Doros: doros.add
+```
