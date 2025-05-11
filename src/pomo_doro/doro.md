@@ -86,7 +86,7 @@ classDiagram
     }
 
     class Pin {
-        innner: ~Option~Doro~
+        innner: Option~Doro~
         pin(&mut self, doro: Doro) Option~Doro~
         unpin(&mut self) Option~Doro~
         pinned(&mut self) Option~&mut Doro~
