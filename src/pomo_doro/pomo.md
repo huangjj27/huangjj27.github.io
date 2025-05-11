@@ -44,4 +44,79 @@ classDiagram
 ```
 
 ## 对象关系分析
+结合之前的分析，整体的对象关系有了以下变化点：
+1. 引入了番茄，作为活动的耗时预估，以聚合属性的形式在活动项中进行管理
+2. 引入番茄钟，仅在置顶项中才可以开始运行与结束
+```mermaid
+classDiagram
+    Doro "*" --o Doros
+    Doro "0..1" <.. Pin
+    Pomo ..> Grade
+    Pomo ..> Forsee
+    Countdown ..> Pomo
+    Pomo "*" --* Doro
+    Pin --> Countdown
+
+    class Doro {
+        description: String
+        due_at: Option~Datetime~
+        last_pinned_at: Option~Datetime~
+        done_at: Option~Datetime~
+        pomos: Vec~Pomo~
+        with_description(desc: &str) Doro$
+        with_desc(&mut self, desc: &str) &mut Self
+        with_due(&mut self, due: Datetime) &mut Self
+        with_new_foresee(n: usize)
+        is_done(&self) bool
+        done(&mut self) Datetime
+        undone(&mut self) Option~Datetime~
+    }
+
+    class Doros {
+        inner: Vec~Doro~
+        add(&mut self, doro: Doro)
+        edit(&mut self, idx: usize) &mut Doro
+        remove(&mut self, idx: usize) Doro
+        all(&self) &[Doro]
+    }
+
+    class Pin {
+        innner: Option~Doro~
+        countdown: Countdown
+        pin(&mut self, doro: Doro) Option~Doro~
+        unpin(&mut self) Option~Doro~
+        pinned(&mut self) Option~&mut Doro~
+        focus(&mut self) &mut Countdown
+        break(&mut self)
+    }
+
+    class Pomo {
+        start_at: Option~Datetime~
+        end_at: Option~Datetime~
+        grade: Grade
+        foresee: Foresee
+        with_foresee(f: Foresee) Self$
+        with_grade(&mut self, g: Grade)
+    }
+
+    class Grade {
+        <<enum>>
+        Deprecated
+        Done
+        Perfect
+    }
+
+    class Forsee {
+        Planned
+        Appended
+        More
+    }
+
+    class Countdown {
+        inner: Option~&mut Pomo~
+        #start_pomo(&mut self)
+        #end_pomo(&mut self)
+    }
+```
+
 ## 时序分析
