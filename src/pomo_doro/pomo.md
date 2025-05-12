@@ -25,7 +25,7 @@ classDiagram
     class Pomo {
         start_at: Option~Datetime~
         end_at: Option~Datetime~
-        grade: Grade
+        grade: Option~Grade~
         foresee: Foresee
         with_foresee(f: Foresee) Self$
         with_grade(&mut self, g: Grade)
@@ -93,7 +93,7 @@ classDiagram
     class Pomo {
         start_at: Option~Datetime~
         end_at: Option~Datetime~
-        grade: Grade
+        grade: Option~Grade~
         foresee: Foresee
         with_foresee(f: Foresee) Self$
         with_grade(&mut self, g: Grade)
