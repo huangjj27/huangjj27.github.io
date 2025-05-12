@@ -126,24 +126,24 @@ classDiagram
 sequenceDiagram
     actor User
     par Create a new doro
+        User ->>+ Doros: Doros::default
+    and
         User ->>+ Doro: Doro::with_description
         Opt Foresee pomos within doros' creation
             Doro ->>+ Pomo: doro.with_new_foresee
             Pomo --)- Doro: Pomo foreseen
         end
-    and
-        User ->>+ Doros: Doros::default
     end
         Doros ->> Doro: doros.add
         Doro --)- Doros: ownership transferred
         Doros --)- User: Doro created & added
 
     par Pin a doro
+        User ->>+ Pin: Pin::default
+    and
         User ->>+ Doros: doros.remove
         Doros --)- Doro: Doro to be pinned returned
         activate Doro
-    and
-        User ->>+ Pin: Pin::default
     end
 
     Pin ->> Doro: Pin.pin
