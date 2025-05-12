@@ -164,3 +164,6 @@ sequenceDiagram
     activate Doro
     Doro ->>- Doros: doros.add
 ```
+
+## 此稿作废
+Rust 的所有权机制阻止 `Countdown` 直接持有 `Pomo`，因此要考虑一下如何重新实现相关功能。
