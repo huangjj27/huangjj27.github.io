@@ -8,7 +8,7 @@
 ## 需求细化
 本次 sprint 将在[上一个sprint](./doro.md)的基础上增加番茄与番茄钟（倒计时）功能。
 
-首先，因为番茄钟只会作为活动的预估出现，这也意味着只有在创建了活动后，才有可能产生番茄，所以我们可以将番茄作为活动的一个属性来进行管理。我设想理想的交互是，在界面上有专门的若干灰色番茄图案，（这也意味着我们限制了一个活动可能预估的上限番茄数量——鼓励用户将工作量比较大的任务拆分成小而具体、可量化花费时间的活动），用户可以在这些图案上点击或者滑动来调整预估的番茄钟数量。而每个活动区分三种预估的思路如下：
+首先，因为番茄钟只会作为活动的预估出现，这也意味着只有在创建了活动后，才有可能产生番茄，所以我们可以将番茄作为活动的一个属性来进行管理。我设想理想的交互是，在界面上有专门的若干灰色番茄图案，（这也意味着我们限制了一个活动可能预估的上限番茄数量——鼓励用户将工作量比较大的任务拆分成小而具体、可量化花费时间的活动），用户可以在这些图案上点击或者滑动来调整预估的番茄钟数量。而每个活动区分番茄的三种预估类型的思路如下：
 
 1. 当用户在该活动下没有任何执行过的番茄时，任意调整评估番茄数量，评估的番茄都算是“计划好的”（Planned）番茄；
 2. 当用户在该活动有执行过（完成状态为完成 Completed 或者废弃 Deprecated）的番茄，且最后一个番茄类型是 Planned 时，追加预估的番茄都算作“追加的（Appended）”。
@@ -33,7 +33,7 @@ classDiagram
 ```
 
 ### Countdown
-番茄钟/倒计时（CountDown）主要应用是启动/结束番茄，以及管理其中的专注-休息循环。注意，番茄总是由活动持有，而任何对番茄钟的启动/停止都是从置顶活动中操作，因此直接从置顶活动中获取可变引用即可。
+番茄钟/倒计时（CountDown）主要应用是启动/结束番茄，配合置顶项管理其中的专注-休息循环。注意，番茄总是由活动持有，而任何对番茄钟的启动/停止都是从置顶活动中操作，因此直接从置顶活动中获取可变引用即可。
 ```mermaid
 classDiagram
     class Countdown {
@@ -54,7 +54,7 @@ classDiagram
     Pomo ..> Grade
     Pomo ..> Forsee
     Countdown ..> Pomo
-    Pomo "*" --* Doro
+    Pomo "*" --o Doro
     Pin --> Countdown
 
     class Doro {
@@ -114,29 +114,41 @@ classDiagram
 
     class Countdown {
         inner: Option~&mut Pomo~
-        #start_pomo(&mut self)
-        #end_pomo(&mut self)
+        start_pomo(&mut self)
+        end_pomo(&mut self)
     }
 ```
 
 ## 时序分析
-如下图，重新分析时序：用户与单个活动对象的交互是作为管理活动清单操作的中的一部分，所以调整用户交互的时序，先与活动清单交互，再由活动清单与单个对象交互。同理，重新梳理了置顶项的交互。
+如下图，重新分析时序：用户创建单个活动与创建全局清单的活动是独立的，所以可以并行执行；而预估番茄则是添加活动时的可算操作，使用 `Opt`片段框出。同样的，将要用于置顶的活动与置顶项的创建是相互独立的，也可以并行执行。
+
 ```mermaid
 sequenceDiagram
-    User ->>+ Doros: Create new Doro
-    Doros ->> Doro: doros.add
-    Doro ->>+ Doro: Doro::with_description
-    Doro ->>+ Pomo: doro.with_new_foresee
-    Pomo --)- Doro: Pomo foreseed
-    Doro --)- Doros: ownership transfered
-    Doros --)- User: Doro created & added
-    User ->>+ Pin: Want Pin
-    User ->>+ Doros: Want Pin
-    Doros ->> Doros: doros.remove
-    Doros --)- Doro: Doro to be pinned returned
-    activate Doro
+    actor User
+    par Create a new doro
+        User ->>+ Doro: Doro::with_description
+        Opt Foresee pomos within doros' creation
+            Doro ->>+ Pomo: doro.with_new_foresee
+            Pomo --)- Doro: Pomo foreseen
+        end
+    and
+        User ->>+ Doros: Doros::default
+    end
+        Doros ->> Doro: doros.add
+        Doro --)- Doros: ownership transferred
+        Doros --)- User: Doro created & added
+
+    par Pin a doro
+        User ->>+ Doros: doros.remove
+        Doros --)- Doro: Doro to be pinned returned
+        activate Doro
+    and
+        User ->>+ Pin: Pin::default
+    end
+
     Pin ->> Doro: Pin.pin
-    Doro --)- Pin: ownership transfered
+    Doro --)- Pin: ownership transferred
+
     loop until all foresee done or unpin
         Pin ->>+ Countdown: pin.focus
         Countdown ->>+ Pomo: countdown.start_pomo
