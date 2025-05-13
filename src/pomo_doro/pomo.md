@@ -33,13 +33,14 @@ classDiagram
 ```
 
 ### Countdown
-番茄钟/倒计时（CountDown）主要应用是启动/结束番茄，配合置顶项管理其中的专注-休息循环。注意，番茄总是由活动持有，而任何对番茄钟的启动/停止都是从置顶活动中操作，因此直接从置顶活动中获取可变引用即可。
+番茄钟/倒计时（CountDown）主要应用是启动/结束番茄，配合置顶项管理其中的专注-休息循环。注意，番茄总是由活动持有，而任何对番茄钟的启动/停止都是从置顶活动中操作，因此直接从置顶活动中获取可变引用即可。注意，番茄的实际创建是在倒计时结束的时候自动计算生成的。
 ```mermaid
 classDiagram
     class Countdown {
-        inner: Option~&mut Pomo~
-        start_pomo(&mut self)
-        end_pomo(&mut self)
+        start_at: Datetime
+        forsee: Forsee
+        start() Countdown$
+        end(self) Pomo
     }
 ```
 
@@ -51,6 +52,7 @@ classDiagram
 classDiagram
     Doro "*" --o Doros
     Doro "0..1" <.. Pin
+    Countdown ..> Forsee
     Pomo ..> Grade
     Pomo ..> Forsee
     Countdown ..> Pomo
@@ -66,7 +68,8 @@ classDiagram
         with_description(desc: &str) Doro$
         with_desc(&mut self, desc: &str) &mut Self
         with_due(&mut self, due: Datetime) &mut Self
-        with_new_foresee(n: usize)
+        with_new_foresee(&mut self, n: usize) &mut Self
+        with_pomo(&mut self, p: Pomo) &mut Self
         is_done(&self) bool
         done(&mut self) Datetime
         undone(&mut self) Option~Datetime~
@@ -107,15 +110,17 @@ classDiagram
     }
 
     class Forsee {
+        <<enum>>
         Planned
         Appended
         More
     }
 
     class Countdown {
-        inner: Option~&mut Pomo~
-        start_pomo(&mut self)
-        end_pomo(&mut self)
+        start_at: Datetime
+        forsee: Forsee
+        start() Countdown$
+        end(self) Pomo
     }
 ```
 
@@ -149,21 +154,23 @@ sequenceDiagram
     Pin ->> Doro: Pin.pin
     Doro --)- Pin: ownership transferred
 
-    loop until all foresee done or unpin
-        Pin ->>+ Countdown: pin.focus
-        Countdown ->>+ Pomo: countdown.start_pomo
-        activate Pomo
-        Pin ->> Countdown: pin.break
-        Countdown ->>- Pomo: countdown.end_pomo
-        deactivate Pomo
+    Opt foresee
+        loop
+            Pin ->> Pin: pin.focus
+            Pin -)+ Countdown: Countdown::start
+            Pin ->> Pin: pin.break
+            Pin -) Countdown: countdown.end
+            Countdown --)- Pomo: pomo created
+            activate Pomo
+            Pin ->>+ Doro: pin.pinned
+            Doro ->> Pomo: doro.with_pomo
+            Pomo --)- Doro: pomo added to doro
+        end
     end
-    Pin ->>+ Doro: pin.pinned
+
     Doro ->> Doro: doro.done
     Doro --)- Pin: mut reference destroyed
     Pin ->>- Doro: pin.unpin
     activate Doro
     Doro ->>- Doros: doros.add
 ```
-
-## 此稿作废
-Rust 的所有权机制阻止 `Countdown` 直接持有 `Pomo`，因此要考虑一下如何重新实现相关功能。
