@@ -18,17 +18,15 @@
 
 ## 核心对象分析
 ### Pomo
-番茄(Pomo)除了基本的开始与结束时间，还需要理清完成后的评级（坏、普通、完美的番茄）、预估类型（第几次预估(foresee)）此外，番茄作为活动的耗时预估，其创建时必然是有预估类型的：
+番茄(Pomo)除了基本的开始与结束时间，还需要理清完成后的评级（坏、普通、完美的番茄）、预估类型（第几次预估(foresee)）~~此外，番茄作为活动的耗时预估，其创建时必然是有预估类型的~~ 番茄作为活动的预估只需要调整活动中的预估数量，其实际创建应在番茄钟结束时（如此可以绕过番茄钟持有实体番茄是遇到的引用生存期问题），根据活动当前的番茄执行情况来赋予番茄钟预估类型，使得在创建番茄时可以透传。这也意味着，番茄没有任何修改自身的方法。
 
 ```mermaid
 classDiagram
     class Pomo {
-        start_at: Option~Datetime~
-        end_at: Option~Datetime~
-        grade: Option~Grade~
+        start_at: Datetime
+        end_at: Datetime
+        grade: Grade
         foresee: Foresee
-        with_foresee(f: Foresee) Self$
-        with_grade(&mut self, g: Grade)
     }
 ```
 
@@ -94,9 +92,9 @@ classDiagram
     }
 
     class Pomo {
-        start_at: Option~Datetime~
-        end_at: Option~Datetime~
-        grade: Option~Grade~
+        start_at: Datetime
+        end_at: Datetime
+        grade: Grade
         foresee: Foresee
         with_foresee(f: Foresee) Self$
         with_grade(&mut self, g: Grade)
