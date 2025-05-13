@@ -62,6 +62,7 @@ classDiagram
         due_at: Option~Datetime~
         last_pinned_at: Option~Datetime~
         done_at: Option~Datetime~
+        foresee: [u8;3]
         pomos: Vec~Pomo~
         with_description(desc: &str) Doro$
         with_desc(&mut self, desc: &str) &mut Self
