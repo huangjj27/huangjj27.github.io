@@ -84,11 +84,11 @@ classDiagram
 
     class Pin {
         innner: Option~Doro~
-        countdown: Countdown
+        countdown: Option~Countdown~
         pin(&mut self, doro: Doro) Option~Doro~
         unpin(&mut self) Option~Doro~
         pinned(&mut self) Option~&mut Doro~
-        focus(&mut self) &mut Countdown
+        focus(&mut self)
         break(&mut self)
     }
 
