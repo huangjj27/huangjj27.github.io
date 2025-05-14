@@ -48,19 +48,21 @@ classDiagram
 
     class Countdown~T~ {
         state: T
-        pinned: Option~Doro~
     }
 
     class Idle {
+        pinned: Doro
         pin(self, d: Doro) Ready
     }
 
     class Ready {
-        unpin(self) Idle
+        pinned: Doro
+        unpin(self) (Idle, Doro)
         start(self) Focus
     }
 
     class Focus {
+        pinned: Doro
         foresee: Foresee
         disturbations: Vec~Interuption~
         notify(&mut self)
@@ -69,12 +71,14 @@ classDiagram
     }
 
     class Break {
+        pinned: Doro
         notify(&mut self)
         confirm(self) Ready
         done(self) (Idle, Doro)
     }
 
     class Interrupted {
+        pinned: Doro
         foresee: Foresee
         disturbations: Vec~Interuption~
         recover(self) Focus
