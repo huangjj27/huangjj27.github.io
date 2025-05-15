@@ -25,4 +25,4 @@
     - [WASI版猜数字](./wasi/wasi_guess.md)
 
 ---
-[关于我](./resume.md)
+[关于我](resume.md)
