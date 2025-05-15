@@ -51,19 +51,21 @@ classDiagram
     }
 
     class Idle {
-        pinned: Doro
-        pin(self, d: Doro) Ready
+        pinned: &mut Doro
+        pin(self, d: &mut Doro) Ready
     }
 
     class Ready {
-        pinned: Doro
-        unpin(self) (Idle, Doro)
+        pinned: &mut Doro
+        pin(&mut self)
+        unpin(self) (Idle, &mut Doro)
         start(self) Focus
     }
 
     class Focus {
-        pinned: Doro
+        pinned: &mut Doro
         foresee: Foresee
+        start_at: Datetime
         disturbations: Vec~Interuption~
         notify(&mut self)
         interrupt(self) Interrupted
@@ -71,15 +73,17 @@ classDiagram
     }
 
     class Break {
-        pinned: Doro
+        pinned: &mut Doro
         notify(&mut self)
         confirm(self) Ready
-        done(self) (Idle, Doro)
+        done(self): (Idle, &mut Doro)
     }
 
     class Interrupted {
-        pinned: Doro
+        pinned: &mut Doro
         foresee: Foresee
+        start_at: Datetime
+        interrupted_at: Datetime
         disturbations: Vec~Interuption~
         recover(self) Focus
         timeout(self) Ready
