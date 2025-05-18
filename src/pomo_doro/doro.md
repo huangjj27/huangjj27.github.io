@@ -27,33 +27,23 @@ classDiagram
     }
 ```
 
-### 活动清单(Doros)
-活动清单包含新增、编辑、删除（可回收）、查询活动的功能，也即活动清单的目的是管理活动。活动清单全局唯一。
+### 活动清单(Doros) 与 置顶（Pin）
+活动清单包含新增、编辑、删除（可回收）、查询活动的功能，也即活动清单的目的是管理活动。活动清单全局唯一。置顶是番茄工作才会存在的概念，其目的是从活动清单中挑选一项活动保持专注，直到活动完成。置顶项也是全局唯一的。置顶项可以任意置顶与取消。
+
 ```mermaid
 classDiagram
 
     class Doros {
         inner: Vec~Doro~
+        pinned: Option~usize~
         add(&mut self, doro: Doro)
         edit(&mut self, idx: usize) &mut Doro
-        remove(&mut self, idx: usize) Doro
-        all(&self) &[Doro]
+        pin(&mut self, idx: usize)
+        unpin(&mut self)
+        pinned(&mut self) Result~&mut Doro~
     }
 ```
 
-### 置顶（Pin）
-置顶是番茄工作才会存在的概念，其目的是从活动清单中挑选一项活动保持专注，直到活动完成。置顶项也是全局唯一的。置顶项可以任意置顶与取消，也可以获取内部活动的可访问引用（不使用`DerefMut` 是因为涉及到置顶项时总是可写的）。
-
-```mermaid
-classDiagram
-
-    class Pin {
-        innner: Option~Doro~
-        pin(&mut self, doro: Doro)
-        unpin(&mut self) Option~Doro~
-        pinned(&mut self) Option~&mut Doro~
-    }
-```
 
 ## 对象关系分析
 活动清单由单个的活动聚合而成，而置顶依赖被选定的活动而工作：
@@ -62,7 +52,6 @@ classDiagram
 classDiagram
     direction LR
     Doro "*" --o Doros
-    Doro "0..1" <.. Pin
 
     class Doro {
         description: String
@@ -84,13 +73,6 @@ classDiagram
         remove(&mut self, idx: usize) Doro
         all(&self) &[Doro]
     }
-
-    class Pin {
-        innner: Option~Doro~
-        pin(&mut self, doro: Doro) Option~Doro~
-        unpin(&mut self) Option~Doro~
-        pinned(&mut self) Option~&mut Doro~
-    }
 ```
 
 ## 时序分析
@@ -104,12 +86,15 @@ classDiagram
 
 ```mermaid
 sequenceDiagram
+    actor User
     User ->>+ Doro: Doro::with_description
-    Doro ->>+ Doros: doros.add
-    Doros ->>- Doro: doros.remove
-    Doro ->>+ Pin: pin.pin
-    Pin -->> Doro: pin.pinned
+    Doro --) User: Doro created
+    Doros ->> Doro: doros.add
+    activate Doros
+    Doro --)- Doros: Ownership transferred
+    Doros ->> Doros: doros.pin(idx)
+    Doros ->>+ Doro: pin.pinned
     Doro ->> Doro: doro.done
-    Pin ->>- Doro: pin.unpin
-    Doro ->>- Doros: doros.add
+    Doro --)- Doros: exclusive referrence destroyed
+    deactivate Doros
 ```
