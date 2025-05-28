@@ -11,6 +11,9 @@ edition = "2021"
 [output.html]
 mathjax-support = true
 no-section-label = true
+additional-css = [
+    "assets/css/chinese-ident.css",
+]
 additional-js = ["assets/fzf.umd.js", "assets/elasticlunr.js"]
 git-repository-url = "https://gitlab.com/huangjj27/huangjj27.gitlab.io"
 git-repository-icon = "fa-gitlab"
