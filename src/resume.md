@@ -8,9 +8,9 @@
 
 <i class="fa fa-envelope" aria-hidden="true"></i> <huangjj.27@qq.com> ·
 <i class="fa fa-github" aria-hidden="true"></i> [huangjj27](https://github.com/huangjj27) ·
-<i class="fa fa-gitlab" aria-hidden="true"></i> [huangjj27](https://jihulab.com/huangjj27)
+<i class="fa fa-gitlab" aria-hidden="true"></i> [huangjj27](https://gitlab.com/huangjj27)
 
-<i class="fa fa-book" aria-hidden="true"></i> tech-blog: <https://huangjj27.gitlab.io> ·
+<i class="fa fa-book" aria-hidden="true"></i> tech-blog: <https://huangjj27.github.io> ·
 <i class="fa fa-book" aria-hidden="true"></i> 微信技术公众号: 不如学点Rust
 
 ## <i class="fa fa-graduation-cap" aria-hidden="true"></i> 教育背景
