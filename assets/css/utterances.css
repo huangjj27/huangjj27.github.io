@@ -1,0 +1,4 @@
+.content hr { max-width: var(--content-max-width); }
+.content .utterances {
+    max-width: var(--content-max-width);
+}
