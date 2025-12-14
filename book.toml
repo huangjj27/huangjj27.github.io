@@ -1,7 +1,6 @@
 [book]
 authors = ["huangjj27"]
 language = "zh"
-multilingual = false
 src = "src"
 title = "huangjj27 的技术博客"
 
@@ -12,8 +11,8 @@ edition = "2021"
 mathjax-support = true
 no-section-label = true
 additional-js = ["assets/fzf.umd.js", "assets/elasticlunr.js"]
-git-repository-url = "https://gitlab.com/huangjj27/huangjj27.gitlab.io"
-git-repository-icon = "fa-gitlab"
+git-repository-url = "https://github.com/huangjj27/huangjj27.github.io"
+git-repository-icon = "fab-github"
 
 [output.html.print]
 enable = false

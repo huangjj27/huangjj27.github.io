@@ -1,22 +1,19 @@
-<!-- 引入font-awesome -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.css" rel="stylesheet">
+# <i class="fa-solid fa-person" aria-hidden="true"></i> Sunny Huang
+<i class="fa-solid fa-phone" aria-hidden="true"></i> 77u/KCs4NikxODgtMTk0OC0xMjYyDQo=
 
-# <i class="fa fa-male" aria-hidden="true"></i> Sunny Huang
-<i class="fa fa-phone" aria-hidden="true"></i> 77u/KCs4NikxODgtMTk0OC0xMjYyDQo=
+<i class="fa-solid fa-id-card" aria-hidden="true"></i> 4237 514E 3573 DB47 EE84  5A2B CC7D A6E6 9494 7EE8
 
-<i class="fa fa-id-card" aria-hidden="true"></i> 4237 514E 3573 DB47 EE84  5A2B CC7D A6E6 9494 7EE8
+<i class="fa-solid fa-envelope" aria-hidden="true"></i> <huangjj.27@qq.com> ·
+<i class="fa-brands fa-github" aria-hidden="true"></i> [huangjj27](https://github.com/huangjj27) ·
+<i class="fa-brands fa-gitlab" aria-hidden="true"></i> [huangjj27](https://jihulab.com/huangjj27)
 
-<i class="fa fa-envelope" aria-hidden="true"></i> <huangjj.27@qq.com> ·
-<i class="fa fa-github" aria-hidden="true"></i> [huangjj27](https://github.com/huangjj27) ·
-<i class="fa fa-gitlab" aria-hidden="true"></i> [huangjj27](https://jihulab.com/huangjj27)
+<i class="fa-solid fa-book" aria-hidden="true"></i> tech-blog: <https://huangjj27.gitlab.io> ·
+<i class="fa-solid fa-book" aria-hidden="true"></i> 微信技术公众号: 不如学点Rust
 
-<i class="fa fa-book" aria-hidden="true"></i> tech-blog: <https://huangjj27.gitlab.io> ·
-<i class="fa fa-book" aria-hidden="true"></i> 微信技术公众号: 不如学点Rust
-
-## <i class="fa fa-graduation-cap" aria-hidden="true"></i> 教育背景
+## <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> 教育背景
 2013.9 -- 2017.7 **中山大学** 数据科学与计算机学院(原软件学院) **软件工程** **_工学学士_**
 
-## <i class="fa fa-users" aria-hidden="true"></i> 项目经历
+## <i class="fa-solid fa-users" aria-hidden="true"></i> 项目经历
 ### 数字化营业厅 2021.09 - 至今
 **_测试工程师_: 业务测试、自动化测试、性能测试**
 - 负责数字化营业厅项目下的叫号系统与数据赋能看板项目的功能测试
@@ -78,7 +75,7 @@ Bonus:
 [Python]: https://github.com/tencentyun/tls-sig-api-python
 [TLSSigAPI]: https://github.com/huangjj27/TLSSigAPI
 
-## <i class="fa fa-cogs" aria-hidden="true"></i> 技能
+## <i class="fa-solid fa-gears" aria-hidden="true"></i> 技能
 - 数据分析开发
     - 基于 HiveQL 的银行业务数据分析设计与开发
     - 基于 polars/panda 的数据分析
@@ -102,7 +99,7 @@ Bonus:
 [语义化版本]: http://semver.org/lang/zh-CN/
 
 <!--
-## <i class="fa fa-heart" aria-hidden="true"></i> 期望
+## <i class="fa-solid fa-heart" aria-hidden="true"></i> 期望
 - 工作地点: 广州
 - 期望岗位:
     - 测试工程师
