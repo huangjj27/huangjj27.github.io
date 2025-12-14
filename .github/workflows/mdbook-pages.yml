@@ -8,6 +8,21 @@ on:
     branches:
       - dev
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 env:
   CARGO_TERM_COLOR: always
 
@@ -15,7 +30,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Install mdbook
       uses: actions-rs/install@v0.1
       with:
@@ -24,28 +39,24 @@ jobs:
         use-tool-cache: true
     - name: Build mdbook
       run: mdbook build
-    - name: Cache artifact
-      uses: actions/upload-artifact@v4
+    - name: Setup Pages
+      id: pages
+      uses: actions/configure-pages@v5
+    - name: Build with mdBook
+      run: mdbook build
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        name: book
         path: ./book
 
   deploy:
     if: github.event_name == 'push'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: Get artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: book
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        publish_dir: ./book
-        publish_branch: master
-        allow_empty_commit: true
-        user_name: "huangjj27"
-        user_email: "huangjj.27@qq.com"
-        force_orphan: true
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
