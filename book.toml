@@ -10,7 +10,13 @@ edition = "2021"
 [output.html]
 mathjax-support = true
 no-section-label = true
-additional-js = ["assets/fzf.umd.js", "assets/elasticlunr.js"]
+additional-css = [
+    "assets/css/utterances.css",
+]
+additional-js = [
+    "assets/javascript/fzf.umd.js",
+    "assets/javascript/elasticlunr.js",
+]
 git-repository-url = "https://github.com/huangjj27/huangjj27.github.io"
 git-repository-icon = "fab-github"
 
