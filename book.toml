@@ -10,6 +10,9 @@ edition = "2021"
 [output.html]
 mathjax-support = true
 no-section-label = true
+additional-css = [
+    "assets/css/utterances.css",
+]
 additional-js = [
     "assets/javascript/fzf.umd.js",
     "assets/javascript/elasticlunr.js",
