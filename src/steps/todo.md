@@ -99,3 +99,6 @@ sequenceDiagram
     Doro --)- Doros: exclusive referrence destroyed
     deactivate Doros
 ```
+
+## 存储分析
+以上分析忽略了一个很重要的设计要素：在 CLI 中，每次执行命令就必须直接写入嵌入数据库（如sqlite/turso），在后续可能实现的浏览器 UI 中，才可能考虑将多次操作同步到 Web 后端，而即使多次操作同步，也是每个操作依次同步到数据库中，因此分析核心对象的生命周期意义不大。
