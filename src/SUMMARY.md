@@ -16,6 +16,7 @@
 - [WASI探索](./wasi/intro.md)
     - [WASI简介与Wasmtime配置](./wasi/wasi_and_wasmtime.md)
     - [WASI版猜数字](./wasi/wasi_guess.md)
+- [一个基于事件成功次数的带权评估方法](./estimate-function.md)
 
 ---
 [关于我](./resume.md)
