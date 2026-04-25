@@ -6,7 +6,7 @@
 ## 场景设计
 我们先设计一个简单的副本模式，包含了一个 Boss 和若干小怪，小怪数量在范围内随机波动。小怪和 Boss 都拥有血量，但是只有Boss 能攻击。我们把这个模式定义为结构：
 
-```rs,no_run
+```rust,ignore
 struct Dungeon {
     boss: Box<dyn Boss>,
     monsters: Vec<Box<dyn Monster>>,
@@ -30,7 +30,7 @@ trait Boss: Monster {
 
 然后，我们建立抽象工厂：
 
-```
+```rust,ignore
 use rand::random;
 trait DungeonFactory {
     fn create_boss(&self) -> Box<dyn Boss>
@@ -47,7 +47,7 @@ trait DungeonFactory {
 
 然后，我们创建新手副本的具体工厂:
 
-```rs,no_run
+```rust,ignore
 struct NewbieDungeonFactory;
 
 impl DungeonFactory for NewBieDungeonFactory {
@@ -105,7 +105,7 @@ impl Boss for NewbieBoss {
 
 接下来，我们可以新增一个新副本，新副本的小怪和 Boss 是新手副本的 `NewbieBoss`，但是小怪已经不能攻击玩家了（通过动态分发为 `dyn Monster` 对象来屏蔽 `Boss` 的攻击行为：
 
-```rs,no_run
+```rust,ignore
 struct JuniorDungeonFactory;
 
 impl DungeonFactory for JuniorDungeonFactory {
