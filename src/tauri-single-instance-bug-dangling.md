@@ -215,7 +215,7 @@ examples\emit-event> src-tauri\target\debug\z12345678901234.exe
 [tauri-plugin-single-instance\src\platform_impl\windows.rs:51] hwnd = 40113446
 ```
 
-```
+```shell
 # process1
 > cd examples\emit-event
 examples\emit-event> cargo tauri build --debug
