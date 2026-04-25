@@ -135,7 +135,7 @@ Rust 中的[特质（trait）](https://kaisery.gitbooks.io/trpl-zh-cn/ch10-02-tr
 ### 建模与实现
 本文使用面向对象（Object-Oriented）编程范式[^2]来进行抽象，如下所示：
 
-{{#playground ../code/reservoir.rs}}
+{{#playground ../code/reservoir/main.rs}}
 
 ## 优点
 - 流式处理，可以适应任意规模的参与人群
