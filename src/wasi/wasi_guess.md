@@ -187,12 +187,12 @@ fn guess_a_number((lb, hb): (u32, u32)) {
 
 ## 是时候编译成WASI目标了
 我们还需要添加对应的编译目标：
-```
+```shell
 rustup target add wasm32-wasi
 ```
 
 编译到`wasm32-wasi`目标上：
-```
+```shell
 $ cargo build --target=wasm32-wasi --release
    Compiling proc-macro2 v1.0.18
    Compiling version_check v0.9.2
@@ -236,7 +236,7 @@ $ cargo build --target=wasm32-wasi --release
 ```
 
 现在，我们来运行一下程序吧：
-```
+```shell
 $ wasmer --version
 wasmer 0.13.1
 $ wasmer run .\target\wasm32-wasi\release\guess.wasm --env RUST_LOG=trace -- --levels 10 100 1000

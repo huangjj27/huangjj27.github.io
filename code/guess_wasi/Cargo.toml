@@ -9,7 +9,7 @@ edition = "2018"
 # ANCHOR: log
 # ANCHOR: structopt
 [dependencies]
-rand = "0.7"
+rand = "0.10"
 # ANCHOR_END: rand
 
 # 总是使用最新的log与env_log
