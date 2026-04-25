@@ -201,7 +201,7 @@ pub fn init<R: Runtime>(f: Box<SingleInstanceCallback<R>>) -> TauriPlugin<R> {
 
 然后，将代码仓库  `examples\emit-event\src-tauri\tauri.conf.json` 分别改成 `z12345678901234` 与 `z123456789012345`，然后执行：
 
-```
+```shell
 # process1
 > cd examples\emit-event
 examples\emit-event> cargo tauri build --debug
@@ -296,7 +296,7 @@ fn create_event_target_window<R: Runtime>(class_name: &str, window_name: &str) -
 ```
 
 `z12345678901234`:
-```
+```shell
 examples\emit-event> src-tauri\target\debug\z12345678901234.exe
 [tauri-plugin-single-instance\src\platform_impl\windows.rs:43] hmutex = 556
 [tauri-plugin-single-instance\src\platform_impl\windows.rs:153] class.lpszClassName = 0x0000021d099eddc0
@@ -307,7 +307,7 @@ examples\emit-event> src-tauri\target\debug\z12345678901234.exe
 ```
 
 `z123456789012345`:
-```
+```shell
 examples\emit-event> src-tauri\target\debug\z123456789012345.exe
 [tauri-plugin-single-instance\src\platform_impl\windows.rs:43] hmutex = 548
 [tauri-plugin-single-instance\src\platform_impl\windows.rs:153] class.lpszClassName = 0x0000017259ca6be0

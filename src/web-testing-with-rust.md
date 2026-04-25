@@ -23,7 +23,7 @@ Python 是一门非常适合编写即时性脚本的语言，能够简化很多�
 ## 实践no.1 -- Workspace
 最开始因为 `goose` 性能框架支持 binary，并且认为可复用组件少而形成了单个负载测试独立作为项目、多个负责测试组成同一工作空间的架构：
 
-```
+```markdown
 workspace
 |-- perf_binary1
     |-- src/main.rs
@@ -42,7 +42,7 @@ workspace
 ## 实践no.2 -- 带有多个 binary 的 cargo 项目，使用 features 控制依赖
 经常 [实践1](#实践no1----workspace)，发现了更好的方式通过 binary 的方式管理多个不同的负载测试用例，而 binary 所需的依赖可以作为可选依赖通过 `cargo features` 来引入：
 
-```
+```markdown
 project
     |-- src
         |-- bin
