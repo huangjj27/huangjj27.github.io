@@ -1,4 +1,4 @@
-use rand::random;
+use rand::prelude::*;
 
 use std::fmt::Debug;
 
@@ -40,7 +40,7 @@ impl<P> ReservoirSampler for Lottery<P> {
         self.total += 1;
 
         // 概率渐小的随机替换
-        let r = random::<usize>() % self.total + 1;
+        let r = rand::rng().random_range(1..=self.total);
         let mut replaced = None;
         if r <= lucky_cap {
             replaced = self.lucky[r - 1].take();
@@ -73,7 +73,7 @@ impl<P: Debug> Lottery<P> {
             i += 1;
 
             // 概率渐小的随机替换
-            let r = random::<usize>() % i + 1;
+            let r = rand::rng().random_range(1..=i);
             if r <= lucky_cap {
                 final_lucky[i - 1] = final_lucky[r - 1].take();
             }

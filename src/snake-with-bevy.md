@@ -400,7 +400,7 @@ impl Default for FoodSpawnTimer {
 
 至于实现 `Default` 的原因，会在我解释下面的系统的时候说明：
 
-```
+```rs
 fn food_spawner(
     mut commands: Commands,
     materials: Res<Materials>,

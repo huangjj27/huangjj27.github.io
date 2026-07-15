@@ -1,0 +1,12 @@
+[package]
+name = "reservoir"
+version = "0.1.0"
+authors = ["huangjj27 <huangjj.27@qq.com>"]
+edition = "2024"
+
+[dependencies]
+rand = "0.10"
+
+[[bin]]
+name = "reservoir"
+path = "./main.rs"
