@@ -13,6 +13,7 @@ stages:
 before_script:
   - export PATH="$PATH:$CARGO_HOME/bin"
   - cargo install mdbook
+  - cargo install mdbook-mermaid
 
 build:
   stage: check
