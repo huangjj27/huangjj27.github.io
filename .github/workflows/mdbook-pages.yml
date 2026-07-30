@@ -37,6 +37,12 @@ jobs:
         crate: mdbook
         version: latest
         use-tool-cache: true
+    - name: Install mdbook-mermaid
+      uses: actions-rs/install@v0.1
+      with:
+        crate: mdbook-mermaid
+        version: latest
+        use-tool-cache: true
     - name: Build mdbook
       run: mdbook build
     - name: Setup Pages

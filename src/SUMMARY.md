@@ -1,5 +1,12 @@
 # Summary
 
+- [pomo_doro敏捷开发笔记](./pomo_doro/intro.md)
+    - [sprint-0.0.0 需求分析](./pomo_doro/requirement-analyzing.md)
+    - [sprint-0.0.1 Doro](./pomo_doro/doro.md)
+    - [sprint-0.0.2 Pomo](./pomo_doro/pomo.md)
+    - [sprint-0.0.3 Countdown redesign](./pomo_doro/countdown.md)
+    <!-- - [sprint1-doro, pomo & estimate, interuption](./pomo_doro/estimate-interuption.md) -->
+    <!-- - [sprint2-pomo config、today list](./pomo_doro/config-list.md) -->
 - [在 web 项目中使用 Rust 组织测试代码](./web-testing-with-rust.md)
 - [由 tauri 单例模式 bug “意外修复” 发现的 dangling](./tauri-single-instance-bug-dangling.md)
 - [尝试在单 HTML 文件中嵌入 WASM 模块的错误操作](./load-wasm-mistake.md)
@@ -18,4 +25,4 @@
     - [WASI版猜数字](./wasi/wasi_guess.md)
 
 ---
-[关于我](./resume.md)
+[关于我](resume.md)
