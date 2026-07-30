@@ -1,7 +1,6 @@
 [book]
 authors = ["huangjj27"]
 language = "zh"
-multilingual = false
 src = "src"
 title = "huangjj27 的技术博客"
 
@@ -15,13 +14,13 @@ additional-css = [
     "assets/css/utterances.css",
 ]
 additional-js = [
-    "assets/fzf.umd.js",
-    "assets/elasticlunr.js",
-    "assets/mermaid.min.js",
-    "assets/mermaid-init.js"
+    "assets/javascript/fzf.umd.js",
+    "assets/javascript/elasticlunr.js",
+    "assets/javascript/mermaid.min.js",
+    "assets/javascript/mermaid-init.js"
 ]
 git-repository-url = "https://gitlab.com/huangjj27/huangjj27.gitlab.io"
-git-repository-icon = "fa-gitlab"
+git-repository-icon = "fab-gitlab"
 
 [output.html.print]
 enable = false
